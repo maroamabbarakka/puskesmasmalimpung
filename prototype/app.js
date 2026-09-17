@@ -446,6 +446,16 @@ function navigate(fullRoute, scroll = true) {
     }
   }
 
+  // Inisialisasi & refresh Leaflet Map pada beranda
+  if (baseRoute === 'home') {
+    setTimeout(() => {
+      initHealthAtlasHomeMap();
+      if (healthAtlasHomeMap) {
+        healthAtlasHomeMap.invalidateSize();
+      }
+    }, 150);
+  }
+
   // Inisialisasi & refresh Leaflet Map pada rute insights
   if (baseRoute === 'insights') {
     setTimeout(() => {
@@ -639,6 +649,91 @@ function initHealthAtlasLeafletMap() {
     });
 }
 window.initHealthAtlasLeafletMap = initHealthAtlasLeafletMap;
+
+// ---------------------------------------------------------------------------
+// 6B. HEALTH ATLAS MAP ENGINE UNTUK BERANDA (#health-atlas-home-map)
+// ---------------------------------------------------------------------------
+let healthAtlasHomeMap = null;
+let healthAtlasHomeGeoJsonLayer = null;
+
+function initHealthAtlasHomeMap() {
+  const mapContainer = document.getElementById('health-atlas-home-map');
+  if (!mapContainer || healthAtlasHomeMap || typeof L === 'undefined') return;
+
+  healthAtlasHomeMap = L.map('health-atlas-home-map', {
+    center: [-3.729869, 119.73413],
+    zoom: 12,
+    scrollWheelZoom: false
+  });
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | BIG Batas Wilayah'
+  }).addTo(healthAtlasHomeMap);
+
+  const villageStyles = {
+    'malimpung': { color: '#059669', fillColor: '#10b981', fillOpacity: 0.35, weight: 2.5 },
+    'padang loang': { color: '#2563eb', fillColor: '#3b82f6', fillOpacity: 0.35, weight: 2.5 },
+    'maccirinna': { color: '#d97706', fillColor: '#f59e0b', fillOpacity: 0.35, weight: 2.5 }
+  };
+
+  const pkmIcon = L.divIcon({
+    className: 'pkm-custom-marker',
+    html: `<div style="background-color: #e11d48; width: 26px; height: 26px; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px; line-height: 1;">+</div>`,
+    iconSize: [26, 26],
+    iconAnchor: [13, 13]
+  });
+
+  const pkmMarker = L.marker([-3.729869, 119.73413], { icon: pkmIcon, title: 'Puskesmas Malimpung Induk' }).addTo(healthAtlasHomeMap);
+  pkmMarker.bindPopup(`
+    <div style="font-family: 'Plus Jakarta Sans', sans-serif; min-width: 210px; padding: 4px;">
+      <span style="font-size: 10px; font-weight: 800; color: #087d79; text-transform: uppercase;">Puskesmas Induk</span>
+      <h4 style="font-size: 14px; font-weight: 800; color: #18383A; margin: 3px 0;">Puskesmas Malimpung</h4>
+      <p style="font-size: 11px; color: #4b5563; margin-bottom: 6px;">Benteng Malimpung, Patampanua, Pinrang</p>
+      <a href="https://maps.app.goo.gl/YYYWShsgAxZoG2vW8" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 700; color: #087d79; text-decoration: none;">Buka Google Maps ↗</a>
+    </div>
+  `);
+
+  fetch('assets/batas_wilayah_malimpung.geojson')
+    .then(res => res.json())
+    .then(geoData => {
+      healthAtlasHomeGeoJsonLayer = L.geoJSON(geoData, {
+        style: function(feature) {
+          const name = (feature.properties.NAMOBJ || '').toLowerCase();
+          for (const key in villageStyles) {
+            if (name.includes(key)) return villageStyles[key];
+          }
+          return { color: '#64748b', fillColor: '#94a3b8', fillOpacity: 0.3, weight: 2 };
+        },
+        onEachFeature: function(feature, layer) {
+          const p = feature.properties;
+          layer.bindTooltip(`<strong>${p.TIPE} ${p.NAMOBJ}</strong>`, { sticky: true, direction: 'top' });
+          layer.bindPopup(`
+            <div style="font-family: 'Plus Jakarta Sans', sans-serif; min-width: 200px; padding: 4px;">
+              <span style="font-size: 10px; font-weight: 800; color: #087d79; text-transform: uppercase;">${p.TIPE} BINAAN</span>
+              <h4 style="font-size: 14px; font-weight: 800; color: #18383A; margin: 3px 0;">${p.TIPE} ${p.NAMOBJ}</h4>
+              <p style="font-size: 11px; color: #6b7280; margin: 0;">Kode Kemendagri: <strong>${p.KODE_KEMENDAGRI}</strong></p>
+              <p style="font-size: 11px; color: #15803d; font-weight: 600; margin-top: 4px;">Batas Resmi BIG 2023</p>
+            </div>
+          `);
+          layer.on({
+            mouseover: function(e) {
+              e.target.setStyle({ fillOpacity: 0.6, weight: 3.5 });
+            },
+            mouseout: function(e) {
+              healthAtlasHomeGeoJsonLayer.resetStyle(e.target);
+            }
+          });
+        }
+      }).addTo(healthAtlasHomeMap);
+
+      healthAtlasHomeMap.fitBounds(healthAtlasHomeGeoJsonLayer.getBounds(), { padding: [20, 20] });
+    })
+    .catch(err => {
+      console.warn('Gagal memuat GeoJSON batas wilayah BIG untuk Beranda:', err);
+    });
+}
+window.initHealthAtlasHomeMap = initHealthAtlasHomeMap;
 
 // ---------------------------------------------------------------------------
 // 7. TOAST HELPER

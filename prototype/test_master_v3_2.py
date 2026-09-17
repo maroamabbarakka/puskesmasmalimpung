@@ -147,22 +147,27 @@ def run():
         assert services_count == 5, f"5 Layanan Unggulan harus ada, ditemukan {services_count}"
         print(f"  [LULUS] 4. Layanan Unggulan Terverifikasi ({services_count} layanan foto fasyankes asli).")
 
-        # 5. Program Kesehatan Siklus Hidup ILP (5 Klaster)
+        # 5. Program Kesehatan Siklus Hidup ILP (4 Klaster Resmi Sesuai SOP Pelayanan PKM Malimpung)
         lifestage_count = page.locator(".lifestage-item-card").count()
-        assert lifestage_count == 5, f"5 Klaster Program ILP harus ada, ditemukan {lifestage_count}"
-        print(f"  [LULUS] 5. Program Kesehatan Siklus Hidup ILP Terverifikasi ({lifestage_count} klaster siklus hidup).")
+        assert lifestage_count == 4, f"4 Klaster Program ILP resmi harus ada, ditemukan {lifestage_count}"
+        print(f"  [LULUS] 5. Program Kesehatan Siklus Hidup ILP Terverifikasi ({lifestage_count} klaster resmi SOP PKM Malimpung).")
 
-        # 6. Health Atlas Geospasial
-        assert page.locator(".atlas-composite-card").is_visible(), "Health Atlas card harus ada"
-        print("  [LULUS] 6. Health Atlas Geospasial (Batas Wilayah 2 Desa 1 Kelurahan) Terverifikasi.")
+        # 6. Section 6 Mandiri: Health Atlas Geospasial Beranda
+        assert page.locator(".section-health-atlas-home").is_visible(), "Section Health Atlas mandiri beranda harus ada"
+        assert page.locator("#health-atlas-home-map").is_visible(), "Kontainer peta Leaflet beranda #health-atlas-home-map harus ada"
+        # Tunggu render Leaflet peta beranda
+        page.wait_for_timeout(1500)
+        home_svg_paths = page.locator("#health-atlas-home-map path.leaflet-interactive").count()
+        print(f"  [LULUS] 6. Section 6 Health Atlas Beranda Mandiri Terverifikasi ({home_svg_paths} poligon interaktif batas BIG ter-render di beranda).")
 
-        # 7. Ekosistem Digital & Launcher CKG
+        # 7. Section 7 Mandiri: Ekosistem Digital & Launcher CKG
+        assert page.locator(".section-digital-ecosystem").is_visible(), "Section Ekosistem Digital mandiri harus ada"
         ckg_links = page.locator('a[href="https://ckg.puskesmasmalimpung.id/"]').all()
         assert len(ckg_links) >= 2, "Tautan ke subdomain CKG wajib ada di beranda (Akses Cepat & Launcher)"
         for link in ckg_links:
             assert link.get_attribute("target") == "_blank", "Tautan CKG harus target='_blank'"
             assert "noopener" in link.get_attribute("rel") and "noreferrer" in link.get_attribute("rel"), "Tautan CKG wajib memiliki rel='noopener noreferrer'"
-        print(f"  [LULUS] 7. Ekosistem Digital & Isolasi Domain CKG Terverifikasi ({len(ckg_links)} launcher dengan rel='noopener noreferrer').")
+        print(f"  [LULUS] 7. Section 7 Ekosistem Digital & Isolasi Domain CKG Terverifikasi ({len(ckg_links)} launcher dengan rel='noopener noreferrer').")
 
         # 8. Berita & Kegiatan Puskesmas (4 Kartu)
         news_count = page.locator(".news-feed-card").count()
@@ -174,28 +179,30 @@ def run():
         assert articles_count == 4, f"4 Kartu Artikel Edukasi harus ada, ditemukan {articles_count}"
         print(f"  [LULUS] 9. Artikel & Edukasi Kesehatan Terpisah Terverifikasi ({articles_count} edukasi medis dengan reviewer & ref).")
 
-        # 10. Profil & Aktivitas Puskesmas
+        # 10. Profil & Aktivitas Puskesmas (Foto Fasad Gedung Fasyankes Asli)
         assert page.locator(".section-profile-highlight").is_visible(), "Section Profil Fasyankes harus ada"
-        print("  [LULUS] 10. Profil Serta Aktivitas Puskesmas Terverifikasi (Akreditasi Paripurna & Budaya BerAKHLAK).")
+        assert page.locator(".profile-facade-img").is_visible(), "Foto fasad gedung fasyankes asli wajib tampil"
+        print("  [LULUS] 10. Profil Serta Aktivitas Puskesmas Terverifikasi (Foto Fasad Gedung, Akreditasi Paripurna & BerAKHLAK).")
 
         # 11. Keterbukaan Informasi Publik (PPID)
         assert page.locator(".section-public-transparency").is_visible(), "Section Informasi Publik harus ada"
         print("  [LULUS] 11. Keterbukaan Informasi Publik Terverifikasi (Maklumat Pelayanan & IKM 89.24).")
 
-        # 12. Kontak & Footer Institusional (Gambar BerAKHLAK & Favicon Resmi)
+        # 12. Kontak & Footer Institusional (Gambar BerAKHLAK Vektor Putih & Favicon Resmi)
         assert page.locator(".site-footer").is_visible(), "Footer institusional harus ada"
         page.locator(".site-footer").scroll_into_view_if_needed()
         page.wait_for_timeout(400)
         assert page.locator(".footer-berakhlak-img").is_visible(), "Logo resmi BerAKHLAK wajib tampil di footer"
+        assert page.locator(".footer-berakhlak-img").get_attribute("src") == "assets/BerAKHLAK_Putih_Vektor.svg", "Logo BerAKHLAK harus menggunakan file vektor SVG putih"
         assert page.locator('link[rel="icon"][type="image/x-icon"]').get_attribute("href") == "favicon.ico"
         assert page.locator('link[rel="icon"][sizes="32x32"]').get_attribute("href") == "assets/favicon-32x32.png"
-        print("  [LULUS] 12. Kontak & Footer Institusional dengan Logo BerAKHLAK Resmi & Favicon Terverifikasi.")
+        print("  [LULUS] 12. Kontak & Footer Institusional dengan Logo BerAKHLAK Putih Vektor & Favicon Terverifikasi.")
 
         # 13. Verifikasi Interaktif Halaman Health Atlas Leaflet (Poligon BIG 2 Desa 1 Kelurahan)
         page.locator('a[data-go="insights"]').first.click()
         page.wait_for_timeout(600)
         page.wait_for_selector("#health-atlas-leaflet-map", state="visible", timeout=10000)
-        page.wait_for_selector(".pkm-custom-marker", timeout=10000)
+        page.wait_for_selector("#health-atlas-leaflet-map .pkm-custom-marker", timeout=10000)
         page.wait_for_timeout(1500)  # Beri jeda render GeoJSON
         svg_paths = page.locator("#health-atlas-leaflet-map path.leaflet-interactive").count()
         assert svg_paths >= 3, f"Harus ada minimal 3 poligon batas desa/kelurahan BIG, terdeteksi {svg_paths}"
