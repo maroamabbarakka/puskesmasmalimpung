@@ -33,9 +33,26 @@ Sebelum dilakukan penerbitan resmi (*Go-Live*) ke domain publik pemerintah (cont
    ```bash
    git checkout feature/health-hub-v2
    ```
-2. Salin isi folder `prototype/` (berkas `index.html`, `style.css`, `app.js`, `_headers`, dan direktori `assets/`) ke document root web server.
-3. Untuk deployment Nginx: pasang konfigurasi dari `prototype/nginx.conf.example` ke `/etc/nginx/sites-available/` dan buat symlink ke `sites-enabled/`.
-4. Jalankan pengujian otomatis `python prototype/test_extended_viewports.py` untuk memastikan seluruh rute, viewport, dan deep-linking slug berfungsi normal.
+2. **Opsi 1: Rilis ke Firebase Hosting (Puskesmas Malimpung)**
+   Berkas `.firebaserc` dan `firebase.json` telah dikonfigurasi ke project `puskesmas-malimpung` dengan target direktori `prototype`.
+   Jalankan perintah deployment:
+   ```bash
+   # Login ke akun Google/Firebase jika belum:
+   npx firebase login
+   
+   # Lakukan deployment langsung:
+   npx firebase deploy --only hosting
+   ```
+   Aplikasi akan live seketika pada:
+   - `https://puskesmas-malimpung.web.app`
+   - `https://puskesmas-malimpung.firebaseapp.com`
+
+3. **Opsi 2: Rilis ke Server Pemkab Pinrang / Diskominfo (Nginx)**
+   - Salin isi folder `prototype/` (berkas `index.html`, `style.css`, `app.js`, `firebase-config.js`, `_headers`, dan direktori `assets/`) ke document root web server.
+   - Pasang konfigurasi dari `prototype/nginx.conf.example` ke `/etc/nginx/sites-available/` dan buat symlink ke `sites-enabled/`.
+   - Lakukan reload Nginx: `sudo nginx -t && sudo systemctl reload nginx`.
+
+4. Jalankan pengujian otomatis `python prototype/test_extended_viewports.py` untuk memastikan seluruh rute, viewport, dan deep-linking slug berfungsi normal setelah deployment.
 
 ---
 

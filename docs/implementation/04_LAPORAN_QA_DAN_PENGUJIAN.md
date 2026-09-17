@@ -78,8 +78,5 @@ Pengujian otomatis tambahan telah dijalankan menggunakan Playwright Edge Chromiu
 | **Filter Siklus Hidup Program** | Toolbar interaktif di `#page-programs` | Filter klaster P2P & reset ke all | Isolasi program infeksi & restorasi 5 klaster | **PASS** |
 | **Topologi Skematis Jejaring** | Diagram alur di `#page-insights` | Evaluasi SVG alur 6 desa ke induk | Responsif, keterbacaan optimal, zero PHI | **PASS** |
 | **Kepatuhan Supresi Sel Kecil** | Regulasi UU 27/2022 & Permenkes 24/2022 | Proteksi batas < 5 kasus per desa | Perlindungan identitas warga dari re-identifikasi | **PASS** |
-
-
-
-
-
+| **Pemuatan Modul Firebase SDK** | Modul ES `prototype/firebase-config.js` | Inisialisasi Firebase App & Analytics | Status HTTP 200, zero console error, defensive `isSupported()` | **PASS** |
+| **Kepatuhan CSP Firebase** | Content Security Policy `_headers` & `firebase.json` | Konektivitas Analytics & Firestore | Whitelist resmi Google Analytics & Firebase aktif | **PASS** |

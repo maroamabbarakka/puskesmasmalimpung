@@ -53,3 +53,20 @@ Semua indikator yang disajikan pada halaman **Kesehatan Wilayah** wajib mematuhi
 ## 4. Keamanan & Penilaian Risiko Pengungkapan (Disclosure Control)
 - **Aturan Sel Kecil (Small Cell Suppression):** Jika suatu kondisi penyakit atau skrining di suatu desa menghasilkan temuan < 5 kasus, rincian angka desa tidak boleh ditampilkan secara publik guna mencegah re-identifikasi identitas pasien oleh tetangga atau masyarakat setempat.
 - **Data Agregat Terpisah:** Data PWS desa hanya disajikan dalam bentuk agregat persentase atau interval kategori risiko (*Rendah / Sedang / Tinggi*).
+
+---
+
+## 5. Integrasi Firebase Web SDK & Google Analytics
+Aplikasi telah terintegrasi dengan Firebase Web SDK v10 Modular (`firebase/app` dan `firebase/analytics`) via modul terisolasi:
+- **Berkas Konfigurasi:** [`prototype/firebase-config.js`](file:///d:/PKM_MALIMPUNG/Malimpung_Smart_Virtual_Office/prototype/firebase-config.js)
+- **Project ID:** `puskesmas-malimpung`
+- **Measurement ID:** `G-BH467HR1V6`
+- **Fitur Keamanan:**
+  1. Pemeriksaan ketersediaan analitik secara defensif menggunakan `isSupported()` sehingga aman pada peramban headless atau lingkungan tanpa koneksi internet.
+  2. Whitelist domain Firebase & Analytics pada Content Security Policy (`prototype/_headers` & `firebase.json`):
+     - `https://www.googletagmanager.com`
+     - `https://*.google-analytics.com`
+     - `https://*.firebaseio.com`
+     - `https://*.googleapis.com`
+  3. Tidak ada pengiriman data sensitif pasien (NIK, nama, riwayat penyakit) ke Google Analytics; event analitik dibatasi pada navigasi rute halaman, pengiriman formulir SKM, dan interaksi publik.
+
