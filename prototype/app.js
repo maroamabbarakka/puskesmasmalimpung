@@ -285,7 +285,7 @@ function renderServices() {
   });
 }
 
-function openServiceDetail(id) {
+function openServiceDetail(id, updateHash = true) {
   const service = servicesState.find(s => s.id === id);
   if (!service) return;
 
@@ -303,13 +303,20 @@ function openServiceDetail(id) {
 
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  if (updateHash) {
+    history.replaceState(null, '', `#services/${id}`);
+  }
 }
 
-function closeServiceDetail() {
+function closeServiceDetail(updateHash = true) {
   const modal = document.getElementById('service-detail-modal');
   if (modal) {
     modal.classList.remove('open');
     document.body.style.overflow = '';
+  }
+  if (updateHash && location.hash.startsWith('#services/')) {
+    history.replaceState(null, '', '#services');
   }
 }
 
@@ -378,26 +385,27 @@ function updateTopicView(topicKey) {
 }
 
 // ---------------------------------------------------------------------------
-// 4. ROUTING & NAVIGATION
+// 4. ROUTING & NAVIGATION (DENGAN DUKUNGAN DEEP-LINKING SLUG)
 // ---------------------------------------------------------------------------
 const VALID_ROUTES = ['home', 'services', 'programs', 'insights', 'public', 'office'];
 
-function navigate(route, scroll = true) {
-  if (!VALID_ROUTES.includes(route)) route = 'home';
+function navigate(fullRoute, scroll = true) {
+  let [baseRoute, subSlug] = (fullRoute || 'home').split('/');
+  if (!VALID_ROUTES.includes(baseRoute)) baseRoute = 'home';
 
   // Toggle kelas halaman aktif
   document.querySelectorAll('.page').forEach(p => {
-    const isTarget = (p.id === `page-${route}`);
+    const isTarget = (p.id === `page-${baseRoute}`);
     p.classList.toggle('active', isTarget);
     if (isTarget) p.classList.add('fade-in');
   });
 
   // Toggle navigasi desktop & drawer
   document.querySelectorAll('.nav-link').forEach(link => {
-    link.classList.toggle('active', link.dataset.go === route);
+    link.classList.toggle('active', link.dataset.go === baseRoute);
   });
   document.querySelectorAll('.mobile-nav-link').forEach(link => {
-    link.classList.toggle('active', link.dataset.go === route);
+    link.classList.toggle('active', link.dataset.go === baseRoute);
   });
 
   // Update Judul Halaman
@@ -409,14 +417,22 @@ function navigate(route, scroll = true) {
     public: 'Keterbukaan Informasi Publik — Puskesmas Malimpung',
     office: 'Smart Virtual Office — Ruang Kerja Terotorisasi'
   };
-  document.title = titles[route] || 'Puskesmas Malimpung';
+  document.title = titles[baseRoute] || 'Puskesmas Malimpung';
 
   // Tutup mobile drawer jika terbuka
   closeMobileNav();
 
-  // Sinkronisasi URL Hash
-  if (location.hash !== `#${route}`) {
-    history.replaceState(null, '', `#${route}`);
+  // Sinkronisasi Deep-Linking Detail Layanan
+  if (baseRoute === 'services' && subSlug) {
+    openServiceDetail(subSlug, false);
+    if (location.hash !== `#services/${subSlug}`) {
+      history.replaceState(null, '', `#services/${subSlug}`);
+    }
+  } else {
+    closeServiceDetail(false);
+    if (location.hash !== `#${baseRoute}`) {
+      history.replaceState(null, '', `#${baseRoute}`);
+    }
   }
 
   if (scroll) {
@@ -676,6 +692,12 @@ document.addEventListener('DOMContentLoaded', () => {
       closeServiceDetail();
       closeMobileNav();
     }
+  });
+
+  // Sinkronisasi navigasi tombol browser Back/Forward (hashchange)
+  window.addEventListener('hashchange', () => {
+    const route = location.hash.replace('#', '') || 'home';
+    navigate(route, false);
   });
 
   // Sinkronisasi route awal dari hash
