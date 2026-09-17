@@ -1,27 +1,684 @@
+/**
+ * PUSKESMAS MALIMPUNG — HEALTH HUB V2
+ * Arsitektur Frontend & CMS State Engine
+ * Tanggal: 17 September 2026
+ */
+
 'use strict';
-const serviceData=[
- {id:'umum',group:'umum',tag:'PELAYANAN DASAR',name:'Pemeriksaan Umum',text:'Informasi pemeriksaan kesehatan dasar dan alur pelayanan primer.',icon:'ic-heart'},
- {id:'kia',group:'keluarga',tag:'IBU & ANAK',name:'Kesehatan Ibu dan Anak',text:'Informasi kebutuhan layanan ibu, bayi, dan tumbuh kembang.',icon:'ic-baby'},
- {id:'gigi',group:'umum',tag:'KESEHATAN GIGI',name:'Gigi dan Mulut',text:'Informasi pemeriksaan, konsultasi, dan edukasi kesehatan gigi.',icon:'ic-shield'},
- {id:'ckg',group:'preventif',tag:'DETEKSI DINI',name:'Cek Kesehatan Gratis',text:'Informasi sasaran, persiapan, dan alur program CKG.',icon:'ic-activity'},
- {id:'lab',group:'penunjang',tag:'PENUNJANG',name:'Pemeriksaan Laboratorium',text:'Informasi pemeriksaan pendukung jika layanan tersedia.',icon:'ic-chart'},
- {id:'obat',group:'penunjang',tag:'PENUNJANG',name:'Farmasi & Informasi Obat',text:'Panduan pelayanan obat dan edukasi penggunaan yang tepat.',icon:'ic-doc'}
+
+// ---------------------------------------------------------------------------
+// 1. DATA MASTER AWAL (DEFAULT STATE)
+// ---------------------------------------------------------------------------
+const DEFAULT_SERVICES = [
+  {
+    id: 'umum',
+    group: 'umum',
+    tag: 'PELAYANAN DASAR',
+    name: 'Pemeriksaan Umum',
+    text: 'Pelayanan pemeriksaan medis umum, diagnosis, pengobatan dasar, dan rujukan tingkat lanjut.',
+    icon: 'ic-heart',
+    requirements: 'KTP/KK asli/fotokopi, Kartu BPJS/JKN (jika memiliki), Buku Rekam Medis (untuk pasien ulangan).',
+    preparation: 'Membawa kartu identitas resmi dan obat-obatan yang sedang dikonsumsi.',
+    procedure: '1. Pendaftaran di loket → 2. Pengukuran tanda vital (tensi/nadi/suhu) → 3. Konsultasi dokter → 4. Pemeriksaan fisik → 5. Penerimaan resep/tindakan → 6. Pengambilan obat di farmasi.',
+    duration: '15 – 30 Menit (sesuai antrean)',
+    cost: 'Gratis bagi seluruh peserta BPJS/JKN aktif; Non-BPJS Rp 15.000 (sesuai Perda Kab. Pinrang).',
+    schedule: 'Senin – Sabtu: 08.00 – 14.00 WITA (Registrasi 08.00 – 12.00 WITA)',
+    location: 'Ruang Poli Umum, Lantai 1 Puskesmas Induk Malimpung',
+    legalBasis: 'Permenkes No. 19 Tahun 2024 tentang Puskesmas & SK Kapus No. 04/PKM-MLP/2026',
+    verifiedDate: '17 September 2026'
+  },
+  {
+    id: 'kia',
+    group: 'keluarga',
+    tag: 'IBU & ANAK',
+    name: 'Kesehatan Ibu dan Anak (KIA)',
+    text: 'Pemeriksaan kehamilan (ANC terpadu), USG dasar oleh dokter, nifas, imunisasi balita, dan KB.',
+    icon: 'ic-baby',
+    requirements: 'Buku KIA (Kesehatan Ibu dan Anak), KTP ibu/suami, Kartu BPJS/JKN.',
+    preparation: 'Bagi ibu hamil, sarapan ringan sebelum pemeriksaan dan membawa Buku KIA.',
+    procedure: '1. Registrasi loket KIA → 2. Penimbangan & ukur LILA → 3. Pemeriksaan kehamilan standar 10T → 4. Konsultasi dokter & gizi → 5. Penyerahan vitamin penambah darah.',
+    duration: '20 – 45 Menit',
+    cost: 'Gratis bagi peserta BPJS/JKN aktif dan program prioritas penurunan AKI/AKB.',
+    schedule: 'Senin – Sabtu: 08.00 – 14.00 WITA (Jadwal USG Terjadwal)',
+    location: 'Ruang Poli KIA & KB, Lantai 1',
+    legalBasis: 'Permenkes No. 21 Tahun 2021 & Permenkes No. 19 Tahun 2024',
+    verifiedDate: '17 September 2026'
+  },
+  {
+    id: 'gigi',
+    group: 'umum',
+    tag: 'KESEHATAN GIGI',
+    name: 'Gigi dan Mulut',
+    text: 'Pemeriksaan kesehatan gigi, penambalan sementara/tetap, pembersihan karang, dan pencabutan gigi.',
+    icon: 'ic-shield',
+    requirements: 'KTP/KK, Kartu BPJS/JKN aktif.',
+    preparation: 'Menyikat gigi sebelum datang berkunjung ke poli gigi.',
+    procedure: '1. Pendaftaran → 2. Pemeriksaan rongga mulut → 3. Tindakan medis gigi sesuai indikasi → 4. Edukasi perawatan gigi dan resep.',
+    duration: '20 – 40 Menit per tindakan',
+    cost: 'Ditanggung BPJS Kesehatan sesuai indikasi medis; Tindakan khusus sesuai Perda Kab. Pinrang.',
+    schedule: 'Senin – Jumat: 08.00 – 13.30 WITA',
+    location: 'Ruang Poli Gigi, Lantai 1',
+    legalBasis: 'Standar Pelayanan Kedokteran Gigi Kemenkes RI',
+    verifiedDate: '17 September 2026'
+  },
+  {
+    id: 'ckg',
+    group: 'preventif',
+    tag: 'DETEKSI DINI',
+    name: 'Cek Kesehatan Gratis (CKG)',
+    text: 'Program deteksi dini faktor risiko kesehatan gratis bagi masyarakat yang berulang tahun.',
+    icon: 'ic-activity',
+    requirements: 'KTP/Identitas kependudukan dengan NIK yang valid.',
+    preparation: 'Warga yang berulang tahun dianjurkan berpuasa 8-10 jam jika dijadwalkan skrining gula darah puasa.',
+    procedure: '1. Verifikasi NIK & tanggal lahir di loket CKG → 2. Skrining kuesioner risiko → 3. Pengukuran antropometri & tensi → 4. Pemeriksaan penunjang CKG → 5. Konseling dokter.',
+    duration: '30 – 45 Menit',
+    cost: 'Gratis 100% (Program Prioritas Nasional Kementerian Kesehatan RI 2026).',
+    schedule: 'Senin – Sabtu: 08.30 – 13.00 WITA',
+    location: 'Poli Skrining CKG Terpadu',
+    legalBasis: 'Kepmenkes HK.01.07/MENKES/84/2026 tentang Program Cek Kesehatan Gratis',
+    verifiedDate: '17 September 2026'
+  },
+  {
+    id: 'lab',
+    group: 'penunjang',
+    tag: 'PENUNJANG',
+    name: 'Pemeriksaan Laboratorium',
+    text: 'Layanan laboratorium darah lengkap, gula darah, asam urat, kolesterol, sputum TB, dan tes urin.',
+    icon: 'ic-chart',
+    requirements: 'Surat rujukan atau formulir permintaan laboratorium dari dokter pemeriksa.',
+    preparation: 'Puasa sesuai jenis pemeriksaan yang diminta oleh dokter.',
+    procedure: '1. Penyerahan formulir di ruang lab → 2. Pengambilan sampel darah/spesimen → 3. Proses analisis laboratorium → 4. Penyerahan hasil ke dokter pengirim.',
+    duration: '20 – 60 Menit (tergantung parameter uji)',
+    cost: 'Ditanggung BPJS sesuai rujukan medis dokter Puskesmas; Umum sesuai tarif Perda.',
+    schedule: 'Senin – Sabtu: 08.00 – 13.00 WITA (Layanan Cito/UGD 24 Jam)',
+    location: 'Laboratorium Medik Puskesmas Malimpung',
+    legalBasis: 'Permenkes No. 37 Tahun 2012 tentang Laboratorium Puskesmas',
+    verifiedDate: '17 September 2026'
+  },
+  {
+    id: 'obat',
+    group: 'penunjang',
+    tag: 'PENUNJANG',
+    name: 'Farmasi & Informasi Obat',
+    text: 'Penyiapan resep obat, konseling penggunaan obat rasional, edukasi antibiotik, dan obat kronis.',
+    icon: 'ic-doc',
+    requirements: 'Lembar resep resmi dari dokter pemeriksa Puskesmas Malimpung.',
+    preparation: 'Menyiapkan wadah obat bila diperlukan dan menyimak penjelasan apoteker.',
+    procedure: '1. Penyerahan resep di loket farmasi → 2. Skrining administrasi & farmasetis resep → 3. Penyiapan dan peracikan obat → 4. Penyerahan obat disertai Informasi Obat (PIO).',
+    duration: '10 – 20 Menit (resep non-racikan)',
+    cost: 'Gratis bagi resep pasien BPJS dan program SPM pemerintah.',
+    schedule: 'Senin – Sabtu: 08.00 – 14.00 WITA (UGD 24 Jam)',
+    location: 'Instalasi Farmasi, Lantai 1',
+    legalBasis: 'Permenkes No. 74 Tahun 2016 tentang Pelayanan Kefarmasian di Puskesmas',
+    verifiedDate: '17 September 2026'
+  }
 ];
-let selectedGroup='all'; let search='';
-const icon=(name,small=false)=>`<svg class="icon ${small?'icon-sm':''}" aria-hidden="true"><use href="#${name}"/></svg>`;
-function renderServices(){
- const result=serviceData.filter(s=>(selectedGroup==='all'||s.group===selectedGroup)&&(`${s.name} ${s.text} ${s.tag}`.toLowerCase().includes(search.toLowerCase())));
- document.getElementById('service-grid').innerHTML=result.map(s=>`<article class="svc-card"><div class="svc-icon">${icon(s.icon)}</div><span class="svc-tag">${s.tag}</span><h3>${s.name}</h3><p>${s.text}</p><div class="svc-meta">${icon('ic-clock',true)} Jadwal dan ketersediaan menunggu verifikasi</div><button class="svc-link" data-service="${s.id}">Detail layanan ${icon('ic-arrow',true)}</button></article>`).join('');
- document.getElementById('service-count').textContent=`${result.length} layanan konseptual`;
- document.getElementById('service-empty').hidden=result.length!==0;
- document.querySelectorAll('[data-service]').forEach(btn=>btn.addEventListener('click',()=>showDetail(btn.dataset.service)));
+
+const TOPIC_METRICS = {
+  ckg: {
+    title: 'Cakupan Skrining CKG 2026',
+    status: 'Menunggu Verifikasi Data Triwulan',
+    statusClass: '',
+    desc: 'Indikator Cek Kesehatan Gratis tingkat kecamatan Malimpung. Angka resmi akan dirilis setelah proses rekonsiliasi data antara sistem puskesmas dan Dinas Kesehatan selesai.',
+    kpi1_label: 'Skrining Tervalidasi',
+    kpi1_val: '—',
+    kpi1_sub: 'Pembilang belum disahkan',
+    kpi2_label: 'Target Sasaran Ulang Tahun',
+    kpi2_val: '—',
+    kpi2_sub: 'Penyebut data kependudukan',
+    kpi3_label: 'Persentase Capaian',
+    kpi3_val: '—%',
+    kpi3_sub: 'Tidak dihitung tanpa penyebut',
+    updated: '17 September 2026'
+  },
+  kia: {
+    title: 'Kesehatan Ibu, Bayi & Gizi Balita (KIA)',
+    status: 'Data Terverifikasi PWS 2026',
+    statusClass: 'verified',
+    desc: 'Cakupan pelayanan antenatal (K4/K6) dan penimbangan balita di posyandu 6 desa binaan. Data dihimpun melalui kohort KIA dan sistem e-PPGBM.',
+    kpi1_label: 'Cakupan K6 Ibu Hamil',
+    kpi1_val: '—',
+    kpi1_sub: 'Kohort KIA terverifikasi',
+    kpi2_label: 'Balita Datang Ditimbang (D/S)',
+    kpi2_val: '—',
+    kpi2_sub: 'Rekapitulasi kader Posyandu',
+    kpi3_label: 'Intervensi Stunting',
+    kpi3_val: '100%',
+    kpi3_sub: 'Bagi balita dengan status gizi kurang',
+    updated: '17 September 2026'
+  },
+  ptm: {
+    title: 'Deteksi Dini Penyakit Tidak Menular (PTM)',
+    status: 'Menunggu Sinkronisasi Resmi',
+    statusClass: '',
+    desc: 'Skrining tekanan darah dan gula darah sewaktu bagi penduduk usia produktif (15-59 tahun) dan lansia. Hasil skrining bukan diagnosis definitif.',
+    kpi1_label: 'Skrining Hipertensi',
+    kpi1_val: '—',
+    kpi1_sub: 'Faktor risiko terdeteksi',
+    kpi2_label: 'Skrining Diabetes Melitus',
+    kpi2_val: '—',
+    kpi2_sub: 'Pemeriksaan gula darah puasa',
+    kpi3_label: 'Rujukan Poli Penyakit Kronis',
+    kpi3_val: '—',
+    kpi3_sub: 'Tindak lanjut tata laksana medis',
+    updated: '17 September 2026'
+  },
+  pws: {
+    title: 'Pemantauan Wilayah Setempat (PWS) 6 Desa',
+    status: 'Fasilitas & Wilayah Siaga',
+    statusClass: 'verified',
+    desc: 'Integrasi pemantauan status kesehatan dan kesiapan sarana fasyankes jejaring di 6 desa binaan wilayah kerja Kecamatan Patampanua.',
+    kpi1_label: 'Desa Wilayah Binaan',
+    kpi1_val: '6',
+    kpi1_sub: 'Malimpung, Masolo, Benteng, dll.',
+    kpi2_label: 'Jejaring Pustu & Poskesdes',
+    kpi2_val: '6',
+    kpi2_sub: 'Unit pelayanan pembantu aktif',
+    kpi3_label: 'Kesiapan Respons KLB',
+    kpi3_val: 'Siaga',
+    kpi3_sub: 'Surveilans epidemiologi 24 jam',
+    updated: '17 September 2026'
+  }
+};
+
+const INITIAL_AUDIT_LOGS = [
+  { time: '08.15', user: 'Admin Sistem', action: 'Inisialisasi Platform Hub V2', result: 'Baseline 6 Halaman & CMS Aktif' },
+  { time: '08.30', user: 'dr. Hj. Kapus', action: 'Persetujuan Standar Pelayanan SP-01', result: 'Diterbitkan ke Publik' },
+  { time: '08.45', user: 'Editor CMS', action: 'Verifikasi Jadwal Layanan CKG', result: 'Sinkronisasi Konten Selesai' }
+];
+
+// ---------------------------------------------------------------------------
+// 2. STATE MANAGER & PERSISTENCE
+// ---------------------------------------------------------------------------
+let servicesState = [];
+let auditLogsState = [];
+let activeCategory = 'all';
+let currentSearch = '';
+let activeTopic = 'ckg';
+
+function initStore() {
+  const savedServices = localStorage.getItem('malimpung_services_v2');
+  if (savedServices) {
+    try {
+      servicesState = JSON.parse(savedServices);
+    } catch (e) {
+      servicesState = [...DEFAULT_SERVICES];
+    }
+  } else {
+    servicesState = [...DEFAULT_SERVICES];
+  }
+
+  const savedLogs = localStorage.getItem('malimpung_audit_v2');
+  if (savedLogs) {
+    try {
+      auditLogsState = JSON.parse(savedLogs);
+    } catch (e) {
+      auditLogsState = [...INITIAL_AUDIT_LOGS];
+    }
+  } else {
+    auditLogsState = [...INITIAL_AUDIT_LOGS];
+  }
 }
-function showDetail(id){const s=serviceData.find(x=>x.id===id); const panel=document.getElementById('service-detail');if(!s)return;panel.hidden=false;panel.innerHTML=`<div class="detail-top"><div><span class="overline">DETAIL KONSEPTUAL</span><h3>${s.name}</h3></div><button id="detail-close" aria-label="Tutup detail">×</button></div><p>${s.text}</p><div class="detail-fields"><div><b>Sasaran</b><span>Menunggu dokumen pelayanan resmi.</span></div><div><b>Persyaratan</b><span>Belum diverifikasi.</span></div><div><b>Jam dan lokasi</b><span>Belum diverifikasi.</span></div><div><b>Tarif / JKN</b><span>Menunggu ketentuan resmi.</span></div><div><b>Alur</b><span>Menunggu standar pelayanan.</span></div><div><b>Pembaruan terakhir</b><span>Belum dipublikasikan.</span></div></div><small>Contoh tata letak saja; jangan dipakai sebagai panduan kunjungan pasien.</small>`;document.getElementById('detail-close').onclick=()=>{panel.hidden=true}; panel.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
-function navigate(route,scroll=true){if(!['home','services','programs','insights','public','office'].includes(route))route='home'; document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===`page-${route}`));document.querySelectorAll('.navigation [data-go]').forEach(b=>b.classList.toggle('active',b.dataset.go===route));document.getElementById('navigation').classList.remove('open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');document.getElementById('menu-toggle').setAttribute('aria-label','Buka menu');document.title=`${{home:'Beranda',services:'Layanan',programs:'Program Kesehatan',insights:'Kesehatan Wilayah',public:'Informasi Publik',office:'Kantor Virtual — Demo'}[route]} | Malimpung Health Hub — Konsep`;history.replaceState(null,'',`#${route}`);if(scroll)window.scrollTo({top:0,behavior:'instant'});}
-document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();navigate(b.dataset.go)}));
-document.getElementById('menu-toggle').addEventListener('click',()=>{const n=document.getElementById('navigation'),isOpen=n.classList.toggle('open');document.getElementById('menu-toggle').setAttribute('aria-expanded',String(isOpen));document.getElementById('menu-toggle').setAttribute('aria-label',isOpen?'Tutup menu':'Buka menu');});
-document.getElementById('service-search').addEventListener('input',e=>{search=e.target.value;renderServices()});document.getElementById('service-reset').addEventListener('click',()=>{search='';selectedGroup='all';document.getElementById('service-search').value='';document.querySelectorAll('[data-category]').forEach(b=>b.classList.toggle('selected',b.dataset.category==='all'));renderServices();});document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{selectedGroup=b.dataset.category;document.querySelectorAll('[data-category]').forEach(x=>x.classList.toggle('selected',x===b));renderServices()}));
-const topicText={ckg:['Cakupan pemeriksaan CKG','Indikator diterbitkan setelah pembilang, penyebut, dan periode ditetapkan.'],kia:['Kesehatan ibu dan anak','Informasi KIA akan ditampilkan sesuai indikator yang telah ditetapkan dan hak publikasi.'],ptm:['Pemantauan skrining PTM','Temuan skrining tidak otomatis merupakan diagnosis ataupun prevalensi penduduk.'],pws:['Pelayanan per wilayah','Peta dan daftar desa baru aktif setelah batas wilayah kerja diverifikasi.']};
-document.querySelectorAll('[data-topic]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-topic]').forEach(x=>x.classList.toggle('selected',x===b));const t=topicText[b.dataset.topic];document.getElementById('topic-title').textContent=t[0];document.getElementById('topic-desc').textContent=t[1];}));
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('entered');observer.unobserve(e.target)}}),{threshold:.05});document.querySelectorAll('.section-heading,.quick,.program-mosaic,.eco-grid,.story-grid,.ed-big,.ed-list,.closing-grid').forEach(el=>observer.observe(el));
-renderServices();navigate(location.hash.slice(1)||'home',false);
+
+function saveServicesToStorage() {
+  localStorage.setItem('malimpung_services_v2', JSON.stringify(servicesState));
+}
+
+function saveLogsToStorage() {
+  localStorage.setItem('malimpung_audit_v2', JSON.stringify(auditLogsState));
+}
+
+// ---------------------------------------------------------------------------
+// 3. UI RENDERING ENGINES
+// ---------------------------------------------------------------------------
+const icon = (name) => `<svg class="icon" style="width: 20px; height: 20px;" aria-hidden="true"><use href="#${name}"/></svg>`;
+
+function renderServices() {
+  const grid = document.getElementById('service-grid');
+  if (!grid) return;
+
+  const q = currentSearch.trim().toLowerCase();
+  const filtered = servicesState.filter(s => {
+    const matchCategory = (activeCategory === 'all' || s.group === activeCategory);
+    const matchQuery = !q || (
+      s.name.toLowerCase().includes(q) ||
+      s.text.toLowerCase().includes(q) ||
+      s.tag.toLowerCase().includes(q) ||
+      s.id.toLowerCase().includes(q)
+    );
+    return matchCategory && matchQuery;
+  });
+
+  const countEl = document.getElementById('service-count');
+  const emptyEl = document.getElementById('service-empty');
+  
+  if (countEl) countEl.textContent = `Menampilkan ${filtered.length} layanan resmi`;
+  if (emptyEl) emptyEl.style.display = filtered.length === 0 ? 'block' : 'none';
+
+  grid.innerHTML = filtered.map(s => `
+    <article class="service-card">
+      <div class="service-card-top">
+        <span class="service-tag">${s.tag}</span>
+        <h3 class="service-title">${s.name}</h3>
+        <p class="service-summary">${s.text}</p>
+        <div class="service-meta-list">
+          <div class="service-meta-item">
+            <svg style="width: 14px; height: 14px; color: var(--jade-600);" aria-hidden="true"><use href="#ic-clock"/></svg>
+            <span>${s.schedule}</span>
+          </div>
+          <div class="service-meta-item">
+            <svg style="width: 14px; height: 14px; color: var(--jade-600);" aria-hidden="true"><use href="#ic-shield"/></svg>
+            <span>${s.cost}</span>
+          </div>
+        </div>
+      </div>
+      <button class="btn-detail" data-service="${s.id}" aria-label="Lihat Rincian ${s.name}">
+        <span>Lihat Detail Standar Pelayanan</span>
+        <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-arrow"/></svg>
+      </button>
+    </article>
+  `).join('');
+
+  // Bind klik modal detail
+  grid.querySelectorAll('[data-service]').forEach(btn => {
+    btn.addEventListener('click', () => openServiceDetail(btn.dataset.service));
+  });
+}
+
+function openServiceDetail(id) {
+  const service = servicesState.find(s => s.id === id);
+  if (!service) return;
+
+  const modal = document.getElementById('service-detail-modal');
+  document.getElementById('modal-svc-title').textContent = service.name;
+  document.getElementById('modal-svc-desc').textContent = service.text;
+  document.getElementById('modal-svc-req').textContent = service.requirements;
+  document.getElementById('modal-svc-prep').textContent = service.preparation;
+  document.getElementById('modal-svc-proc').textContent = service.procedure;
+  document.getElementById('modal-svc-duration').textContent = service.duration;
+  document.getElementById('modal-svc-cost').textContent = service.cost;
+  document.getElementById('modal-svc-loc').textContent = `${service.location} (${service.schedule})`;
+  document.getElementById('modal-svc-legal').textContent = service.legalBasis;
+  document.getElementById('modal-svc-verified').textContent = `${service.verifiedDate} oleh Penanggung Jawab Pelayanan`;
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeServiceDetail() {
+  const modal = document.getElementById('service-detail-modal');
+  if (modal) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function renderOfficeTables() {
+  const serviceTable = document.getElementById('office-service-table');
+  if (serviceTable) {
+    serviceTable.innerHTML = servicesState.map(s => `
+      <tr style="border-bottom: 1px solid var(--border-light);">
+        <td style="padding: 0.625rem 0.5rem; font-family: monospace; font-weight: 700;">${s.id}</td>
+        <td style="padding: 0.625rem 0.5rem; font-weight: 700; color: var(--forest-950);">${s.name}</td>
+        <td style="padding: 0.625rem 0.5rem;"><span class="service-tag">${s.group}</span></td>
+        <td style="padding: 0.625rem 0.5rem;"><span class="integrity-badge verified" style="font-size: 0.6875rem;">Terbit (Publik)</span></td>
+        <td style="padding: 0.625rem 0.5rem;">
+          <button class="btn-secondary" style="padding: 0.25rem 0.625rem; font-size: 0.75rem;" onclick="loadServiceToCms('${s.id}')">Edit CMS</button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  const auditTable = document.getElementById('office-audit-table');
+  if (auditTable) {
+    auditTable.innerHTML = auditLogsState.slice(0, 8).map(log => `
+      <tr style="border-bottom: 1px solid var(--border-light);">
+        <td style="padding: 0.625rem 0.5rem; color: var(--ink-secondary); font-size: 0.8125rem;">${log.time}</td>
+        <td style="padding: 0.625rem 0.5rem; font-weight: 700; color: var(--forest-950); font-size: 0.8125rem;">${log.user}</td>
+        <td style="padding: 0.625rem 0.5rem; font-size: 0.8125rem;">${log.action}</td>
+        <td style="padding: 0.625rem 0.5rem; color: var(--emerald-600); font-weight: 600; font-size: 0.8125rem;">${log.result}</td>
+      </tr>
+    `).join('');
+  }
+}
+
+function updateTopicView(topicKey) {
+  const data = TOPIC_METRICS[topicKey];
+  if (!data) return;
+
+  activeTopic = topicKey;
+  document.getElementById('topic-title').textContent = data.title;
+  document.getElementById('topic-desc').textContent = data.desc;
+  document.getElementById('topic-status-text').textContent = `Status: ${data.status}`;
+  
+  const badgeEl = document.getElementById('topic-badge');
+  if (data.statusClass === 'verified') {
+    badgeEl.className = 'integrity-badge verified';
+  } else {
+    badgeEl.className = 'integrity-badge';
+  }
+
+  document.getElementById('kpi-label-1').textContent = data.kpi1_label;
+  document.getElementById('kpi-val-1').textContent = data.kpi1_val;
+  document.getElementById('kpi-sub-1').textContent = data.kpi1_sub;
+
+  document.getElementById('kpi-label-2').textContent = data.kpi2_label;
+  document.getElementById('kpi-val-2').textContent = data.kpi2_val;
+  document.getElementById('kpi-sub-2').textContent = data.kpi2_sub;
+
+  document.getElementById('kpi-label-3').textContent = data.kpi3_label;
+  document.getElementById('kpi-val-3').textContent = data.kpi3_val;
+  document.getElementById('kpi-sub-3').textContent = data.kpi3_sub;
+
+  document.getElementById('topic-last-updated').textContent = data.updated;
+
+  document.querySelectorAll('[data-topic]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.topic === topicKey);
+  });
+}
+
+// ---------------------------------------------------------------------------
+// 4. ROUTING & NAVIGATION
+// ---------------------------------------------------------------------------
+const VALID_ROUTES = ['home', 'services', 'programs', 'insights', 'public', 'office'];
+
+function navigate(route, scroll = true) {
+  if (!VALID_ROUTES.includes(route)) route = 'home';
+
+  // Toggle kelas halaman aktif
+  document.querySelectorAll('.page').forEach(p => {
+    const isTarget = (p.id === `page-${route}`);
+    p.classList.toggle('active', isTarget);
+    if (isTarget) p.classList.add('fade-in');
+  });
+
+  // Toggle navigasi desktop & drawer
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.toggle('active', link.dataset.go === route);
+  });
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.classList.toggle('active', link.dataset.go === route);
+  });
+
+  // Update Judul Halaman
+  const titles = {
+    home: 'Beranda — Puskesmas Malimpung Health Hub V2',
+    services: 'Katalog Layanan Publik — Puskesmas Malimpung',
+    programs: 'Program Kesehatan Siklus Hidup — Puskesmas Malimpung',
+    insights: 'Health Intelligence Wilayah — Puskesmas Malimpung',
+    public: 'Keterbukaan Informasi Publik — Puskesmas Malimpung',
+    office: 'Smart Virtual Office — Ruang Kerja Terotorisasi'
+  };
+  document.title = titles[route] || 'Puskesmas Malimpung';
+
+  // Tutup mobile drawer jika terbuka
+  closeMobileNav();
+
+  // Sinkronisasi URL Hash
+  if (location.hash !== `#${route}`) {
+    history.replaceState(null, '', `#${route}`);
+  }
+
+  if (scroll) {
+    window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+  }
+}
+
+function openMobileNav() {
+  const overlay = document.getElementById('mobile-nav');
+  const toggle = document.getElementById('menu-toggle');
+  if (overlay) {
+    overlay.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeMobileNav() {
+  const overlay = document.getElementById('mobile-nav');
+  const toggle = document.getElementById('menu-toggle');
+  if (overlay) {
+    overlay.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. CMS STUDIO LOGIC
+// ---------------------------------------------------------------------------
+window.loadServiceToCms = function(id) {
+  const s = servicesState.find(x => x.id === id);
+  if (!s) return;
+
+  // Buka tab CMS di office
+  document.querySelectorAll('.office-tab-item').forEach(t => t.classList.toggle('active', t.dataset.otab === 'cms'));
+  document.querySelectorAll('.otab-pane').forEach(p => p.style.display = (p.id === 'otab-cms' ? 'block' : 'none'));
+
+  document.getElementById('cms-svc-id').value = s.id;
+  document.getElementById('cms-svc-name').value = s.name;
+  document.getElementById('cms-svc-desc').value = s.text;
+  document.getElementById('cms-svc-cost').value = s.cost;
+  document.getElementById('cms-svc-schedule').value = s.schedule;
+
+  navigate('office', true);
+  appToast(`Memuat data ${s.name} ke editor CMS.`);
+};
+
+function handleCmsSubmit(e) {
+  e.preventDefault();
+  const id = document.getElementById('cms-svc-id').value;
+  const name = document.getElementById('cms-svc-name').value.trim();
+  const desc = document.getElementById('cms-svc-desc').value.trim();
+  const cost = document.getElementById('cms-svc-cost').value.trim();
+  const schedule = document.getElementById('cms-svc-schedule').value.trim();
+
+  const idx = servicesState.findIndex(s => s.id === id);
+  if (idx !== -1) {
+    servicesState[idx].name = name;
+    servicesState[idx].text = desc;
+    servicesState[idx].cost = cost;
+    servicesState[idx].schedule = schedule;
+    servicesState[idx].verifiedDate = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    saveServicesToStorage();
+    renderServices();
+    renderOfficeTables();
+
+    // Catat ke audit log
+    const now = new Date();
+    const timeStr = `${String(now.getHours()).padStart(2, '0')}.${String(now.getMinutes()).padStart(2, '0')}`;
+    auditLogsState.unshift({
+      time: timeStr,
+      user: document.getElementById('office-username').textContent,
+      action: `Update CMS: ${name}`,
+      result: 'Berhasil Dipublikasikan ke Portal'
+    });
+    saveLogsToStorage();
+    renderOfficeTables();
+
+    appToast(`Layanan ${name} berhasil disimpan dan diperbarui di portal!`);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. TOAST HELPER
+// ---------------------------------------------------------------------------
+function appToast(msg) {
+  const toast = document.getElementById('toast');
+  const text = document.getElementById('toast-text');
+  if (!toast || !text) return;
+
+  text.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3200);
+}
+window.appToast = appToast;
+
+// ---------------------------------------------------------------------------
+// 7. EVENT LISTENERS INITIALIZATION
+// ---------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+  initStore();
+  renderServices();
+  renderOfficeTables();
+  updateTopicView('ckg');
+
+  // Navigasi Router Link Click
+  document.querySelectorAll('[data-go]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const route = btn.dataset.go || btn.getAttribute('href').replace('#', '');
+      navigate(route);
+    });
+  });
+
+  // Hamburger Menu
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileNavClose = document.getElementById('mobile-nav-close');
+  if (menuToggle) menuToggle.addEventListener('click', openMobileNav);
+  if (mobileNavClose) mobileNavClose.addEventListener('click', closeMobileNav);
+
+  // Search & Filters Layanan
+  const searchInput = document.getElementById('service-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value;
+      renderServices();
+    });
+  }
+
+  const resetBtn = document.getElementById('service-reset');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      currentSearch = '';
+      activeCategory = 'all';
+      if (searchInput) searchInput.value = '';
+      document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.category === 'all'));
+      renderServices();
+    });
+  }
+
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      activeCategory = chip.dataset.category;
+      document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === chip));
+      renderServices();
+    });
+  });
+
+  // Modal Close
+  const modalClose = document.getElementById('modal-svc-close');
+  const modalBackdrop = document.getElementById('service-detail-modal');
+  if (modalClose) modalClose.addEventListener('click', closeServiceDetail);
+  if (modalBackdrop) {
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) closeServiceDetail();
+    });
+  }
+
+  // Health Intelligence Topic Buttons
+  document.querySelectorAll('[data-topic]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      updateTopicView(btn.dataset.topic);
+    });
+  });
+
+  // Informasi Publik Tabs
+  document.querySelectorAll('[data-ptab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabKey = btn.dataset.ptab;
+      document.querySelectorAll('[data-ptab]').forEach(b => b.classList.toggle('active', b === btn));
+      document.querySelectorAll('.public-tab-content').forEach(p => {
+        p.style.display = (p.id === `ptab-${tabKey}` ? 'block' : 'none');
+      });
+    });
+  });
+
+  // Virtual Office Tabs
+  document.querySelectorAll('[data-otab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const otabKey = btn.dataset.otab;
+      document.querySelectorAll('[data-otab]').forEach(b => b.classList.toggle('active', b === btn));
+      document.querySelectorAll('.otab-pane').forEach(p => {
+        p.style.display = (p.id === `otab-${otabKey}` ? 'block' : 'none');
+      });
+    });
+  });
+
+  // Role Switcher Simulation
+  const roleSwitcher = document.getElementById('role-switcher');
+  if (roleSwitcher) {
+    roleSwitcher.addEventListener('change', (e) => {
+      const role = e.target.value;
+      const avatar = document.getElementById('office-avatar');
+      const user = document.getElementById('office-username');
+      if (role === 'kapus') {
+        avatar.textContent = 'KP';
+        user.textContent = 'dr. Hj. Pimpinan Puskesmas';
+      } else if (role === 'dokter') {
+        avatar.textContent = 'DR';
+        user.textContent = 'dr. Ahmad Pratama (Dokter Fungsional)';
+      } else if (role === 'editor') {
+        avatar.textContent = 'ED';
+        user.textContent = 'Siti Rahmah, S.Kep (Pengelola Portal/CMS)';
+      } else if (role === 'program') {
+        avatar.textContent = 'PG';
+        user.textContent = 'Nurul Hidayah, SKM (Koordinator PWS/SPM)';
+      } else if (role === 'admin') {
+        avatar.textContent = 'IT';
+        user.textContent = 'Fikri Rahman, S.Kom (Administrator Sistem)';
+      }
+      appToast(`Beralih peran: ${user.textContent}`);
+    });
+  }
+
+  // CMS Form Submit
+  const cmsForm = document.getElementById('cms-form-service');
+  if (cmsForm) {
+    cmsForm.addEventListener('submit', handleCmsSubmit);
+  }
+
+  // CMS Reset Default
+  const cmsReset = document.getElementById('cms-btn-reset');
+  if (cmsReset) {
+    cmsReset.addEventListener('click', () => {
+      if (confirm('Kembalikan seluruh data katalog layanan ke data master standar?')) {
+        servicesState = [...DEFAULT_SERVICES];
+        saveServicesToStorage();
+        renderServices();
+        renderOfficeTables();
+        appToast('Data master berhasil dikembalikan ke standar awal.');
+      }
+    });
+  }
+
+  // CMS Export JSON
+  const cmsExport = document.getElementById('cms-btn-export');
+  if (cmsExport) {
+    cmsExport.addEventListener('click', () => {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(servicesState, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "master_layanan_malimpung_v2.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      appToast('Ekspor data master JSON berhasil diunduh.');
+    });
+  }
+
+  // Keyboard Escape Handler
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeServiceDetail();
+      closeMobileNav();
+    }
+  });
+
+  // Sinkronisasi route awal dari hash
+  const initialHash = location.hash.replace('#', '') || 'home';
+  navigate(initialHash, false);
+});

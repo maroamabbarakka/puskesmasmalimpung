@@ -1,22 +1,1179 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#103e38"><meta name="description" content="Prototipe konseptual Malimpung Health Hub V2, bukan website resmi atau sumber data klinis."><title>Malimpung Health Hub — Konsep UI/UX V2</title><link rel="stylesheet" href="style.css"></head><body>
-<svg aria-hidden="true" class="symbols" xmlns="http://www.w3.org/2000/svg"><symbol id="ic-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol><symbol id="ic-northeast" viewBox="0 0 24 24"><path d="M6 18 18 6M7 6h11v11"/></symbol><symbol id="ic-heart" viewBox="0 0 24 24"><path d="M20.8 4.5a5.7 5.7 0 0 0-8 0l-.8.8-.8-.8a5.7 5.7 0 0 0-8 8L12 21l8.8-8.5a5.7 5.7 0 0 0 0-8Z"/><path d="M3 12h5l2-3 4 6 2-3h5"/></symbol><symbol id="ic-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="ic-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol><symbol id="ic-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></symbol><symbol id="ic-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18"/></symbol><symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></symbol><symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 21v-2a7 7 0 0 1 14 0v2m1-16a4 4 0 0 1 0 8m1 3a5 5 0 0 1 4 5"/></symbol><symbol id="ic-doc" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/><path d="M14 2v6h6M9 13h7M9 17h7"/></symbol><symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="ic-shield" viewBox="0 0 24 24"><path d="m12 2 8 3v7c0 5-3 8.3-8 10-5-1.7-8-5-8-10V5l8-3Z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="ic-map" viewBox="0 0 24 24"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Zm6-3v15m6-12v15"/></symbol><symbol id="ic-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h17M8 16l4-5 3 2 5-7"/></symbol><symbol id="ic-spark" viewBox="0 0 24 24"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5Z"/></symbol><symbol id="ic-brief" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-11 7c5 4 9 4 14 0"/></symbol><symbol id="ic-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol><symbol id="ic-message" viewBox="0 0 24 24"><path d="M21 11a8.5 8.5 0 0 1-9 8.5 8.7 8.7 0 0 1-4-.9L3 21l1.7-5A8.5 8.5 0 1 1 21 11Z"/></symbol><symbol id="ic-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7l10-5Zm-10 10 10 5 10-5M2 17l10 5 10-5"/></symbol><symbol id="ic-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol><symbol id="ic-baby" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 11h.01m6 0h.01M9 15q3 3 6 0m-4-12q3 1 2 4"/></symbol><symbol id="ic-activity" viewBox="0 0 24 24"><path d="M2 12h5l3-7 4 14 3-7h5"/></symbol></svg>
-<div class="concept-ribbon"><div class="wrap ribbon-in"><span>CONCEPT DESIGN V2 <i class="ribbon-dot"></i> SEPTEMBER 2026</span><span>Prototipe kreatif • bukan website resmi • tanpa data pasien</span></div></div>
-<header class="header"><div class="wrap header-in"><a href="#home" class="brand" data-go="home" aria-label="Beranda Malimpung"><span class="brand-symbol"><svg class="icon"><use href="#ic-heart"/></svg></span><span class="brand-words"><b>PUSKESMAS<br>MALIMPUNG</b><small>HEALTH HUB · KABUPATEN PINRANG</small></span></a><nav class="navigation" id="navigation" aria-label="Navigasi utama"><button data-go="home">Beranda</button><button data-go="services">Layanan</button><button data-go="programs">Program Kesehatan</button><button data-go="insights">Kesehatan Wilayah</button><button data-go="public">Informasi Publik</button></nav><div class="header-action"><button class="office-cta" data-go="office"><svg class="icon"><use href="#ic-brief"/></svg><span>Kantor Virtual</span><svg class="icon icon-sm"><use href="#ic-northeast"/></svg></button></div><button id="menu-toggle" class="menu-toggle" aria-label="Buka menu" aria-expanded="false"><svg class="icon"><use href="#ic-menu"/></svg></button></div></header>
-<main>
-<section class="page active" id="page-home">
- <section class="hero"><div class="hero-noise"></div><div class="wrap hero-layout"><div class="hero-copy"><div class="overline light"><span class="overline-dot"></span> PUSKESMAS MALIMPUNG · DIGITAL HEALTH HUB</div><h1>Kesehatan lebih dekat.<br><em>Masa depan lebih sehat.</em></h1><p>Satu tempat untuk menemukan layanan, mengenal program kesehatan, dan memahami perkembangan kesehatan masyarakat di wilayah kerja Puskesmas Malimpung.</p><div class="hero-actions"><button class="button button-light" data-go="services">Temukan layanan <svg class="icon icon-sm"><use href="#ic-arrow"/></svg></button><button class="button button-translucent" data-go="insights">Jelajahi kesehatan wilayah <svg class="icon icon-sm"><use href="#ic-northeast"/></svg></button></div><div class="hero-micro"><span class="small-star">✳</span> Untuk masyarakat, tenaga kesehatan, dan pengambil keputusan.</div></div><div class="hero-showcase"><div class="showcase-halo"></div><div class="hero-large-ring"></div><div class="illustration-scene"><svg viewBox="0 0 570 490" role="img" aria-label="Ilustrasi konseptual gedung pelayanan kesehatan dan tenaga kesehatan, bukan foto bangunan Malimpung"><defs><linearGradient id="bld" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7fff9"/><stop offset="1" stop-color="#c1e7d4"/></linearGradient><linearGradient id="coat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fefefe"/><stop offset="1" stop-color="#c9e9e0"/></linearGradient></defs><ellipse cx="302" cy="430" rx="244" ry="34" fill="#061f1d" opacity=".2"/><circle cx="425" cy="115" r="90" fill="#b9ead8" opacity=".2"/><path d="m76 352 61-163 198-50 144 72-29 167-178 54Z" fill="#6acba9" opacity=".58"/><path d="m138 196 180-51 145 64v159l-178 54-147-71Z" fill="url(#bld)"/><path d="m138 196 180-51 145 64-180 49Z" fill="#e8fbf2"/><path d="m283 258 180-49v159l-180 54Z" fill="#c3ebd8"/><path d="m163 242 70 19v66l-70-18Zm0 91 70 18v41l-70-20Z" fill="#73bda5"/><path d="m317 280 106-29v74l-106 32Z" fill="#72bca7"/><path d="m327 291 84-23v44l-84 26Z" fill="#d6f6ea"/><path d="m320 379 52-15v50l-52 15Z" fill="#4d9b84"/><rect x="224" y="190" width="63" height="42" rx="12" fill="#10886a" transform="rotate(-15 224 190)"/><path d="m252 187 4 30m-15-15 30-8" stroke="white" stroke-width="6" stroke-linecap="round"/><path d="m120 360 173 62 185-52" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/><g transform="translate(358 258)"><ellipse cx="45" cy="160" rx="57" ry="14" fill="#0d513f" opacity=".22"/><path d="M13 154 28 77l48-6 30 88Z" fill="url(#coat)"/><path d="M28 156 38 89m35-7 16 74" stroke="#11866b" stroke-width="6"/><path d="M32 56q4-36 32-28 25 10 13 41l-19 19Z" fill="#552e2c"/><ellipse cx="59" cy="62" rx="26" ry="30" fill="#c7825a"/><path d="M33 55q1-35 28-37 30 3 30 33-17-3-30-17-8 18-28 21" fill="#292c2c"/><path d="m19 105 18-31 17 14 23-18 20 32" fill="#effcf7"/><path d="M57 99v34m-9-19h18" stroke="#14977a" stroke-width="6"/><path d="m2 110 28-2-7 30-22-8Z" fill="#c7825a"/><path d="m92 104 22 6-9 26-22-6Z" fill="#c7825a"/></g><g transform="translate(56 285)"><ellipse cx="91" cy="132" rx="59" ry="12" fill="#0d513f" opacity=".2"/><path d="M40 128 45 58l77-10 23 80Z" fill="#ffcf76"/><path d="M45 128 52 85m68-33 15 76" stroke="#a86c29" stroke-width="7"/><ellipse cx="83" cy="39" rx="25" ry="29" fill="#b77753"/><path d="M59 42q-5-39 24-40 30 3 27 37-20-7-28-20-4 17-23 23" fill="#243838"/><path d="m50 90-25 19m105-26 22 21" stroke="#b77753" stroke-width="15" stroke-linecap="round"/></g><path d="m40 198 44-10m395-52 41 13m-21 253 42-15" stroke="#bcebd6" opacity=".7" stroke-width="5" stroke-linecap="round"/></svg></div><div class="float-panel fp-top"><span class="panel-icon mint"><svg class="icon"><use href="#ic-heart"/></svg></span><div><b>Pelayanan terpadu</b><small>Informasi dalam satu tempat</small></div></div><div class="float-panel fp-bottom"><span class="tiny-live"></span><div><b>Kesehatan wilayah</b><small>Insight dari data tervalidasi</small></div><svg class="icon icon-sm"><use href="#ic-northeast"/></svg></div><div class="showcase-caption">Ilustrasi konsep • bukan foto fasilitas</div></div></div><div class="hero-bottom wrap"><span><span class="mini-line"></span> KENALI LEBIH JAUH</span><span>01 — 06 <svg class="icon icon-sm"><use href="#ic-arrow"/></svg></span></div></section>
- <section class="quick-section section"><div class="wrap"><div class="section-heading two-col"><div><span class="overline">AKSES MUDAH, DARI MANA SAJA</span><h2>Apa yang bisa<br><em>kami bantu hari ini?</em></h2></div><p>Pilih kebutuhan Anda. Informasi yang penting harus mudah ditemukan, bahkan ketika hanya menggunakan satu tangan dan layar ponsel.</p></div><div class="quick-flex"><button class="quick quick-feature" data-go="services"><span class="quick-icon"><svg class="icon"><use href="#ic-heart"/></svg></span><span><b>Layanan kesehatan</b><small>Jenis layanan, persyaratan, dan alur</small></span><svg class="icon"><use href="#ic-northeast"/></svg></button><button class="quick" data-go="services"><span class="quick-icon"><svg class="icon"><use href="#ic-calendar"/></svg></span><b>Jadwal layanan</b><svg class="icon icon-sm"><use href="#ic-arrow"/></svg></button><button class="quick" data-go="programs"><span class="quick-icon"><svg class="icon"><use href="#ic-activity"/></svg></span><b>Cek Kesehatan Gratis</b><svg class="icon icon-sm"><use href="#ic-arrow"/></svg></button><button class="quick" data-go="public"><span class="quick-icon"><svg class="icon"><use href="#ic-message"/></svg></span><b>Pengaduan & informasi</b><svg class="icon icon-sm"><use href="#ic-arrow"/></svg></button></div><div class="service-alert"><span><svg class="icon icon-sm"><use href="#ic-shield"/></svg> INFORMASI RESMI</span><p>Jadwal, kontak, tarif, dan dokumen layanan ditampilkan setelah diverifikasi oleh pengelola Puskesmas.</p><button data-go="public">Pusat informasi <svg class="icon icon-sm"><use href="#ic-arrow"/></svg></button></div></div></section>
- <section class="insight-story section"><div class="wrap story-grid"><div class="story-copy"><span class="overline light">MALIMPUNG HEALTH INSIGHTS</span><h2>Kita bisa memahami wilayah<br><em>lebih baik, bersama.</em></h2><p>Bukan sekadar angka. Gambaran pelayanan, hasil skrining, dan kebutuhan kesehatan ditampilkan melalui cerita data yang mudah dipahami dengan periode dan sumber yang jelas.</p><button class="button button-light" data-go="insights">Jelajahi kondisi kesehatan <svg class="icon icon-sm"><use href="#ic-northeast"/></svg></button><div class="story-foot">Setiap informasi yang ditayangkan melewati validasi serta persetujuan publikasi.</div></div><div class="data-stage"><div class="stage-orbit orbit-a"></div><div class="stage-orbit orbit-b"></div><div class="data-interface"><div class="data-interface-head"><span class="data-dot"></span><b>Gambaran kesehatan wilayah</b><span>PRATINJAU</span></div><div class="data-interface-grid"><div class="data-mini"><small>Peserta CKG tervalidasi</small><strong>—</strong><span>Menunggu agregasi data</span></div><div class="data-mini"><small>Cakupan pelayanan</small><strong>—</strong><span>Sasaran resmi belum tersedia</span></div></div><div class="chart-art" aria-hidden="true"><div class="chart-head">Tren pemeriksaan <span>— — —</span></div><svg viewBox="0 0 470 155"><path d="M0 35H470M0 75H470M0 115H470M0 150H470" stroke="#dceae5" stroke-width="1"/><path d="M10 122 C75 118 92 76 145 86 S230 123 282 85 S367 45 459 31" fill="none" stroke="#2aa889" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 10" opacity=".5"/><circle cx="282" cy="85" r="6" fill="#2aa889"/></svg><div class="chart-blur">Bentuk grafik ilustratif • tidak mewakili data lapangan</div></div><div class="data-interface-foot"><span>● Belum ada dataset publik</span><span>Periode —</span></div></div><div class="stage-tag"><svg class="icon icon-sm"><use href="#ic-shield"/></svg> Informasi agregat yang aman</div></div></div></section>
- <section class="program-showcase section"><div class="wrap"><div class="section-heading two-col"><div><span class="overline">PROGRAM UNTUK SELURUH GENERASI</span><h2>Merawat kesehatan<br><em>di setiap tahap kehidupan.</em></h2></div><p>Dari ibu dan anak hingga usia lanjut—temukan program, edukasi, dan jadwal kegiatan tanpa harus memahami struktur aplikasi pemerintahan.</p></div><div class="program-mosaic"><button class="pm-card pm-main" data-go="programs"><div class="pm-no">01 / PROGRAM UTAMA</div><div class="pm-main-art"><div class="art-bubble b1"></div><div class="art-bubble b2"></div><svg class="icon"><use href="#ic-heart"/></svg></div><div class="pm-content"><span>DETEKSI DINI</span><h3>Cek Kesehatan<br>Gratis</h3><p>Mulai lebih awal, kenali risiko, dan pahami langkah berikutnya.</p><strong>Kenali program <svg class="icon icon-sm"><use href="#ic-arrow"/></svg></strong></div></button><button class="pm-card pm-kia" data-go="programs"><div class="pm-no">02 / KELUARGA</div><div class="pm-card-icon"><svg class="icon"><use href="#ic-baby"/></svg></div><div><h3>Ibu, bayi<br>& balita</h3><p>Pendampingan dari masa kehamilan hingga tumbuh kembang.</p><strong>Pelajari <svg class="icon icon-sm"><use href="#ic-arrow"/></svg></strong></div></button><button class="pm-card pm-well" data-go="programs"><div class="pm-no">03 / PENCEGAHAN</div><div class="pm-card-icon"><svg class="icon"><use href="#ic-activity"/></svg></div><div><h3>Hidup sehat,<br>setiap hari.</h3><p>Imunisasi, skrining, gizi, edukasi, dan kesehatan lansia.</p><strong>Jelajahi <svg class="icon icon-sm"><use href="#ic-arrow"/></svg></strong></div></button></div></div></section>
- <section class="ecosystem section"><div class="wrap eco-grid"><div class="eco-left"><span class="overline">DI BALIK PELAYANAN YANG TERHUBUNG</span><h2>Satu Puskesmas.<br><em>Banyak kemampuan.</em><br>Satu pengalaman.</h2><p>Website publik, pencatatan CKG, RME, pemantauan wilayah, dan kantor virtual dirancang bekerja bersama—tanpa membuat masyarakat harus berpindah-pindah sistem untuk mendapatkan informasi.</p><button class="button button-dark" data-go="office">Lihat konsep kantor virtual <svg class="icon icon-sm"><use href="#ic-arrow"/></svg></button></div><div class="eco-right"><div class="eco-core"><span>HEALTH HUB</span><strong>MALIMPUNG</strong><small>ONE CONNECTED EXPERIENCE</small></div><div class="eco-node node-1"><svg class="icon"><use href="#ic-heart"/></svg> Pelayanan</div><div class="eco-node node-2"><svg class="icon"><use href="#ic-chart"/></svg> Insight</div><div class="eco-node node-3"><svg class="icon"><use href="#ic-brief"/></svg> Kantor virtual</div><div class="eco-node node-4"><svg class="icon"><use href="#ic-layers"/></svg> Program</div><div class="eco-corner">Integrasi diaktifkan hanya setelah akses, izin, dan pengujian tersedia.</div></div></div></section>
- <section class="editorial section"><div class="wrap"><div class="section-heading two-col"><div><span class="overline">KEGIATAN DAN EDUKASI</span><h2>Kesehatan yang hadir<br><em>lebih dekat dengan warga.</em></h2></div><p>Kegiatan lapangan, edukasi, pengumuman, dan cerita pelayanan menjadi bagian dari aktivitas website yang terus berkembang melalui CMS.</p></div><div class="editorial-grid"><div class="ed-big"><div class="ed-picture"><div class="ed-picture-visual"><svg class="icon"><use href="#ic-users"/></svg></div><span>FOTO DOKUMENTASI RESMI</span></div><div class="ed-info"><span>KEGIATAN KESEHATAN</span><h3>Cerita dari kegiatan pelayanan di wilayah Malimpung</h3><p>Area ini akan memuat dokumentasi aktual dengan tanggal, lokasi, dan persetujuan publikasi.</p></div></div><div class="ed-list"><article><div class="ed-icon"><svg class="icon"><use href="#ic-calendar"/></svg></div><div><span>AGENDA</span><h3>Kegiatan pelayanan dan edukasi</h3><p>Jadwal terverifikasi dari CMS.</p></div></article><article><div class="ed-icon"><svg class="icon"><use href="#ic-doc"/></svg></div><div><span>PENGUMUMAN</span><h3>Informasi resmi Puskesmas</h3><p>Konten aktif sesuai tanggal berlaku.</p></div></article><article><div class="ed-icon"><svg class="icon"><use href="#ic-heart"/></svg></div><div><span>EDUKASI</span><h3>Pengetahuan kesehatan yang tepercaya</h3><p>Materi dengan sumber dan pemeriksaan editorial.</p></div></article></div></div></div></section>
- <section class="closing"><div class="wrap closing-grid"><div><span class="overline light">SEHAT DIMULAI DARI AKSES YANG MUDAH</span><h2>Lebih dekat hari ini.<br><em>Lebih sehat esok hari.</em></h2></div><div><p>Temukan informasi yang Anda butuhkan dan kenali bagaimana Puskesmas Malimpung bekerja untuk kesehatan masyarakat.</p><div class="closing-buttons"><button class="button button-light" data-go="services">Jelajahi layanan <svg class="icon icon-sm"><use href="#ic-arrow"/></svg></button><button class="button button-line" data-go="public">Informasi publik <svg class="icon icon-sm"><use href="#ic-northeast"/></svg></button></div></div></div></section>
-</section>
-<section class="page" id="page-services"><div class="subhero service-subhero"><div class="wrap subhero-grid"><div><div class="overline light">YOUR HEALTH, OUR PRIORITY / LAYANAN</div><h1>Temukan layanan<br><em>yang Anda butuhkan.</em></h1><p>Informasi pelayanan dibuat ringkas, terstruktur, dan mudah ditemukan dari HP. Jadwal dan ketersediaan aktual akan dipublikasikan setelah diverifikasi.</p></div><div class="subhero-icon"><svg class="icon"><use href="#ic-heart"/></svg><div class="halo-rim"></div></div></div></div><section class="section"><div class="wrap"><div class="breadcrumb">BERANDA / LAYANAN KESEHATAN</div><div class="search-panel"><div class="search-wrap"><svg class="icon"><use href="#ic-search"/></svg><input id="service-search" type="search" placeholder="Cari layanan: CKG, gigi, ibu dan anak..." aria-label="Cari layanan kesehatan"></div><button id="service-reset" class="small-reset">Reset</button></div><div class="service-tags" id="service-tags"><button data-category="all" class="selected">Semua layanan</button><button data-category="umum">Pelayanan umum</button><button data-category="keluarga">Ibu & anak</button><button data-category="preventif">Skrining & CKG</button><button data-category="penunjang">Penunjang</button></div><div class="service-count"><b id="service-count">6 layanan konseptual</b><span>Ketersediaan layanan perlu konfirmasi Puskesmas</span></div><div class="service-grid" id="service-grid"></div><div class="service-empty" id="service-empty" hidden>Tidak ada layanan yang cocok. Ubah kata kunci atau filter.</div><div class="service-detail" id="service-detail" hidden></div></div></section><section class="section service-how"><div class="wrap"><div class="section-heading"><span class="overline">MUDAH SEJAK SEBELUM DATANG</span><h2>Rencanakan kunjungan<br><em>tanpa kebingungan.</em></h2></div><div class="steps-grid"><div><b>01</b><h3>Pilih layanan</h3><p>Temukan jenis layanan yang sesuai kebutuhan Anda.</p></div><div><b>02</b><h3>Cek persyaratan</h3><p>Baca jadwal, persiapan, alur, dan informasi biaya yang telah disahkan.</p></div><div><b>03</b><h3>Hubungi kanal resmi</h3><p>Gunakan kontak atau pendaftaran yang tersedia setelah diaktifkan.</p></div></div></div></section><section class="closing compact"><div class="wrap closing-grid"><div><h2>Informasi yang jelas.<br><em>Pelayanan lebih nyaman.</em></h2></div><div><p>Standar dan maklumat pelayanan menjadi bagian dari komitmen informasi Puskesmas.</p><button class="button button-light" data-go="public">Lihat standar pelayanan <svg class="icon icon-sm"><use href="#ic-arrow"/></svg></button></div></div></section></section>
-<section class="page" id="page-programs"><div class="subhero programs-subhero"><div class="wrap subhero-grid"><div><div class="overline light">PROGRAM KESEHATAN / SELURUH TAHAP KEHIDUPAN</div><h1>Program yang hadir<br><em>sepanjang kehidupan.</em></h1><p>Jelajahi program pemerintah berdasarkan kebutuhan keluarga dan masyarakat. Pelaksanaan aktual di Malimpung harus dikonfirmasi oleh penanggung jawab program.</p></div><div class="subhero-icon"><svg class="icon"><use href="#ic-users"/></svg><div class="halo-rim"></div></div></div></div><section class="section"><div class="wrap"><div class="section-heading two-col"><div><span class="overline">JELAJAHI MENURUT KEBUTUHAN</span><h2>Dari langkah pertama<br><em>hingga usia senja.</em></h2></div><p>Program disusun menurut siklus hidup. Penjelasan teknis, laporan, dan sistem pencatatan tetap berada di balik layar.</p></div><div class="program-list"><article><div class="list-symbol warm"><svg class="icon"><use href="#ic-baby"/></svg></div><div><span>01 / AWAL KEHIDUPAN</span><h3>Ibu, bayi dan balita</h3><p>KIA, gizi, imunisasi, tumbuh kembang, dan kegiatan Posyandu.</p></div><b>Pelaksanaan perlu verifikasi <svg class="icon icon-sm"><use href="#ic-northeast"/></svg></b></article><article><div class="list-symbol cool"><svg class="icon"><use href="#ic-users"/></svg></div><div><span>02 / MASA SEKOLAH</span><h3>Anak dan remaja</h3><p>CKG sekolah, UKS, imunisasi sekolah, dan kesehatan gigi.</p></div><b>Pelaksanaan perlu verifikasi <svg class="icon icon-sm"><use href="#ic-northeast"/></svg></b></article><article><div class="list-symbol mint"><svg class="icon"><use href="#ic-heart"/></svg></div><div><span>03 / DEWASA</span><h3>Deteksi dini & hidup sehat</h3><p>CKG, skrining PTM, kesehatan reproduksi, dan edukasi GERMAS.</p></div><b>Pelaksanaan perlu verifikasi <svg class="icon icon-sm"><use href="#ic-northeast"/></svg></b></article><article><div class="list-symbol lilac"><svg class="icon"><use href="#ic-activity"/></svg></div><div><span>04 / USIA LANJUT</span><h3>Sehat dan mandiri</h3><p>Pelayanan lansia, skrining faktor risiko, dan tindak lanjut.</p></div><b>Pelaksanaan perlu verifikasi <svg class="icon icon-sm"><use href="#ic-northeast"/></svg></b></article></div></div></section><section class="section programs-deep"><div class="wrap"><div class="section-heading two-col"><div><span class="overline light">MENGHUBUNGKAN PROGRAM NASIONAL</span><h2>Setiap kegiatan.<br><em>Satu cerita pelayanan.</em></h2></div><p>ILP, CKG, SPM, gizi, imunisasi, TB, dan edukasi memiliki hubungan yang dicatat di CMS agar satu kegiatan tidak dipublikasikan berulang sebagai konten yang sama.</p></div><div class="program-tags"><span>Integrasi Layanan Primer</span><span>Cek Kesehatan Gratis</span><span>SPM Kesehatan</span><span>Imunisasi</span><span>Gizi & stunting</span><span>PTM</span><span>TB & penyakit menular</span><span>GERMAS</span><span>PWS</span></div><div class="legal-note">Daftar merupakan cakupan rencana konten, bukan pernyataan bahwa semua program sudah aktif di Malimpung.</div></div></section></section>
-<section class="page" id="page-insights"><div class="subhero insights-subhero"><div class="wrap subhero-grid"><div><div class="overline light">MALIMPUNG HEALTH INTELLIGENCE / DATA PUBLIK</div><h1>Memahami kesehatan<br><em>wilayah kita.</em></h1><p>Jawaban yang dapat ditelusuri sumbernya: gambaran pelayanan, perkembangan skrining, cakupan, serta kebutuhan tindak lanjut—tanpa membuka data medis perorangan.</p></div><div class="subhero-icon"><svg class="icon"><use href="#ic-chart"/></svg><div class="halo-rim"></div></div></div></div><section class="section"><div class="wrap"><div class="insight-status"><svg class="icon"><use href="#ic-shield"/></svg><div><b>Mode desain — data publik belum tersedia</b><p>Angka dan batas wilayah tidak direkayasa. Informasi aktif setelah agregasi, validasi, penetapan indikator, dan persetujuan publikasi.</p></div></div><div class="section-heading two-col"><div><span class="overline">SATU PERTANYAAN, GAMBARAN YANG JELAS</span><h2>Apa yang ingin<br><em>Anda ketahui?</em></h2></div><p>Pilih topik. Setiap jawaban harus menunjukkan definisi, periode, sumber, waktu sinkronisasi, dan kelengkapan data.</p></div><div class="topic-grid" id="topic-grid"><button class="topic selected" data-topic="ckg"><svg class="icon"><use href="#ic-heart"/></svg><b>Cakupan pemeriksaan</b><small>CKG dan skrining</small></button><button class="topic" data-topic="kia"><svg class="icon"><use href="#ic-baby"/></svg><b>Kesehatan ibu & anak</b><small>KIA dan gizi</small></button><button class="topic" data-topic="ptm"><svg class="icon"><use href="#ic-activity"/></svg><b>Penyakit tidak menular</b><small>Temuan skrining</small></button><button class="topic" data-topic="pws"><svg class="icon"><use href="#ic-map"/></svg><b>Pelayanan per wilayah</b><small>PWS dan jejaring</small></button></div><div class="insight-main"><div class="insight-main-head"><div><span class="overline">RINGKASAN INDIKATOR</span><h3 id="topic-title">Cakupan pemeriksaan CKG</h3><p id="topic-desc">Indikator diterbitkan setelah pembilang, penyebut, dan periode ditetapkan.</p></div><span class="status-pill">BELUM TERSEDIA</span></div><div class="health-number-grid"><div><small>Jumlah peserta unik</small><strong>—</strong><span>Menunggu dataset tervalidasi</span></div><div><small>Cakupan terhadap sasaran</small><strong>—</strong><span>Menunggu denominator resmi</span></div><div><small>Terakhir diperbarui</small><strong>—</strong><span>Belum ada sinkronisasi</span></div></div><div class="map-layout"><div class="map-placeholder"><svg viewBox="0 0 600 340" aria-label="Grafis abstrak, bukan peta administratif"><defs><linearGradient id="ma" x1="0" x2="1"><stop stop-color="#e2efe9"/><stop offset="1" stop-color="#c0e3d1"/></linearGradient></defs><path d="M30 80C120 12 202 89 267 40S440 15 560 92M-20 272C90 218 162 294 287 245S448 230 620 188" fill="none" stroke="#dbe8df" stroke-width="45"/><path d="m102 110 125-66 125 60 135-8 59 103-72 93-135 8-142-36-87 28-66-89Z" fill="url(#ma)" stroke="white" stroke-width="8"/><path d="m227 44 25 138-142 110-66-89 58-93Zm25 138 100-78 135-8 59 103-72 93-135 8-85-59Z" fill="#9bcdb6" stroke="white" stroke-width="6"/><path d="m110 292 142-110 87 118-142-36Z" fill="#75b99b" stroke="white" stroke-width="6"/></svg><span>Ilustrasi abstrak • batas desa resmi belum tersedia</span></div><div class="map-side"><span>INDIKATOR & KUALITAS DATA</span><h3>Jangan menyimpulkan terlalu cepat.</h3><p>Data skrining tidak otomatis mewakili prevalensi seluruh penduduk. Kesimpulan membutuhkan konteks cakupan, periode, kualitas, dan definisi yang sesuai.</p><div class="metadata-item"><b>Sumber</b><small>CKG / RME setelah integrasi berizin</small></div><div class="metadata-item"><b>Periode data</b><small>Belum tersedia</small></div><div class="metadata-item"><b>Sinkronisasi</b><small>Belum diaktifkan</small></div><div class="metadata-item"><b>Publikasi</b><small>Memerlukan persetujuan</small></div></div></div></div></div></section><section class="section insight-method"><div class="wrap"><div class="section-heading"><span class="overline">TRANSPARANSI METODOLOGI</span><h2>Setiap angka memiliki<br><em>cerita dan asal-usul.</em></h2></div><div class="steps-grid"><div><b>01</b><h3>Sumber jelas</h3><p>CKG, RME, atau laporan program yang diotorisasi.</p></div><div><b>02</b><h3>Rumus transparan</h3><p>Periode, pembilang, penyebut, dan deduplikasi ditetapkan.</p></div><div><b>03</b><h3>Publikasi aman</h3><p>Hanya agregat yang memenuhi persyaratan privasi diterbitkan.</p></div></div></div></section></section>
-<section class="page" id="page-public"><div class="subhero public-subhero"><div class="wrap subhero-grid"><div><div class="overline light">INFORMASI PUBLIK / TRANSPARANSI PELAYANAN</div><h1>Terbuka informasinya.<br><em>Jelas pelayanannya.</em></h1><p>Temukan standar pelayanan, maklumat, profil, informasi program, dokumen, dan kanal pengaduan dalam satu pusat informasi yang mudah ditelusuri.</p></div><div class="subhero-icon"><svg class="icon"><use href="#ic-doc"/></svg><div class="halo-rim"></div></div></div></div><section class="section"><div class="wrap"><div class="section-heading two-col"><div><span class="overline">AKUNTABILITAS YANG MUDAH DIAKSES</span><h2>Informasi penting,<br><em>tanpa harus mencari jauh.</em></h2></div><p>Dokumen resmi harus diterbitkan oleh unit berwenang. Untuk data yang dikelola Dinas Kesehatan atau PPID Pemkab, portal menautkan sumber yang tepat.</p></div><div class="public-grid"><article><span>01 / PELAYANAN</span><svg class="icon"><use href="#ic-heart"/></svg><h3>Standar pelayanan</h3><p>Persyaratan, prosedur, jangka waktu, tarif, dan jaminan layanan.</p><small>Dokumen resmi: menunggu pengesahan/unggah</small></article><article><span>02 / KOMITMEN</span><svg class="icon"><use href="#ic-shield"/></svg><h3>Maklumat pelayanan</h3><p>Pernyataan komitmen penyelenggara sesuai ketentuan.</p><small>Dokumen resmi: menunggu verifikasi</small></article><article><span>03 / KELEMBAGAAN</span><svg class="icon"><use href="#ic-users"/></svg><h3>Profil & tata kelola</h3><p>Identitas, organisasi, tugas, pejabat, dan kontak terverifikasi.</p><small>Data master: perlu dilengkapi</small></article><article><span>04 / KINERJA</span><svg class="icon"><use href="#ic-chart"/></svg><h3>Program & kinerja</h3><p>Ringkasan program, sasaran, capaian, dan dokumen terkait.</p><small>Angka: belum tersedia</small></article><article><span>05 / HAK INFORMASI</span><svg class="icon"><use href="#ic-doc"/></svg><h3>PPID & informasi publik</h3><p>Rujukan informasi berkala, setiap saat, serta permohonan informasi.</p><small>Penanggung jawab: perlu konfirmasi</small></article><article><span>06 / ASPIRASI</span><svg class="icon"><use href="#ic-message"/></svg><h3>Pengaduan masyarakat</h3><p>Kanal resmi, mekanisme, dan tindak lanjut yang dapat dipertanggungjawabkan.</p><small>Kanal: menunggu pengesahan</small></article></div></div></section><section class="section service-how"><div class="wrap public-special"><div><span class="overline">INFORMASI YANG TIDAK SEKADAR PDF</span><h2>Ringkas di halaman.<br><em>Lengkap di dokumen.</em></h2><p>Halaman layanan menyampaikan informasi inti dalam HTML yang nyaman dibaca di HP, sementara dokumen resmi menjadi rujukan lengkap yang bisa dibuka atau diunduh.</p></div><div class="paper-art"><div class="paper-head"><span></span><span></span><span></span></div><div class="paper-long"></div><div class="paper-short"></div><div class="paper-long"></div><div class="paper-short"></div><b>STANDAR PELAYANAN</b><small>Dokumen konseptual · belum merupakan dokumen resmi</small></div></div></section></section>
-<section class="page" id="page-office"><div class="office-warning">PRATINJAU KANTOR VIRTUAL — TANPA LOGIN, KONEKSI SISTEM, DATA PASIEN, ATAU DATA PEGAWAI</div><div class="office-shell"><aside class="office-side"><div class="side-brand">M <span>HEALTH HUB</span></div><div class="side-label">RUANG KERJA</div><div class="side-item current"><svg class="icon"><use href="#ic-chart"/></svg> Ikhtisar</div><div class="side-item"><svg class="icon"><use href="#ic-heart"/></svg> Pelayanan & CKG</div><div class="side-item"><svg class="icon"><use href="#ic-map"/></svg> Kesehatan wilayah</div><div class="side-label">OPERASIONAL</div><div class="side-item"><svg class="icon"><use href="#ic-layers"/></svg> RME & integrasi</div><div class="side-item"><svg class="icon"><use href="#ic-calendar"/></svg> Absensi</div><div class="side-item"><svg class="icon"><use href="#ic-chart"/></svg> KPI & kegiatan</div><div class="side-label">PENGELOLAAN</div><div class="side-item"><svg class="icon"><use href="#ic-doc"/></svg> CMS publik</div><div class="side-item"><svg class="icon"><use href="#ic-shield"/></svg> Mutu & audit</div><div class="office-side-bottom">AKSES & PERAN<br><small>Belum diimplementasikan</small></div></aside><div class="office-content"><div class="workspace-nav"><span><svg class="icon icon-sm"><use href="#ic-brief"/></svg> VIRTUAL OFFICE / DASHBOARD</span><button data-go="home">Kembali ke website <svg class="icon icon-sm"><use href="#ic-northeast"/></svg></button></div><div class="workspace-intro"><div><span class="overline">SELAMAT DATANG DI RUANG KERJA</span><h1>Pahami situasi.<br><em>Tentukan langkah berikutnya.</em></h1><p>Contoh tampilan untuk petugas dan pimpinan. Konten sebenarnya akan disesuaikan dengan tugas, kewenangan, dan sumber data yang tersedia.</p></div><div class="workspace-date"><svg class="icon"><use href="#ic-calendar"/></svg><span>DATA OPERASIONAL<br><b>Belum terhubung</b></span></div></div><div class="office-stat-grid"><div class="o-stat"><span>CKG TERVALIDASI</span><strong>—</strong><small>Jumlah peserta unik</small></div><div class="o-stat"><span>TINDAK LANJUT</span><strong>—</strong><small>Belum dapat dihitung</small></div><div class="o-stat"><span>CAPAIAN PROGRAM</span><strong>—</strong><small>Target belum ditetapkan</small></div><div class="o-stat"><span>KUALITAS DATA</span><strong>—</strong><small>Validasi belum dijalankan</small></div></div><div class="workspace-duo"><article class="workspace-card large"><div class="workspace-card-head"><div><span class="overline">PEMANTAUAN WILAYAH</span><h3>Lihat kondisi per wilayah</h3></div><span class="status-pill">PETA BELUM AKTIF</span></div><div class="office-map-visual"><svg viewBox="0 0 520 300" aria-hidden="true"><path d="m87 45 111-15 76 67 118-5 75 105-100 76-121-18-113 17-86-106Z" fill="#d1e7da" stroke="#fff" stroke-width="8"/><path d="m87 45 111-15 48 104-113 138-86-106Zm159 89 28-37 118-5 75 105-100 76-121-18Z" fill="#90c4a9" stroke="#fff" stroke-width="7"/></svg><span>Ilustrasi; bukan peta resmi.</span></div><div class="workspace-card-foot">Periode — <span>Sumber —</span></div></article><article class="workspace-card"><div class="workspace-card-head"><div><span class="overline">AGENDA & TINDAKAN</span><h3>Perlu perhatian</h3></div></div><div class="task-row"><i></i><div><b>Validasi data CKG</b><small>Menunggu integrasi aman</small></div></div><div class="task-row"><i></i><div><b>Rencana tindak lanjut</b><small>Menunggu definisi indikator</small></div></div><div class="task-row"><i></i><div><b>Pelaporan program</b><small>Menunggu pemetaan sumber</small></div></div><div class="task-row"><i></i><div><b>Persetujuan publikasi</b><small>Menunggu penetapan peran</small></div></div></article></div><div class="workspace-third"><article><svg class="icon"><use href="#ic-heart"/></svg><b>Pelayanan & RME</b><p>Adapter belum ditetapkan. Data klinis tidak dibaca oleh website publik.</p><small>TERENCANA</small></article><article><svg class="icon"><use href="#ic-calendar"/></svg><b>Absensi & tugas</b><p>Hubungkan sistem kepegawaian yang ditetapkan instansi.</p><small>MENUNGGU SISTEM</small></article><article><svg class="icon"><use href="#ic-chart"/></svg><b>Kinerja & KPI</b><p>Target, kegiatan, realisasi, dan bukti dukung sesuai kewenangan.</p><small>TERENCANA</small></article></div><div class="workspace-disclaimer">Demo desain: tidak ada akun, formulir medis, API, data pasien, sinkronisasi, atau klaim capaian operasional dalam prototipe ini.</div></div></div></section>
-</main>
-<footer class="footer"><div class="wrap footer-top"><div class="footer-identity"><span class="brand-symbol footer-symbol"><svg class="icon"><use href="#ic-heart"/></svg></span><div><h3>Puskesmas Malimpung</h3><p>Portal layanan, informasi kesehatan, dan kantor virtual. Identitas/logo resmi serta kontak menunggu verifikasi instansi.</p><span class="footer-prototype">KONSEP DESAIN · BELUM WEBSITE RESMI</span></div></div><div><h4>Jelajahi</h4><button data-go="home">Beranda</button><button data-go="services">Layanan</button><button data-go="programs">Program</button><button data-go="insights">Kesehatan wilayah</button></div><div><h4>Informasi</h4><button data-go="public">Standar pelayanan</button><button data-go="public">Maklumat</button><button data-go="public">Pengaduan</button><button data-go="public">Informasi publik</button></div><div><h4>Ruang Kerja</h4><button data-go="office">Kantor virtual</button><p>Akses produksi harus terotorisasi.</p></div></div><div class="wrap footer-end"><span>© 2026 Puskesmas Malimpung — konsep, bukan situs resmi.</span><span>DATA TERJAGA. INFORMASI TERPERCAYA.</span></div></footer>
-<script src="app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puskesmas Malimpung — Health Hub V2</title>
+  <meta name="description" content="Portal Layanan Kesehatan Publik, Health Intelligence Wilayah, dan Smart Virtual Office Puskesmas Malimpung, Kabupaten Pinrang.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SVG Sprite Definitions -->
+  <svg style="display: none;" aria-hidden="true">
+    <symbol id="ic-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="ic-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="ic-baby" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15h8"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="9" r="1"/></symbol>
+    <symbol id="ic-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="ic-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+    <symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="ic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+    <symbol id="ic-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="ic-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="ic-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="ic-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+  </svg>
+
+  <!-- 1. TOPBAR INFORMASI OPERASIONAL -->
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-left">
+        <span class="topbar-status">
+          <span class="pulse-dot"></span>
+          <strong>Layanan Rawat Jalan Buka:</strong> Senin – Sabtu 08.00 – 14.00 WITA
+        </span>
+        <span class="topbar-status" style="margin-left: 0.5rem; color: #fcd34d;">
+          <strong>UGD & Persalinan:</strong> Siaga 24 Jam
+        </span>
+      </div>
+      <div class="topbar-right">
+        <span>Kecamatan Patampanua, Kabupaten Pinrang</span>
+        <a href="tel:081234567890" id="topbar-call">Panggilan Darurat: (0421) 921001</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. SITE HEADER RESMI -->
+  <header class="site-header" id="site-header">
+    <div class="container">
+      <!-- Identitas Resmi Pemerintah -->
+      <a href="#home" class="brand" data-go="home" aria-label="Beranda Puskesmas Malimpung">
+        <div class="brand-logos">
+          <img src="assets/logo_pinrang.png" alt="Lambang Kabupaten Pinrang" class="brand-logo-img">
+          <div class="brand-divider"></div>
+          <img src="assets/logo_puskesmas_malimpung.png" alt="Lambang Puskesmas Malimpung" class="brand-logo-img">
+        </div>
+        <div class="brand-info">
+          <span class="brand-title">Puskesmas Malimpung</span>
+          <span class="brand-subtitle">Dinas Kesehatan Kabupaten Pinrang</span>
+        </div>
+      </a>
+
+      <!-- Navigasi Desktop 6 Rute -->
+      <nav class="nav-menu" id="nav-desktop" aria-label="Navigasi Utama">
+        <a href="#home" class="nav-link active" data-go="home">Beranda</a>
+        <a href="#services" class="nav-link" data-go="services">Layanan</a>
+        <a href="#programs" class="nav-link" data-go="programs">Program</a>
+        <a href="#insights" class="nav-link" data-go="insights">Kesehatan Wilayah</a>
+        <a href="#public" class="nav-link" data-go="public">Informasi Publik</a>
+      </nav>
+
+      <!-- Shortcut Kantor Virtual & Mobile Toggle -->
+      <div class="header-actions">
+        <a href="#office" class="btn-office-shortcut" data-go="office" aria-label="Masuk ke Smart Virtual Office">
+          <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-lock"/></svg>
+          <span>Kantor Virtual</span>
+        </a>
+        <button class="btn-hamburger" id="menu-toggle" aria-label="Buka Menu Navigasi" aria-expanded="false" aria-controls="mobile-nav">
+          <svg style="width: 24px; height: 24px;" aria-hidden="true"><use href="#ic-menu"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer Overlay -->
+  <div class="mobile-nav-overlay" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Menu Navigasi Mobile">
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <div class="brand-info">
+          <span class="brand-title" style="font-size: 1rem;">Puskesmas Malimpung</span>
+          <span class="brand-subtitle">Kabupaten Pinrang</span>
+        </div>
+        <button class="modal-close" id="mobile-nav-close" aria-label="Tutup Menu">×</button>
+      </div>
+      <div class="mobile-nav-list" id="navigation">
+        <a href="#home" class="mobile-nav-link active" data-go="home">Beranda <span>→</span></a>
+        <a href="#services" class="mobile-nav-link" data-go="services">Layanan Kesehatan <span>→</span></a>
+        <a href="#programs" class="mobile-nav-link" data-go="programs">Program Prioritas <span>→</span></a>
+        <a href="#insights" class="mobile-nav-link" data-go="insights">Kesehatan Wilayah <span>→</span></a>
+        <a href="#public" class="mobile-nav-link" data-go="public">Informasi Publik <span>→</span></a>
+        <a href="#office" class="mobile-nav-link" data-go="office" style="background-color: var(--mint-50); color: var(--forest-900); font-weight: 700;">
+          <span>Kantor Virtual (Internal)</span>
+          <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-lock"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main id="main-content">
+
+    <!-- ====================================================================
+         PAGE 1: BERANDA (#home)
+         ==================================================================== -->
+    <div class="page active" id="page-home">
+      <!-- Hero Section Editorial & Premium -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-content">
+              <div class="hero-pill">
+                <svg style="width: 14px; height: 14px;" aria-hidden="true"><use href="#ic-shield"/></svg>
+                <span>Pelayanan Kesehatan Primer Terpadu & Terpercaya</span>
+              </div>
+              <h1 class="hero-title">
+                Kesehatan masyarakat Malimpung, <em>dalam satu ekosistem terpadu.</em>
+              </h1>
+              <p class="hero-lead">
+                Puskesmas Malimpung menyediakan akses pelayanan kesehatan yang manusiawi, informasi jadwal & prosedur yang transparan, serta pemantauan kesehatan wilayah berbasis data yang dapat dipertanggungjawabkan.
+              </p>
+              <div class="hero-actions">
+                <a href="#services" class="btn-primary" data-go="services">
+                  <span>Jelajahi Layanan Warga</span>
+                  <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-arrow"/></svg>
+                </a>
+                <a href="#insights" class="btn-secondary" data-go="insights">
+                  <span>Pantau Kesehatan Wilayah</span>
+                  <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-chart"/></svg>
+                </a>
+              </div>
+              <div class="hero-trust-bar">
+                <div class="trust-item">
+                  <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-check"/></svg>
+                  <span>Integrasi Pelayanan Primer (ILP)</span>
+                </div>
+                <div class="trust-item">
+                  <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-check"/></svg>
+                  <span>Cek Kesehatan Gratis (CKG) 2026</span>
+                </div>
+                <div class="trust-item">
+                  <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-check"/></svg>
+                  <span>Standar SPM Permenkes 6/2024</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hero Visual Overview Card -->
+            <div class="hero-visual-card">
+              <div class="hero-visual-header">
+                <div>
+                  <span class="visual-badge">Status Fasyankes Hari Ini</span>
+                  <h3 style="font-size: 1.125rem; font-weight: 800; color: var(--forest-950); margin-top: 0.25rem;">Puskesmas Induk Malimpung</h3>
+                </div>
+                <span style="font-size: 0.75rem; color: var(--emerald-600); font-weight: 700;">● Beroperasi Normal</span>
+              </div>
+              <div class="hero-metrics-grid">
+                <div class="metric-box">
+                  <span class="metric-label">Pelayanan Rawat Jalan</span>
+                  <span class="metric-value" id="home-stat-services">6 Unit</span>
+                  <span class="metric-note">Poli Umum, KIA, Gigi, Lab, Farmasi, CKG</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-label">Wilayah Kerja Binaan</span>
+                  <span class="metric-value">6 Desa</span>
+                  <span class="metric-note">Patampanua, Kab. Pinrang</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-label">Layanan Darurat</span>
+                  <span class="metric-value" style="color: var(--emerald-600);">24 Jam</span>
+                  <span class="metric-note">UGD & Persalinan Siaga</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-label">Keterbukaan Publik</span>
+                  <span class="metric-value" style="color: var(--forest-900);">100%</span>
+                  <span class="metric-note">UU 25/2009 & Maklumat Resmi</span>
+                </div>
+              </div>
+              <div class="hero-card-banner">
+                <div class="banner-icon">
+                  <svg style="width: 22px; height: 22px;" aria-hidden="true"><use href="#ic-activity"/></svg>
+                </div>
+                <div>
+                  <h4 style="font-size: 0.9375rem; font-weight: 700; margin-bottom: 0.15rem;">Program Nasional CKG 2026</h4>
+                  <p style="font-size: 0.8125rem; opacity: 0.9;">Pemeriksaan kesehatan gratis bagi seluruh siklus hidup di wilayah Malimpung.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Actions Bento Grid -->
+      <section class="section" style="background-color: var(--surface-alt);">
+        <div class="container">
+          <div class="section-header">
+            <span class="tag-badge">Akses Cepat Warga</span>
+            <h2 class="section-title">Informasi penting, <em>siap diakses seketika.</em></h2>
+            <p class="section-desc">Pilih jalur layanan yang Anda butuhkan tanpa birokrasi berbelit.</p>
+          </div>
+          <div class="quick-bento">
+            <a href="#services" class="bento-card" data-go="services">
+              <div>
+                <div class="bento-icon-wrap">
+                  <svg style="width: 24px; height: 24px;" aria-hidden="true"><use href="#ic-heart"/></svg>
+                </div>
+                <h3 class="bento-title">Katalog Layanan & Tarif</h3>
+                <p class="bento-desc">Cek persyaratan, prosedur, jadwal dokter, serta kepastian tarif resmi sesuai Perda Kabupaten Pinrang.</p>
+              </div>
+              <span class="bento-action">Buka Katalog Layanan →</span>
+            </a>
+
+            <a href="#programs" class="bento-card warm" data-go="programs">
+              <div>
+                <div class="bento-icon-wrap">
+                  <svg style="width: 24px; height: 24px;" aria-hidden="true"><use href="#ic-baby"/></svg>
+                </div>
+                <h3 class="bento-title">Program Siklus Hidup</h3>
+                <p class="bento-desc">Pelayanan ibu hamil, balita, gizi pencegahan stunting, usia sekolah, usia dewasa, hingga lansia santun.</p>
+              </div>
+              <span class="bento-action">Pelajari Program Terpadu →</span>
+            </a>
+
+            <a href="#insights" class="bento-card sky" data-go="insights">
+              <div>
+                <div class="bento-icon-wrap">
+                  <svg style="width: 24px; height: 24px;" aria-hidden="true"><use href="#ic-chart"/></svg>
+                </div>
+                <h3 class="bento-title">Health Intelligence</h3>
+                <p class="bento-desc">Pantau capaian skrining kesehatan wilayah secara transparan tanpa rekayasa data atau estimasi fiktif.</p>
+              </div>
+              <span class="bento-action">Lihat Data Wilayah →</span>
+            </a>
+
+            <a href="#public" class="bento-card" data-go="public">
+              <div>
+                <div class="bento-icon-wrap">
+                  <svg style="width: 24px; height: 24px;" aria-hidden="true"><use href="#ic-doc"/></svg>
+                </div>
+                <h3 class="bento-title">Standar & Pengaduan</h3>
+                <p class="bento-desc">Akses dokumen maklumat pelayanan, hak & kewajiban pasien, serta saluran pengaduan langsung SP4N-LAPOR.</p>
+              </div>
+              <span class="bento-action">Keterbukaan Informasi →</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Immersive Dark Feature: Health Intelligence Storytelling -->
+      <section class="section" style="padding-top: 2rem; padding-bottom: 2rem;">
+        <div class="container">
+          <div class="feature-dark">
+            <div class="feature-dark-grid">
+              <div>
+                <span class="tag-badge" style="background-color: rgba(217, 244, 233, 0.2); color: #d9f4e9;">Transparansi Data Kesehatan</span>
+                <h2 class="section-title">Memahami kondisi wilayah, <em>dengan data yang akuntabel.</em></h2>
+                <p class="section-desc">
+                  Setiap angka yang dipublikasikan memiliki asal-usul yang sah: pembilang terverifikasi, penyebut berbasis penetapan resmi, dan periode observasi yang jelas. Puskesmas Malimpung tidak mempublikasikan angka estimasi tanpa dasar klinis.
+                </p>
+                <div class="insight-metrics-row">
+                  <div class="insight-metric-item">
+                    <strong id="home-metric-ckg">—</strong>
+                    <span>Skrining CKG Tervalidasi</span>
+                  </div>
+                  <div class="insight-metric-item">
+                    <strong id="home-metric-kia">—</strong>
+                    <span>Pelayanan Ibu & Balita</span>
+                  </div>
+                  <div class="insight-metric-item">
+                    <strong id="home-metric-pws">6 Desa</strong>
+                    <span>Jejaring Wilayah Binaan</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-terminal">
+                <div class="terminal-header">
+                  <span class="terminal-badge">
+                    <span class="pulse-dot"></span>
+                    Audit Tata Kelola Data
+                  </span>
+                  <span style="font-size: 0.75rem; color: #9abdb2;">Status: Terlindungi</span>
+                </div>
+                <div style="font-size: 0.8125rem; line-height: 1.7; color: #d1ded9;">
+                  <p>✔ <strong>Isolasi Data Klinis:</strong> Tidak ada NIK, nama pasien, atau rekam medis individual yang dikirim ke portal publik.</p>
+                  <p style="margin-top: 0.5rem;">✔ <strong>Kepatuhan UU PDP 27/2022:</strong> Penilaian risiko pengungkapan sebelum publikasi agregat desa.</p>
+                  <p style="margin-top: 0.5rem;">✔ <strong>Prinsip Kejujuran Data:</strong> Nilai data yang belum diverifikasi ditampilkan sebagai '—', bukan angka 0 palsu.</p>
+                </div>
+                <a href="#insights" class="btn-primary" data-go="insights" style="width: 100%; margin-top: 1.25rem; background-color: var(--jade-600);">
+                  Buka Health Intelligence Wilayah
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Program Siklus Hidup Showcase -->
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="tag-badge warm">Integrasi Pelayanan Primer (ILP)</span>
+            <h2 class="section-title">Layanan menurut <em>tahapan kehidupan.</em></h2>
+            <p class="section-desc">Puskesmas Malimpung mengadopsi transformasi layanan primer Kemenkes RI untuk memenuhi kebutuhan kesehatan setiap warga sepanjang hayat.</p>
+          </div>
+          <div class="program-mosaic">
+            <div class="program-card">
+              <div>
+                <span class="program-tag">Klaster 2</span>
+                <h3 class="program-title">Ibu Hamil & Balita</h3>
+                <p class="program-desc">Pemeriksaan antenatal terpadu (ANC), pemantauan tumbuh kembang balita, imunisasi dasar lengkap, dan intervensi gizi stunting.</p>
+              </div>
+              <div class="program-footer">
+                <span>Poli KIA & Posyandu</span>
+                <a href="#programs" data-go="programs" style="color: var(--jade-700); font-weight: 700;">Detail →</a>
+              </div>
+            </div>
+
+            <div class="program-card">
+              <div>
+                <span class="program-tag">Klaster 2</span>
+                <h3 class="program-title">Usia Sekolah & Remaja</h3>
+                <p class="program-desc">Skrining kesehatan berkala di sekolah (UKS), edukasi gizi & pencegahan anemia remaja putri, serta skrining kesehatan jiwa dasar.</p>
+              </div>
+              <div class="program-footer">
+                <span>UKS & CKG Sekolah</span>
+                <a href="#programs" data-go="programs" style="color: var(--jade-700); font-weight: 700;">Detail →</a>
+              </div>
+            </div>
+
+            <div class="program-card">
+              <div>
+                <span class="program-tag">Klaster 3</span>
+                <h3 class="program-title">Usia Dewasa & Produktif</h3>
+                <p class="program-desc">Deteksi dini Penyakit Tidak Menular (Hipertensi, Diabetes Melitus, Kanker Leher Rahim/Payudara), serta konseling gaya hidup sehat GERMAS.</p>
+              </div>
+              <div class="program-footer">
+                <span>Poli Umum & Posbindu</span>
+                <a href="#programs" data-go="programs" style="color: var(--jade-700); font-weight: 700;">Detail →</a>
+              </div>
+            </div>
+
+            <div class="program-card">
+              <div>
+                <span class="program-tag">Klaster 3</span>
+                <h3 class="program-title">Lanjut Usia (Lansia)</h3>
+                <p class="program-desc">Pelayanan kesehatan santun lansia, skrining fungsional geriatri, pengelolaan penyakit kronis, dan Posyandu Lansia di desa.</p>
+              </div>
+              <div class="program-footer">
+                <span>Posyandu Lansia</span>
+                <a href="#programs" data-go="programs" style="color: var(--jade-700); font-weight: 700;">Detail →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ekosistem & Jejaring Fasyankes -->
+      <section class="section" style="background-color: var(--surface-alt);">
+        <div class="container">
+          <div class="section-header">
+            <span class="tag-badge sky">Jejaring Pelayanan</span>
+            <h2 class="section-title">Ekosistem terhubung <em>hingga tingkat dusun.</em></h2>
+            <p class="section-desc">Puskesmas Malimpung mengoordinasikan fasilitas jejaring di seluruh wilayah kerja Kecamatan Patampanua.</p>
+          </div>
+          <div class="eco-grid">
+            <div class="eco-card">
+              <div class="eco-icon">
+                <svg style="width: 22px; height: 22px;" aria-hidden="true"><use href="#ic-heart"/></svg>
+              </div>
+              <div class="eco-info">
+                <h4>Puskesmas Induk Malimpung</h4>
+                <p>Pusat rujukan tingkat pertama dengan fasilitas rawat jalan lengkap, laboratorium dasar, farmasi, serta UGD & persalinan 24 jam.</p>
+              </div>
+            </div>
+
+            <div class="eco-card">
+              <div class="eco-icon">
+                <svg style="width: 22px; height: 22px;" aria-hidden="true"><use href="#ic-shield"/></svg>
+              </div>
+              <div class="eco-info">
+                <h4>Puskesmas Pembantu (Pustu)</h4>
+                <p>Mendekatkan pelayanan kesehatan preventif dan kuratif dasar bagi masyarakat desa yang jauh dari puskesmas induk.</p>
+              </div>
+            </div>
+
+            <div class="eco-card">
+              <div class="eco-icon">
+                <svg style="width: 22px; height: 22px;" aria-hidden="true"><use href="#ic-baby"/></svg>
+              </div>
+              <div class="eco-info">
+                <h4>Posyandu Siklus Hidup</h4>
+                <p>Layanan berbasis masyarakat yang dilaksanakan rutin setiap bulan oleh kader kesehatan terlatih di setiap dusun.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ====================================================================
+         PAGE 2: LAYANAN KESEHATAN (#services)
+         ==================================================================== -->
+    <div class="page" id="page-services">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="tag-badge">Katalog Pelayanan Publik</span>
+            <h1 class="section-title">Standar Layanan <em>Puskesmas Malimpung.</em></h1>
+            <p class="section-desc">Cari persyaratan, jadwal registrasi, prosedur alur kunjungan, dan kepastian tarif resmi sesuai Permenkes 19/2024 dan Perda Kabupaten Pinrang.</p>
+          </div>
+
+          <!-- Toolbar Pencarian & Filter Kategori -->
+          <div class="catalog-toolbar">
+            <div class="search-wrap">
+              <svg class="search-icon" style="width: 20px; height: 20px;" aria-hidden="true"><use href="#ic-search"/></svg>
+              <input type="text" id="service-search" class="search-input" placeholder="Ketik nama layanan, poli, atau keluhan (contoh: gigi, kia, laboratorium, ckg)..." aria-label="Cari Layanan">
+            </div>
+            <div class="filter-chips">
+              <span style="font-size: 0.8125rem; font-weight: 700; color: var(--ink-secondary); margin-right: 0.25rem;">Kategori:</span>
+              <button class="chip active" data-category="all">Semua Layanan</button>
+              <button class="chip" data-category="umum">Pelayanan Dasar</button>
+              <button class="chip" data-category="keluarga">Ibu & Anak (KIA)</button>
+              <button class="chip" data-category="preventif">Deteksi Dini & CKG</button>
+              <button class="chip" data-category="penunjang">Penunjang & Farmasi</button>
+              <button class="chip" data-category="darurat">Layanan 24 Jam</button>
+              <button id="service-reset" style="font-size: 0.75rem; color: var(--rose-600); font-weight: 700; margin-left: auto;">Reset Pencarian</button>
+            </div>
+          </div>
+
+          <!-- Counter Status Hasil -->
+          <div class="catalog-status">
+            <span id="service-count">Menampilkan 6 layanan resmi</span>
+            <span style="font-size: 0.75rem; color: var(--ink-tertiary);">Data diverifikasi oleh Penanggung Jawab Pelayanan</span>
+          </div>
+
+          <!-- Grid Kartu Layanan -->
+          <div class="service-grid" id="service-grid">
+            <!-- Disuntikkan secara dinamis oleh app.js -->
+          </div>
+
+          <div id="service-empty" style="display: none; text-align: center; padding: 3rem; background-color: #ffffff; border-radius: var(--radius-lg); border: 1px solid var(--border); margin-top: 1.5rem;">
+            <p style="font-size: 1.125rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.5rem;">Layanan tidak ditemukan</p>
+            <p style="font-size: 0.875rem; color: var(--ink-secondary);">Coba kata kunci lain atau hubungi meja informasi kami.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ====================================================================
+         PAGE 3: PROGRAM KESEHATAN (#programs)
+         ==================================================================== -->
+    <div class="page" id="page-programs">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="tag-badge warm">Prioritas Kesehatan Masyarakat</span>
+            <h1 class="section-title">Program Terpadu <em>Siklus Hidup.</em></h1>
+            <p class="section-desc">Penyelenggaraan 12 Standar Pelayanan Minimal (SPM) Kesehatan Kabupaten Pinrang dan Program Kesehatan Masyarakat di wilayah kerja Malimpung.</p>
+          </div>
+
+          <div class="program-mosaic" style="grid-template-columns: 1fr; gap: 2rem;">
+            <!-- Klaster 2: KIA & Gizi -->
+            <div class="transparency-card">
+              <span class="tag-badge">Klaster 2: Ibu & Anak</span>
+              <h3 style="margin-top: 0.5rem;">Program Pencegahan Stunting & Kesehatan Ibu Anak (KIA)</h3>
+              <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.25rem;">
+                Meliputi pemeriksaan kehamilan standar 6 kali (2 kali dengan dokter dan USG dasar), pemantauan pertambahan berat badan balita di Posyandu, serta pemberian makanan tambahan (PMT) berbahan pangan lokal bagi balita gizi kurang dan ibu hamil KEK.
+              </p>
+              <div class="detail-table" style="margin-bottom: 1.25rem;">
+                <table>
+                  <tbody>
+                    <tr><td><strong>Sasaran</strong></td><td>Ibu hamil, ibu nifas, bayi, dan anak balita di 6 desa binaan.</td></tr>
+                    <tr><td><strong>Penanggung Jawab</strong></td><td>Koordinator Program KIA & Gizi Puskesmas Malimpung</td></tr>
+                    <tr><td><strong>Indikator Utama</strong></td><td>Cakupan K6 Ibu Hamil, Balita Ditimbang (D/S), Persentase Balita Stunting Tertangani.</td></tr>
+                    <tr><td><strong>Fasilitas Terkait</strong></td><td>Poli KIA, Poli Gizi, Posyandu Siklus Hidup Desa.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Program Nasional CKG 2026 -->
+            <div class="transparency-card">
+              <span class="tag-badge warm">Program Nasional 2026</span>
+              <h3 style="margin-top: 0.5rem;">Cek Kesehatan Gratis (CKG) Seluruh Siklus Hidup</h3>
+              <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.25rem;">
+                Sesuai Kepmenkes RI, program CKG menyasar seluruh warga yang berulang tahun untuk melakukan skrining faktor risiko kesehatan, pemeriksaan gula darah, tekanan darah, indeks massa tubuh, serta skrining lanjutan berdasarkan kelompok usia.
+              </p>
+              <div class="detail-table" style="margin-bottom: 1.25rem;">
+                <table>
+                  <tbody>
+                    <tr><td><strong>Sasaran</strong></td><td>Seluruh penduduk Indonesia yang berulang tahun (Bayi s.d. Lansia).</td></tr>
+                    <tr><td><strong>Penanggung Jawab</strong></td><td>Tim Kerja CKG Puskesmas Malimpung</td></tr>
+                    <tr><td><strong>Persyaratan</strong></td><td>Membawa KTP/KIA/KK untuk verifikasi NIK dan status kependudukan.</td></tr>
+                    <tr><td><strong>Tindak Lanjut</strong></td><td>Hasil berisiko dirujuk ke pemeriksaan dokter poli atau pemeriksaan laboratorium pendukung.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Klaster 3: Pengendalian PTM & Lansia -->
+            <div class="transparency-card">
+              <span class="tag-badge sky">Klaster 3: Dewasa & Lansia</span>
+              <h3 style="margin-top: 0.5rem;">Pengendalian Penyakit Tidak Menular (PTM) & Geriatri Santun</h3>
+              <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.25rem;">
+                Deteksi dini hipertensi, diabetes melitus, obesitas, kanker payudara/leher rahim, serta pemantauan kemandirian fungsional lansia melalui instrumen ADL (Activities of Daily Living) dan AMT (Abbreviated Mental Test).
+              </p>
+              <div class="detail-table">
+                <table>
+                  <tbody>
+                    <tr><td><strong>Sasaran</strong></td><td>Warga usia 15 tahun ke atas dan lanjut usia (≥60 tahun).</td></tr>
+                    <tr><td><strong>Penanggung Jawab</strong></td><td>Koordinator Program PTM & Lansia Puskesmas Malimpung</td></tr>
+                    <tr><td><strong>Jadwal Pelaksanaan</strong></td><td>Setiap hari kerja di Puskesmas dan jadwal Posbindu/Posyandu Lansia bulanan di desa.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ====================================================================
+         PAGE 4: KESEHATAN WILAYAH (HEALTH INTELLIGENCE) (#insights)
+         ==================================================================== -->
+    <div class="page" id="page-insights">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="tag-badge sky">Health Intelligence Platform</span>
+            <h1 class="section-title">Kesehatan Wilayah <em>Malimpung.</em></h1>
+            <p class="section-desc">
+              Menyajikan gambaran kondisi kesehatan masyarakat berbasis agregat data tervalidasi. Portal ini mematuhi standar privasi data dan menolak publikasi angka estimasi tanpa penetapan resmi.
+            </p>
+          </div>
+
+          <!-- Topic Switcher -->
+          <div class="intelligence-toolbar">
+            <button class="topic-btn active" data-topic="ckg">Program CKG 2026</button>
+            <button class="topic-btn" data-topic="kia">Kesehatan Ibu & Anak (KIA)</button>
+            <button class="topic-btn" data-topic="ptm">Deteksi Dini PTM</button>
+            <button class="topic-btn" data-topic="pws">Pemantauan Wilayah (PWS)</button>
+          </div>
+
+          <!-- Data Integrity & Status Panel -->
+          <div class="data-integrity-card">
+            <div class="integrity-header">
+              <div>
+                <span class="overline" style="font-size: 0.6875rem; font-weight: 800; color: var(--jade-700); letter-spacing: 0.05em;">RINGKASAN INDIKATOR TERVERIFIKASI</span>
+                <h2 id="topic-title" style="font-size: 1.375rem; font-weight: 800; color: var(--forest-950); margin-top: 0.25rem;">Cakupan Pemeriksaan CKG 2026</h2>
+              </div>
+              <div id="topic-badge" class="integrity-badge">
+                <svg style="width: 14px; height: 14px;" aria-hidden="true"><use href="#ic-clock"/></svg>
+                <span id="topic-status-text">Status: Menunggu Sinkronisasi Resmi</span>
+              </div>
+            </div>
+
+            <p id="topic-desc" style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+              Indikator resmi diterbitkan setelah pembilang, penyebut kependudukan sah, dan periode pengamatan divalidasi oleh Dinas Kesehatan Kabupaten Pinrang.
+            </p>
+
+            <div class="kpi-stat-grid">
+              <div class="kpi-stat-item">
+                <span id="kpi-label-1">Jumlah Peserta Tervalidasi</span>
+                <strong id="kpi-val-1">—</strong>
+                <small id="kpi-sub-1">Pembilang terverifikasi sistem</small>
+              </div>
+              <div class="kpi-stat-item">
+                <span id="kpi-label-2">Populasi Sasaran Resmi</span>
+                <strong id="kpi-val-2">—</strong>
+                <small id="kpi-sub-2">Penyebut proyeksi resmi Disdukcapil/Dinkes</small>
+              </div>
+              <div class="kpi-stat-item">
+                <span id="kpi-label-3">Cakupan Wilayah</span>
+                <strong id="kpi-val-3">—%</strong>
+                <small id="kpi-sub-3">Cakupan tidak dihitung tanpa penyebut sah</small>
+              </div>
+            </div>
+
+            <!-- Methodology Sidecar -->
+            <div class="methodology-box">
+              <h4>
+                <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-shield"/></svg>
+                Transparansi Metodologi & Keaslian Data
+              </h4>
+              <p>
+                <strong>Sumber Data:</strong> Aplikasi Internal CKG Puskesmas Malimpung & Laporan Bulanan Terpadu Puskesmas (SP3).<br>
+                <strong>Prinsip Privasi:</strong> Tidak memuat NIK, nama pasien, atau koordinat rumah penduduk (UU 27/2022).<br>
+                <strong>Pembaruan Terakhir:</strong> <span id="topic-last-updated">17 September 2026</span> · Verifikator: Petugas Surveilans Puskesmas Malimpung.
+              </p>
+            </div>
+          </div>
+
+          <!-- Territory Overview List -->
+          <div class="section-header" style="margin-top: 3rem; margin-bottom: 1.5rem;">
+            <span class="tag-badge">Wilayah Binaan</span>
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--forest-950);">Daftar Wilayah Kerja Puskesmas Malimpung</h3>
+            <p style="font-size: 0.875rem; color: var(--ink-secondary);">Data pemantauan fasilitas jejaring tingkat desa di Kecamatan Patampanua.</p>
+          </div>
+
+          <div class="territory-grid">
+            <div class="village-card">
+              <div>
+                <span class="village-name">Desa Malimpung</span>
+                <span class="village-facility">Lokasi Puskesmas Induk & 1 Poskesdes</span>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Pusat rujukan tingkat pertama dan koordinasi jejaring wilayah barat Patampanua.</p>
+              </div>
+              <div class="village-meta">Jadwal Posyandu: Minggu ke-1 & 2 tiap bulan</div>
+            </div>
+
+            <div class="village-card">
+              <div>
+                <span class="village-name">Desa Masolo</span>
+                <span class="village-facility">1 Pustu & 2 Posyandu Siklus Hidup</span>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Pelayanan rawat jalan dasar dan pemantauan balita stunting secara aktif.</p>
+              </div>
+              <div class="village-meta">Jadwal Posyandu: Hari Selasa minggu ke-2</div>
+            </div>
+
+            <div class="village-card">
+              <div>
+                <span class="village-name">Desa Padangloang</span>
+                <span class="village-facility">1 Poskesdes & 2 Posyandu</span>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Skrining PTM usia produktif dan pembinaan kesehatan lingkungan.</p>
+              </div>
+              <div class="village-meta">Jadwal Posyandu: Hari Rabu minggu ke-2</div>
+            </div>
+
+            <div class="village-card">
+              <div>
+                <span class="village-name">Desa Sipatuo</span>
+                <span class="village-facility">1 Pustu Pembantu</span>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Pelayanan kesehatan ibu hamil, imunisasi rutin, dan posyandu lansia.</p>
+              </div>
+              <div class="village-meta">Jadwal Posyandu: Hari Kamis minggu ke-3</div>
+            </div>
+
+            <div class="village-card">
+              <div>
+                <span class="village-name">Desa Benteng</span>
+                <span class="village-facility">1 Poskesdes</span>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Pemantauan wilayah setempat KIA dan program pengendalian penyakit menular.</p>
+              </div>
+              <div class="village-meta">Jadwal Posyandu: Hari Sabtu minggu ke-3</div>
+            </div>
+
+            <div class="village-card">
+              <div>
+                <span class="village-name">Desa Mattiro Ade</span>
+                <span class="village-facility">1 Pustu & Posyandu Terpadu</span>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Integrasi layanan primer dan skrining CKG mobile bagi warga lansia.</p>
+              </div>
+              <div class="village-meta">Jadwal Posyandu: Hari Senin minggu ke-4</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ====================================================================
+         PAGE 5: INFORMASI PUBLIK (HUB TRANSPARANSI) (#public)
+         ==================================================================== -->
+    <div class="page" id="page-public">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="tag-badge">Keterbukaan Informasi Publik</span>
+            <h1 class="section-title">Transparansi <em>Pemerintahan.</em></h1>
+            <p class="section-desc">Pemenuhan amanat UU No. 25/2009 tentang Pelayanan Publik dan Peraturan Komisi Informasi (PerKI) No. 1/2021.</p>
+          </div>
+
+          <!-- Tab Kategori Informasi Publik -->
+          <div class="public-tabs">
+            <button class="public-tab-btn active" data-ptab="standar">Standar Pelayanan</button>
+            <button class="public-tab-btn" data-ptab="maklumat">Maklumat Pelayanan</button>
+            <button class="public-tab-btn" data-ptab="profil">Profil & Struktur</button>
+            <button class="public-tab-btn" data-ptab="dokumen">Dokumen Resmi</button>
+            <button class="public-tab-btn" data-ptab="pengaduan">Saluran Pengaduan</button>
+            <button class="public-tab-btn" data-ptab="ppid">Kanal PPID Resmi</button>
+          </div>
+
+          <!-- Konten Tab 1: Standar Pelayanan -->
+          <div class="public-tab-content" id="ptab-standar">
+            <div class="transparency-card">
+              <h3>Standar Pelayanan Publik Puskesmas Malimpung</h3>
+              <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                Ditetapkan berdasarkan Surat Keputusan Kepala Puskesmas Malimpung untuk menjamin kepastian persyaratan, prosedur, jangka waktu penyelesaian, dan kepastian biaya pelayanan bagi seluruh masyarakat.
+              </p>
+              <div class="doc-download-item">
+                <div class="doc-meta">
+                  <h5>Standar Pelayanan Rawat Jalan & Gawat Darurat (SP-PKM-01)</h5>
+                  <span>Versi 2026 · Format Ringkasan Resmi · Berlaku Mulai 2 Januari 2026</span>
+                </div>
+                <button class="btn-secondary" style="padding: 0.4rem 0.875rem; font-size: 0.8125rem;" onclick="appToast('Dokumen resmi Standar Pelayanan SP-PKM-01 terbuka.')">Lihat Salinan PDF</button>
+              </div>
+              <div class="doc-download-item">
+                <div class="doc-meta">
+                  <h5>Standar Pelayanan Laboratorium & Farmasi (SP-PKM-02)</h5>
+                  <span>Versi 2026 · Format Ringkasan Resmi · Disahkan Kepala Puskesmas</span>
+                </div>
+                <button class="btn-secondary" style="padding: 0.4rem 0.875rem; font-size: 0.8125rem;" onclick="appToast('Dokumen resmi Standar Pelayanan SP-PKM-02 terbuka.')">Lihat Salinan PDF</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Konten Tab 2: Maklumat Pelayanan -->
+          <div class="public-tab-content" id="ptab-maklumat" style="display: none;">
+            <div class="transparency-card" style="border-left: 4px solid var(--jade-600);">
+              <span class="overline" style="font-size: 0.75rem; font-weight: 800; color: var(--jade-700);">JANJI PELAYANAN</span>
+              <h3 style="margin-top: 0.5rem;">Maklumat Pelayanan Puskesmas Malimpung</h3>
+              <blockquote style="font-size: 1.125rem; font-style: italic; color: var(--forest-950); line-height: 1.8; margin-bottom: 1.5rem; background-color: var(--mint-50); padding: 1.5rem; border-radius: var(--radius-md);">
+                "Dengan ini, kami pimpinan dan seluruh staf pegawai Puskesmas Malimpung menyatakan sanggup menyelenggarakan pelayanan kesehatan sesuai dengan standar pelayanan yang telah ditetapkan, dan apabila tidak menepati janji ini, kami siap menerima sanksi sesuai dengan ketentuan peraturan perundang-undangan yang berlaku."
+              </blockquote>
+              <p style="font-size: 0.875rem; color: var(--ink-secondary);">
+                Ditandatangani oleh Kepala Puskesmas Malimpung bersama seluruh penanggung jawab klaster pelayanan terpadu.
+              </p>
+            </div>
+          </div>
+
+          <!-- Konten Tab 3: Profil & Struktur Organisasi -->
+          <div class="public-tab-content" id="ptab-profil" style="display: none;">
+            <div class="transparency-card">
+              <h3>Profil Kelembagaan & Tugas Pokok</h3>
+              <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                Puskesmas Malimpung merupakan Unit Pelaksana Teknis Daerah (UPTD) di bawah naungan Dinas Kesehatan Kabupaten Pinrang yang bertugas menyelenggarakan kebijakan kesehatan untuk mencapai tujuan pembangunan kesehatan di wilayah kerja Kecamatan Patampanua.
+              </p>
+              <div class="detail-table">
+                <table>
+                  <tbody>
+                    <tr><td><strong>Visi</strong></td><td>Terwujudnya Masyarakat Malimpung yang Mandiri untuk Hidup Sehat dan Berkualitas.</td></tr>
+                    <tr><td><strong>Misi</strong></td><td>1. Meningkatkan pelayanan kesehatan yang bermutu, merata, dan terjangkau.<br>2. Mendorong kemandirian masyarakat hidup sehat melalui pemberdayaan.<br>3. Memantapkan manajemen puskesmas yang akuntabel dan transparan.</td></tr>
+                    <tr><td><strong>Tata Nilai</strong></td><td><strong>MALIMPUNG:</strong> Mandiri, Amanah, Loyal, Inovatif, Melayani, Profesional, Unggul, Nyaman, Gotong-royong.</td></tr>
+                    <tr><td><strong>Kepala Puskesmas</strong></td><td>Pejabat Definitif Dinas Kesehatan Kabupaten Pinrang</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Konten Tab 4: Dokumen Resmi -->
+          <div class="public-tab-content" id="ptab-dokumen" style="display: none;">
+            <div class="transparency-card">
+              <h3>Arsip Publik & Laporan Kinerja</h3>
+              <div class="doc-download-item">
+                <div class="doc-meta">
+                  <h5>Laporan Kinerja Instansi Pemerintah (LKjIP) Puskesmas Malimpung</h5>
+                  <span>Periode Pelaporan 2025 · Publikasi Berkala</span>
+                </div>
+                <button class="btn-secondary" style="padding: 0.4rem 0.875rem; font-size: 0.8125rem;" onclick="appToast('Membuka ringkasan LKjIP 2025.')">Unduh PDF</button>
+              </div>
+              <div class="doc-download-item">
+                <div class="doc-meta">
+                  <h5>Rencana Usulan Kegiatan (RUK) Puskesmas Malimpung 2026</h5>
+                  <span>Dokumen Perencanaan Program Kesehatan</span>
+                </div>
+                <button class="btn-secondary" style="padding: 0.4rem 0.875rem; font-size: 0.8125rem;" onclick="appToast('Membuka dokumen RUK 2026.')">Unduh PDF</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Konten Tab 5: Saluran Pengaduan -->
+          <div class="public-tab-content" id="ptab-pengaduan" style="display: none;">
+            <div class="transparency-card">
+              <h3>Mekanisme Pengaduan & Aspirasi Masyarakat</h3>
+              <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                Masyarakat dapat menyampaikan kritik, saran, maupun keluhan atas penyelenggaraan pelayanan publik melalui kanal resmi yang dikelola langsung oleh Tim Penanganan Pengaduan Puskesmas.
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="background-color: var(--surface-alt); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+                  <h4 style="font-size: 1rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.5rem;">Kotak Saran Fisik</h4>
+                  <p style="font-size: 0.8125rem; color: var(--ink-secondary);">Tersedia di ruang tunggu pendaftaran dan ruang farmasi Puskesmas Induk Malimpung.</p>
+                </div>
+                <div style="background-color: var(--surface-alt); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+                  <h4 style="font-size: 1rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.5rem;">WhatsApp Meja Informasi</h4>
+                  <p style="font-size: 0.8125rem; color: var(--ink-secondary);">Layanan pesan langsung: <strong>0812-3456-7890</strong> (Jam Kerja Operasional).</p>
+                </div>
+                <div style="background-color: var(--surface-alt); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+                  <h4 style="font-size: 1rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.5rem;">Portal Nasional SP4N-LAPOR</h4>
+                  <p style="font-size: 0.8125rem; color: var(--ink-secondary);">Kanal pengaduan terintegrasi nasional: <strong>lapor.go.id</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Konten Tab 6: Kanal PPID -->
+          <div class="public-tab-content" id="ptab-ppid" style="display: none;">
+            <div class="transparency-card">
+              <h3>Kanal Pejabat Pengelola Informasi & Dokumentasi (PPID)</h3>
+              <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                Sesuai dengan ketentuan PerKI No. 1/2021 dan kewenangan kelembagaan pemerintah daerah, kewenangan PPID Utama berada pada Dinas Komunikasi, Informatika, dan Persandian Kabupaten Pinrang, sedangkan Puskesmas berkedudukan sebagai Pelaksana PPID di bawah koordinasi Dinas Kesehatan Kabupaten Pinrang.
+              </p>
+              <div class="doc-download-item">
+                <div class="doc-meta">
+                  <h5>Portal Resmi PPID Pemerintah Kabupaten Pinrang</h5>
+                  <span>https://ppid.pinrangkab.go.id · Akses Informasi Publik Daerah</span>
+                </div>
+                <a href="https://pinrangkab.go.id" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 0.4rem 0.875rem; font-size: 0.8125rem;">Kunjungi Portal PPID</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ====================================================================
+         PAGE 6: SMART VIRTUAL OFFICE (#office)
+         ==================================================================== -->
+    <div class="page" id="page-office">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="tag-badge" style="background-color: var(--forest-900); color: #ffffff;">Ruang Kerja Terotorisasi</span>
+            <h1 class="section-title">Smart Virtual Office <em>Malimpung.</em></h1>
+            <p class="section-desc">
+              Portal internal terintegrasi bagi pimpinan dan staf Puskesmas Malimpung. Akses data dibatasi ketat berdasarkan peran (Role-Based Access Control) dan seluruh aktivitas terekam dalam audit log.
+            </p>
+          </div>
+
+          <!-- Shell Virtual Office Interaktif -->
+          <div class="office-shell">
+            <!-- Office Topbar dengan Simulator Peran Pengguna -->
+            <div class="office-topbar">
+              <div class="office-user-badge">
+                <div class="user-avatar" id="office-avatar">KP</div>
+                <div>
+                  <div style="font-size: 0.9375rem; font-weight: 700;" id="office-username">dr. Hj. Pimpinan Puskesmas</div>
+                  <div style="font-size: 0.75rem; opacity: 0.8;">NIP: 19800512 200604 2 001 · Sesi Aktif</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <label for="role-switcher" style="font-size: 0.8125rem; font-weight: 600;">Simulasi Peran:</label>
+                <select id="role-switcher" class="user-role-select" aria-label="Ganti Peran Pengguna">
+                  <option value="kapus">Kepala Puskesmas (Pimpinan Eksekutif)</option>
+                  <option value="dokter">Dokter / Petugas Medis (Klinis)</option>
+                  <option value="editor">Petugas Administrasi / Editor CMS</option>
+                  <option value="program">Koordinator Program / Verifikator Data</option>
+                  <option value="admin">Administrator TI & Keamanan Sistem</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Tab Navigasi Internal Virtual Office -->
+            <div class="office-nav-tabs">
+              <button class="office-tab-item active" data-otab="overview">Overview Eksekutif</button>
+              <button class="office-tab-item" data-otab="layanan-internal">Verifikasi Pelayanan</button>
+              <button class="office-tab-item" data-otab="integrasi">Konektor Sistem Eksternal</button>
+              <button class="office-tab-item" data-otab="cms">CMS Manajemen Konten</button>
+              <button class="office-tab-item" data-otab="audit">Audit Log & Kualitas Data</button>
+            </div>
+
+            <!-- Konten Tab Virtual Office -->
+            <div class="office-content">
+              <!-- Tab 1: Overview Eksekutif -->
+              <div class="otab-pane" id="otab-overview">
+                <div class="kpi-stat-grid" style="margin-bottom: 1.5rem;">
+                  <div class="kpi-stat-item">
+                    <span>Status Pelayanan Hari Ini</span>
+                    <strong style="color: var(--emerald-600);">Aktif Normal</strong>
+                    <small>Rawat Jalan & UGD Siaga Penuh</small>
+                  </div>
+                  <div class="kpi-stat-item">
+                    <span>Verifikasi Konten Portal</span>
+                    <strong id="office-content-status">100% Sah</strong>
+                    <small>Tidak ada draf konten kedaluwarsa</small>
+                  </div>
+                  <div class="kpi-stat-item">
+                    <span>Keamanan Data Pasien</span>
+                    <strong style="color: var(--emerald-600);">Terisolasi</strong>
+                    <small>Zero PHI leakage to public</small>
+                  </div>
+                </div>
+
+                <div class="transparency-card" style="margin-bottom: 0;">
+                  <h4>Catatan Kebijakan & Prioritas Pimpinan</h4>
+                  <ul style="list-style: disc; margin-left: 1.25rem; font-size: 0.875rem; color: var(--ink-secondary); line-height: 1.8; margin-top: 0.75rem;">
+                    <li>Pastikan seluruh data skrining CKG diverifikasi oleh dokter penanggung jawab sebelum direkonsiliasi.</li>
+                    <li>Konektor ASIK dan RME tetap dalam status isolasi staging hingga surat resmi penetapan hak akses diterbitkan Dinas Kesehatan.</li>
+                    <li>Setiap perubahan jadwal atau tarif layanan publik wajib melalui alur persetujuan pejabat berwenang di CMS.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Tab 2: Verifikasi Pelayanan -->
+              <div class="otab-pane" id="otab-layanan-internal" style="display: none;">
+                <div class="transparency-card" style="margin-bottom: 0;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h4>Daftar Layanan Terdaftar di Portal Publik</h4>
+                    <span style="font-size: 0.75rem; color: var(--jade-700); font-weight: 700;">Status: Real-Time Sync</span>
+                  </div>
+                  <div class="detail-table">
+                    <table>
+                      <thead>
+                        <tr style="border-bottom: 2px solid var(--border);">
+                          <th style="padding: 0.5rem; text-align: left;">ID / Slug</th>
+                          <th style="padding: 0.5rem; text-align: left;">Nama Layanan</th>
+                          <th style="padding: 0.5rem; text-align: left;">Kategori</th>
+                          <th style="padding: 0.5rem; text-align: left;">Status Publikasi</th>
+                          <th style="padding: 0.5rem; text-align: left;">Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody id="office-service-table">
+                        <!-- Disuntikkan via JS -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 3: Konektor Sistem Eksternal -->
+              <div class="otab-pane" id="otab-integrasi" style="display: none;">
+                <div class="transparency-card" style="margin-bottom: 0;">
+                  <h4>Status Arsitektur Integrasi Sistem (Pemisahan Tegas)</h4>
+                  <p style="font-size: 0.875rem; color: var(--ink-secondary); margin-bottom: 1.25rem;">
+                    Sesuai Blueprint 07 & 08, konektor eksternal tidak diaktifkan sebelum izin, akun resmi, dan audit keamanan disahkan.
+                  </p>
+                  <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div class="doc-download-item">
+                      <div class="doc-meta">
+                        <h5>Aplikasi CKG Malimpung (Internal Database)</h5>
+                        <span>Status: Read-Only Service Account Siap · Penyimpanan Terisolasi Aman</span>
+                      </div>
+                      <span class="integrity-badge verified">Konektor Aman (Staged)</span>
+                    </div>
+
+                    <div class="doc-download-item">
+                      <div class="doc-meta">
+                        <h5>Rekam Medis Elektronik (RME) Puskesmas</h5>
+                        <span>Status: Menunggu Keputusan Pemilihan Vendor RME Resmi dari Dinas Kesehatan</span>
+                      </div>
+                      <span class="integrity-badge" style="background-color: #f3f4f6; color: #6b7280;">Dinonaktifkan Sementara</span>
+                    </div>
+
+                    <div class="doc-download-item">
+                      <div class="doc-meta">
+                        <h5>Aplikasi Sehat IndonesiaKu (ASIK Kemenkes RI)</h5>
+                        <span>Status: Pengajuan Akun Institusi Dalam Proses · Tidak Ada Bot Ilegal</span>
+                      </div>
+                      <span class="integrity-badge" style="background-color: #f3f4f6; color: #6b7280;">Dinonaktifkan Sementara</span>
+                    </div>
+
+                    <div class="doc-download-item">
+                      <div class="doc-meta">
+                        <h5>SATUSEHAT Platform Interoperability (HL7 FHIR)</h5>
+                        <span>Status: Registrasi Fasyankes Aktif · Menunggu Kredensial Produksi Kemenkes</span>
+                      </div>
+                      <span class="integrity-badge" style="background-color: #f3f4f6; color: #6b7280;">Staging Mode</span>
+                    </div>
+
+                    <div class="doc-download-item">
+                      <div class="doc-meta">
+                        <h5>Sistem Absensi & KPI Pegawai Pemkab Pinrang</h5>
+                        <span>Status: Menunggu Integrasi API Resmi Badan Kepegawaian Daerah (BKPSDM)</span>
+                      </div>
+                      <span class="integrity-badge" style="background-color: #f3f4f6; color: #6b7280;">Menunggu Dokumen API</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 4: CMS Studio Manajemen Konten (Operasional Penuh) -->
+              <div class="otab-pane" id="otab-cms" style="display: none;">
+                <div class="cms-panel">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-light);">
+                    <div>
+                      <h3 style="font-size: 1.125rem; font-weight: 800; color: var(--forest-950);">Studio CMS Puskesmas Malimpung</h3>
+                      <p style="font-size: 0.8125rem; color: var(--ink-secondary);">Ubah konten portal publik secara langsung tanpa menyentuh source code.</p>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                      <button class="btn-secondary" id="cms-btn-reset" style="font-size: 0.75rem; padding: 0.35rem 0.75rem;">Reset Default</button>
+                      <button class="btn-secondary" id="cms-btn-export" style="font-size: 0.75rem; padding: 0.35rem 0.75rem;">Ekspor JSON</button>
+                    </div>
+                  </div>
+
+                  <!-- Form Edit Layanan Cepat -->
+                  <form id="cms-form-service">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                      <div class="form-group">
+                        <label class="form-label" for="cms-svc-id">Pilih Layanan untuk Diedit:</label>
+                        <select id="cms-svc-id" class="form-control">
+                          <option value="umum">Pemeriksaan Umum (Pelayanan Dasar)</option>
+                          <option value="kia">Kesehatan Ibu dan Anak (KIA)</option>
+                          <option value="gigi">Kesehatan Gigi dan Mulut</option>
+                          <option value="ckg">Cek Kesehatan Gratis (CKG)</option>
+                          <option value="lab">Pemeriksaan Laboratorium</option>
+                          <option value="obat">Farmasi & Informasi Obat</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-label" for="cms-svc-name">Nama Layanan:</label>
+                        <input type="text" id="cms-svc-name" class="form-control" required>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="cms-svc-desc">Deskripsi Singkat:</label>
+                      <textarea id="cms-svc-desc" class="form-control" rows="2" required></textarea>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                      <div class="form-group">
+                        <label class="form-label" for="cms-svc-cost">Ketentuan Biaya / Tarif:</label>
+                        <input type="text" id="cms-svc-cost" class="form-control" value="Gratis bagi peserta BPJS/JKN aktif; Non-BPJS sesuai Perda Pinrang">
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-label" for="cms-svc-schedule">Jadwal Operasional:</label>
+                        <input type="text" id="cms-svc-schedule" class="form-control" value="Senin – Sabtu, 08.00 – 14.00 WITA">
+                      </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                      <div style="font-size: 0.75rem; color: var(--ink-secondary);">
+                        Alur: <span style="color: var(--emerald-600); font-weight: 700;">Draft → Review → Disetujui → Diterbitkan</span>
+                      </div>
+                      <button type="submit" class="btn-cms-publish" id="cms-submit-btn">Simpan & Publikasikan ke Portal</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <!-- Tab 5: Audit Log & Kualitas Data -->
+              <div class="otab-pane" id="otab-audit" style="display: none;">
+                <div class="transparency-card" style="margin-bottom: 0;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h4>Buku Catatan Audit Sistem (Editorial & Keamanan)</h4>
+                    <span style="font-size: 0.75rem; color: var(--ink-tertiary);">Perekaman Otomatis</span>
+                  </div>
+                  <div class="detail-table">
+                    <table>
+                      <thead>
+                        <tr style="border-bottom: 2px solid var(--border);">
+                          <th style="padding: 0.5rem; text-align: left;">Waktu (WITA)</th>
+                          <th style="padding: 0.5rem; text-align: left;">Pengguna / Peran</th>
+                          <th style="padding: 0.5rem; text-align: left;">Tindakan</th>
+                          <th style="padding: 0.5rem; text-align: left;">Hasil / Dampak</th>
+                        </tr>
+                      </thead>
+                      <tbody id="office-audit-table">
+                        <!-- Disuntikkan via JS -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- MODAL DETAIL LAYANAN BERDASARKAN SLUG -->
+  <div class="modal-backdrop" id="service-detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-svc-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <span class="overline" style="font-size: 0.6875rem; font-weight: 800; color: var(--jade-700); letter-spacing: 0.05em;">STANDAR PELAYANAN RESMI</span>
+          <h2 id="modal-svc-title" style="font-size: 1.375rem; font-weight: 800; color: var(--forest-950); margin-top: 0.25rem;">Nama Layanan</h2>
+        </div>
+        <button class="modal-close" id="modal-svc-close" aria-label="Tutup Detail Layanan">×</button>
+      </div>
+      <div class="modal-body">
+        <p id="modal-svc-desc" style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6;"></p>
+        
+        <div>
+          <span class="detail-section-title">RINCIAN STANDAR OPERASIONAL</span>
+          <div class="detail-table">
+            <table>
+              <tbody>
+                <tr><td><strong>Persyaratan Berkas</strong></td><td id="modal-svc-req">KTP/KK, Kartu BPJS/JKN (bila memiliki)</td></tr>
+                <tr><td><strong>Persiapan Pasien</strong></td><td id="modal-svc-prep">Tidak ada persiapan khusus</td></tr>
+                <tr><td><strong>Prosedur & Alur</strong></td><td id="modal-svc-proc">Pendaftaran → Pemeriksaan Awal Triage → Pelayanan Dokter → Farmasi/Tindakan</td></tr>
+                <tr><td><strong>Estimasi Waktu</strong></td><td id="modal-svc-duration">15 – 30 Menit</td></tr>
+                <tr><td><strong>Tarif & Biaya</strong></td><td id="modal-svc-cost">Gratis bagi peserta BPJS aktif / Sesuai Perda Kab. Pinrang</td></tr>
+                <tr><td><strong>Jadwal & Lokasi</strong></td><td id="modal-svc-loc">Gedung Utama Puskesmas Malimpung (Senin – Sabtu, 08.00 – 14.00 WITA)</td></tr>
+                <tr><td><strong>Dasar Hukum</strong></td><td id="modal-svc-legal">Permenkes No. 19 Tahun 2024 tentang Penyelenggaraan Puskesmas</td></tr>
+                <tr><td><strong>Tanggal Verifikasi</strong></td><td id="modal-svc-verified">17 September 2026 oleh Penanggung Jawab Pelayanan</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="background-color: var(--surface-alt); padding: 1rem; border-radius: var(--radius-md); font-size: 0.8125rem; color: var(--ink-tertiary);">
+          Jika memiliki keluhan atau pertanyaan lebih lanjut terkait layanan ini, silakan hubungi meja pengaduan Puskesmas Malimpung di <strong>0812-3456-7890</strong> atau melalui portal <strong>lapor.go.id</strong>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSTITUTIONAL FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.875rem;">
+            <img src="assets/logo_pinrang.png" alt="Kabupaten Pinrang" style="height: 36px; width: auto;">
+            <img src="assets/logo_puskesmas_malimpung.png" alt="Puskesmas Malimpung" style="height: 36px; width: auto;">
+          </div>
+          <h4>Puskesmas Malimpung</h4>
+          <p>
+            Dinas Kesehatan Pemerintah Kabupaten Pinrang.<br>
+            Jl. Poros Malimpung, Kecamatan Patampanua, Kabupaten Pinrang, Provinsi Sulawesi Selatan, Kode Pos 91252.
+          </p>
+          <div style="font-size: 0.8125rem; color: #a6c9be;">
+            <strong>Telepon UGD 24 Jam:</strong> (0421) 921001<br>
+            <strong>WhatsApp Informasi:</strong> 0812-3456-7890
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Layanan Publik</h5>
+          <div class="footer-links">
+            <a href="#services" data-go="services">Katalog Layanan</a>
+            <a href="#services" data-go="services">Jadwal Dokter</a>
+            <a href="#services" data-go="services">Program CKG 2026</a>
+            <a href="#services" data-go="services">Tarif & Ketentuan JKN</a>
+            <a href="#public" data-go="public">Maklumat Pelayanan</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Keterbukaan</h5>
+          <div class="footer-links">
+            <a href="#public" data-go="public">Standar Pelayanan (UU 25/2009)</a>
+            <a href="#public" data-go="public">Profil & Struktur Lembaga</a>
+            <a href="#public" data-go="public">Laporan Kinerja & Dokumen</a>
+            <a href="#public" data-go="public">Saluran Pengaduan Masyarakat</a>
+            <a href="#public" data-go="public">PPID Kabupaten Pinrang</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Tautan Resmi</h5>
+          <div class="footer-links">
+            <a href="https://pinrangkab.go.id" target="_blank" rel="noopener noreferrer">Pemerintah Kabupaten Pinrang ↗</a>
+            <a href="https://dinkes.pinrangkab.go.id" target="_blank" rel="noopener noreferrer">Dinas Kesehatan Pinrang ↗</a>
+            <a href="https://kemkes.go.id" target="_blank" rel="noopener noreferrer">Kementerian Kesehatan RI ↗</a>
+            <a href="https://satusehat.kemkes.go.id" target="_blank" rel="noopener noreferrer">SATUSEHAT Platform ↗</a>
+            <a href="https://lapor.go.id" target="_blank" rel="noopener noreferrer">SP4N-LAPOR! Nasional ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Puskesmas Malimpung, Kabupaten Pinrang. Seluruh hak cipta dilindungi undang-undang.
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <span>Kepatuhan WCAG 2.2 AA</span>
+          <span>Kebijakan Privasi (UU 27/2022)</span>
+          <span>Versi 2.0 (17-09-2026)</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Element -->
+  <div class="toast" id="toast">
+    <svg style="width: 18px; height: 18px; color: #34d399;" aria-hidden="true"><use href="#ic-check"/></svg>
+    <span id="toast-text">Pemberitahuan</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
