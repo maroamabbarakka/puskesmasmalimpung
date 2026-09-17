@@ -23,9 +23,9 @@
 
 | Rute / Halaman | Viewport | Dimensi Aktual (W × H) | Status Overflow | Nama Berkas Screenshot |
 |---|---|---|---|---|
-| **Beranda** | Desktop | 1440 × 3587 px | 0 px (Lulus) | `Beranda_Desktop_1440_FULLPAGE.png` |
-| **Beranda** | Tablet | 820 × 5106 px | 0 px (Lulus) | `Beranda_Tablet_820_FULLPAGE.png` |
-| **Beranda** | Mobile | 390 × 8034 px | 0 px (Lulus) | `Beranda_Mobile_390_FULLPAGE.png` |
+| **Beranda** | Desktop | 1440 × 4624 px | 0 px (Lulus) | `Beranda_Desktop_1440_FULLPAGE.png` |
+| **Beranda** | Tablet | 820 × 6284 px | 0 px (Lulus) | `Beranda_Tablet_820_FULLPAGE.png` |
+| **Beranda** | Mobile | 390 × 9946 px | 0 px (Lulus) | `Beranda_Mobile_390_FULLPAGE.png` |
 | **Layanan** | Desktop | 1440 × 1857 px | 0 px (Lulus) | `Layanan_Desktop_1440_FULLPAGE.png` |
 | **Layanan** | Tablet | 820 × 2637 px | 0 px (Lulus) | `Layanan_Tablet_820_FULLPAGE.png` |
 | **Layanan** | Mobile | 390 × 4603 px | 0 px (Lulus) | `Layanan_Mobile_390_FULLPAGE.png` |
@@ -37,7 +37,7 @@
 | **Kesehatan Wilayah** | Mobile | 390 × 4223 px | 0 px (Lulus) | `Kesehatan_Wilayah_Mobile_390_FULLPAGE.png` |
 | **Informasi Publik** | Desktop | 1440 × 1375 px | 0 px (Lulus) | `Informasi_Publik_Desktop_1440_FULLPAGE.png` |
 | **Informasi Publik** | Tablet | 820 × 1731 px | 0 px (Lulus) | `Informasi_Publik_Tablet_820_FULLPAGE.png` |
-| **Informasi Publik** | Mobile | 390 × 2689 px | 0 px (Lulus) | `Informasi_Publik_Mobile_390_FULLPAGE.png` |
+| **Informasi Publik** | Mobile | 390 × 2740 px | 0 px (Lulus) | `Informasi_Publik_Mobile_390_FULLPAGE.png` |
 | **Kantor Virtual** | Desktop | 1440 × 1458 px | 0 px (Lulus) | `Kantor_Virtual_Desktop_1440_FULLPAGE.png` |
 | **Kantor Virtual** | Tablet | 820 × 1851 px | 0 px (Lulus) | `Kantor_Virtual_Tablet_820_FULLPAGE.png` |
 | **Kantor Virtual** | Mobile | 390 × 2984 px | 0 px (Lulus) | `Kantor_Virtual_Mobile_390_FULLPAGE.png` |
