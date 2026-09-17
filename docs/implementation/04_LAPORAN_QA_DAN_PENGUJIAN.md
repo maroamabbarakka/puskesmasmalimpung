@@ -75,8 +75,10 @@ Pengujian otomatis tambahan telah dijalankan menggunakan Playwright Edge Chromiu
 | **Deep-Linking Hashchange** | Evaluasi `#services/gigi` | Navigasi dinamis antar-layanan | Modal berganti ke layanan Gigi dan Mulut | **PASS** |
 | **Sanitasi XSS Input CMS** | String input uji karakter khusus | `escapeHTML` aktif | Karakter `<`, `>`, `"`, `'`, `&` di-escape sempurna | **PASS** |
 | **Aspirasi & Pengaduan Warga** | Input form publik di `#ptab-pengaduan` | Submit aduan dengan kontak & poli | Nomor tiket `ADU-2026-XXXXX` diterbitkan | **PASS** |
-| **Sinkronisasi Audit Trail** | Evaluasi riwayat di `#office` | Cek integrasi log sistem | Aduan warga otomatis tercatat di log internal | **PASS** |
 | **Filter Siklus Hidup Program** | Toolbar interaktif di `#page-programs` | Filter klaster P2P & reset ke all | Isolasi program infeksi & restorasi 5 klaster | **PASS** |
+| **Topologi Skematis Jejaring** | Diagram alur di `#page-insights` | Evaluasi SVG alur 6 desa ke induk | Responsif, keterbacaan optimal, zero PHI | **PASS** |
+| **Kepatuhan Supresi Sel Kecil** | Regulasi UU 27/2022 & Permenkes 24/2022 | Proteksi batas < 5 kasus per desa | Perlindungan identitas warga dari re-identifikasi | **PASS** |
+
 
 
 
