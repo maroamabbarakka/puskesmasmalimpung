@@ -1,0 +1,7 @@
+# robots.txt untuk Portal Resmi Puskesmas Malimpung
+User-agent: *
+Allow: /
+Disallow: /cms/
+Disallow: /api/
+
+Sitemap: https://puskesmas-malimpung.web.app/sitemap.xml
