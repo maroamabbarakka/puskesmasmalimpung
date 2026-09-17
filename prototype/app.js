@@ -395,12 +395,298 @@ function updateTopicView(topicKey) {
 }
 
 // ---------------------------------------------------------------------------
-// 4. ROUTING & NAVIGATION (DENGAN DUKUNGAN DEEP-LINKING SLUG)
+// 4. DATABASE BERITA RESMI & ARTIKEL SINGLE POST
 // ---------------------------------------------------------------------------
-const VALID_ROUTES = ['home', 'services', 'programs', 'insights', 'public', 'office', 'news'];
+const NEWS_DATABASE = {
+  'posyandu-terpadu-pajalele': {
+    slug: 'posyandu-terpadu-pajalele',
+    title: 'Puskesmas Malimpung Gelar Posyandu Terpadu di Dusun Pajalele',
+    category: 'Kegiatan Fasyankes',
+    date: '02 September 2026',
+    readTime: '4 Menit Baca',
+    author: 'Tim Promkes & KIA Puskesmas Malimpung',
+    cover: 'assets/berita_posyandu.webp',
+    caption: 'Pelayanan penimbangan balita presisi dan skrining kesehatan ibu hamil di Posyandu Melati Dusun Pajalele, Desa Malimpung.',
+    excerpt: 'Pelayanan penimbangan balita, imunisasi dasar lengkap, pemeriksaan antenatal ibu hamil, serta penyuluhan gizi seimbang dilaksanakan bersama kader kesehatan di Posyandu Melati Dusun Pajalele.',
+    contentHtml: `
+      <p class="single-post-lead">
+        Upaya percepatan penurunan angka stunting dan penguatan ketahanan kesehatan keluarga terus diakselerasi oleh UPT Puskesmas Malimpung. Bertempat di Posyandu Melati Dusun Pajalele, Desa Malimpung, tim pelayanan gabungan menggelar kegiatan Posyandu Terpadu berbasis Siklus Hidup yang menyasar balita, ibu hamil, serta kelompok usia rentan pada Rabu pagi (02/09/2026).
+      </p>
+
+      <h2>Pelayanan Antropometri Presisi & Imunisasi Lengkap</h2>
+      <p>
+        Sebanyak 48 balita dan 12 ibu hamil hadir memanfaatkan rangkaian pemeriksaan kesehatan tanpa dipungut biaya. Pelayanan yang diberikan mengacu pada standardisasi Kementerian Kesehatan RI terkini, meliputi:
+      </p>
+      <ul>
+        <li><strong>Pengukuran Antropometri Terstandar:</strong> Penimbangan bobot badan dengan timbangan digital bayi berpresisi tinggi, pengukuran panjang badan/tinggi badan menggunakan infantometer dan stadiometer resmi Kemenkes.</li>
+        <li><strong>Pencatatan Kohort Real-Time:</strong> Integrasi pencatatan buku KIA fisik ke dalam sistem elektronik e-PPGBM dan SATUSEHAT guna mendeteksi deviasi kurva pertumbuhan secara instan.</li>
+        <li><strong>Imunisasi Dasar & Lanjutan:</strong> Pemberian vaksin BCG, DPT-HB-Hib, Polio tetes/suntik (IPV), serta Campak-Rubella (MR) bagi bayi yang telah memasuki jadwal imunisasi.</li>
+        <li><strong>Edukasi Gizi & Distribusi PMT Pangan Lokal:</strong> Pembagian Pemberian Makanan Tambahan (PMT) berbasis pangan lokal kaya protein hewani (telur, ikan, dan kacang-kacangan) serta konseling menyusui eksklusif bagi ibu menyusui.</li>
+      </ul>
+
+      <blockquote class="single-post-quote">
+        "Posyandu bukan lagi sekadar rutinitas timbang badan bulanan, melainkan garda terdepan sistem surveilans kesehatan masyarakat di tingkat dusun. Dengan Integrasi Layanan Primer (ILP), setiap kali ditemukan balita yang kurvanya mendatar atau beratnya tidak naik (T), tim medis puskesmas langsung mengambil langkah rujukan dan tata laksana gizi spesifik hari itu juga."
+        <cite>— Bidan Koordinator Puskesmas Malimpung</cite>
+      </blockquote>
+
+      <h2>Sinergi Bersama Kader & Pemantauan Door-to-Door</h2>
+      <p>
+        Kelancaran kegiatan Posyandu Terpadu ini tidak lepas dari dedikasi 5 kader kesehatan Dusun Pajalele yang proaktif mendampingi warga sejak pagi hari. Kader juga melakukan aksi sweeping atau kunjungan rumah <em>(door-to-door)</em> bagi keluarga yang berhalangan hadir karena kendala pekerjaan bertani atau jarak pemukiman.
+      </p>
+      <p>
+        Melalui kolaborasi erat antara tenaga kesehatan profesional, kader posyandu, dan pemerintah desa, Puskesmas Malimpung berkomitmen menjaga cakupan pemantauan tumbuh kembang balita dan kesehatan ibu hamil di atas 95% demi mewujudkan generasi emas Pinrang yang sehat, cerdas, dan bebas stunting.
+      </p>
+    `
+  },
+  'edukasi-phbs-sekolah-dasar': {
+    slug: 'edukasi-phbs-sekolah-dasar',
+    title: 'Edukasi PHBS dan Cuci Tangan Pakai Sabun di SD Binaan',
+    category: 'Promosi Kesehatan',
+    date: '28 Agustus 2026',
+    readTime: '3 Menit Baca',
+    author: 'Unit Promosi Kesehatan & UKS Puskesmas Malimpung',
+    cover: 'assets/berita_phbs.webp',
+    caption: 'Petugas Promosi Kesehatan memandu praktik 6 langkah cuci tangan pakai sabun bersama murid sekolah dasar binaan di Patampanua.',
+    excerpt: 'Petugas Promosi Kesehatan Puskesmas Malimpung memberikan penyuluhan cuci tangan pakai sabun, konsumsi jajanan sehat di kantin sekolah, dan sikat gigi massal bersama siswa sekolah dasar binaan.',
+    contentHtml: `
+      <p class="single-post-lead">
+        Membangun fondasi perilaku hidup bersih dan sehat (PHBS) sejak usia dini merupakan investasi strategis kesehatan jangka panjang. Tim Promosi Kesehatan (Promkes) dan Pembina Usaha Kesehatan Sekolah (UKS) Puskesmas Malimpung melaksanakan kampanye edukasi interaktif dan aksi cuci tangan bersama di halaman sekolah dasar binaan di wilayah Kecamatan Patampanua (28/08/2026).
+      </p>
+
+      <h2>Praktik 6 Langkah Cuci Tangan Pakai Sabun (CTPS)</h2>
+      <p>
+        Lebih dari 120 siswa kelas 1 hingga kelas 6 mengikuti kegiatan ini dengan penuh antusiasme. Menggunakan sarana wastafel air mengalir dan sabun busa higienis, para siswa diajarkan secara langsung metode 6 langkah CTPS standar WHO:
+      </p>
+      <ol>
+        <li>Menggosok kedua telapak tangan dengan sabun hingga merata.</li>
+        <li>Menggosok punggung tangan kiri dengan telapak tangan kanan dan sebaliknya.</li>
+        <li>Menggosok sela-sela jari tangan secara menyeluruh.</li>
+        <li>Membersihkan ujung jari dengan posisi tangan saling mengunci.</li>
+        <li>Menggosok dan memutar ibu jari secara bergantian.</li>
+        <li>Memutar ujung jari dan kuku di atas telapak tangan untuk mengangkat kotoran tersembunyi.</li>
+      </ol>
+
+      <blockquote class="single-post-quote">
+        "Mencuci tangan pakai sabun di air mengalir terbukti secara ilmiah mampu menurunkan risiko penyakit diare hingga 40% dan infeksi saluran pernapasan akut (ISPA) hingga 25% pada anak usia sekolah. Kami mengemas edukasi ini dengan nyanyian dan simulasi langsung agar anak-anak terbiasa menjadikannya budaya harian."
+        <cite>— Petugas Penyuluh Promosi Kesehatan Puskesmas Malimpung</cite>
+      </blockquote>
+
+      <h2>Pemeriksaan Kantin Sehat & Kesehatan Gigi</h2>
+      <p>
+        Selain praktik cuci tangan, petugas sanitarian puskesmas juga melakukan inspeksi keamanan pangan pada kantin sekolah, mengedukasi pedagang untuk menghindari bahan pengawet berbahaya, serta membagikan sikat gigi dan pasta gigi berfluoride kepada seluruh siswa yang hadir.
+      </p>
+      <p>
+        Pihak sekolah mengapresiasi kehadiran rutin tim medis puskesmas. Program pembinaan berkelanjutan ini diharapkan mampu menurunkan angka absensi sakit siswa dan membentuk lingkungan belajar yang higienis serta berdaya sehat.
+      </p>
+    `
+  },
+  'kunjungan-rumah-perkesmas': {
+    slug: 'kunjungan-rumah-perkesmas',
+    title: 'Kunjungan Rumah Program Perawatan Kesehatan Masyarakat',
+    category: 'Layanan Lapangan',
+    date: '20 Agustus 2026',
+    readTime: '4 Menit Baca',
+    author: 'Tim Perkesmas UPT Puskesmas Malimpung',
+    cover: 'assets/berita_bumil.webp',
+    caption: 'Perawat Perkesmas Puskesmas Malimpung melakukan pemeriksaan tanda vital dan konsultasi kesehatan berkala di kediaman lansia binaan.',
+    excerpt: 'Bidan desa bersama perawat perkesmas melakukan kunjungan langsung (home visit) untuk memantau kesehatan lansia dan keluarga berisiko tinggi di wilayah kerja pedesaan Malimpung.',
+    contentHtml: `
+      <p class="single-post-lead">
+        Mendekatkan layanan kesehatan langsung ke pangkuan warga yang memiliki keterbatasan mobilitas fisik merupakan mandat utama Program Perawatan Kesehatan Masyarakat (Perkesmas). Tim perawat dan bidan desa UPT Puskesmas Malimpung mengintensifkan kunjungan rumah <em>(home visit)</em> ke pemukiman warga di Desa Padang Loang dan Kelurahan Maccirinna (20/08/2026).
+      </p>
+
+      <h2>Fokus Pelayanan Pasien Kronis & Lansia Resti</h2>
+      <p>
+        Dalam agenda kunjungan lapangan ini, tim tenaga kesehatan menyambangi rumah-rumah keluarga berisiko tinggi (resti), penderita hipertensi menahun, diabetes melitus, pasien pasca-stroke, serta warga lansia yang hidup sebatang kara. Pelayanan yang diberikan di tempat meliputi:
+      </p>
+      <ul>
+        <li><strong>Pemeriksaan Tanda Vital & Antropometri:</strong> Pengukuran tekanan darah, saturasi oksigen darah (SpO2), frekuensi pernapasan, serta pemantauan indeks massa tubuh.</li>
+        <li><strong>Pemeriksaan Laboratorium Sederhana (Point-of-Care):</strong> Uji glukosa darah sewaktu, asam urat, dan kolesterol bagi pasien diabetes dan penyakit kardiovaskular.</li>
+        <li><strong>Edukasi Kepatuhan Minum Obat:</strong> Rekonsiliasi obat hipertensi dan antidiabetes agar dikonsumsi sesuai dosis instruksi dokter tanpa jeda putus obat.</li>
+        <li><strong>Asesmen Sanitasi Tempat Tinggal:</strong> Memberikan masukan terkait ventilasi kamar tidur lansia, pencahayaan, dan pencegahan risiko lantai licin guna menghindari cedera patah tulang panggul.</li>
+      </ul>
+
+      <blockquote class="single-post-quote">
+        "Bagi kami di Puskesmas Malimpung, jarak pemukiman yang jauh dan medan pedesaan bukanlah hambatan. Melalui Perkesmas, kami hadir memastikan tidak ada warga kami yang tertinggal dalam mendapatkan hak pelayanan medis dasar. Kehangatan sapaan dan sentuhan medis yang tulus menjadi obat penyemangat bagi para lansia kita."
+        <cite>— Penanggung Jawab Program Perkesmas Puskesmas Malimpung</cite>
+      </blockquote>
+
+      <h2>Rencana Perawatan Berkelanjutan</h2>
+      <p>
+        Setiap hasil pemeriksaan rumah dicatat ke dalam rekam medis keluarga terpadu (Family Folder) dan dipantau bersama bidan desa. Keluarga pasien diberikan nomor kontak darurat UGD 24 Jam Puskesmas Malimpung jika sewaktu-waktu membutuhkan ambulans siaga atau rujukan gawat darurat.
+      </p>
+    `
+  },
+  'lokakarya-lintas-sektor-stunting': {
+    slug: 'lokakarya-lintas-sektor-stunting',
+    title: 'Lokakarya Mini Lintas Sektor untuk Pencegahan Stunting Terpadu',
+    category: 'Manajemen Mutu',
+    date: '15 Agustus 2026',
+    readTime: '5 Menit Baca',
+    author: 'Bagian Tata Usaha & Manajemen Mutu Puskesmas Malimpung',
+    cover: 'assets/berita_stunting.webp',
+    caption: 'Suasana Rapat Koordinasi Lokakarya Mini Lintas Sektor Stunting dipimpin unsur Camat, Kepala Puskesmas, dan tokoh penggerak di aula pertemuan.',
+    excerpt: 'Rapat koordinasi lintas sektor bersama pihak Kecamatan Patampanua, aparat desa, Babinsa, Bhabinkamtibmas, serta PKK guna memperkuat pendampingan keluarga berisiko stunting di seluruh desa binaan.',
+    contentHtml: `
+      <p class="single-post-lead">
+        Penuntasan masalah stunting membutuhkan komitmen konvergensi terpadu yang melibatkan seluruh elemen pemangku kepentingan lintas sektoral. UPT Puskesmas Malimpung menggelar Lokakarya Mini (Lokmin) Triwulanan Lintas Sektor bertajuk "Aksi Kolaboratif Terpadu Mewujudkan Zero New Stunting di Wilayah Malimpung" yang diselenggarakan di Aula Pertemuan Fasyankes (15/08/2026).
+      </p>
+
+      <h2>Forum Musyawarah & Analisis Data Berbasis Geospasial</h2>
+      <p>
+        Pertemuan strategis ini dihadiri oleh Camat Patampanua, jajaran Kepala Desa Malimpung, Desa Padang Loang, Lurah Maccirinna, Danramil/Babinsa, Kapolsek/Bhabinkamtibmas, Tim Penggerak PKK Kecamatan dan Desa, penyuluh KB, serta tokoh agama dan tokoh masyarakat setempat.
+      </p>
+      <p>
+        Dalam sesi pemaparan, Kepala Puskesmas Malimpung menyajikan evaluasi indikator Standar Pelayanan Minimal (SPM) dan mendemonstrasikan integrasi peta geospasial <em>Health Atlas</em> yang memetakan titik sebaran keluarga sasaran, sumber air bersih, serta posyandu aktif. Berdasarkan data evaluasi triwulan II 2026, angka intervensi gizi terpadu berhasil menekan tren prevalensi balita stunting di wilayah kerja hingga menyentuh angka 6.8%.
+      </p>
+
+      <blockquote class="single-post-quote">
+        "Penanganan stunting bukan hanya tugas sektor kesehatan, melainkan 70% ditentukan oleh intervensi sensitif seperti sanitasi layak, ketersediaan air bersih, dan ketahanan pangan keluarga. Sinergi anggaran dana desa dan program kesehatan puskesmas adalah kunci keberhasilan nyata kita di lapangan."
+        <cite>— Camat Patampanua Kabupaten Pinrang</cite>
+      </blockquote>
+
+      <h2>Rencana Tindak Lanjut (RTL) Semester II 2026</h2>
+      <p>
+        Lokakarya mini menghasilkan beberapa kesepakatan rencana aksi konkret, antara lain:
+      </p>
+      <ul>
+        <li>Pengalokasian dana desa untuk program jambanisasi sehat bagi 18 keluarga pra-sejahtera di wilayah pedesaan.</li>
+        <li>Penyelenggaraan Dapur Sehat Atasi Stunting (DASHAT) secara bergilir di balai posyandu dusun.</li>
+        <li>Pemeriksaan kesehatan gratis bagi calon pengantin (catin) minimal 3 bulan sebelum pernikahan untuk skrining anemia dan status gizi.</li>
+        <li>Optimalisasi peran Babinsa dan Bhabinkamtibmas dalam pendampingan distribusi bantuan pangan bergizi.</li>
+      </ul>
+      <p>
+        Acara ditutup dengan penandatanganan Berita Acara Komitmen Bersama Rencana Tindak Lanjut Triwulan III oleh seluruh unsur pimpinan lintas sektor, menandai kesiapsiagaan bersama dalam mengawal generasi masa depan yang sehat dan unggul.
+      </p>
+    `
+  }
+};
+
+// ---------------------------------------------------------------------------
+// 5. ROUTING & NAVIGATION (DENGAN DUKUNGAN SINGLE POST BERITA & DEEP-LINKING)
+// ---------------------------------------------------------------------------
+const VALID_ROUTES = ['home', 'services', 'programs', 'insights', 'public', 'office', 'news', 'news-detail'];
+
+let previousPageBeforeNews = 'news';
+
+function openNewsDetail(slug, pushHistory = true) {
+  const article = NEWS_DATABASE[slug] || NEWS_DATABASE['posyandu-terpadu-pajalele'];
+  if (!article) return;
+
+  // Catat halaman asal untuk tombol kembali
+  const currentActivePage = document.querySelector('.page.active');
+  if (currentActivePage && currentActivePage.id !== 'page-news-detail') {
+    previousPageBeforeNews = currentActivePage.id.replace('page-', '');
+  }
+
+  // Isi data single post
+  const titleEl = document.getElementById('single-news-title');
+  const crumbEl = document.getElementById('single-news-crumb-title');
+  const badgeEl = document.getElementById('single-news-badge');
+  const readTimeEl = document.getElementById('single-news-read-time');
+  const authorEl = document.getElementById('single-news-author');
+  const dateEl = document.getElementById('single-news-date');
+  const coverEl = document.getElementById('single-news-cover');
+  const captionEl = document.getElementById('single-news-caption');
+  const bodyEl = document.getElementById('single-news-body');
+  const btnBackText = document.getElementById('btn-back-text');
+
+  if (titleEl) titleEl.textContent = article.title;
+  if (crumbEl) crumbEl.textContent = article.title;
+  if (badgeEl) badgeEl.textContent = article.category;
+  if (readTimeEl) readTimeEl.textContent = article.readTime;
+  if (authorEl) authorEl.textContent = article.author;
+  if (dateEl) dateEl.textContent = `${article.date} • Publikasi Resmi Fasyankes`;
+  if (coverEl) {
+    coverEl.src = article.cover;
+    coverEl.alt = article.title;
+  }
+  if (captionEl) captionEl.textContent = article.caption;
+  if (bodyEl) bodyEl.innerHTML = article.contentHtml;
+  if (btnBackText) {
+    btnBackText.textContent = (previousPageBeforeNews === 'home') ? 'Kembali ke Beranda' : 'Kembali ke Berita';
+  }
+
+  // Render Berita Terkait Lainnya
+  const relatedGrid = document.getElementById('single-news-related-grid');
+  if (relatedGrid) {
+    const otherArticles = Object.values(NEWS_DATABASE).filter(a => a.slug !== article.slug);
+    relatedGrid.innerHTML = otherArticles.slice(0, 3).map(rel => `
+      <div class="related-card-item" onclick="openNewsDetail('${escapeHTML(rel.slug)}')" style="cursor: pointer;">
+        <div class="related-card-thumb">
+          <img src="${escapeHTML(rel.cover)}" alt="${escapeHTML(rel.title)}" loading="lazy">
+        </div>
+        <div class="related-card-body">
+          <span class="related-badge">${escapeHTML(rel.category)}</span>
+          <span class="related-date">${escapeHTML(rel.date)}</span>
+          <h4 class="related-title">${escapeHTML(rel.title)}</h4>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Buka halaman Single Post
+  document.querySelectorAll('.page').forEach(p => {
+    const isTarget = (p.id === 'page-news-detail');
+    p.classList.toggle('active', isTarget);
+    if (isTarget) p.classList.add('fade-in');
+  });
+
+  // Perbarui Title Peramban
+  document.title = `${article.title} — Puskesmas Malimpung`;
+
+  // Tutup drawer jika ada
+  closeMobileNav();
+
+  // Sinkronisasi riwayat hash
+  if (pushHistory) {
+    history.pushState(null, '', `#news/${article.slug}`);
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goBackFromNewsDetail() {
+  if (previousPageBeforeNews && previousPageBeforeNews !== 'news-detail') {
+    navigate(previousPageBeforeNews);
+  } else {
+    navigate('news');
+  }
+}
+
+function shareNewsWhatsApp() {
+  const title = document.getElementById('single-news-title')?.textContent || 'Berita Puskesmas Malimpung';
+  const url = window.location.href;
+  const text = encodeURIComponent(`*${title}*\nBaca selengkapnya di portal resmi Puskesmas Malimpung:\n${url}`);
+  window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+}
+
+function copyNewsUrl() {
+  const url = window.location.href;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => {
+      appToast('Tautan berita berhasil disalin ke papan klip.');
+    }).catch(() => {
+      appToast('Tautan: ' + url);
+    });
+  } else {
+    appToast('Tautan: ' + url);
+  }
+}
 
 function navigate(fullRoute, scroll = true) {
   let [baseRoute, subSlug] = (fullRoute || 'home').split('/');
+
+  // Jika rute news dan ada subSlug, buka detail berita
+  if (baseRoute === 'news' && subSlug && NEWS_DATABASE[subSlug]) {
+    openNewsDetail(subSlug, false);
+    return;
+  }
+  if (baseRoute === 'news-detail') {
+    openNewsDetail(subSlug || 'posyandu-terpadu-pajalele', false);
+    return;
+  }
+
   if (!VALID_ROUTES.includes(baseRoute)) baseRoute = 'home';
 
   // Toggle kelas halaman aktif
@@ -426,7 +712,8 @@ function navigate(fullRoute, scroll = true) {
     insights: 'Health Intelligence Wilayah — Puskesmas Malimpung',
     public: 'Keterbukaan Informasi Publik — Puskesmas Malimpung',
     office: 'Smart Virtual Office — Puskesmas Malimpung',
-    news: 'Berita & Informasi Terkini — Puskesmas Malimpung'
+    news: 'Berita & Informasi Terkini — Puskesmas Malimpung',
+    'news-detail': 'Detail Berita — Puskesmas Malimpung'
   };
   document.title = titles[baseRoute] || 'Puskesmas Malimpung';
 
@@ -496,6 +783,10 @@ window.openMobileNav = openMobileNav;
 window.closeMobileNav = closeMobileNav;
 window.openServiceDetail = openServiceDetail;
 window.closeServiceDetail = closeServiceDetail;
+window.openNewsDetail = openNewsDetail;
+window.goBackFromNewsDetail = goBackFromNewsDetail;
+window.shareNewsWhatsApp = shareNewsWhatsApp;
+window.copyNewsUrl = copyNewsUrl;
 
 // ---------------------------------------------------------------------------
 // 5. CMS STUDIO LOGIC

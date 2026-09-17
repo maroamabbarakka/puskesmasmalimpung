@@ -132,20 +132,21 @@ def run():
         assert page.locator(".site-header").is_visible(), "Site header resmi harus ada"
         print("  [LULUS] 1. Header & Navigasi Terverifikasi.")
 
-        # 2. Immersive Hero & 3 Fakta Wilayah
-        fact_text = page.locator(".hero-facts-strip").text_content()
-        assert "2 Desa" in fact_text and "1 Kelurahan" in fact_text and "8 Dusun/Lingkungan" in fact_text
-        print("  [LULUS] 2. Immersive Hero & 3 Fakta Struktur Wilayah (2 Desa, 1 Kelurahan, 8 Dusun/Lingkungan) Terverifikasi.")
+        # 2. Immersive Hero, 4 Nilai Pelayanan Prima, & Social Proof
+        assert page.locator(".hero-values-strip").is_visible(), "Hero Values Strip harus ada"
+        val_count = page.locator(".val-card-item").count()
+        assert val_count == 4, f"4 Nilai Pelayanan Prima harus ada, ditemukan {val_count}"
+        print(f"  [LULUS] 2. Immersive Hero & 4 Nilai Pelayanan Prima Terverifikasi ({val_count} nilai utama).")
 
         # 3. Akses Cepat Warga (7 Kartu Layanan Praktis)
         quick_count = page.locator(".quick-card-item").count()
         assert quick_count == 7, f"7 Akses Cepat Warga harus ada, ditemukan {quick_count}"
         print(f"  [LULUS] 3. Akses Cepat Warga Terverifikasi ({quick_count} jalur layanan praktis).")
 
-        # 4. 5 Layanan Unggulan
-        services_count = page.locator(".featured-svc-card").count()
-        assert services_count == 5, f"5 Layanan Unggulan harus ada, ditemukan {services_count}"
-        print(f"  [LULUS] 4. Layanan Unggulan Terverifikasi ({services_count} layanan foto fasyankes asli).")
+        # 4. Layanan Unggulan Siklus Hidup (4 Persona Tahap Kehidupan Sesuai Mockup Humanis)
+        lifecycle_count = page.locator(".lifecycle-card").count()
+        assert lifecycle_count == 4, f"4 Tahap Kehidupan harus ada, ditemukan {lifecycle_count}"
+        print(f"  [LULUS] 4. Layanan Unggulan Siklus Hidup Terverifikasi ({lifecycle_count} kartu persona humanis).")
 
         # 5. Program Kesehatan Siklus Hidup ILP (4 Klaster Resmi Sesuai SOP Pelayanan PKM Malimpung)
         lifestage_count = page.locator(".lifestage-item-card").count()
@@ -206,9 +207,25 @@ def run():
         page.wait_for_timeout(1500)  # Beri jeda render GeoJSON
         svg_paths = page.locator("#health-atlas-leaflet-map path.leaflet-interactive").count()
         assert svg_paths >= 3, f"Harus ada minimal 3 poligon batas desa/kelurahan BIG, terdeteksi {svg_paths}"
-        atlas_shot = os.path.join(screenshots_dir, "06_Health_Atlas_Leaflet_BIG.png")
-        page.screenshot(path=atlas_shot, full_page=True)
-        print(f"  [LULUS] 13. Health Atlas Leaflet BIG Terverifikasi ({svg_paths} poligon interaktif + 1 fasyankes marker) -> {atlas_shot}.")
+        # 14. Verifikasi Interaktif Fitur Single Post Berita (Detail Berita Penuh)
+        page.locator('a[data-go="home"]').first.click()
+        page.wait_for_timeout(600)
+        page.locator('.section-news-feed .news-feed-card').first.click()
+        page.wait_for_timeout(600)
+        assert page.evaluate('() => document.querySelector(".page.active")?.id') == 'page-news-detail', "Single post harus aktif"
+        single_title = page.locator('#single-news-title').text_content()
+        assert len(single_title) > 10, f"Judul single post harus valid, ditemukan: {single_title}"
+        single_cover = page.locator('#single-news-cover').get_attribute('src')
+        assert "berita_" in single_cover, f"Cover berita single post harus valid: {single_cover}"
+        single_shot = os.path.join(screenshots_dir, "07_Single_Post_Berita_Desktop_1440.png")
+        page.screenshot(path=single_shot, full_page=True)
+        print(f"  [LULUS] 14. Fitur Single Post Berita Interaktif Terverifikasi ('{single_title}') -> {single_shot}.")
+
+        # Kembali ke Home via tombol Single Post
+        page.locator('.btn-back-single-post').click()
+        page.wait_for_timeout(500)
+        assert page.evaluate('() => document.querySelector(".page.active")?.id') == 'page-home', "Harus kembali ke Beranda"
+        print("  [LULUS] 15. Navigasi Kembali dari Single Post Berita Berhasil.")
 
         context.close()
 
