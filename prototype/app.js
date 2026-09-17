@@ -582,16 +582,29 @@ document.addEventListener('DOMContentLoaded', () => {
       currentSearch = '';
       activeCategory = 'all';
       if (searchInput) searchInput.value = '';
-      document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.category === 'all'));
+      document.querySelectorAll('.chip[data-category]').forEach(c => c.classList.toggle('active', c.dataset.category === 'all'));
       renderServices();
     });
   }
 
-  document.querySelectorAll('.chip').forEach(chip => {
+  document.querySelectorAll('.chip[data-category]').forEach(chip => {
     chip.addEventListener('click', () => {
       activeCategory = chip.dataset.category;
-      document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === chip));
+      document.querySelectorAll('.chip[data-category]').forEach(c => c.classList.toggle('active', c === chip));
       renderServices();
+    });
+  });
+
+  // Filters Program Siklus Hidup
+  document.querySelectorAll('.program-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const selectedPcat = chip.dataset.pcat;
+      document.querySelectorAll('.program-chip').forEach(c => c.classList.toggle('active', c === chip));
+      document.querySelectorAll('.program-item').forEach(item => {
+        const match = (selectedPcat === 'all' || item.dataset.pcat === selectedPcat);
+        item.style.display = match ? 'block' : 'none';
+        if (match) item.classList.add('fade-in');
+      });
     });
   });
 

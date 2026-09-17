@@ -123,11 +123,30 @@ with sync_playwright() as pw:
     assert ticket_id in office_audit_text, f"Ticket {ticket_id} not recorded in Smart Virtual Office audit log!"
     print(f"  [PASS]: Ticket {ticket_id} successfully synchronized into Smart Virtual Office audit logs!")
 
+    # Phase 4: Auditing Life-Stage Health Programs Filtering
+    print("\n[Phase 4] Auditing Life-Stage Health Programs Filtering...")
+    page.evaluate("location.hash = '#programs'")
+    page.wait_for_timeout(300)
+
+    # Filter Klaster 4: Pencegahan Penyakit Menular (P2P)
+    page.locator('button.program-chip[data-pcat="p2p"]').click()
+    page.wait_for_timeout(200)
+    assert page.locator('.program-item[data-pcat="p2p"]').is_visible(), "P2P program item should be visible"
+    assert not page.locator('.program-item[data-pcat="kia"]').is_visible(), "KIA program item should be hidden when filtered to P2P"
+    print("  [PASS]: Filter to 'p2p' successfully isolated infectious disease program and hid other clusters!")
+
+    # Reset filter ke 'all'
+    page.locator('button.program-chip[data-pcat="all"]').click()
+    page.wait_for_timeout(200)
+    assert page.locator('.program-item[data-pcat="kia"]').is_visible(), "KIA program should be restored"
+    assert page.locator('.program-item[data-pcat="p2p"]').is_visible(), "P2P program should be restored"
+    print("  [PASS]: Resetting filter to 'all' restored all 5 life-stage program clusters!")
+
     context.close()
     browser.close()
 
 print("\n=================================================================")
-print("ALL EXTENDED CHECKS PASSED: 7 VIEWPORTS, SLUGS & AUDIT LOG SYNC!")
+print("ALL EXTENDED CHECKS PASSED: 7 VIEWPORTS, SLUGS, AUDIT & PROGRAMS!")
 print("=================================================================")
 os._exit(0)
 

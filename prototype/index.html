@@ -562,9 +562,22 @@
             <p class="section-desc">Penyelenggaraan 12 Standar Pelayanan Minimal (SPM) Kesehatan Kabupaten Pinrang dan Program Kesehatan Masyarakat di wilayah kerja Malimpung.</p>
           </div>
 
+          <!-- Toolbar Filter Siklus Hidup Program -->
+          <div class="catalog-toolbar" style="margin-bottom: 2rem;">
+            <div class="filter-chips">
+              <span style="font-size: 0.8125rem; font-weight: 700; color: var(--ink-secondary); margin-right: 0.25rem;">Siklus Hidup:</span>
+              <button class="chip active program-chip" data-pcat="all">Semua Program</button>
+              <button class="chip program-chip" data-pcat="kia">Ibu & Anak (Klaster 2)</button>
+              <button class="chip program-chip" data-pcat="remaja">Usia Sekolah & Remaja</button>
+              <button class="chip program-chip" data-pcat="ckg">Skrining CKG Nasional</button>
+              <button class="chip program-chip" data-pcat="lansia">Dewasa & Lansia (Klaster 3)</button>
+              <button class="chip program-chip" data-pcat="p2p">Pencegahan Menular (Klaster 4)</button>
+            </div>
+          </div>
+
           <div class="program-mosaic" style="grid-template-columns: 1fr; gap: 2rem;">
             <!-- Klaster 2: KIA & Gizi -->
-            <div class="transparency-card">
+            <div class="transparency-card program-item" data-pcat="kia">
               <span class="tag-badge">Klaster 2: Ibu & Anak</span>
               <h3 style="margin-top: 0.5rem;">Program Pencegahan Stunting & Kesehatan Ibu Anak (KIA)</h3>
               <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.25rem;">
@@ -582,9 +595,28 @@
               </div>
             </div>
 
+            <!-- Program Usia Sekolah & Remaja (Klaster 2B) -->
+            <div class="transparency-card program-item" data-pcat="remaja">
+              <span class="tag-badge warm">Klaster 2B: Usia Sekolah & Remaja</span>
+              <h3 style="margin-top: 0.5rem;">Kesehatan Anak Usia Sekolah, Remaja & Usaha Kesehatan Sekolah (UKS)</h3>
+              <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.25rem;">
+                Penjaringan kesehatan berkala peserta didik SD, SMP, SMA di wilayah kerja Patampanua, pemberian Tablet Tambah Darah (TTD) bagi remaja putri guna pencegahan anemia dini, serta edukasi kesehatan reproduksi dan gizi seimbang.
+              </p>
+              <div class="detail-table" style="margin-bottom: 1.25rem;">
+                <table>
+                  <tbody>
+                    <tr><td><strong>Sasaran</strong></td><td>Siswa-siswi sekolah dasar dan menengah di wilayah Kecamatan Patampanua.</td></tr>
+                    <tr><td><strong>Penanggung Jawab</strong></td><td>Koordinator Program UKS & Remaja Puskesmas Malimpung</td></tr>
+                    <tr><td><strong>Kegiatan Utama</strong></td><td>Skrining berkala ketajaman mata/pendengaran, pembagian TTD mingguan di sekolah.</td></tr>
+                    <tr><td><strong>Rujukan Medis</strong></td><td>Poli Gigi dan Poli Umum bagi siswa dengan temuan kelainan fisik.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             <!-- Program Nasional CKG 2026 -->
-            <div class="transparency-card">
-              <span class="tag-badge warm">Program Nasional 2026</span>
+            <div class="transparency-card program-item" data-pcat="ckg">
+              <span class="tag-badge warm">Program Prioritas Nasional 2026</span>
               <h3 style="margin-top: 0.5rem;">Cek Kesehatan Gratis (CKG) Seluruh Siklus Hidup</h3>
               <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.25rem;">
                 Sesuai Kepmenkes RI, program CKG menyasar seluruh warga yang berulang tahun untuk melakukan skrining faktor risiko kesehatan, pemeriksaan gula darah, tekanan darah, indeks massa tubuh, serta skrining lanjutan berdasarkan kelompok usia.
@@ -602,18 +634,36 @@
             </div>
 
             <!-- Klaster 3: Pengendalian PTM & Lansia -->
-            <div class="transparency-card">
+            <div class="transparency-card program-item" data-pcat="lansia">
               <span class="tag-badge sky">Klaster 3: Dewasa & Lansia</span>
               <h3 style="margin-top: 0.5rem;">Pengendalian Penyakit Tidak Menular (PTM) & Geriatri Santun</h3>
               <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.25rem;">
                 Deteksi dini hipertensi, diabetes melitus, obesitas, kanker payudara/leher rahim, serta pemantauan kemandirian fungsional lansia melalui instrumen ADL (Activities of Daily Living) dan AMT (Abbreviated Mental Test).
               </p>
-              <div class="detail-table">
+              <div class="detail-table" style="margin-bottom: 1.25rem;">
                 <table>
                   <tbody>
                     <tr><td><strong>Sasaran</strong></td><td>Warga usia 15 tahun ke atas dan lanjut usia (≥60 tahun).</td></tr>
                     <tr><td><strong>Penanggung Jawab</strong></td><td>Koordinator Program PTM & Lansia Puskesmas Malimpung</td></tr>
                     <tr><td><strong>Jadwal Pelaksanaan</strong></td><td>Setiap hari kerja di Puskesmas dan jadwal Posbindu/Posyandu Lansia bulanan di desa.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Klaster 4: Penanggulangan Penyakit Menular (P2P) -->
+            <div class="transparency-card program-item" data-pcat="p2p">
+              <span class="tag-badge" style="background-color: var(--rose-50); color: var(--rose-700); border-color: var(--rose-200);">Klaster 4: Pengendalian Infeksi</span>
+              <h3 style="margin-top: 0.5rem;">Pencegahan & Pengendalian Penyakit Menular (P2P) serta Imunisasi</h3>
+              <p style="font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 1.25rem;">
+                Investigasi kontak erat tuberkulosis (TB), pemantauan kepatuhan minum obat (PMO), kewaspadaan dini surveilans DBD melalui Gerakan 1 Rumah 1 Jumantik, serta pemenuhan Imunisasi Rutin Lengkap (IRL) bayi dan balita.
+              </p>
+              <div class="detail-table">
+                <table>
+                  <tbody>
+                    <tr><td><strong>Sasaran</strong></td><td>Masyarakat rentan, kontak erat penderita TB, dan bayi usia 0–24 bulan.</td></tr>
+                    <tr><td><strong>Penanggung Jawab</strong></td><td>Koordinator Surveilans & Pengendalian Penyakit Menular (P2P)</td></tr>
+                    <tr><td><strong>Fasilitas Terkait</strong></td><td>Laboratorium TCM/BTA, Ruang Konseling TB, dan Pojok Imunisasi Puskesmas.</td></tr>
                   </tbody>
                 </table>
               </div>

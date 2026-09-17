@@ -76,6 +76,8 @@ Pengujian otomatis tambahan telah dijalankan menggunakan Playwright Edge Chromiu
 | **Sanitasi XSS Input CMS** | String input uji karakter khusus | `escapeHTML` aktif | Karakter `<`, `>`, `"`, `'`, `&` di-escape sempurna | **PASS** |
 | **Aspirasi & Pengaduan Warga** | Input form publik di `#ptab-pengaduan` | Submit aduan dengan kontak & poli | Nomor tiket `ADU-2026-XXXXX` diterbitkan | **PASS** |
 | **Sinkronisasi Audit Trail** | Evaluasi riwayat di `#office` | Cek integrasi log sistem | Aduan warga otomatis tercatat di log internal | **PASS** |
+| **Filter Siklus Hidup Program** | Toolbar interaktif di `#page-programs` | Filter klaster P2P & reset ke all | Isolasi program infeksi & restorasi 5 klaster | **PASS** |
+
 
 
 
