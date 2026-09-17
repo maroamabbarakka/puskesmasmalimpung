@@ -3423,65 +3423,14 @@ table {
 }
 
 /* --------------------------------------------------------------------------
-   20.9 FOOTER RESMI MASTER V3.2
+   20.9 FOOTER RESMI MASTER V3.3
    -------------------------------------------------------------------------- */
 .site-footer {
   background-color: #062b24;
   color: #ffffff;
-  padding-top: 3.5rem;
-  padding-bottom: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 2.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.footer-top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 2.5rem;
-}
-
-.footer-top-brand {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.footer-logos-group {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.footer-logo-img {
-  height: 38px;
-  width: auto;
-}
-
-.footer-brand-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer-inst-title {
-  font-size: 1.0625rem;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: 0.02em;
-}
-
-.footer-inst-sub {
-  font-size: 0.75rem;
-  color: #a5cec3;
-}
-
-.footer-top-address p {
-  font-size: 0.875rem;
-  color: #cde6de;
-  max-width: 440px;
 }
 
 .footer-grid-master {
