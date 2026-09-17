@@ -51,6 +51,9 @@
 4. **Health Intelligence Topics:** Pergantian topik ke `"ptm"` berhasil memperbarui judul dan deskripsi, serta pengembalian ke `"ckg"` memvalidasi bahwa metrik tetap menyajikan `'—'` (kejujuran data tanpa pemalsuan nol).
 5. **Keterbukaan Informasi Publik:** Tab maklumat dan standar pelayanan berhasil berganti konten dengan mulus.
 6. **Navigasi Mobile Drawer:** Tombol hamburger berhasil membuka drawer overlay pada viewport mobile (390px), dan navigasi ke rute layanan berhasil berpindah rute dengan benar.
+7. **Modul Survei Kepuasan Masyarakat (SKM):** Partisipasi voting cepat warga (Sangat Puas, Puas, Cukup, Perlu Perbaikan) berhasil menyimpan pilihan ke `localStorage` (`malimpung_skm_vote`) dan memberikan pesan umpan balik instan tanpa reload halaman.
+8. **Keamanan Input & Proteksi XSS:** Fungsi `escapeHTML` aktif pada seluruh penyajian data katalog layanan dan tabel Virtual Office/CMS untuk menangkal injeksi tag HTML atau script berbahaya.
+9. **Eliminasi 404 Favicon:** Penambahan favicon SVG inline berbasis data-URI berhasil meniadakan error 404 request `/favicon.ico` pada peramban web modern.
 
 ---
 
@@ -70,4 +73,6 @@ Pengujian otomatis tambahan telah dijalankan menggunakan Playwright Edge Chromiu
 | **Deep-Linking Direct URL** | URL `#services/ckg` | Buka browser langsung ke modal | Modal CKG terbuka otomatis & judul sesuai | **PASS** |
 | **Deep-Linking Close Sync** | Tutup modal CKG | Sinkronisasi History Hash | Hash URL kembali ke `#services` | **PASS** |
 | **Deep-Linking Hashchange** | Evaluasi `#services/gigi` | Navigasi dinamis antar-layanan | Modal berganti ke layanan Gigi dan Mulut | **PASS** |
+| **Sanitasi XSS Input CMS** | String input uji karakter khusus | `escapeHTML` aktif | Karakter `<`, `>`, `"`, `'`, `&` di-escape sempurna | **PASS** |
+
 

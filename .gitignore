@@ -1,0 +1,13 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary & Environment
+.env
+.env.local
+node_modules/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

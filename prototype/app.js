@@ -233,6 +233,16 @@ function saveLogsToStorage() {
 // ---------------------------------------------------------------------------
 const icon = (name) => `<svg class="icon" style="width: 20px; height: 20px;" aria-hidden="true"><use href="#${name}"/></svg>`;
 
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 function renderServices() {
   const grid = document.getElementById('service-grid');
   if (!grid) return;
@@ -258,21 +268,21 @@ function renderServices() {
   grid.innerHTML = filtered.map(s => `
     <article class="service-card">
       <div class="service-card-top">
-        <span class="service-tag">${s.tag}</span>
-        <h3 class="service-title">${s.name}</h3>
-        <p class="service-summary">${s.text}</p>
+        <span class="service-tag">${escapeHTML(s.tag)}</span>
+        <h3 class="service-title">${escapeHTML(s.name)}</h3>
+        <p class="service-summary">${escapeHTML(s.text)}</p>
         <div class="service-meta-list">
           <div class="service-meta-item">
             <svg style="width: 14px; height: 14px; color: var(--jade-600);" aria-hidden="true"><use href="#ic-clock"/></svg>
-            <span>${s.schedule}</span>
+            <span>${escapeHTML(s.schedule)}</span>
           </div>
           <div class="service-meta-item">
             <svg style="width: 14px; height: 14px; color: var(--jade-600);" aria-hidden="true"><use href="#ic-shield"/></svg>
-            <span>${s.cost}</span>
+            <span>${escapeHTML(s.cost)}</span>
           </div>
         </div>
       </div>
-      <button class="btn-detail" data-service="${s.id}" aria-label="Lihat Rincian ${s.name}">
+      <button class="btn-detail" data-service="${escapeHTML(s.id)}" aria-label="Lihat Rincian ${escapeHTML(s.name)}">
         <span>Lihat Detail Standar Pelayanan</span>
         <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-arrow"/></svg>
       </button>
@@ -325,12 +335,12 @@ function renderOfficeTables() {
   if (serviceTable) {
     serviceTable.innerHTML = servicesState.map(s => `
       <tr style="border-bottom: 1px solid var(--border-light);">
-        <td style="padding: 0.625rem 0.5rem; font-family: monospace; font-weight: 700;">${s.id}</td>
-        <td style="padding: 0.625rem 0.5rem; font-weight: 700; color: var(--forest-950);">${s.name}</td>
-        <td style="padding: 0.625rem 0.5rem;"><span class="service-tag">${s.group}</span></td>
+        <td style="padding: 0.625rem 0.5rem; font-family: monospace; font-weight: 700;">${escapeHTML(s.id)}</td>
+        <td style="padding: 0.625rem 0.5rem; font-weight: 700; color: var(--forest-950);">${escapeHTML(s.name)}</td>
+        <td style="padding: 0.625rem 0.5rem;"><span class="service-tag">${escapeHTML(s.group)}</span></td>
         <td style="padding: 0.625rem 0.5rem;"><span class="integrity-badge verified" style="font-size: 0.6875rem;">Terbit (Publik)</span></td>
         <td style="padding: 0.625rem 0.5rem;">
-          <button class="btn-secondary" style="padding: 0.25rem 0.625rem; font-size: 0.75rem;" onclick="loadServiceToCms('${s.id}')">Edit CMS</button>
+          <button class="btn-secondary" style="padding: 0.25rem 0.625rem; font-size: 0.75rem;" onclick="loadServiceToCms('${escapeHTML(s.id)}')">Edit CMS</button>
         </td>
       </tr>
     `).join('');
@@ -340,10 +350,10 @@ function renderOfficeTables() {
   if (auditTable) {
     auditTable.innerHTML = auditLogsState.slice(0, 8).map(log => `
       <tr style="border-bottom: 1px solid var(--border-light);">
-        <td style="padding: 0.625rem 0.5rem; color: var(--ink-secondary); font-size: 0.8125rem;">${log.time}</td>
-        <td style="padding: 0.625rem 0.5rem; font-weight: 700; color: var(--forest-950); font-size: 0.8125rem;">${log.user}</td>
-        <td style="padding: 0.625rem 0.5rem; font-size: 0.8125rem;">${log.action}</td>
-        <td style="padding: 0.625rem 0.5rem; color: var(--emerald-600); font-weight: 600; font-size: 0.8125rem;">${log.result}</td>
+        <td style="padding: 0.625rem 0.5rem; color: var(--ink-secondary); font-size: 0.8125rem;">${escapeHTML(log.time)}</td>
+        <td style="padding: 0.625rem 0.5rem; font-weight: 700; color: var(--forest-950); font-size: 0.8125rem;">${escapeHTML(log.user)}</td>
+        <td style="padding: 0.625rem 0.5rem; font-size: 0.8125rem;">${escapeHTML(log.action)}</td>
+        <td style="padding: 0.625rem 0.5rem; color: var(--emerald-600); font-weight: 600; font-size: 0.8125rem;">${escapeHTML(log.result)}</td>
       </tr>
     `).join('');
   }
@@ -610,6 +620,26 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.public-tab-content').forEach(p => {
         p.style.display = (p.id === `ptab-${tabKey}` ? 'block' : 'none');
       });
+    });
+  });
+
+  // SKM Quick Poll Handler
+  const savedSkmVote = localStorage.getItem('malimpung_skm_vote');
+  const skmThankyou = document.getElementById('skm-vote-thankyou');
+  if (savedSkmVote && skmThankyou) {
+    skmThankyou.style.display = 'block';
+    skmThankyou.textContent = `✓ Anda telah menyampaikan penilaian: "${savedSkmVote}". Terima kasih atas partisipasi Anda!`;
+  }
+
+  document.querySelectorAll('.skm-vote-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const voteVal = btn.dataset.vote;
+      localStorage.setItem('malimpung_skm_vote', voteVal);
+      if (skmThankyou) {
+        skmThankyou.style.display = 'block';
+        skmThankyou.textContent = `✓ Terima kasih! Penilaian Anda (${voteVal}) telah berhasil dicatat.`;
+      }
+      appToast(`Terima kasih atas partisipasi survei Anda (${voteVal})!`);
     });
   });
 

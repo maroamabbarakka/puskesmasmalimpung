@@ -25,20 +25,17 @@ Sebelum dilakukan penerbitan resmi (*Go-Live*) ke domain publik pemerintah (cont
 - Web Server: Nginx, Apache, atau Hosting Statis Berkinerja Tinggi (Firebase Hosting / Cloudflare Pages / Server Pemkab Pinrang).
 - Dukungan HTTPS (Sertifikat SSL/TLS Aktif wajib untuk kepatuhan keamanan data).
 - Security Headers Terkonfigurasi:
-  ```nginx
-  add_header X-Frame-Options "SAMEORIGIN";
-  add_header X-Content-Type-Options "nosniff";
-  add_header Referrer-Policy "strict-origin-when-cross-origin";
-  add_header Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;";
-  ```
+  - Telah disediakan berkas konfigurasi HTTP Headers siap pakai: [`prototype/_headers`](file:///d:/PKM_MALIMPUNG/Malimpung_Smart_Virtual_Office/prototype/_headers) untuk platform static hosting (Cloudflare Pages, Vercel, Netlify).
+  - Telah disediakan berkas contoh konfigurasi Nginx berstandar produksi: [`prototype/nginx.conf.example`](file:///d:/PKM_MALIMPUNG/Malimpung_Smart_Virtual_Office/prototype/nginx.conf.example) untuk server resmi Pemkab Pinrang / Diskominfo.
 
-### B. Prosedur Deployment Staging
+### B. Prosedur Deployment Staging & Produksi
 1. Kloning branch rilis:
    ```bash
    git checkout feature/health-hub-v2
    ```
-2. Salin isi folder `prototype/` (berkas `index.html`, `style.css`, `app.js`, dan direktori `assets/`) ke document root web server staging.
-3. Jalankan pengujian otomatis `python prototype/capture_qa_v2.py` untuk memastikan tidak ada file yang korup.
+2. Salin isi folder `prototype/` (berkas `index.html`, `style.css`, `app.js`, `_headers`, dan direktori `assets/`) ke document root web server.
+3. Untuk deployment Nginx: pasang konfigurasi dari `prototype/nginx.conf.example` ke `/etc/nginx/sites-available/` dan buat symlink ke `sites-enabled/`.
+4. Jalankan pengujian otomatis `python prototype/test_extended_viewports.py` untuk memastikan seluruh rute, viewport, dan deep-linking slug berfungsi normal.
 
 ---
 

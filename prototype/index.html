@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Puskesmas Malimpung — Health Hub V2</title>
   <meta name="description" content="Portal Layanan Kesehatan Publik, Health Intelligence Wilayah, dan Smart Virtual Office Puskesmas Malimpung, Kabupaten Pinrang.">
+  <meta name="theme-color" content="#07221d">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%2307221d%22/><path d=%22M50 20v60M20 50h60%22 stroke=%22%231fa288%22 stroke-width=%2214%22 stroke-linecap=%22round%22/></svg>">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Puskesmas Malimpung — Health Hub V2">
+  <meta property="og:description" content="Portal Layanan Kesehatan Publik, Health Intelligence Wilayah, dan Smart Virtual Office Puskesmas Malimpung, Kabupaten Pinrang.">
+  <meta property="og:image" content="assets/logo_puskesmas_malimpung.png">
+  <meta property="og:locale" content="id_ID">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -901,6 +909,21 @@
                     <li>Ketiadaan Biaya Liar / Transparansi Tarif (Skor: 3.85)</li>
                     <li>Kesopanan & Keramahan Petugas (Skor: 3.70)</li>
                   </ul>
+                </div>
+              </div>
+
+              <!-- Partisipasi Survei Kepuasan Cepat Warga -->
+              <div class="skm-survey-box" style="margin-top: 1.5rem; background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.5rem;">
+                <h4 style="font-size: 1rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.5rem;">Partisipasi Survei Kepuasan Anda</h4>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); margin-bottom: 1rem;">Bagaimana penilaian Anda terhadap keramahan dan kemudahan pelayanan Puskesmas Malimpung hari ini?</p>
+                <div class="skm-rating-grid" style="display: flex; gap: 0.75rem; flex-wrap: wrap;" id="skm-vote-container">
+                  <button type="button" class="btn-secondary skm-vote-btn" data-vote="Sangat Puas" style="padding: 0.5rem 1rem; font-size: 0.8125rem; border-radius: var(--radius-full);">😍 Sangat Puas</button>
+                  <button type="button" class="btn-secondary skm-vote-btn" data-vote="Puas" style="padding: 0.5rem 1rem; font-size: 0.8125rem; border-radius: var(--radius-full);">😊 Puas</button>
+                  <button type="button" class="btn-secondary skm-vote-btn" data-vote="Cukup" style="padding: 0.5rem 1rem; font-size: 0.8125rem; border-radius: var(--radius-full);">😐 Cukup</button>
+                  <button type="button" class="btn-secondary skm-vote-btn" data-vote="Perlu Perbaikan" style="padding: 0.5rem 1rem; font-size: 0.8125rem; border-radius: var(--radius-full);">🙁 Perlu Perbaikan</button>
+                </div>
+                <div id="skm-vote-thankyou" style="display: none; margin-top: 0.75rem; padding: 0.75rem 1rem; background-color: var(--mint-50); border: 1px solid var(--mint-200); border-radius: var(--radius-md); font-size: 0.8125rem; color: var(--forest-900);">
+                  ✓ Terima kasih! Aspirasi Anda telah dicatat untuk evaluasi berkelanjutan pelayanan Puskesmas Malimpung.
                 </div>
               </div>
             </div>
