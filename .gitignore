@@ -19,3 +19,7 @@ Thumbs.db
 *.MP4
 Dokumentasi Acara Malimpung/
 Peresmian Puskesmas malinpung/
+
+# Logs & scratch
+*.log
+scratch/

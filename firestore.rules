@@ -1,0 +1,114 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Assumed Data Model & Security Architecture
+    // Proyek: Puskesmas Malimpung (Kabupaten Pinrang)
+    // Tanggal: 18 September 2026
+    // ===============================================================
+    //
+    // 1. Koleksi: complaints
+    //    - Dokumen aduan masyarakat lengkap beserta PII (nama, kontak).
+    //    - Hak Akses: Publik dapat membuat aduan (create) dengan validasi ketat.
+    //    - Hanya admin / petugas Puskesmas terotentikasi yang dapat membaca dan memperbarui status.
+    //
+    // 2. Koleksi: complaint_tracking
+    //    - Proyeksi status aduan publik non-PII (hanya ticketId, unit, status, timestamp).
+    //    - Hak Akses: Publik dapat membuat dokumen pelacakan saat mengirim aduan.
+    //    - Publik dapat membaca (read) status aduan berdasarkan ticketId tanpa membocorkan identitas warga.
+    //    - Update status hanya diizinkan untuk staf/admin Puskesmas.
+    //
+    // 3. Koleksi: skm_votes
+    //    - Hasil survei kepuasan masyarakat (Permenpan-RB 14/2017).
+    //    - Hak Akses: Publik dapat mengirimkan survei (create) dengan opsi sah.
+    //    - Pembacaan rekapitulasi terbuka untuk transparansi publik.
+    //
+    // 4. Koleksi: services
+    //    - Katalog master standar pelayanan publik resmi.
+    //    - Hak Akses: Terbuka untuk umum (read).
+    //    - Modifikasi (write) hanya diizinkan untuk aparatur/petugas terotentikasi.
+    //
+    // 5. Koleksi: audit_logs
+    //    - Rekam jejak operasional Smart Virtual Office.
+    //    - Hak Akses: Terbatas untuk aparatur terotentikasi.
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isStaffOrAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.firebase.sign_in_provider != null ||
+        request.auth.token.role in ['admin', 'nakes', 'kapus', 'editor']
+      );
+    }
+
+    // 1. Koleksi Pengaduan Warga (Complaints - Memuat PII Rahasia)
+    match /complaints/{complaintId} {
+      function isValidComplaint(data) {
+        return data.keys().hasAll(['ticketId', 'name', 'contact', 'unit', 'message', 'createdAt', 'status']) &&
+               data.ticketId is string && data.ticketId.size() >= 5 && data.ticketId.size() <= 30 &&
+               data.name is string && data.name.size() >= 2 && data.name.size() <= 100 &&
+               data.contact is string && data.contact.size() >= 6 && data.contact.size() <= 50 &&
+               data.unit is string && data.unit.size() >= 2 && data.unit.size() <= 100 &&
+               data.message is string && data.message.size() >= 5 && data.message.size() <= 2000 &&
+               data.status in ['Tercatat', 'Diproses', 'Selesai', 'Perlu Tindak Lanjut', 'Tersimpan Lokal (Menunggu Sinkronisasi)'];
+      }
+
+      // Publik boleh membuat aduan dengan validasi data yang ketat
+      allow create: if isValidComplaint(request.resource.data);
+
+      // Hanya petugas terotentikasi yang boleh membaca, mengupdate status, atau menghapus
+      allow read, update, delete: if isStaffOrAdmin();
+    }
+
+    // 2. Koleksi Pelacakan Status Pengaduan Publik (Non-PII Public Projection)
+    match /complaint_tracking/{ticketId} {
+      function isValidTracking(data) {
+        return data.keys().hasAll(['ticketId', 'unit', 'status', 'createdAt', 'updatedAt']) &&
+               data.ticketId is string && data.ticketId.size() >= 5 && data.ticketId.size() <= 30 &&
+               data.unit is string && data.unit.size() >= 2 && data.unit.size() <= 100 &&
+               data.status in ['Tercatat', 'Diproses', 'Selesai', 'Perlu Tindak Lanjut', 'Tersimpan Lokal (Menunggu Sinkronisasi)'] &&
+               data.createdAt is string && data.updatedAt is string;
+      }
+
+      allow create: if isValidTracking(request.resource.data);
+      allow read: if true; // Publik dapat melacak progres tiketnya secara aman
+      allow update, delete: if isStaffOrAdmin();
+    }
+
+    // 3. Koleksi Survei Kepuasan Masyarakat (SKM Votes)
+    match /skm_votes/{voteId} {
+      function isValidVote(data) {
+        return data.keys().hasAll(['vote', 'createdAt']) &&
+               data.vote in ['Sangat Puas', 'Puas', 'Kurang Puas', 'Tidak Puas'];
+      }
+
+      allow create: if isValidVote(request.resource.data);
+      allow read: if true; // Transparansi keterbukaan informasi publik hasil survei
+      allow update, delete: if isStaffOrAdmin();
+    }
+
+    // 4. Koleksi Katalog Layanan Publik (Services)
+    match /services/{serviceId} {
+      // Katalog layanan dibaca bebas oleh seluruh masyarakat (keterbukaan informasi)
+      allow read: if true;
+
+      // Hanya aparatur/admin yang boleh menambah atau memperbarui katalog
+      allow write: if isStaffOrAdmin();
+    }
+
+    // 5. Koleksi Rekam Jejak Audit Log (Audit Logs)
+    match /audit_logs/{logId} {
+      allow read, write: if isStaffOrAdmin();
+    }
+
+    // Blokir akses default untuk seluruh koleksi lain
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1254" height="1254" viewBox="0 0 1254 1254" role="img" aria-labelledby="title desc">
+  <title id="title">Logo segi enam hijau dengan salib medis, atap rumah, dan dua cincin</title>
+  <desc id="desc">Rekonstruksi vektor resolusi-independen, area luar segi enam transparan.</desc>
+  <!-- Semua elemen merupakan geometri vektor asli; tidak menggunakan gambar raster. -->
+  <g fill="#006532">
+    <!-- Bidang luar segi enam; transparansi dipertahankan di luar kontur. -->
+    <path d="M 626 21 L 1163 330 L 1163 915 L 626 1226 L 89 915 L 89 330 Z"/>
+  </g>
+  <!-- Bidang putih hanya di dalam batas segi enam. -->
+  <path fill="#fff" d="M 626 72 L 1119 357 L 1119 891 L 626 1175 L 134 891 L 134 357 Z"/>
+  <g fill="#006532">
+    <!-- Salib medis bagian atas/kiri yang bertemu dengan garis atap negatif. -->
+    <path d="M 508 249 H 745 V 495 L 411 742 H 238 V 511 H 508 Z"/>
+    <!-- Bidang kanan atas, dipisahkan oleh garis atap putih. -->
+    <path d="M 803 511 H 1015 V 669 Z"/>
+    <!-- Atap rumah hijau, lengan kanan salib dan kaki vertikal. -->
+    <path d="M 762 508 L 1015 692 V 742 H 745 V 1003 H 508 V 742 H 443 Z"/>
+  </g>
+  <!-- Dua cincin ditampilkan sebagai stroke vektor tajam, tanpa mengubah warna bidang. -->
+  <g fill="none" stroke="#fff" stroke-width="13.5">
+    <circle cx="716.5" cy="661.5" r="46.6"/>
+    <circle cx="786" cy="661.5" r="46.6"/>
+  </g>
+</svg>

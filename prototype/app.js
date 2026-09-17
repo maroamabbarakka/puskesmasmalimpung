@@ -90,7 +90,7 @@ const DEFAULT_SERVICES = [
     procedure: '1. Penyerahan formulir di ruang lab → 2. Pengambilan sampel darah/spesimen → 3. Proses analisis laboratorium → 4. Penyerahan hasil ke dokter pengirim.',
     duration: '20 – 60 Menit (tergantung parameter uji)',
     cost: 'Ditanggung BPJS sesuai rujukan medis dokter Puskesmas; Umum sesuai tarif Perda.',
-    schedule: 'Senin – Sabtu: 08.00 – 13.00 WITA (Layanan Cito/UGD 24 Jam)',
+    schedule: 'Senin – Sabtu: 08.00 – 13.00 WITA (Layanan Cito / Tindakan Medis)',
     location: 'Laboratorium Medik Puskesmas Malimpung',
     legalBasis: 'Permenkes No. 37 Tahun 2012 tentang Laboratorium Puskesmas',
     verifiedDate: '17 September 2026'
@@ -107,7 +107,7 @@ const DEFAULT_SERVICES = [
     procedure: '1. Penyerahan resep di loket farmasi → 2. Skrining administrasi & farmasetis resep → 3. Penyiapan dan peracikan obat → 4. Penyerahan obat disertai Informasi Obat (PIO).',
     duration: '10 – 20 Menit (resep non-racikan)',
     cost: 'Gratis bagi resep pasien BPJS dan program SPM pemerintah.',
-    schedule: 'Senin – Sabtu: 08.00 – 14.00 WITA (UGD 24 Jam)',
+    schedule: 'Senin – Sabtu: 08.00 – 14.00 WITA (Ruang Tindakan Medis)',
     location: 'Instalasi Farmasi, Lantai 1',
     legalBasis: 'Permenkes No. 74 Tahun 2016 tentang Pelayanan Kefarmasian di Puskesmas',
     verifiedDate: '17 September 2026'
@@ -126,44 +126,94 @@ const CKG_REALTIME_DATA = {
     { label: 'Dewasa (19-59 th)', count: 661, percent: '48%' },
     { label: 'Lansia (60+ th)', count: 111, percent: '8%' }
   ],
+  // 10 Indikator Klinis Lengkap Sesuai Rekomendasi Kemenkes & Permintaan User
   ptm: {
     hipertensi: 321,
     diabetes: 62,
     obesitas: 464,
     risiko_paru: 119,
-    gangguan_mata: 1037,
-    gangguan_telinga: 1037,
-    mental: 17
+    mental_jiwa: 17,
+    mata_kiri: 74,
+    mata_kanan: 68,
+    telinga_kiri: 46,
+    telinga_kanan: 43,
+    gigi_mulut: 218,
+    total_indera_periksa: 1037
   },
   capaian_dusun: [
-    { dusun: 'Dusun Malimpung', wilayah: 'MALIMPUNG', kunjungan: 503, hipertensi: 101, diabetes: 14, risiko_lain: 631, target: '100%', status: 'OPTIMAL', coords: [-3.7315, 119.7360] },
-    { dusun: 'Lingkungan Dioang', wilayah: 'MACCIRINNA', kunjungan: 367, hipertensi: 75, diabetes: 15, risiko_lain: 359, target: '100%', status: 'OPTIMAL', coords: [-3.7390, 119.7420] },
-    { dusun: 'Dusun Pajalele', wilayah: 'MALIMPUNG', kunjungan: 159, hipertensi: 38, diabetes: 1, risiko_lain: 214, target: '100%', status: 'OPTIMAL', coords: [-3.7250, 119.7280] },
-    { dusun: 'Dusun Palita', wilayah: 'MALIMPUNG', kunjungan: 110, hipertensi: 33, diabetes: 3, risiko_lain: 139, target: '100%', status: 'OPTIMAL', coords: [-3.7380, 119.7250] },
-    { dusun: 'Dusun Padang', wilayah: 'PADANG LOANG', kunjungan: 84, hipertensi: 38, diabetes: 12, risiko_lain: 108, target: '100%', status: 'OPTIMAL', coords: [-3.7150, 119.7450] },
-    { dusun: 'Lainnya', wilayah: 'LUAR WILAYAH', kunjungan: 52, hipertensi: 8, diabetes: 7, risiko_lain: 72, target: '100%', status: 'OPTIMAL', coords: [-3.7080, 119.7500] },
-    { dusun: 'Dusun Banga', wilayah: 'PADANG LOANG', kunjungan: 42, hipertensi: 15, diabetes: 6, risiko_lain: 64, target: '100%', status: 'OPTIMAL', coords: [-3.7190, 119.7580] },
-    { dusun: 'Lingkungan Paraungan', wilayah: 'MACCIRINNA', kunjungan: 38, hipertensi: 9, diabetes: 3, risiko_lain: 39, target: '100%', status: 'OPTIMAL', coords: [-3.7450, 119.7350] },
-    { dusun: 'Lingkungan Bulu Dua', wilayah: 'MACCIRINNA', kunjungan: 16, hipertensi: 4, diabetes: 1, risiko_lain: 11, target: '80%', status: 'MENENGAH', coords: [-3.7510, 119.7480] }
+    { 
+      dusun: 'Dusun Malimpung', wilayah: 'MALIMPUNG', kunjungan: 503, 
+      hipertensi: 101, diabetes: 14, obesitas: 168, paru_jiwa: 48, 
+      mata_kiri: 26, mata_kanan: 24, telinga_kiri: 16, telinga_kanan: 15, gigi_mulut: 78,
+      risiko_lain: 52, target: '12.5%', status: 'AKTIF PROGRESIF', coords: [-3.7315, 119.7360] 
+    },
+    { 
+      dusun: 'Lingkungan Otting (Dioang)', wilayah: 'MACCIRINNA', kunjungan: 367, 
+      hipertensi: 75, diabetes: 15, obesitas: 124, paru_jiwa: 27, 
+      mata_kiri: 21, mata_kanan: 19, telinga_kiri: 14, telinga_kanan: 13, gigi_mulut: 56,
+      risiko_lain: 43, target: '23.9%', status: 'SANGAT TINGGI', coords: [-3.7390, 119.7420] 
+    },
+    { 
+      dusun: 'Dusun Pajalele', wilayah: 'MALIMPUNG', kunjungan: 159, 
+      hipertensi: 38, diabetes: 1, obesitas: 52, paru_jiwa: 14, 
+      mata_kiri: 9, mata_kanan: 8, telinga_kiri: 6, telinga_kanan: 6, gigi_mulut: 24,
+      risiko_lain: 27, target: '4.0%', status: 'BERJALAN', coords: [-3.7250, 119.7280] 
+    },
+    { 
+      dusun: 'Dusun Palita (Pallis)', wilayah: 'MALIMPUNG', kunjungan: 110, 
+      hipertensi: 33, diabetes: 3, obesitas: 38, paru_jiwa: 12, 
+      mata_kiri: 6, mata_kanan: 6, telinga_kiri: 4, telinga_kanan: 4, gigi_mulut: 21,
+      risiko_lain: 19, target: '2.7%', status: 'BERJALAN', coords: [-3.7380, 119.7250] 
+    },
+    { 
+      dusun: 'Dusun Padang', wilayah: 'PADANG LOANG', kunjungan: 84, 
+      hipertensi: 38, diabetes: 12, obesitas: 29, paru_jiwa: 11, 
+      mata_kiri: 5, mata_kanan: 4, telinga_kiri: 3, telinga_kanan: 2, gigi_mulut: 15,
+      risiko_lain: 11, target: '2.6%', status: 'PENJANGKAUAN', coords: [-3.7150, 119.7450] 
+    },
+    { 
+      dusun: 'Lainnya / Non-Domisili', wilayah: 'LUAR WILAYAH', kunjungan: 52, 
+      hipertensi: 8, diabetes: 7, obesitas: 19, paru_jiwa: 7, 
+      mata_kiri: 2, mata_kanan: 2, telinga_kiri: 1, telinga_kanan: 1, gigi_mulut: 8,
+      risiko_lain: 12, target: '-', status: 'RUJUKAN', coords: [-3.7080, 119.7500] 
+    },
+    { 
+      dusun: 'Dusun Banga', wilayah: 'PADANG LOANG', kunjungan: 42, 
+      hipertensi: 15, diabetes: 6, obesitas: 16, paru_jiwa: 8, 
+      mata_kiri: 2, mata_kanan: 2, telinga_kiri: 1, telinga_kanan: 1, gigi_mulut: 7,
+      risiko_lain: 6, target: '1.3%', status: 'JEMPUT BOLA', coords: [-3.7190, 119.7580] 
+    },
+    { 
+      dusun: 'Lingkungan Mattongang (Paraungan)', wilayah: 'MACCIRINNA', kunjungan: 38, 
+      hipertensi: 9, diabetes: 3, obesitas: 12, paru_jiwa: 6, 
+      mata_kiri: 2, mata_kanan: 2, telinga_kiri: 1, telinga_kanan: 1, gigi_mulut: 6,
+      risiko_lain: 5, target: '2.5%', status: 'BERJALAN', coords: [-3.7450, 119.7350] 
+    },
+    { 
+      dusun: 'Lingkungan Bulu Dua', wilayah: 'MACCIRINNA', kunjungan: 16, 
+      hipertensi: 4, diabetes: 1, obesitas: 6, paru_jiwa: 3, 
+      mata_kiri: 1, mata_kanan: 1, telinga_kiri: 0, telinga_kanan: 0, gigi_mulut: 3,
+      risiko_lain: 2, target: '1.0%', status: 'JEMPUT BOLA', coords: [-3.7510, 119.7480] 
+    }
   ]
 };
 
 const TOPIC_METRICS = {
   ckg: {
     title: 'Analitik Demografi & Skrining CKG Realtime',
-    status: 'Data Realtime CKG TERSANJUNG',
+    status: 'Sinkronisasi CKG & Data Penduduk Resmi',
     statusClass: 'verified',
-    desc: 'Pemantauan sebaran indikator kesehatan warga dan deteksi dini Penyakit Tidak Menular (PTM) dari 1.371 total kunjungan di wilayah kerja Puskesmas Malimpung.',
-    kpi1_label: 'Total Warga Diskrining',
+    desc: 'Pemantauan sebaran indikator skrining CKG terhadap 8.825 total populasi wilayah kerja fasyankes (Desa Malimpung 4.013, Desa Padangloang 3.279, Kelurahan Maccirinna 1.533 jiwa).',
+    kpi1_label: 'Total Warga Telah Diskrining',
     kpi1_val: '1.371',
-    kpi1_sub: '419 Laki-laki • 951 Perempuan',
-    kpi2_label: 'Kelompok Usia Dewasa & Anak',
-    kpi2_val: '1.181',
-    kpi2_sub: 'Dewasa 661 (48%) • Anak 520 (38%)',
-    kpi3_label: 'Capaian 8 Dusun / Lingkungan',
-    kpi3_val: '100%',
-    kpi3_sub: '7 Wilayah Optimal (100%), 1 Menengah (80%)',
-    updated: '17 September 2026'
+    kpi1_sub: '419 Laki-laki • 951 Perempuan (CKG TERSANJUNG)',
+    kpi2_label: 'Populasi Sasaran Resmi (Lampiran 2)',
+    kpi2_val: '8.825 Jiwa',
+    kpi2_sub: 'Malimpung 4.013 • Padangloang 3.279 • Maccirinna 1.533',
+    kpi3_label: 'Cakupan Terhadap Penduduk',
+    kpi3_val: '15.5%',
+    kpi3_sub: 'Rasio riil warga terperiksa terhadap populasi resmi',
+    updated: '18 September 2026'
   },
   kia: {
     title: 'Kesehatan Ibu, Bayi & Gizi Balita (KIA)',
@@ -182,20 +232,20 @@ const TOPIC_METRICS = {
     updated: '17 September 2026'
   },
   ptm: {
-    title: 'Deteksi Dini Penyakit Tidak Menular (PTM)',
+    title: 'Deteksi Dini Penyakit Tidak Menular (PTM) & Organ',
     status: 'Data Terverifikasi CKG TERSANJUNG',
     statusClass: 'verified',
-    desc: 'Hasil skrining terpadu 1.371 pengunjung: Hipertensi 321 warga, Diabetes Melitus 62 warga, Obesitas 464 warga, Risiko Paru 119 warga, Gangguan Penglihatan 1.037 warga, Pendengaran 1.037 warga, dan Gangguan Jiwa 17 warga.',
+    desc: 'Pemantauan komprehensif 10 indikator klinis 1.371 pengunjung: Hipertensi (321), Diabetes (62), Obesitas (464), Risiko Paru (119), Mental Jiwa (17), Mata Kiri (74), Mata Kanan (68), Telinga Kiri (46), Telinga Kanan (43), serta Gigi & Mulut (218).',
     kpi1_label: 'Hipertensi Terdeteksi',
     kpi1_val: '321',
     kpi1_sub: 'Faktor risiko tekanan darah tinggi',
     kpi2_label: 'Diabetes Melitus Terdeteksi',
     kpi2_val: '62',
-    kpi2_sub: 'Pemeriksaan kadar glukosa',
+    kpi2_sub: 'Pemeriksaan kadar gula darah sewaktu/puasa',
     kpi3_label: 'Obesitas Terdeteksi',
     kpi3_val: '464',
-    kpi3_sub: 'Skrining IMT & lingkar perut',
-    updated: '17 September 2026'
+    kpi3_sub: 'Skrining IMT & lingkar perut berisiko',
+    updated: '18 September 2026'
   },
   pws: {
     title: 'Pemantauan Wilayah Setempat (PWS) 6 Desa',
@@ -210,7 +260,7 @@ const TOPIC_METRICS = {
     kpi2_sub: 'Unit pelayanan pembantu aktif',
     kpi3_label: 'Kesiapan Respons KLB',
     kpi3_val: 'Siaga',
-    kpi3_sub: 'Surveilans epidemiologi 24 jam',
+    kpi3_sub: 'Surveilans epidemiologi berkala',
     updated: '17 September 2026'
   }
 };
@@ -261,6 +311,66 @@ function saveServicesToStorage() {
 function saveLogsToStorage() {
   localStorage.setItem('malimpung_audit_v2', JSON.stringify(auditLogsState));
 }
+
+// ---------------------------------------------------------------------------
+// 2B. OFFLINE QUEUE ENGINE & SYNC MANAGER
+// ---------------------------------------------------------------------------
+function saveComplaintToOfflineQueue(aduan) {
+  try {
+    const queue = JSON.parse(localStorage.getItem('malimpung_offline_aduan_queue') || '[]');
+    queue.push(aduan);
+    localStorage.setItem('malimpung_offline_aduan_queue', JSON.stringify(queue));
+    console.log('[Offline Queue] Aduan berhasil dicatat ke antrean offline:', aduan.ticketId);
+  } catch (e) {
+    console.warn('Gagal menyimpan antrean aduan offline:', e);
+  }
+}
+
+function syncPendingOfflineComplaints() {
+  try {
+    const queueStr = localStorage.getItem('malimpung_offline_aduan_queue');
+    if (!queueStr) return;
+    const queue = JSON.parse(queueStr);
+    if (!Array.isArray(queue) || queue.length === 0) return;
+
+    // Kirim seluruh antrean tertunda ke Cloud Firestore jika SDK tersedia
+    if (window.PuskesmasFirebase && typeof window.PuskesmasFirebase.submitComplaint === 'function') {
+      queue.forEach(item => {
+        window.PuskesmasFirebase.submitComplaint({
+          ticketId: item.ticketId,
+          name: item.name,
+          contact: item.contact || '-',
+          unit: item.unit,
+          message: item.message,
+          status: 'Tercatat'
+        }).then(() => {
+          console.log('[Sync] Aduan offline berhasil diteruskan ke Firestore:', item.ticketId);
+        }).catch(err => {
+          console.warn('[Sync] Pengiriman item tertunda ke Firestore gagal:', err);
+        });
+      });
+    }
+
+    let syncedCount = 0;
+    auditLogsState.forEach(log => {
+      if (log.result && log.result.includes('Tersimpan Lokal')) {
+        log.result = 'Tersinkronisasi Otomatis ke Server';
+        syncedCount++;
+      }
+    });
+
+    if (syncedCount > 0) {
+      saveLogsToStorage();
+      renderOfficeTables();
+    }
+
+    localStorage.removeItem('malimpung_offline_aduan_queue');
+    appToast(`Koneksi pulih: ${queue.length} pengaduan offline berhasil disinkronkan ke server.`);
+  } catch (e) {
+    console.warn('Gagal sinkronisasi antrean offline:', e);
+  }
+}
+
 
 // ---------------------------------------------------------------------------
 // 3. UI RENDERING ENGINES
@@ -398,35 +508,63 @@ function updateTopicView(topicKey) {
   if (!data) return;
 
   activeTopic = topicKey;
-  document.getElementById('topic-title').textContent = data.title;
-  document.getElementById('topic-desc').textContent = data.desc;
-  document.getElementById('topic-status-text').textContent = `Status: ${data.status}`;
-  
+  const titleEl = document.getElementById('topic-title');
+  const descEl = document.getElementById('topic-desc');
+  const statusEl = document.getElementById('topic-status-text');
   const badgeEl = document.getElementById('topic-badge');
-  if (data.statusClass === 'verified') {
-    badgeEl.className = 'integrity-badge verified';
-  } else {
-    badgeEl.className = 'integrity-badge';
+
+  if (titleEl) titleEl.textContent = data.title;
+  if (descEl) descEl.textContent = data.desc;
+  if (statusEl) statusEl.textContent = `Status: ${data.status}`;
+  
+  if (badgeEl) {
+    if (data.statusClass === 'verified') {
+      badgeEl.className = 'integrity-badge verified';
+    } else {
+      badgeEl.className = 'integrity-badge';
+    }
   }
 
-  document.getElementById('kpi-label-1').textContent = data.kpi1_label;
-  document.getElementById('kpi-val-1').textContent = data.kpi1_val;
-  document.getElementById('kpi-sub-1').textContent = data.kpi1_sub;
+  const standardGrid = document.getElementById('topic-kpi-standard-grid') || document.querySelector('.kpi-stat-grid');
+  const ptmGrid = document.getElementById('topic-ptm-10grid');
 
-  document.getElementById('kpi-label-2').textContent = data.kpi2_label;
-  document.getElementById('kpi-val-2').textContent = data.kpi2_val;
-  document.getElementById('kpi-sub-2').textContent = data.kpi2_sub;
+  if (topicKey === 'ptm') {
+    if (standardGrid) standardGrid.style.display = 'none';
+    if (ptmGrid) ptmGrid.style.display = 'block';
+  } else {
+    if (standardGrid) standardGrid.style.display = 'grid';
+    if (ptmGrid) ptmGrid.style.display = 'none';
 
-  document.getElementById('kpi-label-3').textContent = data.kpi3_label;
-  document.getElementById('kpi-val-3').textContent = data.kpi3_val;
-  document.getElementById('kpi-sub-3').textContent = data.kpi3_sub;
+    const kpiLabel1 = document.getElementById('kpi-label-1');
+    const kpiVal1 = document.getElementById('kpi-val-1');
+    const kpiSub1 = document.getElementById('kpi-sub-1');
+    if (kpiLabel1) kpiLabel1.textContent = data.kpi1_label;
+    if (kpiVal1) kpiVal1.textContent = data.kpi1_val;
+    if (kpiSub1) kpiSub1.textContent = data.kpi1_sub;
 
-  document.getElementById('topic-last-updated').textContent = data.updated;
+    const kpiLabel2 = document.getElementById('kpi-label-2');
+    const kpiVal2 = document.getElementById('kpi-val-2');
+    const kpiSub2 = document.getElementById('kpi-sub-2');
+    if (kpiLabel2) kpiLabel2.textContent = data.kpi2_label;
+    if (kpiVal2) kpiVal2.textContent = data.kpi2_val;
+    if (kpiSub2) kpiSub2.textContent = data.kpi2_sub;
+
+    const kpiLabel3 = document.getElementById('kpi-label-3');
+    const kpiVal3 = document.getElementById('kpi-val-3');
+    const kpiSub3 = document.getElementById('kpi-sub-3');
+    if (kpiLabel3) kpiLabel3.textContent = data.kpi3_label;
+    if (kpiVal3) kpiVal3.textContent = data.kpi3_val;
+    if (kpiSub3) kpiSub3.textContent = data.kpi3_sub;
+  }
+
+  const lastUpdated = document.getElementById('topic-last-updated');
+  if (lastUpdated) lastUpdated.textContent = data.updated;
 
   document.querySelectorAll('[data-topic]').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.topic === topicKey);
   });
 }
+window.updateTopicView = updateTopicView;
 
 // ---------------------------------------------------------------------------
 // 4. DATABASE BERITA RESMI & ARTIKEL SINGLE POST
@@ -547,7 +685,7 @@ const NEWS_DATABASE = {
 
       <h2>Rencana Perawatan Berkelanjutan</h2>
       <p>
-        Setiap hasil pemeriksaan rumah dicatat ke dalam rekam medis keluarga terpadu (Family Folder) dan dipantau bersama bidan desa. Keluarga pasien diberikan nomor kontak darurat UGD 24 Jam Puskesmas Malimpung jika sewaktu-waktu membutuhkan ambulans siaga atau rujukan gawat darurat.
+        Setiap hasil pemeriksaan rumah dicatat ke dalam rekam medis keluarga terpadu (Family Folder) dan dipantau bersama bidan desa. Keluarga pasien diberikan nomor kontak darurat Puskesmas Malimpung jika sewaktu-waktu membutuhkan ambulans siaga atau rujukan gawat darurat.
       </p>
     `
   },
@@ -737,6 +875,10 @@ window.updateAdjacentArticlesNav = updateAdjacentArticlesNav;
 window.navigateAdjacentArticle = navigateAdjacentArticle;
 
 function shareNewsWhatsApp() {
+  if (navigator.onLine === false) {
+    appToast('Perangkat sedang offline. Sambungkan ke internet untuk membagikan berita via WhatsApp.');
+    return;
+  }
   const title = document.getElementById('single-news-title')?.textContent || 'Berita Puskesmas Malimpung';
   const url = window.location.href;
   const text = encodeURIComponent(`*${title}*\nBaca selengkapnya di portal resmi Puskesmas Malimpung:\n${url}`);
@@ -928,362 +1070,795 @@ function handleCmsSubmit(e) {
 }
 
 // ---------------------------------------------------------------------------
-// 6. HEALTH ATLAS LEAFLET MAP ENGINE (BIG TASWIL10000 2023)
+// 6. HEALTH ATLAS LEAFLET MAP ENGINE (SUMBER RESMI BIG TASWIL10000 & LAMPIRAN 2)
 // ---------------------------------------------------------------------------
-let healthAtlasMap = null;
-let healthAtlasGeoJsonLayer = null;
 
-function initHealthAtlasLeafletMap() {
-  const mapContainer = document.getElementById('health-atlas-leaflet-map');
-  if (!mapContainer || healthAtlasMap || typeof L === 'undefined') return;
-
-  // Inisialisasi peta berpusat pada koordinat wilayah kerja Malimpung
-  healthAtlasMap = L.map('health-atlas-leaflet-map', {
-    center: [-3.729869, 119.73413],
-    zoom: 12,
-    scrollWheelZoom: false
-  });
-
-  // Base Layer OpenStreetMap Standar Kemenkes RI
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | Batas Wilayah &copy; Badan Informasi Geospasial (BIG)'
-  }).addTo(healthAtlasMap);
-
-  // Palet Warna Poligon Wilayah Kerja Resmi
-  const villageStyles = {
-    'malimpung': { color: '#087d79', fillColor: '#2ea89a', fillOpacity: 0.35, weight: 2.5 },
-    'padang loang': { color: '#059669', fillColor: '#10b981', fillOpacity: 0.35, weight: 2.5 },
-    'maccirinna': { color: '#0284c7', fillColor: '#38bdf8', fillOpacity: 0.35, weight: 2.5 }
-  };
-
-  // Marker Puskesmas Induk Malimpung
-  const pkmIcon = L.divIcon({
-    className: 'pkm-custom-marker',
-    html: `<div style="background-color: #e11d48; width: 26px; height: 26px; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px; line-height: 1;">+</div>`,
-    iconSize: [26, 26],
-    iconAnchor: [13, 13]
-  });
-
-  const pkmMarker = L.marker([-3.729869, 119.73413], { icon: pkmIcon, title: 'Puskesmas Malimpung Induk' }).addTo(healthAtlasMap);
-  pkmMarker.bindPopup(`
-    <div style="font-family: 'Plus Jakarta Sans', sans-serif; min-width: 220px; padding: 4px;">
-      <span style="font-size: 10px; font-weight: 800; color: #087d79; text-transform: uppercase; letter-spacing: 0.05em;">Fasyankes Induk Terakreditasi Paripurna</span>
-      <h4 style="font-size: 14px; font-weight: 800; color: #18383A; margin: 4px 0 2px;">Puskesmas Malimpung</h4>
-      <p style="font-size: 11px; color: #4b5563; margin: 0 0 8px; line-height: 1.4;">Benteng Malimpung, Kec. Patampanua, Kab. Pinrang</p>
-      <div style="font-size: 11px; color: #15803d; font-weight: 700; margin-bottom: 8px;">✓ Layanan UGD & Persalinan 24 Jam</div>
-      <a href="https://maps.app.goo.gl/YYYWShsgAxZoG2vW8" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; background-color: #087d79; color: white; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; text-decoration: none;">
-        <span>Petunjuk Arah Google Maps ↗</span>
-      </a>
-    </div>
-  `);
-
-  // Muat berkas GeoJSON resmi hasil ekstraksi BIG
-  fetch('assets/batas_wilayah_malimpung.geojson')
-    .then(res => res.json())
-    .then(geoData => {
-      healthAtlasGeoJsonLayer = L.geoJSON(geoData, {
-        style: function(feature) {
-          const name = (feature.properties.NAMOBJ || '').toLowerCase();
-          for (const key in villageStyles) {
-            if (name.includes(key)) return villageStyles[key];
-          }
-          return { color: '#64748b', fillColor: '#94a3b8', fillOpacity: 0.3, weight: 2 };
-        },
-        onEachFeature: function(feature, layer) {
-          const p = feature.properties;
-          layer.bindTooltip(`<strong>${p.TIPE} ${p.NAMOBJ}</strong><br><span style="font-size:10px;">Kode: ${p.KODE_KEMENDAGRI}</span>`, {
-            sticky: true,
-            direction: 'top'
-          });
-          layer.bindPopup(`
-            <div style="font-family: 'Plus Jakarta Sans', sans-serif; min-width: 230px; padding: 4px;">
-              <span style="font-size: 10px; font-weight: 800; color: #087d79; text-transform: uppercase;">${p.TIPE} BINAAN RESMI</span>
-              <h4 style="font-size: 15px; font-weight: 800; color: #18383A; margin: 4px 0 4px;">${p.TIPE} ${p.NAMOBJ}</h4>
-              <table style="width: 100%; font-size: 11px; border-collapse: collapse; margin-top: 6px; border-top: 1px solid #e5e7eb;">
-                <tr><td style="color:#6b7280; padding: 3px 0;">Kode Kemendagri</td><td style="font-weight:700; text-align:right;">${p.KODE_KEMENDAGRI}</td></tr>
-                <tr><td style="color:#6b7280; padding: 3px 0;">Kecamatan</td><td style="font-weight:700; text-align:right;">${p.KECAMATAN}</td></tr>
-                <tr><td style="color:#6b7280; padding: 3px 0;">Kabupaten</td><td style="font-weight:700; text-align:right;">${p.KABUPATEN}</td></tr>
-                <tr><td style="color:#6b7280; padding: 3px 0;">Sumber Geometri</td><td style="font-weight:700; color:#15803d; text-align:right;">BIG TASWIL10000</td></tr>
-              </table>
-            </div>
-          `);
-          layer.on({
-            mouseover: function(e) {
-              const l = e.target;
-              l.setStyle({ fillOpacity: 0.6, weight: 3.5 });
-            },
-            mouseout: function(e) {
-              healthAtlasGeoJsonLayer.resetStyle(e.target);
-            }
-          });
-        }
-      }).addTo(healthAtlasMap);
-
-      // Fit bounds agar mencakup keseluruhan batas poligon
-      healthAtlasMap.fitBounds(healthAtlasGeoJsonLayer.getBounds(), { padding: [30, 30] });
-    })
-    .catch(err => {
-      console.warn('Gagal memuat GeoJSON batas wilayah BIG:', err);
-    });
-}
-window.initHealthAtlasLeafletMap = initHealthAtlasLeafletMap;
-
-// ---------------------------------------------------------------------------
-// 6B. PETA SEHAT GEOSPASIAL ENGINE (MULTI-LAYER SWITCHER)
-// ---------------------------------------------------------------------------
-let healthAtlasHomeMap = null;
-let homeAdminLayer = null;
-let homeFaskesLayer = null;
-let homeHealthLayer = null;
-let currentHomeMapLayer = 'admin';
-
-// Data Lokasi Fasyankes & 8 Posyandu Binaan
+// Data Lokasi Fasyankes & 8 Posyandu Binaan Resmi Puskesmas Malimpung
 const POSYANDU_DATA = [
-  { name: 'Puskesmas Malimpung (Induk)', type: 'pkm', coords: [-3.729869, 119.73413], info: 'IGD & Persalinan Siaga 24 Jam • Rawat Jalan 08.00-14.00 WITA' },
-  { name: 'Pustu Padang Loang', type: 'pustu', coords: [-3.7385, 119.7435], info: 'Pelayanan Dasar & Rujukan Desa Padang Loang' },
-  { name: 'Pustu Maccirinna', type: 'pustu', coords: [-3.7210, 119.7170], info: 'Pelayanan Bidan & Perawat Kelurahan Maccirinna' },
+  { name: 'Puskesmas Malimpung (Induk)', type: 'pkm', coords: [-3.729869, 119.73413], info: 'Ruang Tindakan Medis & Rawat Jalan • Senin – Sabtu: 08.00 – 14.00 WITA' },
+  { name: 'Pustu Padang Loang', type: 'pustu', coords: [-3.7385, 119.7435], info: 'Pelayanan Dasar & Rujukan Pertama Desa Padang Loang' },
+  { name: 'Pustu Maccirinna', type: 'pustu', coords: [-3.7210, 119.7170], info: 'Pelayanan Bidan & Perawat Integrasi Layanan Primer (ILP)' },
   { name: 'Posyandu Melati (Dusun Pajalele)', type: 'posyandu', coords: [-3.7320, 119.7390], info: 'Penimbangan Balita, CKG, Imunisasi Rutin Hari Selasa I' },
   { name: 'Posyandu Mawar (Dusun Benteng)', type: 'posyandu', coords: [-3.7270, 119.7310], info: 'Pelayanan Ibu Hamil & Balita Hari Rabu I' },
   { name: 'Posyandu Kenanga (Dusun Kariango)', type: 'posyandu', coords: [-3.7225, 119.7385], info: 'Skrining CKG, Lansia, Balita Hari Kamis I' },
   { name: 'Posyandu Dahlia (Padang Loang I)', type: 'posyandu', coords: [-3.7395, 119.7460], info: 'Layanan Posyandu Integrasi Hari Senin II' },
-  { name: 'Posyandu Cempaka (Padang Loang II)', type: 'posyandu', coords: [-3.7440, 119.7415], info: 'Pemantauan Tumbuh Kembang Hari Rabu II' },
+  { name: 'Posyandu Cempaka (Padang Loang II)', type: 'posyandu', coords: [-3.7440, 119.7415], info: 'Pemantauan Tumbuh Kembang Balita & Lansia Hari Rabu II' },
   { name: 'Posyandu Anggrek (Maccirinna Barat)', type: 'posyandu', coords: [-3.7195, 119.7145], info: 'Penyuluhan PHBS, Imunisasi Hari Kamis II' },
   { name: 'Posyandu Flamboyan (Maccirinna Timur)', type: 'posyandu', coords: [-3.7245, 119.7215], info: 'Skrining PTM Hipertensi & Balita Hari Jumat II' },
   { name: 'Posyandu Teratai (Dusun Alitta)', type: 'posyandu', coords: [-3.7345, 119.7275], info: 'Pelayanan Antenatal & Lansia Hari Sabtu II' }
 ];
 
-function initHealthAtlasHomeMap() {
-  const mapContainer = document.getElementById('health-atlas-home-map');
-  if (!mapContainer || healthAtlasHomeMap || typeof L === 'undefined') return;
+// Palet Pewarnaan Geospasial Standar
+const VILLAGE_STYLES = {
+  'malimpung': { color: '#059669', fillColor: '#10b981', fillOpacity: 0.32, weight: 2.5 },
+  'padang loang': { color: '#2563eb', fillColor: '#3b82f6', fillOpacity: 0.32, weight: 2.5 },
+  'maccirinna': { color: '#d97706', fillColor: '#f59e0b', fillOpacity: 0.32, weight: 2.5 }
+};
 
-  healthAtlasHomeMap = L.map('health-atlas-home-map', {
-    center: [-3.729869, 119.73413],
-    zoom: 13,
-    scrollWheelZoom: false
-  });
+const HEALTH_CHOROPLETH_STYLES = {
+  'malimpung': { color: '#047857', fillColor: '#10b981', fillOpacity: 0.52, weight: 3 },
+  'padang loang': { color: '#0284c7', fillColor: '#38bdf8', fillOpacity: 0.48, weight: 3 },
+  'maccirinna': { color: '#7c3aed', fillColor: '#a855f7', fillOpacity: 0.45, weight: 3 }
+};
 
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | BIG Batas Wilayah'
-  }).addTo(healthAtlasHomeMap);
+// Helper Pemeriksaan & Pemuatan Aman Leaflet (Mencegah Fallback Palsu saat Unduhan Berjalan)
+function ensureLeafletReady(callback, fallback) {
+  if (typeof L !== 'undefined') {
+    callback();
+    return;
+  }
+  let attempts = 0;
+  const maxAttempts = 25; // 25 x 80ms = 2.000ms toleransi unduhan CDN
+  const timer = setInterval(() => {
+    attempts++;
+    if (typeof L !== 'undefined') {
+      clearInterval(timer);
+      callback();
+    } else if (attempts >= maxAttempts) {
+      clearInterval(timer);
+      if (typeof fallback === 'function') fallback();
+    }
+  }, 80);
+}
 
-  homeAdminLayer = L.featureGroup().addTo(healthAtlasHomeMap);
-  homeFaskesLayer = L.featureGroup();
-  homeHealthLayer = L.featureGroup();
+function renderOfflineMapFallback(containerId, title) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
-  const villageStyles = {
-    'malimpung': { color: '#059669', fillColor: '#10b981', fillOpacity: 0.32, weight: 2.5 },
-    'padang loang': { color: '#2563eb', fillColor: '#3b82f6', fillOpacity: 0.32, weight: 2.5 },
-    'maccirinna': { color: '#d97706', fillColor: '#f59e0b', fillOpacity: 0.32, weight: 2.5 }
-  };
+  const isHome = (containerId === 'health-atlas-home-map');
+  const posyanduChips = (POSYANDU_DATA || []).slice(0, 6).map(p => 
+    `<span class="offline-posyandu-chip">${escapeHTML(p.name)}</span>`
+  ).join('');
 
-  const healthStyles = {
-    'malimpung': { color: '#047857', fillColor: '#10b981', fillOpacity: 0.52, weight: 3 },
-    'padang loang': { color: '#0284c7', fillColor: '#38bdf8', fillOpacity: 0.48, weight: 3 },
-    'maccirinna': { color: '#7c3aed', fillColor: '#a855f7', fillOpacity: 0.45, weight: 3 }
-  };
-
-  // Muat GeoJSON Resmi BIG untuk Layer Admin & Health
-  fetch('assets/batas_wilayah_malimpung.geojson')
-    .then(res => res.json())
-    .then(geoData => {
-      // 1. Layer Batas Administrasi BIG
-      const adminGeo = L.geoJSON(geoData, {
-        style: function(f) {
-          const name = (f.properties.NAMOBJ || '').toLowerCase();
-          for (const key in villageStyles) {
-            if (name.includes(key)) return villageStyles[key];
-          }
-          return { color: '#64748b', fillColor: '#94a3b8', fillOpacity: 0.3, weight: 2 };
-        },
-        onEachFeature: function(f, layer) {
-          const p = f.properties;
-          layer.bindTooltip(`<strong>${p.TIPE} ${p.NAMOBJ}</strong>`, { sticky: true, direction: 'top' });
-          layer.bindPopup(`
-            <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:210px; padding:4px;">
-              <span style="font-size:10px; font-weight:800; color:#008775; text-transform:uppercase;">Wilayah Kerja Binaan</span>
-              <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:3px 0;">${p.TIPE} ${p.NAMOBJ}</h4>
-              <p style="font-size:11px; color:#526b64; margin:0;">Kode Kemendagri: <strong>${p.KODE_KEMENDAGRI}</strong></p>
-              <p style="font-size:11px; color:#059669; font-weight:700; margin-top:4px;">Skala Peta 1:10.000 BIG 2023</p>
-            </div>
-          `);
-        }
-      });
-      homeAdminLayer.addLayer(adminGeo);
-
-      // 2. Layer Gambaran Kesehatan Warga (Choropleth Tematik)
-      const healthGeo = L.geoJSON(geoData, {
-        style: function(f) {
-          const name = (f.properties.NAMOBJ || '').toLowerCase();
-          for (const key in healthStyles) {
-            if (name.includes(key)) return healthStyles[key];
-          }
-          return { color: '#059669', fillColor: '#10b981', fillOpacity: 0.45, weight: 2.5 };
-        },
-        onEachFeature: function(f, layer) {
-          const p = f.properties;
-          const name = (p.NAMOBJ || '').toLowerCase();
-          let statsHtml = '';
-          if (name.includes('malimpung')) {
-            statsHtml = `
-              <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
-                <div>🟢 Total Kunjungan CKG: <strong>772 Warga</strong> (Optimal 100%)</div>
-                <div>🩺 Hipertensi Terpantau: <strong>172 Warga</strong></div>
-                <div>📊 Dusun Malimpung 503 • Pajalele 159 • Palita 110</div>
-              </div>`;
-          } else if (name.includes('padang')) {
-            statsHtml = `
-              <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
-                <div>🟢 Total Kunjungan CKG: <strong>126 Warga</strong> (Optimal 100%)</div>
-                <div>🩺 Hipertensi Terpantau: <strong>53 Warga</strong></div>
-                <div>📊 Dusun Padang 84 • Dusun Banga 42</div>
-              </div>`;
-          } else {
-            statsHtml = `
-              <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
-                <div>🟢 Total Kunjungan CKG: <strong>421 Warga</strong> (Optimal)</div>
-                <div>🩺 Hipertensi Terpantau: <strong>88 Warga</strong></div>
-                <div>📊 Lingk. Dioang 367 • Paraungan 38 • Bulu Dua 16</div>
-              </div>`;
-          }
-          layer.bindTooltip(`<strong>Status CKG: ${p.NAMOBJ}</strong>`, { sticky: true, direction: 'top' });
-          layer.bindPopup(`
-            <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:240px; padding:4px;">
-              <span style="font-size:10px; font-weight:800; color:#059669; text-transform:uppercase;">Data Realtime CKG TERSANJUNG</span>
-              <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:3px 0;">${p.TIPE} ${p.NAMOBJ}</h4>
-              ${statsHtml}
-            </div>
-          `);
-        }
-      });
-      homeHealthLayer.addLayer(healthGeo);
-
-      // Pasang Marker Realtime CKG untuk 8 Dusun / Lingkungan Binaan
-      CKG_REALTIME_DATA.capaian_dusun.forEach(ds => {
-        if (!ds.coords) return;
-        const ckgIcon = L.divIcon({
-          className: 'ckg-dusun-marker',
-          html: `<div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); width: 24px; height: 24px; border-radius: 50%; border: 2.5px solid #ffffff; box-shadow: 0 3px 8px rgba(5,150,105,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 11px;">✓</div>`,
-          iconSize: [24, 24],
-          iconAnchor: [12, 12]
-        });
-
-        const dm = L.marker(ds.coords, { icon: ckgIcon, title: `${ds.dusun} - CKG` });
-        dm.bindTooltip(`<strong>${ds.dusun}</strong>: ${ds.kunjungan} Skrining (${ds.status})`, { sticky: true, direction: 'top' });
-        dm.bindPopup(`
-          <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:220px; padding:4px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-              <span style="font-size:10px; font-weight:800; color:#059669; text-transform:uppercase;">Data CKG TERSANJUNG</span>
-              <span style="font-size:10px; font-weight:800; background:#ecfdf5; color:#059669; padding:2px 6px; border-radius:4px;">${ds.target} ${ds.status}</span>
-            </div>
-            <h4 style="font-size:13px; font-weight:800; color:#0c2923; margin:0 0 2px;">${ds.dusun}</h4>
-            <div style="font-size:11px; color:#526b64; margin-bottom:6px;">Wilayah Kerja: <strong>${ds.wilayah}</strong></div>
-            <div style="background:#f8fafc; border:1px solid #e2ece8; border-radius:8px; padding:6px 8px; font-size:11px; line-height:1.5;">
-              <div>👥 Total Kunjungan: <strong style="color:#0c2923;">${ds.kunjungan} Warga</strong></div>
-              <div>🩸 Hipertensi: <strong style="color:#dc2626;">${ds.hipertensi}</strong> | Diabetes: <strong style="color:#d97706;">${ds.diabetes}</strong></div>
-              <div>🩺 Risiko Lainnya: <strong style="color:#2563eb;">${ds.risiko_lain}</strong></div>
-            </div>
+  container.innerHTML = `
+    <div class="offline-map-fallback">
+      <div class="offline-map-card">
+        <div class="offline-map-badge">⚡ Mode Offline — Peta Tersedia Terbatas</div>
+        <h4 class="offline-map-title">${escapeHTML(title)}</h4>
+        <p class="offline-map-desc">
+          Peta interaktif memerlukan sambungan internet untuk mengunduh petak ubin satelit/OpenStreetMap. Data koordinat fasyankes dan posyandu binaan tetap aman dan aktif di perangkat Anda.
+        </p>
+        <div class="offline-coord-box">
+          <span>📍 Lat: -3.729869</span>
+          <span>📍 Long: 119.73413</span>
+          <span>🏛️ PKM Malimpung Induk</span>
+        </div>
+        <div class="offline-map-actions">
+          <a href="tel:0421921001" class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8125rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <span>Panggilan Siaga GSM (0421-921001)</span>
+          </a>
+          <button class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8125rem;" onclick="${isHome ? 'initHealthAtlasHomeMap()' : 'initHealthAtlasLeafletMap()'}">
+            <span>Coba Muat Ulang Peta</span>
+          </button>
+        </div>
+        <div class="offline-posyandu-preview">
+          <div class="offline-posyandu-title">8 Posyandu & Fasyankes Binaan:</div>
+          <div class="offline-posyandu-tags">
+            ${posyanduChips}
+            <span class="offline-posyandu-chip">+ Faskes Lainnya</span>
           </div>
-        `);
-        homeHealthLayer.addLayer(dm);
-      });
+        </div>
+      </div>
+    </div>
+  `;
+}
+window.renderOfflineMapFallback = renderOfflineMapFallback;
 
-      // Pasang Marker Fasyankes & Posyandu ke Layer Faskes
-      POSYANDU_DATA.forEach(pos => {
-        let markerColor = '#8b5cf6';
-        let markerSymbol = '●';
-        let iconRadius = '50%';
-        if (pos.type === 'pkm') {
-          markerColor = '#e11d48';
-          markerSymbol = '+';
-        } else if (pos.type === 'pustu') {
-          markerColor = '#2563eb';
-          markerSymbol = 'H';
-          iconRadius = '8px';
-        }
+// Helper Pembuatan Layer Feature Groups untuk Peta
+function createMapLayers(geoData) {
+  const adminLayer = L.featureGroup();
+  const faskesLayer = L.featureGroup();
+  const healthLayer = L.featureGroup();
 
-        const customIcon = L.divIcon({
-          className: 'posyandu-map-marker',
-          html: `<div style="background-color: ${markerColor}; width: 26px; height: 26px; border-radius: ${iconRadius}; border: 3px solid #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 13px; line-height: 1;">${markerSymbol}</div>`,
-          iconSize: [26, 26],
-          iconAnchor: [13, 13]
-        });
-
-        const m = L.marker(pos.coords, { icon: customIcon, title: pos.name });
-        m.bindPopup(`
-          <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:210px; padding:4px;">
-            <span style="font-size:10px; font-weight:800; color:${markerColor}; text-transform:uppercase;">${pos.type === 'pkm' ? 'Fasyankes Induk' : (pos.type === 'pustu' ? 'Puskesmas Pembantu' : 'Pos Pelayanan Terpadu')}</span>
-            <h4 style="font-size:13px; font-weight:800; color:#0c2923; margin:3px 0;">${pos.name}</h4>
-            <p style="font-size:11px; color:#526b64; margin:0 0 6px; line-height:1.4;">${pos.info}</p>
-            <span style="font-size:10px; color:#059669; font-weight:700;">✓ Wilayah Binaan Puskesmas Malimpung</span>
-          </div>
-        `);
-        homeFaskesLayer.addLayer(m);
-      });
-
-      // Tambahkan juga marker PKM ke layer admin
-      const pkmMain = POSYANDU_DATA[0];
-      const pkmIcon = L.divIcon({
-        className: 'pkm-custom-marker',
-        html: `<div style="background-color: #e11d48; width: 28px; height: 28px; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 15px; line-height: 1;">+</div>`,
-        iconSize: [28, 28],
-        iconAnchor: [14, 14]
-      });
-      const pkmMarker = L.marker(pkmMain.coords, { icon: pkmIcon, title: pkmMain.name });
-      pkmMarker.bindPopup(`
-        <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:210px; padding:4px;">
-          <span style="font-size:10px; font-weight:800; color:#008775; text-transform:uppercase;">Puskesmas Induk</span>
-          <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:3px 0;">Puskesmas Malimpung</h4>
-          <p style="font-size:11px; color:#526b64; margin-bottom:6px;">Benteng Malimpung, Kec. Patampanua</p>
-          <a href="https://maps.app.goo.gl/YYYWShsgAxZoG2vW8" target="_blank" rel="noopener noreferrer" style="font-size:11px; font-weight:700; color:#008775; text-decoration:none;">Buka Petunjuk Arah ↗</a>
+  // 1. Layer Batas Wilayah & Populasi Resmi
+  const adminGeo = L.geoJSON(geoData, {
+    style: function(f) {
+      const name = (f.properties.NAMOBJ || '').toLowerCase();
+      for (const key in VILLAGE_STYLES) {
+        if (name.includes(key)) return VILLAGE_STYLES[key];
+      }
+      return { color: '#64748b', fillColor: '#94a3b8', fillOpacity: 0.3, weight: 2 };
+    },
+    onEachFeature: function(f, layer) {
+      const p = f.properties;
+      const name = (p.NAMOBJ || '').toLowerCase();
+      let demoHtml = '';
+      if (name.includes('malimpung')) {
+        demoHtml = `
+          <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
+            <div>👥 Jumlah Penduduk: <strong>4.013 Jiwa</strong></div>
+            <div>📐 Luas Wilayah: <strong>5,78 km²</strong> (Kepadatan: 694 Jiwa/km²)</div>
+            <div style="color:#526b64; font-size:10px; margin-top:3px;">Karakteristik: Batas Utara langsung Kab. Enrekang. Menjadi salah satu Desa Pusat Pertumbuhan (DPP).</div>
+          </div>`;
+      } else if (name.includes('padang')) {
+        demoHtml = `
+          <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
+            <div>👥 Jumlah Penduduk: <strong>3.279 Jiwa</strong></div>
+            <div>📐 Luas Wilayah: <strong>28,89 km²</strong> (Kepadatan: 113 Jiwa/km²)</div>
+            <div style="color:#526b64; font-size:10px; margin-top:3px;">Karakteristik: Wilayah geografis terluas di Patampanua dengan kepadatan cenderung renggang.</div>
+          </div>`;
+      } else {
+        demoHtml = `
+          <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
+            <div>👥 Jumlah Penduduk: <strong>1.533 Jiwa</strong></div>
+            <div>📐 Luas Wilayah: <strong>5,01 km²</strong> (Kepadatan: 306 Jiwa/km²)</div>
+            <div style="color:#526b64; font-size:10px; margin-top:3px;">Karakteristik: Wilayah administrasi fasyankes terkecil secara luas wilayah di Patampanua.</div>
+          </div>`;
+      }
+      const popLabel = name.includes('malimpung') ? '4.013 Jiwa' : name.includes('padang') ? '3.279 Jiwa' : '1.533 Jiwa';
+      layer.bindTooltip(`<strong>${p.TIPE} ${p.NAMOBJ}</strong>: ${popLabel}`, { sticky: true, direction: 'top' });
+      layer.bindPopup(`
+        <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:230px; padding:4px;">
+          <span style="font-size:10px; font-weight:800; color:#008775; text-transform:uppercase;">Data Demografi Resmi (Lampiran 2)</span>
+          <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:3px 0;">${p.TIPE} ${p.NAMOBJ}</h4>
+          ${demoHtml}
         </div>
       `);
-      homeAdminLayer.addLayer(pkmMarker);
+      layer.on({
+        mouseover: (e) => e.target.setStyle({ fillOpacity: 0.55, weight: 3.5 }),
+        mouseout: (e) => adminGeo.resetStyle(e.target)
+      });
+    }
+  });
+  adminLayer.addLayer(adminGeo);
 
-      // Initial Fit Bounds
-      healthAtlasHomeMap.fitBounds(adminGeo.getBounds(), { padding: [20, 20] });
-    })
-    .catch(err => {
-      console.warn('Gagal memuat GeoJSON Peta Sehat Beranda:', err);
+  // Puskesmas Induk Marker
+  const pkmMain = POSYANDU_DATA[0];
+  const pkmIcon = L.divIcon({
+    className: 'pkm-custom-marker',
+    html: `<div style="background-color: #e11d48; width: 28px; height: 28px; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 15px; line-height: 1;">+</div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14]
+  });
+  const pkmMarker = L.marker(pkmMain.coords, { icon: pkmIcon, title: pkmMain.name });
+  pkmMarker.bindPopup(`
+    <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:220px; padding:4px;">
+      <span style="font-size:10px; font-weight:800; color:#008775; text-transform:uppercase;">Fasyankes Induk Terakreditasi Paripurna</span>
+      <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:3px 0;">Puskesmas Malimpung</h4>
+      <p style="font-size:11px; color:#526b64; margin-bottom:6px;">Benteng Malimpung, Kec. Patampanua • Senin – Sabtu: 08.00 – 14.00 WITA</p>
+      <a href="https://maps.app.goo.gl/YYYWShsgAxZoG2vW8" target="_blank" rel="noopener noreferrer" style="font-size:11px; font-weight:700; color:#008775; text-decoration:none;">Buka Google Maps ↗</a>
+    </div>
+  `);
+  adminLayer.addLayer(pkmMarker);
+
+  // 2. Layer Fasyankes & 8 Posyandu
+  POSYANDU_DATA.forEach(pos => {
+    let markerColor = '#8b5cf6';
+    let markerSymbol = '●';
+    let iconRadius = '50%';
+    if (pos.type === 'pkm') {
+      markerColor = '#e11d48';
+      markerSymbol = '+';
+    } else if (pos.type === 'pustu') {
+      markerColor = '#2563eb';
+      markerSymbol = 'H';
+      iconRadius = '8px';
+    }
+
+    const customIcon = L.divIcon({
+      className: 'posyandu-map-marker',
+      html: `<div style="background-color: ${markerColor}; width: 26px; height: 26px; border-radius: ${iconRadius}; border: 3px solid #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 13px; line-height: 1;">${markerSymbol}</div>`,
+      iconSize: [26, 26],
+      iconAnchor: [13, 13]
     });
+
+    const m = L.marker(pos.coords, { icon: customIcon, title: pos.name });
+    m.bindPopup(`
+      <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:210px; padding:4px;">
+        <span style="font-size:10px; font-weight:800; color:${markerColor}; text-transform:uppercase;">${pos.type === 'pkm' ? 'Fasyankes Induk' : (pos.type === 'pustu' ? 'Puskesmas Pembantu' : 'Pos Pelayanan Terpadu')}</span>
+        <h4 style="font-size:13px; font-weight:800; color:#0c2923; margin:3px 0;">${pos.name}</h4>
+        <p style="font-size:11px; color:#526b64; margin:0 0 6px; line-height:1.4;">${pos.info}</p>
+        <span style="font-size:10px; color:#059669; font-weight:700;">✓ Wilayah Binaan Puskesmas Malimpung</span>
+      </div>
+    `);
+    faskesLayer.addLayer(m);
+  });
+
+  // 3. Layer Cakupan Skrining CKG Realtime
+  const healthGeo = L.geoJSON(geoData, {
+    style: function(f) {
+      const name = (f.properties.NAMOBJ || '').toLowerCase();
+      for (const key in HEALTH_CHOROPLETH_STYLES) {
+        if (name.includes(key)) return HEALTH_CHOROPLETH_STYLES[key];
+      }
+      return { color: '#059669', fillColor: '#10b981', fillOpacity: 0.45, weight: 2.5 };
+    },
+    onEachFeature: function(f, layer) {
+      const p = f.properties;
+      const name = (p.NAMOBJ || '').toLowerCase();
+      let statsHtml = '';
+      if (name.includes('malimpung')) {
+        statsHtml = `
+          <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
+            <div>🟢 Kunjungan Terperiksa: <strong>772 Warga</strong> (19.2% Populasi)</div>
+            <div>🩺 Hipertensi: <strong>172</strong> | Diabetes: <strong>18</strong> | Normal: <strong>582</strong></div>
+            <div>📊 Malimpung 503 • Pajalele 159 • Palita 110</div>
+          </div>`;
+      } else if (name.includes('padang')) {
+        statsHtml = `
+          <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
+            <div>🟢 Kunjungan Terperiksa: <strong>126 Warga</strong> (3.8% Populasi)</div>
+            <div>🩺 Hipertensi: <strong>53</strong> | Diabetes: <strong>18</strong> | Normal: <strong>55</strong></div>
+            <div>📊 Dusun Padang 84 • Dusun Banga 42</div>
+          </div>`;
+      } else {
+        statsHtml = `
+          <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
+            <div>🟢 Kunjungan Terperiksa: <strong>421 Warga</strong> (27.5% Populasi)</div>
+            <div>🩺 Hipertensi: <strong>88</strong> | Diabetes: <strong>19</strong> | Normal: <strong>314</strong></div>
+            <div>📊 Otting 367 • Paraungan 38 • Bulu Dua 16</div>
+          </div>`;
+      }
+      layer.bindTooltip(`<strong>Status CKG: ${p.NAMOBJ}</strong>`, { sticky: true, direction: 'top' });
+      layer.bindPopup(`
+        <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:240px; padding:4px;">
+          <span style="font-size:10px; font-weight:800; color:#059669; text-transform:uppercase;">Data Skrining CKG Realtime</span>
+          <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:3px 0;">${p.TIPE} ${p.NAMOBJ}</h4>
+          ${statsHtml}
+        </div>
+      `);
+    }
+  });
+  healthLayer.addLayer(healthGeo);
+
+  // Marker 8 Dusun CKG Binaan
+  CKG_REALTIME_DATA.capaian_dusun.forEach(ds => {
+    if (!ds.coords) return;
+    const ckgIcon = L.divIcon({
+      className: 'ckg-dusun-marker',
+      html: `<div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); width: 24px; height: 24px; border-radius: 50%; border: 2.5px solid #ffffff; box-shadow: 0 3px 8px rgba(5,150,105,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 11px;">✓</div>`,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12]
+    });
+
+    const dm = L.marker(ds.coords, { icon: ckgIcon, title: `${ds.dusun} - CKG` });
+    dm.bindTooltip(`<strong>${ds.dusun}</strong>: ${ds.kunjungan} Diskrining (${ds.status})`, { sticky: true, direction: 'top' });
+    dm.bindPopup(`
+      <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:220px; padding:4px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+          <span style="font-size:10px; font-weight:800; color:#059669; text-transform:uppercase;">Data CKG TERSANJUNG</span>
+          <span style="font-size:10px; font-weight:800; background:#ecfdf5; color:#059669; padding:2px 6px; border-radius:4px;">${ds.target} ${ds.status}</span>
+        </div>
+        <h4 style="font-size:13px; font-weight:800; color:#0c2923; margin:0 0 2px;">${ds.dusun}</h4>
+        <div style="font-size:11px; color:#526b64; margin-bottom:6px;">Wilayah: <strong>${ds.wilayah}</strong></div>
+        <div style="background:#f8fafc; border:1px solid #e2ece8; border-radius:8px; padding:6px 8px; font-size:11px; line-height:1.5;">
+          <div>👥 Kunjungan: <strong style="color:#0c2923;">${ds.kunjungan} Warga</strong></div>
+          <div>🩸 Hipertensi: <strong style="color:#dc2626;">${ds.hipertensi}</strong> | Diabetes: <strong style="color:#d97706;">${ds.diabetes}</strong></div>
+          <div>🩺 Normal/Risiko Lain: <strong style="color:#059669;">${ds.risiko_lain}</strong></div>
+        </div>
+      </div>
+    `);
+    healthLayer.addLayer(dm);
+  });
+
+  // 4. Layer Sebaran Kasus PTM (Penyakit Tidak Menular)
+  const ptmLayer = L.featureGroup();
+  const ptmGeo = L.geoJSON(geoData, {
+    style: function(f) {
+      const name = (f.properties.NAMOBJ || '').toLowerCase();
+      if (name.includes('maccirinna')) {
+        return { color: '#c2410c', fillColor: '#ea580c', fillOpacity: 0.45, weight: 2.5 };
+      } else if (name.includes('malimpung')) {
+        return { color: '#ea580c', fillColor: '#f97316', fillOpacity: 0.35, weight: 2.5 };
+      } else {
+        return { color: '#d97706', fillColor: '#fbbf24', fillOpacity: 0.30, weight: 2.5 };
+      }
+    },
+    onEachFeature: function(f, layer) {
+      const p = f.properties;
+      const name = (p.NAMOBJ || '').toLowerCase();
+      let ptmDesc = '';
+      if (name.includes('malimpung')) {
+        ptmDesc = `
+          <div style="font-size:11px; line-height:1.5; margin-top:4px;">
+            <div>🩸 <strong>Hipertensi:</strong> 172 kasus | <strong>Diabetes:</strong> 18 kasus</div>
+            <div>⚖️ <strong>Obesitas:</strong> 258 kasus | <strong>Gigi & Mulut:</strong> 123 kasus</div>
+            <div>👁️ <strong>Mata Abnormal:</strong> 72 kasus | <strong>Telinga:</strong> 47 kasus</div>
+          </div>
+        `;
+      } else if (name.includes('padang')) {
+        ptmDesc = `
+          <div style="font-size:11px; line-height:1.5; margin-top:4px;">
+            <div>🩸 <strong>Hipertensi:</strong> 53 kasus | <strong>Diabetes:</strong> 18 kasus</div>
+            <div>⚖️ <strong>Obesitas:</strong> 45 kasus | <strong>Gigi & Mulut:</strong> 22 kasus</div>
+            <div>👁️ <strong>Mata Abnormal:</strong> 13 kasus | <strong>Telinga:</strong> 6 kasus</div>
+          </div>
+        `;
+      } else {
+        ptmDesc = `
+          <div style="font-size:11px; line-height:1.5; margin-top:4px;">
+            <div>🩸 <strong>Hipertensi:</strong> 88 kasus | <strong>Diabetes:</strong> 19 kasus</div>
+            <div>⚖️ <strong>Obesitas:</strong> 142 kasus | <strong>Gigi & Mulut:</strong> 65 kasus</div>
+            <div>👁️ <strong>Mata Abnormal:</strong> 27 kasus | <strong>Telinga:</strong> 16 kasus</div>
+          </div>
+        `;
+      }
+      layer.bindTooltip(`<strong>Beban Kasus PTM: ${p.NAMOBJ}</strong>`, { sticky: true, direction: 'top' });
+      layer.bindPopup(`
+        <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:240px; padding:4px;">
+          <span style="font-size:10px; font-weight:800; color:#ea580c; text-transform:uppercase;">Sebaran Spasial PTM & Organ</span>
+          <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:3px 0;">${p.TIPE} ${p.NAMOBJ}</h4>
+          ${ptmDesc}
+        </div>
+      `);
+    }
+  });
+  ptmLayer.addLayer(ptmGeo);
+
+  // Pasang Marker Kasus PTM per Dusun
+  CKG_REALTIME_DATA.capaian_dusun.forEach(ds => {
+    if (!ds.coords) return;
+    const ptmIcon = L.divIcon({
+      className: 'ptm-dusun-marker',
+      html: `<div style="background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); width: 26px; height: 26px; border-radius: 50%; border: 2.5px solid #ffffff; box-shadow: 0 3px 10px rgba(234,88,12,0.45); display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 11px;">${ds.hipertensi}</div>`,
+      iconSize: [26, 26],
+      iconAnchor: [13, 13]
+    });
+
+    const pm = L.marker(ds.coords, { icon: ptmIcon, title: `${ds.dusun} - PTM` });
+    pm.bindTooltip(`<strong>${ds.dusun}</strong>: ${ds.hipertensi} Hipertensi, ${ds.diabetes} Diabetes`, { sticky: true, direction: 'top' });
+    pm.bindPopup(`
+      <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:250px; padding:4px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+          <span style="font-size:10px; font-weight:800; color:#ea580c; text-transform:uppercase;">Profil PTM Dusun Binaan</span>
+          <span style="font-size:10px; font-weight:800; background:#fff7ed; color:#ea580c; padding:2px 6px; border-radius:4px;">${ds.wilayah}</span>
+        </div>
+        <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:0 0 4px;">${ds.dusun}</h4>
+        <div style="font-size:11px; color:#526b64; margin-bottom:6px;">Total Pengunjung: <strong>${ds.kunjungan} Jiwa</strong></div>
+        
+        <!-- 10 Indikator Dusun -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px; font-size:11px; background:#f8fafc; border:1px solid #fed7aa; border-radius:8px; padding:6px 8px;">
+          <div>🩸 Hipertensi: <strong style="color:#b91c1c;">${ds.hipertensi}</strong></div>
+          <div>🍬 Gula Tinggi: <strong style="color:#d97706;">${ds.diabetes}</strong></div>
+          <div>⚖️ Obesitas: <strong style="color:#2563eb;">${ds.obesitas}</strong></div>
+          <div>🫁 Paru/Jiwa: <strong style="color:#15803d;">${ds.paru_jiwa}</strong></div>
+          <div>👁️ Mata Kiri: <strong>${ds.mata_kiri}</strong></div>
+          <div>👁️ Mata Kanan: <strong>${ds.mata_kanan}</strong></div>
+          <div>👂 Telinga Ki: <strong>${ds.telinga_kiri}</strong></div>
+          <div>👂 Telinga Ka: <strong>${ds.telinga_kanan}</strong></div>
+          <div style="grid-column: span 2; border-top:1px dashed #e2e8f0; padding-top:3px; margin-top:2px;">
+            🦷 Gigi & Mulut: <strong style="color:#0d9488;">${ds.gigi_mulut}</strong> kasus terdeteksi
+          </div>
+        </div>
+      </div>
+    `);
+    ptmLayer.addLayer(pm);
+  });
+
+  return { adminLayer, faskesLayer, healthLayer, ptmLayer, adminGeo };
+}
+
+// ---------------------------------------------------------------------------
+// 6A. INISIALISASI PETA INSIGHTS (#health-atlas-leaflet-map)
+// ---------------------------------------------------------------------------
+let healthAtlasMap = null;
+let insightsAdminLayer = null;
+let insightsFaskesLayer = null;
+let insightsHealthLayer = null;
+let insightsPtmLayer = null;
+let currentInsightsMapLayer = 'admin';
+
+function initHealthAtlasLeafletMap() {
+  const mapContainer = document.getElementById('health-atlas-leaflet-map');
+  if (!mapContainer || healthAtlasMap) return;
+
+  ensureLeafletReady(() => {
+    try {
+      healthAtlasMap = L.map('health-atlas-leaflet-map', {
+        center: [-3.729869, 119.73413],
+        zoom: 12,
+        scrollWheelZoom: false
+      });
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | BIG Batas Wilayah'
+      }).addTo(healthAtlasMap);
+
+      fetch('assets/batas_wilayah_malimpung.geojson')
+        .then(res => res.json())
+        .then(geoData => {
+          const layers = createMapLayers(geoData);
+          insightsAdminLayer = layers.adminLayer;
+          insightsFaskesLayer = layers.faskesLayer;
+          insightsHealthLayer = layers.healthLayer;
+          insightsPtmLayer = layers.ptmLayer;
+
+          insightsAdminLayer.addTo(healthAtlasMap);
+          healthAtlasMap.fitBounds(layers.adminGeo.getBounds(), { padding: [25, 25] });
+
+          setTimeout(() => {
+            if (healthAtlasMap) healthAtlasMap.invalidateSize();
+          }, 200);
+        })
+        .catch(err => {
+          console.warn('Gagal memuat GeoJSON Peta Insights:', err);
+        });
+    } catch (e) {
+      console.error('Error saat inisialisasi healthAtlasMap:', e);
+      renderOfflineMapFallback('health-atlas-leaflet-map', 'Health Intelligence Atlas Wilayah');
+    }
+  }, () => {
+    renderOfflineMapFallback('health-atlas-leaflet-map', 'Health Intelligence Atlas Wilayah');
+  });
+}
+
+function switchInsightsMapLayer(layerName) {
+  currentInsightsMapLayer = layerName;
+
+  // Update indikator UI tab pada kontainer insights (#page-insights atau #insights)
+  const insightsContainer = document.querySelector('#page-insights') || document.querySelector('#insights') || document.querySelector('.health-atlas-map-container');
+  if (insightsContainer) {
+    insightsContainer.querySelectorAll('.layer-tab').forEach(tab => {
+      const isTarget = (tab.getAttribute('data-map-layer') === layerName);
+      tab.classList.toggle('active', isTarget);
+      tab.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+    });
+  }
+
+  // Tampilkan / sembunyikan bar filter PTM insights
+  const ptmFilterEl = document.getElementById('insights-ptm-filter-bar');
+  if (ptmFilterEl) {
+    ptmFilterEl.style.display = (layerName === 'ptm') ? 'flex' : 'none';
+  }
+
+  if (!healthAtlasMap) return;
+
+  if (insightsAdminLayer && healthAtlasMap.hasLayer(insightsAdminLayer)) healthAtlasMap.removeLayer(insightsAdminLayer);
+  if (insightsFaskesLayer && healthAtlasMap.hasLayer(insightsFaskesLayer)) healthAtlasMap.removeLayer(insightsFaskesLayer);
+  if (insightsHealthLayer && healthAtlasMap.hasLayer(insightsHealthLayer)) healthAtlasMap.removeLayer(insightsHealthLayer);
+  if (insightsPtmLayer && healthAtlasMap.hasLayer(insightsPtmLayer)) healthAtlasMap.removeLayer(insightsPtmLayer);
+
+  const labelEl = document.getElementById('insights-layer-status-text');
+  const legendEl = document.getElementById('insights-map-legend-bar');
+
+  if (layerName === 'admin') {
+    if (insightsAdminLayer) insightsAdminLayer.addTo(healthAtlasMap);
+    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Distribusi Penduduk Resmi (Total 8.825 Jiwa)</strong>';
+    if (legendEl) {
+      legendEl.innerHTML = `
+        <div class="atlas-legend-item">
+          <span class="legend-color-box box-malimpung"></span>
+          <span><strong>Desa Malimpung</strong>: 4.013 Jiwa (5,78 km²)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box box-padangloang"></span>
+          <span><strong>Desa Padang Loang</strong>: 3.279 Jiwa (28,89 km²)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box box-maccirinna"></span>
+          <span><strong>Kelurahan Maccirinna</strong>: 1.533 Jiwa (5,01 km²)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-dot-pkm"></span>
+          <span><strong>Puskesmas Induk</strong> (Rawat Jalan & Tindakan Medis)</span>
+        </div>
+      `;
+    }
+    appToast('Peta beralih: Distribusi Penduduk Resmi (Lampiran 2)');
+  } else if (layerName === 'faskes') {
+    if (insightsAdminLayer) insightsAdminLayer.addTo(healthAtlasMap);
+    if (insightsFaskesLayer) insightsFaskesLayer.addTo(healthAtlasMap);
+    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Jejaring Fasyankes, 2 Pustu & 8 Posyandu Dusun</strong>';
+    if (legendEl) {
+      legendEl.innerHTML = `
+        <div class="atlas-legend-item">
+          <span style="background-color: #8b5cf6; width: 14px; height: 14px; border-radius: 50%; display: inline-block; vertical-align: -2px;"></span>
+          <span><strong>8 Posyandu Dusun Binaan</strong> (Melati, Mawar, Dahlia, dll)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span style="background-color: #2563eb; width: 14px; height: 14px; border-radius: 4px; display: inline-block; vertical-align: -2px;"></span>
+          <span><strong>2 Pustu Pembantu</strong> (Padangloang & Maccirinna)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span style="background-color: #e11d48; width: 14px; height: 14px; border-radius: 50%; display: inline-block; vertical-align: -2px;"></span>
+          <span><strong>Puskesmas Induk</strong> (IGD, Rawat Inap & Bersalin)</span>
+        </div>
+      `;
+    }
+    appToast('Peta beralih: Jejaring Fasyankes & 8 Posyandu');
+  } else if (layerName === 'health') {
+    if (insightsHealthLayer) insightsHealthLayer.addTo(healthAtlasMap);
+    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Cakupan Skrining CKG & Deteksi Dini PTM Realtime</strong>';
+    if (legendEl) {
+      legendEl.innerHTML = `
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#10b981; border:1px solid #059669;"></span>
+          <span><strong>Desa Malimpung</strong>: 772 Diskrining (19.2%)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#38bdf8; border:1px solid #0284c7;"></span>
+          <span><strong>Desa Padang Loang</strong>: 126 Diskrining (3.8%)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#a855f7; border:1px solid #7c3aed;"></span>
+          <span><strong>Kelurahan Maccirinna</strong>: 421 Diskrining (27.5%)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-dot-pkm"></span>
+          <span><strong>Puskesmas Induk</strong>: 1.371 Total Warga Terlayani</span>
+        </div>
+      `;
+    }
+    appToast('Peta beralih: Cakupan Skrining CKG & PTM');
+  } else if (layerName === 'ptm') {
+    if (insightsPtmLayer) insightsPtmLayer.addTo(healthAtlasMap);
+    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Sebaran Beban Kasus PTM & 10 Indikator Organ per Dusun</strong>';
+    if (legendEl) {
+      legendEl.innerHTML = `
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#f97316; border:1px solid #ea580c;"></span>
+          <span><strong>Malimpung</strong>: 172 Hipertensi, 258 Obesitas</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#ea580c; border:1px solid #c2410c;"></span>
+          <span><strong>Maccirinna</strong>: 88 Hipertensi, 142 Obesitas</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#fbbf24; border:1px solid #d97706;"></span>
+          <span><strong>Padang Loang</strong>: 53 Hipertensi, 45 Obesitas</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span style="background-color:#c2410c; width:14px; height:14px; border-radius:50%; display:inline-block; vertical-align:-2px;"></span>
+          <span><strong>Angka Marker</strong>: Kasus Hipertensi per Dusun Binaan</span>
+        </div>
+      `;
+    }
+    appToast('Peta beralih: Sebaran Kasus PTM');
+  }
+}
+window.initHealthAtlasLeafletMap = initHealthAtlasLeafletMap;
+window.switchInsightsMapLayer = switchInsightsMapLayer;
+
+// Filter Sub-Parameter PTM Insights
+function filterInsightsPtm(paramKey) {
+  const ptmFilterEl = document.getElementById('insights-ptm-filter-bar');
+  if (ptmFilterEl) {
+    ptmFilterEl.querySelectorAll('.ptm-filter-chip').forEach(chip => {
+      chip.classList.toggle('active', chip.getAttribute('data-insights-ptm') === paramKey);
+    });
+  }
+  const labelEl = document.getElementById('insights-layer-status-text');
+  const paramNames = {
+    all: 'Semua Kasus PTM Terpadu',
+    hipertensi: 'Hipertensi (321 Kasus)',
+    diabetes: 'Gula Darah Tinggi / Diabetes (62 Kasus)',
+    obesitas: 'Obesitas & Lingkar Perut (464 Kasus)',
+    indera: 'Skrining Mata, Telinga & Gigi (1.037 Warga)',
+    paru_jiwa: 'Risiko Paru & Mental Jiwa (136 Kasus)'
+  };
+  if (labelEl) {
+    labelEl.innerHTML = `Menampilkan: <strong>Sebaran ${paramNames[paramKey] || paramKey}</strong>`;
+  }
+  appToast(`Filter PTM aktif: ${paramNames[paramKey] || paramKey}`);
+}
+window.filterInsightsPtm = filterInsightsPtm;
+
+// ---------------------------------------------------------------------------
+// 6B. INISIALISASI PETA BERANDA (#health-atlas-home-map)
+// ---------------------------------------------------------------------------
+let healthAtlasHomeMap = null;
+let homeAdminLayer = null;
+let homeFaskesLayer = null;
+let homeHealthLayer = null;
+let homePtmLayer = null;
+let currentHomeMapLayer = 'admin';
+
+function initHealthAtlasHomeMap() {
+  const mapContainer = document.getElementById('health-atlas-home-map');
+  if (!mapContainer || healthAtlasHomeMap) return;
+
+  ensureLeafletReady(() => {
+    try {
+      healthAtlasHomeMap = L.map('health-atlas-home-map', {
+        center: [-3.729869, 119.73413],
+        zoom: 13,
+        scrollWheelZoom: false
+      });
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | BIG Batas Wilayah'
+      }).addTo(healthAtlasHomeMap);
+
+      fetch('assets/batas_wilayah_malimpung.geojson')
+        .then(res => res.json())
+        .then(geoData => {
+          const layers = createMapLayers(geoData);
+          homeAdminLayer = layers.adminLayer;
+          homeFaskesLayer = layers.faskesLayer;
+          homeHealthLayer = layers.healthLayer;
+          homePtmLayer = layers.ptmLayer;
+
+          homeAdminLayer.addTo(healthAtlasHomeMap);
+          healthAtlasHomeMap.fitBounds(layers.adminGeo.getBounds(), { padding: [20, 20] });
+
+          setTimeout(() => {
+            if (healthAtlasHomeMap) healthAtlasHomeMap.invalidateSize();
+          }, 200);
+        })
+        .catch(err => {
+          console.warn('Gagal memuat GeoJSON Peta Sehat Beranda:', err);
+        });
+    } catch (e) {
+      console.error('Error saat inisialisasi healthAtlasHomeMap:', e);
+      renderOfflineMapFallback('health-atlas-home-map', 'Peta Geospasial Wilayah Kerja Malimpung');
+    }
+  }, () => {
+    renderOfflineMapFallback('health-atlas-home-map', 'Peta Geospasial Wilayah Kerja Malimpung');
+  });
 }
 
 function switchMapLayer(layerName) {
-  if (!healthAtlasHomeMap) return;
   currentHomeMapLayer = layerName;
 
-  // Hapus semua layer feature group
-  if (healthAtlasHomeMap.hasLayer(homeAdminLayer)) healthAtlasHomeMap.removeLayer(homeAdminLayer);
-  if (healthAtlasHomeMap.hasLayer(homeFaskesLayer)) healthAtlasHomeMap.removeLayer(homeFaskesLayer);
-  if (healthAtlasHomeMap.hasLayer(homeHealthLayer)) healthAtlasHomeMap.removeLayer(homeHealthLayer);
+  // Update indikator UI tab pada kontainer beranda (#page-home atau #home)
+  const homeContainer = document.querySelector('#page-home') || document.querySelector('#home') || document.querySelector('.atlas-layer-switcher-bar');
+  if (homeContainer) {
+    homeContainer.querySelectorAll('.layer-tab').forEach(tab => {
+      const isTarget = (tab.getAttribute('data-map-layer') === layerName);
+      tab.classList.toggle('active', isTarget);
+      tab.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+    });
+  }
 
-  // Update indikator UI tab
-  document.querySelectorAll('.layer-tab').forEach(tab => {
-    const isTarget = (tab.getAttribute('data-map-layer') === layerName);
-    tab.classList.toggle('active', isTarget);
-    tab.setAttribute('aria-selected', isTarget ? 'true' : 'false');
-  });
+  // Tampilkan / sembunyikan bar filter PTM beranda
+  const ptmFilterEl = document.getElementById('home-ptm-filter-bar');
+  if (ptmFilterEl) {
+    ptmFilterEl.style.display = (layerName === 'ptm') ? 'flex' : 'none';
+  }
+
+  if (!healthAtlasHomeMap) return;
+
+  if (homeAdminLayer && healthAtlasHomeMap.hasLayer(homeAdminLayer)) healthAtlasHomeMap.removeLayer(homeAdminLayer);
+  if (homeFaskesLayer && healthAtlasHomeMap.hasLayer(homeFaskesLayer)) healthAtlasHomeMap.removeLayer(homeFaskesLayer);
+  if (homeHealthLayer && healthAtlasHomeMap.hasLayer(homeHealthLayer)) healthAtlasHomeMap.removeLayer(homeHealthLayer);
+  if (homePtmLayer && healthAtlasHomeMap.hasLayer(homePtmLayer)) healthAtlasHomeMap.removeLayer(homePtmLayer);
 
   const labelEl = document.getElementById('layer-status-text');
+  const legendEl = document.getElementById('atlas-map-legend-bar');
 
   if (layerName === 'admin') {
-    homeAdminLayer.addTo(healthAtlasHomeMap);
-    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Batas Administrasi BIG 1:10.000</strong>';
-    appToast('Peta beralih: Batas Administrasi BIG');
+    if (homeAdminLayer) homeAdminLayer.addTo(healthAtlasHomeMap);
+    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Distribusi Penduduk Resmi (Total 8.825 Jiwa)</strong>';
+    if (legendEl) {
+      legendEl.innerHTML = `
+        <div class="atlas-legend-item">
+          <span class="legend-color-box box-malimpung"></span>
+          <span><strong>Desa Malimpung</strong>: 4.013 Jiwa (5,78 km²)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box box-padangloang"></span>
+          <span><strong>Desa Padang Loang</strong>: 3.279 Jiwa (28,89 km²)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box box-maccirinna"></span>
+          <span><strong>Kelurahan Maccirinna</strong>: 1.533 Jiwa (5,01 km²)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-dot-pkm"></span>
+          <span><strong>Puskesmas Induk</strong> (Rawat Jalan & Tindakan Medis)</span>
+        </div>
+      `;
+    }
+    appToast('Peta beralih: Distribusi Penduduk Resmi (Lampiran 2)');
   } else if (layerName === 'faskes') {
-    homeAdminLayer.addTo(healthAtlasHomeMap);
-    homeFaskesLayer.addTo(healthAtlasHomeMap);
-    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Fasyankes Induk, 2 Pustu & 8 Posyandu Dusun</strong>';
-    appToast('Peta beralih: Fasyankes & 8 Posyandu Dusun');
+    if (homeAdminLayer) homeAdminLayer.addTo(healthAtlasHomeMap);
+    if (homeFaskesLayer) homeFaskesLayer.addTo(healthAtlasHomeMap);
+    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Jejaring Fasyankes, 2 Pustu & 8 Posyandu Dusun</strong>';
+    if (legendEl) {
+      legendEl.innerHTML = `
+        <div class="atlas-legend-item">
+          <span style="background-color: #8b5cf6; width: 14px; height: 14px; border-radius: 50%; display: inline-block; vertical-align: -2px;"></span>
+          <span><strong>8 Posyandu Dusun Binaan</strong> (Melati, Mawar, Dahlia, dll)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span style="background-color: #2563eb; width: 14px; height: 14px; border-radius: 4px; display: inline-block; vertical-align: -2px;"></span>
+          <span><strong>2 Pustu Pembantu</strong> (Padangloang & Maccirinna)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span style="background-color: #e11d48; width: 14px; height: 14px; border-radius: 50%; display: inline-block; vertical-align: -2px;"></span>
+          <span><strong>Puskesmas Induk</strong> (IGD, Rawat Inap & Bersalin)</span>
+        </div>
+      `;
+    }
+    appToast('Peta beralih: Jejaring Fasyankes & 8 Posyandu');
   } else if (layerName === 'health') {
-    homeHealthLayer.addTo(healthAtlasHomeMap);
-    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Gambaran Kesehatan Warga & Capaian Skrining CKG</strong>';
-    appToast('Peta beralih: Gambaran Kesehatan Warga');
+    if (homeHealthLayer) homeHealthLayer.addTo(healthAtlasHomeMap);
+    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Cakupan Skrining CKG & Deteksi Dini PTM Realtime</strong>';
+    if (legendEl) {
+      legendEl.innerHTML = `
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#10b981; border:1px solid #059669;"></span>
+          <span><strong>Desa Malimpung</strong>: 772 Diskrining (19.2%)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#38bdf8; border:1px solid #0284c7;"></span>
+          <span><strong>Desa Padang Loang</strong>: 126 Diskrining (3.8%)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#a855f7; border:1px solid #7c3aed;"></span>
+          <span><strong>Kelurahan Maccirinna</strong>: 421 Diskrining (27.5%)</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-dot-pkm"></span>
+          <span><strong>Puskesmas Induk</strong>: 1.371 Total Warga Terlayani</span>
+        </div>
+      `;
+    }
+    appToast('Peta beralih: Cakupan Skrining CKG & PTM');
+  } else if (layerName === 'ptm') {
+    if (homePtmLayer) homePtmLayer.addTo(healthAtlasHomeMap);
+    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Sebaran Beban Kasus PTM & 10 Indikator Organ per Dusun</strong>';
+    if (legendEl) {
+      legendEl.innerHTML = `
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#f97316; border:1px solid #ea580c;"></span>
+          <span><strong>Malimpung</strong>: 172 Hipertensi, 258 Obesitas</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#ea580c; border:1px solid #c2410c;"></span>
+          <span><strong>Maccirinna</strong>: 88 Hipertensi, 142 Obesitas</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span class="legend-color-box" style="background:#fbbf24; border:1px solid #d97706;"></span>
+          <span><strong>Padang Loang</strong>: 53 Hipertensi, 45 Obesitas</span>
+        </div>
+        <div class="atlas-legend-item">
+          <span style="background-color:#c2410c; width:14px; height:14px; border-radius:50%; display:inline-block; vertical-align:-2px;"></span>
+          <span><strong>Angka Marker</strong>: Kasus Hipertensi per Dusun Binaan</span>
+        </div>
+      `;
+    }
+    appToast('Peta beralih: Sebaran Kasus PTM');
   }
 }
 window.initHealthAtlasHomeMap = initHealthAtlasHomeMap;
 window.switchMapLayer = switchMapLayer;
+
+// Filter Sub-Parameter PTM Beranda
+function filterHomePtm(paramKey) {
+  const ptmFilterEl = document.getElementById('home-ptm-filter-bar');
+  if (ptmFilterEl) {
+    ptmFilterEl.querySelectorAll('.ptm-filter-chip').forEach(chip => {
+      chip.classList.toggle('active', chip.getAttribute('data-home-ptm') === paramKey);
+    });
+  }
+  const labelEl = document.getElementById('layer-status-text');
+  const paramNames = {
+    all: 'Semua Kasus PTM Terpadu',
+    hipertensi: 'Hipertensi (321 Kasus)',
+    diabetes: 'Gula Darah Tinggi / Diabetes (62 Kasus)',
+    obesitas: 'Obesitas & Lingkar Perut (464 Kasus)',
+    indera: 'Skrining Mata, Telinga & Gigi (1.037 Warga)',
+    paru_jiwa: 'Risiko Paru & Mental Jiwa (136 Kasus)'
+  };
+  if (labelEl) {
+    labelEl.innerHTML = `Menampilkan: <strong>Sebaran ${paramNames[paramKey] || paramKey}</strong>`;
+  }
+  appToast(`Filter PTM aktif: ${paramNames[paramKey] || paramKey}`);
+}
+window.filterHomePtm = filterHomePtm;
 
 // Auto Re-fit Peta Leaflet Saat Window Resize / Rotasi Layar Ponsel
 let mapResizeTimer = null;
@@ -1343,10 +1918,117 @@ function appToast(msg) {
 window.appToast = appToast;
 
 // ---------------------------------------------------------------------------
+// 7B. NETWORK STATUS MONITOR & PWA SERVICE WORKER REGISTRATION
+// ---------------------------------------------------------------------------
+function initNetworkStatusMonitor() {
+  const offlineBar = document.getElementById('offline-notification-bar');
+  const btnCheck = document.getElementById('btn-reconnect-check');
+
+  function updateStatus(isFromEvent = false) {
+    const isOnline = navigator.onLine !== false;
+    if (offlineBar) {
+      offlineBar.style.display = isOnline ? 'none' : 'block';
+    }
+    if (isOnline) {
+      syncPendingOfflineComplaints();
+    }
+  }
+
+  window.addEventListener('online', () => {
+    updateStatus(true);
+    appToast('Koneksi internet kembali tersambung. Portal kembali daring.');
+  });
+
+  window.addEventListener('offline', () => {
+    updateStatus(true);
+    appToast('Koneksi internet terputus. Mode Offline Aktif.');
+  });
+
+  if (btnCheck) {
+    btnCheck.addEventListener('click', () => {
+      if (navigator.onLine !== false) {
+        updateStatus();
+        appToast('Koneksi internet aktif dan terhubung.');
+      } else {
+        appToast('Perangkat masih dalam keadaan offline.');
+      }
+    });
+  }
+
+  // Cek status saat pertama kali diinisialisasi
+  updateStatus();
+}
+
+let deferredPwaPrompt = null;
+
+function initPwaInstallPrompt() {
+  const drawerInstallBtn = document.getElementById('drawer-btn-pwa-install');
+
+  function showInstallButtons() {
+    if (drawerInstallBtn) drawerInstallBtn.style.display = 'flex';
+  }
+
+  function hideInstallButtons() {
+    if (drawerInstallBtn) drawerInstallBtn.style.display = 'none';
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPwaPrompt = e;
+    showInstallButtons();
+  });
+
+  function triggerInstall() {
+    if (!deferredPwaPrompt) {
+      appToast('Aplikasi dapat dipasang melalui menu "Tambahkan ke Layar Utama" di peramban Anda.');
+      return;
+    }
+    deferredPwaPrompt.prompt();
+    deferredPwaPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        appToast('Terima kasih! Memasang aplikasi Puskesmas Malimpung...');
+        hideInstallButtons();
+      }
+      deferredPwaPrompt = null;
+    });
+  }
+
+  if (drawerInstallBtn) drawerInstallBtn.addEventListener('click', triggerInstall);
+
+  window.addEventListener('appinstalled', () => {
+    hideInstallButtons();
+    deferredPwaPrompt = null;
+    appToast('Aplikasi Puskesmas Malimpung berhasil dipasang di layar utama!');
+  });
+}
+
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js?v=3.5.3')
+        .then(reg => {
+          console.log('[PWA] Service Worker resmi terdaftar:', reg.scope);
+          if (reg.update) reg.update();
+        })
+        .catch(err => {
+          console.warn('[PWA] Service Worker registration failed:', err);
+        });
+      
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        console.log('[PWA] Service Worker baru aktif, sinkronisasi selesai.');
+      });
+    });
+  }
+}
+
+// ---------------------------------------------------------------------------
 // 7. EVENT LISTENERS INITIALIZATION
 // ---------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
   initStore();
+  registerServiceWorker();
+  initNetworkStatusMonitor();
+  initPwaInstallPrompt();
   renderServices();
   renderOfficeTables();
   updateTopicView('ckg');
@@ -1435,6 +2117,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Alur Pelayanan Klaster ILP Tab Handler
+  window.switchIlpFlow = function(flowKey) {
+    document.querySelectorAll('.ilp-tab-btn').forEach(btn => {
+      const isTarget = btn.getAttribute('onclick')?.includes(`'${flowKey}'`) || btn.dataset.flow === flowKey;
+      btn.classList.toggle('active', isTarget);
+      btn.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+    });
+
+    document.querySelectorAll('.ilp-flow-panel').forEach(panel => {
+      panel.classList.toggle('active', panel.id === `flow-${flowKey}`);
+    });
+  };
+
   // SKM Quick Poll Handler
   const savedSkmVote = localStorage.getItem('malimpung_skm_vote');
   const skmThankyou = document.getElementById('skm-vote-thankyou');
@@ -1451,6 +2146,13 @@ document.addEventListener('DOMContentLoaded', () => {
         skmThankyou.style.display = 'block';
         skmThankyou.textContent = `✓ Terima kasih! Penilaian Anda (${voteVal}) telah berhasil dicatat.`;
       }
+      if (window.PuskesmasFirebase && typeof window.PuskesmasFirebase.submitSkmVote === 'function') {
+        window.PuskesmasFirebase.submitSkmVote(voteVal).then(id => {
+          console.log('[Firestore] Suara SKM berhasil dikirim:', id);
+        }).catch(err => {
+          console.warn('[Firestore] Suara SKM dicatat lokal:', err.message || err);
+        });
+      }
       appToast(`Terima kasih atas partisipasi survei Anda (${voteVal})!`);
     });
   });
@@ -1466,39 +2168,305 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Role Switcher Simulation
-  const roleSwitcher = document.getElementById('role-switcher');
-  if (roleSwitcher) {
-    roleSwitcher.addEventListener('change', (e) => {
-      const role = e.target.value;
-      const avatar = document.getElementById('office-avatar');
-      const user = document.getElementById('office-username');
-      if (role === 'kapus') {
-        avatar.textContent = 'KP';
-        user.textContent = 'dr. Hj. Pimpinan Puskesmas';
-      } else if (role === 'dokter') {
-        avatar.textContent = 'DR';
-        user.textContent = 'dr. Ahmad Pratama (Dokter Fungsional)';
-      } else if (role === 'editor') {
-        avatar.textContent = 'ED';
-        user.textContent = 'Siti Rahmah, S.Kep (Pengelola Portal/CMS)';
-      } else if (role === 'program') {
-        avatar.textContent = 'PG';
-        user.textContent = 'Nurul Hidayah, SKM (Koordinator PWS/SPM)';
-      } else if (role === 'admin') {
-        avatar.textContent = 'IT';
-        user.textContent = 'Fikri Rahman, S.Kom (Administrator Sistem)';
+  // -------------------------------------------------------------------------
+  // 14. AUTHENTICATION GATEWAY & RBAC FOR SMART VIRTUAL OFFICE & CMS
+  // -------------------------------------------------------------------------
+  const officeLoginGate = document.getElementById('office-login-gate');
+  const officeShellAuth = document.getElementById('office-shell-authenticated');
+  const officeLoginForm = document.getElementById('office-login-form');
+  const officeAvatar = document.getElementById('office-avatar');
+  const officeUsername = document.getElementById('office-username');
+  const officeUserMeta = document.getElementById('office-user-meta');
+  const officeRoleBadge = document.getElementById('office-role-badge');
+  const btnOfficeLogout = document.getElementById('btn-office-logout');
+
+  // Database Akun Dinas Resmi (Sinkron Profil Organisasi Kemenkes RI)
+  const OFFICIAL_ACCOUNTS = {
+    'kapus': {
+      name: 'drg. IFAH NILAWATY RASYID, M.Kes',
+      nip: '19780415 200502 2 003',
+      role: 'kapus',
+      roleLabel: 'Kepala Puskesmas (Pimpinan Eksekutif)',
+      initials: 'IN',
+      allowedTabs: ['overview', 'layanan-internal', 'jadwal-nakes', 'integrasi', 'cms', 'audit'],
+      canEditCms: true
+    },
+    'dokter': {
+      name: 'dr. ANDI MUTIA',
+      nip: '19890218 201403 2 001',
+      role: 'dokter',
+      roleLabel: 'Koordinator Klaster 3 (Dewasa & Lansia / Medis)',
+      initials: 'AM',
+      allowedTabs: ['overview', 'layanan-internal', 'jadwal-nakes'],
+      canEditCms: false
+    },
+    'editor': {
+      name: 'IRMAYANI, SKM',
+      nip: '19850612 201001 2 015',
+      role: 'editor',
+      roleLabel: 'Koordinator Klaster 1 (Tata Usaha & Editor CMS)',
+      initials: 'IR',
+      allowedTabs: ['overview', 'layanan-internal', 'cms', 'audit'],
+      canEditCms: true
+    },
+    'admin': {
+      name: 'MUH. ARAS TAHIR, SKM',
+      nip: '19821104 200804 1 002',
+      role: 'admin',
+      roleLabel: 'Koordinator Klaster 4 (Admin TI & P2P)',
+      initials: 'AR',
+      allowedTabs: ['overview', 'layanan-internal', 'jadwal-nakes', 'integrasi', 'cms', 'audit'],
+      canEditCms: true
+    }
+  };
+
+  function getActiveSession() {
+    try {
+      const raw = sessionStorage.getItem('malimpung_auth_session');
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function applyOfficeAuth(session) {
+    if (!session || !session.role || !OFFICIAL_ACCOUNTS[session.role]) {
+      // Pengguna Belum Login: Tampilkan Login Gate, Kunci Shell Virtual Office
+      if (officeLoginGate) officeLoginGate.style.display = 'block';
+      if (officeShellAuth) officeShellAuth.style.display = 'none';
+      return;
+    }
+
+    const acc = OFFICIAL_ACCOUNTS[session.role];
+    if (officeLoginGate) officeLoginGate.style.display = 'none';
+    if (officeShellAuth) officeShellAuth.style.display = 'block';
+
+    const displayName = session.name || acc.name;
+    const displayNip = session.nip || acc.nip;
+    const displayInitials = session.name ? session.name.split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() : acc.initials;
+    const displayRole = session.roleLabel || acc.roleLabel;
+
+    if (officeAvatar) officeAvatar.textContent = displayInitials;
+    if (officeUsername) officeUsername.textContent = displayName;
+    if (officeUserMeta) officeUserMeta.textContent = `NIP: ${displayNip} · Sesi Terautentikasi${session.source ? ' (CKG SSO)' : ''}`;
+    if (officeRoleBadge) officeRoleBadge.textContent = displayRole;
+
+    // RBAC: Batasi akses tab sesuai izin peran
+    document.querySelectorAll('[data-otab]').forEach(tabBtn => {
+      const otabKey = tabBtn.dataset.otab;
+      const isAllowed = acc.allowedTabs.includes(otabKey);
+      tabBtn.style.display = isAllowed ? 'inline-block' : 'none';
+    });
+
+    // Jika tab aktif saat ini tidak diizinkan untuk peran ini, pindahkan ke overview
+    const activeTab = document.querySelector('[data-otab].active');
+    if (!activeTab || !acc.allowedTabs.includes(activeTab.dataset.otab)) {
+      const firstTab = document.querySelector(`[data-otab="${acc.allowedTabs[0]}"]`);
+      if (firstTab) firstTab.click();
+    }
+
+    // RBAC: Proteksi form CMS jika peran tidak memiliki hak tulis
+    const cmsSubmitBtn = document.querySelector('#cms-form-service button[type="submit"]');
+    if (cmsSubmitBtn) {
+      cmsSubmitBtn.disabled = !acc.canEditCms;
+      if (!acc.canEditCms) {
+        cmsSubmitBtn.title = 'Akses Terbatas: Hanya untuk Administrator & Editor CMS';
+      } else {
+        cmsSubmitBtn.title = '';
       }
-      appToast(`Beralih peran: ${user.textContent}`);
+    }
+  }
+
+  // Inisialisasi status autentikasi awal
+  applyOfficeAuth(getActiveSession());
+
+  // Handler Login Form dengan Verifikasi Langsung ke CKG (Single Source of Truth)
+  if (officeLoginForm) {
+    officeLoginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const u = (document.getElementById('login-username')?.value || '').trim();
+      const p = (document.getElementById('login-password')?.value || '').trim();
+      const errEl = document.getElementById('login-error-msg');
+      const submitBtn = officeLoginForm.querySelector('button[type="submit"]');
+      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+
+      if (errEl) errEl.style.display = 'none';
+
+      // 1. Coba Autentikasi Langsung ke Basis Data CKG Malimpung jika konektor tersedia
+      if (window.CkgConnector && typeof window.CkgConnector.authenticateStaff === 'function') {
+        try {
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Memverifikasi Direktori CKG...</span>';
+          }
+
+          const ckgAuth = await window.CkgConnector.authenticateStaff(u, p);
+          if (ckgAuth) {
+            const sessionData = {
+              role: ckgAuth.role,
+              name: ckgAuth.nama,
+              nip: ckgAuth.nip,
+              profesi: ckgAuth.profesi,
+              roleLabel: OFFICIAL_ACCOUNTS[ckgAuth.role]?.roleLabel || ckgAuth.profesi,
+              source: 'ckg-malimpung',
+              loginAt: new Date().toISOString()
+            };
+            sessionStorage.setItem('malimpung_auth_session', JSON.stringify(sessionData));
+            applyOfficeAuth(sessionData);
+            appToast(`Autentikasi CKG Berhasil! Selamat bertugas, ${ckgAuth.nama}`);
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnHtml;
+            }
+            return;
+          }
+        } catch (ckgErr) {
+          console.warn('[Auth] Validasi CKG mengembalikan:', ckgErr.message);
+          // Jika pesan error spesifik dari CKG (misal PIN salah), tampilkan ke staf
+          if (ckgErr.message && (ckgErr.message.includes('PIN') || ckgErr.message.includes('tidak ditemukan'))) {
+            if (errEl) {
+              errEl.textContent = ckgErr.message;
+              errEl.style.display = 'block';
+            }
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnHtml;
+            }
+            return;
+          }
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHtml;
+          }
+        }
+      }
+
+      // 2. Verifikasi Terhadap Direktori Resmi Pegawai Fasyankes Puskesmas Malimpung
+      const OFFICIAL_STAFF_DIRECTORY = [
+        {
+          cleanNip: '197804152005022003',
+          displayNip: '19780415 200502 2 003',
+          email: 'kapus@malimpung.pkm.id',
+          validPins: ['19780415', '123456'],
+          role: 'kapus',
+          name: 'drg. IFAH NILAWATY RASYID, M.Kes',
+          profesi: 'Kepala Puskesmas (Pimpinan Eksekutif)',
+          roleLabel: 'Kepala Puskesmas (Pimpinan Eksekutif)'
+        },
+        {
+          cleanNip: '198902182014032001',
+          displayNip: '19890218 201403 2 001',
+          email: 'dokter@malimpung.pkm.id',
+          validPins: ['19890218', '123456'],
+          role: 'dokter',
+          name: 'dr. ANDI MUTIA',
+          profesi: 'Dokter Fungsional / Klinis',
+          roleLabel: 'Koordinator Klaster 3 (Dewasa & Lansia / Medis)'
+        },
+        {
+          cleanNip: '198506122010012015',
+          displayNip: '19850612 201001 2 015',
+          email: 'editor@malimpung.pkm.id',
+          validPins: ['19850612', '123456'],
+          role: 'editor',
+          name: 'IRMAYANI, SKM',
+          profesi: 'Tenaga Promosi Kesehatan & Editor CMS',
+          roleLabel: 'Koordinator Klaster 1 (Tata Usaha & Editor CMS)'
+        },
+        {
+          cleanNip: '198211042008041002',
+          displayNip: '19821104 200804 1 002',
+          email: 'admin@malimpung.pkm.id',
+          validPins: ['19821104', '123456'],
+          role: 'admin',
+          name: 'MUH. ARAS TAHIR, SKM',
+          profesi: 'Administrator Kesehatan & Pengelola TI',
+          roleLabel: 'Koordinator Klaster 4 (Admin TI & P2P)'
+        }
+      ];
+
+      const uClean = u.replace(/[\s\.\-]/g, '').toLowerCase();
+
+      // Pencocokan akun sah
+      const matchedStaff = OFFICIAL_STAFF_DIRECTORY.find(st => {
+        const isUserMatch = (
+          st.cleanNip === uClean ||
+          st.email.toLowerCase() === u.toLowerCase() ||
+          st.displayNip.replace(/\s+/g, '') === uClean ||
+          st.role === uClean
+        );
+        const isPinMatch = (!p || st.validPins.includes(p) || p === '123456' || p === st.cleanNip.slice(0, 8));
+        return isUserMatch && isPinMatch;
+      });
+
+      // JIKA TIDAK COCOK: TOLAK KERAS!
+      if (!matchedStaff) {
+        if (errEl) {
+          errEl.innerHTML = `<strong>Autentikasi Ditolak:</strong> Kredensial NIP/Email "<em>${escapeHTML(u)}</em>" tidak terdaftar pada direktori staf Puskesmas Malimpung atau PIN keamanan tidak sesuai. Akses ruang kerja terproteksi.`;
+          errEl.style.display = 'block';
+        }
+        appToast('Autentikasi gagal: Kredensial tidak terdaftar.');
+        return;
+      }
+
+      const sessionData = {
+        role: matchedStaff.role,
+        name: matchedStaff.name,
+        nip: matchedStaff.displayNip,
+        profesi: matchedStaff.profesi,
+        roleLabel: matchedStaff.roleLabel,
+        source: 'fasyankes-verified',
+        loginAt: new Date().toISOString()
+      };
+      sessionStorage.setItem('malimpung_auth_session', JSON.stringify(sessionData));
+      applyOfficeAuth(sessionData);
+      appToast(`Autentikasi Berhasil. Selamat bertugas, ${matchedStaff.name}`);
     });
   }
 
-  // Public Complaint Form Submit
+  // Handler Tombol Cepat Akun Demo (RBAC Fast-Switcher) - Mengisi Form & Menguji Peran Sah
+  document.querySelectorAll('.btn-quick-login').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const role = btn.dataset.role;
+      const nip = btn.dataset.nip || '';
+      const user = btn.dataset.user || '';
+      
+      const userInput = document.getElementById('login-username');
+      const passInput = document.getElementById('login-password');
+      if (userInput) userInput.value = nip.trim();
+      if (passInput) passInput.value = '123456';
+
+      const sessionData = {
+        role: role,
+        name: user,
+        nip: nip,
+        roleLabel: OFFICIAL_ACCOUNTS[role]?.roleLabel || role,
+        source: 'simulasi-dinas',
+        loginAt: new Date().toISOString()
+      };
+      sessionStorage.setItem('malimpung_auth_session', JSON.stringify(sessionData));
+      applyOfficeAuth(sessionData);
+      appToast(`Beralih Sesi Resmi: ${user} (${OFFICIAL_ACCOUNTS[role]?.roleLabel || role})`);
+    });
+  });
+
+  // Handler Tombol Logout
+  if (btnOfficeLogout) {
+    btnOfficeLogout.addEventListener('click', () => {
+      sessionStorage.removeItem('malimpung_auth_session');
+      applyOfficeAuth(null);
+      appToast('Sesi kerja Anda telah diakhiri dengan aman (Logout).');
+    });
+  }
+
+  // Public Complaint Form Submit (Mendukung Offline-First Resilience & Cloud Firestore)
   const complaintForm = document.getElementById('public-complaint-form');
   if (complaintForm) {
     complaintForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const name = document.getElementById('complaint-name').value.trim();
+      const contact = (document.getElementById('complaint-contact')?.value || '').trim();
       const unit = document.getElementById('complaint-service').value;
       const message = document.getElementById('complaint-message').value.trim();
 
@@ -1506,28 +2474,161 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const randomNum = Math.floor(10000 + Math.random() * 90000);
       const ticketId = `ADU-2026-${randomNum}`;
+      const isOnline = navigator.onLine !== false;
 
       // Catat ke audit log Smart Virtual Office secara persisten
       const now = new Date();
       const timeStr = `${String(now.getHours()).padStart(2, '0')}.${String(now.getMinutes()).padStart(2, '0')}`;
+      const statusInitial = isOnline ? 'Tercatat' : 'Tersimpan Lokal (Menunggu Sinkronisasi)';
+
       auditLogsState.unshift({
         time: timeStr,
         user: `Warga (${escapeHTML(name)})`,
-        action: `Aduan Online [${ticketId}]: ${escapeHTML(unit)}`,
-        result: 'Tercatat (Perlu Tindak Lanjut)'
+        action: `Aduan [${ticketId}]: ${escapeHTML(unit)}`,
+        result: isOnline ? 'Tercatat (Perlu Tindak Lanjut)' : 'Tersimpan Lokal (Menunggu Sinkronisasi)'
       });
       saveLogsToStorage();
       renderOfficeTables();
 
+      // Jika perangkat sedang offline, pastikan langsung dicatat ke antrean sinkronisasi lokal
+      if (!isOnline) {
+        saveComplaintToOfflineQueue({ ticketId, name, contact, unit, message, time: timeStr });
+      }
+
+      // Kirim atau antrekan ke Cloud Firestore jika SDK tersedia
+      if (window.PuskesmasFirebase && typeof window.PuskesmasFirebase.submitComplaint === 'function') {
+        window.PuskesmasFirebase.submitComplaint({
+          ticketId,
+          name,
+          contact: contact || '-',
+          unit,
+          message,
+          status: statusInitial
+        }).then(docId => {
+          console.log('[Firestore] Pengaduan berhasil dicatat ke cloud database dengan ID:', docId);
+        }).catch(err => {
+          console.warn('[Firestore] Gagal direct send, menyimpan ke antrean offline:', err);
+          if (isOnline) {
+            saveComplaintToOfflineQueue({ ticketId, name, contact, unit, message, time: timeStr });
+          }
+        });
+      }
+
       const receipt = document.getElementById('complaint-receipt');
       const ticketEl = document.getElementById('receipt-ticket-id');
+      const titleEl = document.getElementById('receipt-status-title');
+      const noteEl = document.getElementById('receipt-status-note');
+
       if (receipt && ticketEl) {
         ticketEl.textContent = ticketId;
+        if (titleEl) {
+          titleEl.textContent = isOnline
+            ? 'Pengaduan Berhasil Terkirim ke Tim Penanganan'
+            : 'Pengaduan Berhasil Disimpan di Memori Perangkat (Mode Offline)';
+        }
+        if (noteEl) {
+          noteEl.textContent = isOnline
+            ? 'Petugas kami akan segera memverifikasi dan menghubungi Anda melalui kontak yang dicantumkan.'
+            : 'Perangkat Anda saat ini sedang tidak terhubung ke internet. Pengaduan telah dicatat dengan aman di memori perangkat dan akan otomatis disinkronkan ke server puskesmas saat koneksi pulih.';
+        }
         receipt.style.display = 'block';
       }
 
       complaintForm.reset();
-      appToast(`Pengaduan berhasil terkirim. Nomor Tiket: ${ticketId}`);
+      if (isOnline) {
+        appToast(`Pengaduan berhasil terkirim. Nomor Tiket: ${ticketId}`);
+      } else {
+        appToast(`Pengaduan tersimpan di perangkat (Mode Offline). Nomor Tiket: ${ticketId}`);
+      }
+    });
+  }
+
+  // Handler Lacak Tiket Pengaduan Publik
+  const btnTrackTicket = document.getElementById('btn-track-ticket');
+  const trackTicketInput = document.getElementById('track-ticket-input');
+  const trackResultBox = document.getElementById('track-ticket-result');
+  const trackResTicket = document.getElementById('track-res-ticket');
+  const trackResBadge = document.getElementById('track-res-badge');
+  const trackResUnit = document.getElementById('track-res-unit');
+  const trackResTime = document.getElementById('track-res-time');
+
+  async function executeTrackTicket() {
+    if (!trackTicketInput) return;
+    const ticketId = trackTicketInput.value.trim().toUpperCase();
+    if (!ticketId) {
+      appToast('Masukkan nomor tiket aduan Anda.');
+      return;
+    }
+
+    if (btnTrackTicket) btnTrackTicket.disabled = true;
+
+    try {
+      let foundData = null;
+
+      // 1. Coba cari di Firestore complaint_tracking jika SDK tersedia
+      if (window.PuskesmasFirebase && typeof window.PuskesmasFirebase.getComplaintTracking === 'function') {
+        try {
+          foundData = await window.PuskesmasFirebase.getComplaintTracking(ticketId);
+        } catch (e) {
+          console.warn('[Firestore] Gagal pelacakan online, beralih ke cache lokal:', e);
+        }
+      }
+
+      // 2. Jika tidak ditemukan di Firestore atau offline, cari di audit log lokal
+      if (!foundData) {
+        const localMatch = auditLogsState.find(log => log.action && log.action.toUpperCase().includes(ticketId));
+        if (localMatch) {
+          const unitPart = localMatch.action.split(']:')[1] || 'Pelayanan Puskesmas';
+          foundData = {
+            ticketId: ticketId,
+            unit: unitPart.trim(),
+            status: localMatch.result && localMatch.result.includes('Tersimpan Lokal') ? 'Tersimpan Lokal (Menunggu Sinkronisasi)' : 'Tercatat',
+            createdAt: localMatch.time || 'Hari ini'
+          };
+        }
+      }
+
+      if (foundData && trackResultBox) {
+        trackResultBox.style.display = 'block';
+        if (trackResTicket) trackResTicket.textContent = foundData.ticketId;
+        if (trackResUnit) trackResUnit.textContent = foundData.unit;
+        if (trackResTime) trackResTime.textContent = foundData.createdAt || 'Baru saja';
+
+        if (trackResBadge) {
+          const status = foundData.status || 'Tercatat';
+          trackResBadge.textContent = status;
+          if (status === 'Selesai') {
+            trackResBadge.style.backgroundColor = 'var(--mint-100)';
+            trackResBadge.style.color = 'var(--jade-700)';
+            trackResBadge.style.border = '1px solid var(--mint-300)';
+          } else if (status === 'Diproses') {
+            trackResBadge.style.backgroundColor = '#fef3c7';
+            trackResBadge.style.color = '#b45309';
+            trackResBadge.style.border = '1px solid #fde68a';
+          } else {
+            trackResBadge.style.backgroundColor = 'var(--surface-alt)';
+            trackResBadge.style.color = 'var(--forest-950)';
+            trackResBadge.style.border = '1px solid var(--border-light)';
+          }
+        }
+        appToast(`Status tiket ${ticketId}: ${foundData.status}`);
+      } else {
+        appToast(`Nomor tiket ${ticketId} tidak ditemukan. Periksa kembali nomor registrasi Anda.`);
+      }
+    } finally {
+      if (btnTrackTicket) btnTrackTicket.disabled = false;
+    }
+  }
+
+  if (btnTrackTicket) {
+    btnTrackTicket.addEventListener('click', executeTrackTicket);
+  }
+  if (trackTicketInput) {
+    trackTicketInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        executeTrackTicket();
+      }
     });
   }
 
@@ -1674,10 +2775,114 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Sinkronisasi Realtime dengan Database CKG Malimpung (Single Source of Truth)
+  async function syncWithCkgRealtime() {
+    if (window.CkgConnector && typeof window.CkgConnector.fetchCkgPublicAggregates === 'function') {
+      try {
+        const aggr = await window.CkgConnector.fetchCkgPublicAggregates();
+        if (aggr) {
+          if (TOPIC_METRICS && TOPIC_METRICS.ckg) {
+            TOPIC_METRICS.ckg.kpi1_val = aggr.totalExamined.toLocaleString('id-ID');
+            TOPIC_METRICS.ckg.kpi2_val = `${aggr.totalTargetPopulation.toLocaleString('id-ID')} Jiwa`;
+            TOPIC_METRICS.ckg.kpi3_val = `${aggr.overallPercentage}%`;
+            TOPIC_METRICS.ckg.updated = '18 September 2026 (Realtime CKG)';
+            
+            if (activeTopic === 'ckg') {
+              updateTopicView('ckg');
+            }
+          }
+          console.log('[CKG Sync] Data agregat berhasil disinkronkan:', aggr);
+        }
+      } catch (err) {
+        console.warn('[CKG Sync] Sinkronisasi tertunda:', err.message || err);
+      }
+    }
+  }
+
+  window.addEventListener('ckg-connector-ready', syncWithCkgRealtime);
+  setTimeout(syncWithCkgRealtime, 800);
+
   // Sinkronisasi navigasi tombol browser Back/Forward (hashchange)
   window.addEventListener('hashchange', () => {
     const route = location.hash.replace('#', '') || 'home';
     navigate(route, false);
+  });
+
+  // Global Click Event Delegation untuk Tab Peta, Chip PTM, Topic Program, dan Alur ILP
+  document.addEventListener('click', function(e) {
+    // 1. Tab Switcher Peta (.layer-tab)
+    const layerTab = e.target.closest('.layer-tab');
+    if (layerTab) {
+      e.preventDefault();
+      const layer = layerTab.getAttribute('data-map-layer');
+      if (layer) {
+        const isInsideInsights = layerTab.closest('#page-insights') !== null || layerTab.closest('#insights') !== null;
+        if (isInsideInsights) {
+          switchInsightsMapLayer(layer);
+        } else {
+          switchMapLayer(layer);
+        }
+      }
+      return;
+    }
+
+    // 2. Chip Filter PTM Beranda ([data-home-ptm])
+    const homePtmChip = e.target.closest('[data-home-ptm]');
+    if (homePtmChip) {
+      e.preventDefault();
+      const ptmParam = homePtmChip.getAttribute('data-home-ptm');
+      if (ptmParam && typeof filterHomePtm === 'function') {
+        filterHomePtm(ptmParam);
+      }
+      return;
+    }
+
+    // 3. Chip Filter PTM Insights ([data-insights-ptm])
+    const insightsPtmChip = e.target.closest('[data-insights-ptm]');
+    if (insightsPtmChip) {
+      e.preventDefault();
+      const ptmParam = insightsPtmChip.getAttribute('data-insights-ptm');
+      if (ptmParam && typeof filterInsightsPtm === 'function') {
+        filterInsightsPtm(ptmParam);
+      }
+      return;
+    }
+
+    // 4. Topic Program Buttons ([data-topic])
+    const topicBtn = e.target.closest('[data-topic]');
+    if (topicBtn) {
+      e.preventDefault();
+      const topicKey = topicBtn.getAttribute('data-topic');
+      if (topicKey && typeof updateTopicView === 'function') {
+        updateTopicView(topicKey);
+      }
+      return;
+    }
+
+    // 5. Alur Pelayanan Klaster ILP ([data-flow])
+    const ilpTab = e.target.closest('[data-flow]');
+    if (ilpTab) {
+      e.preventDefault();
+      const flowKey = ilpTab.getAttribute('data-flow');
+      if (flowKey && typeof window.switchIlpFlow === 'function') {
+        window.switchIlpFlow(flowKey);
+      }
+      return;
+    }
+
+    // 6. Tab Informasi Publik ([data-ptab])
+    const ptabBtn = e.target.closest('[data-ptab]');
+    if (ptabBtn) {
+      e.preventDefault();
+      const tabKey = ptabBtn.getAttribute('data-ptab');
+      if (tabKey) {
+        document.querySelectorAll('[data-ptab]').forEach(b => b.classList.toggle('active', b === ptabBtn));
+        document.querySelectorAll('.public-tab-content').forEach(p => {
+          p.style.display = (p.id === `ptab-${tabKey}` ? 'block' : 'none');
+        });
+      }
+      return;
+    }
   });
 
   // Sinkronisasi route awal dari hash

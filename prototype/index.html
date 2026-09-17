@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#07221d">
   <link rel="canonical" href="https://puskesmas-malimpung.web.app/">
   <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon_puskesmas.svg">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
@@ -27,7 +28,7 @@
     "logo": "https://puskesmas-malimpung.web.app/assets/logo_puskesmas_malimpung.png",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Benteng Malimpung",
+      "streetAddress": "Malimpung",
       "addressLocality": "Kecamatan Patampanua",
       "addressRegion": "Sulawesi Selatan",
       "postalCode": "91252",
@@ -48,10 +49,10 @@
       },
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        "opens": "00:00",
-        "closes": "23:59",
-        "description": "Layanan Kegawatdaruratan (UGD) & Persalinan 24 Jam"
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "08:00",
+        "closes": "14:00",
+        "description": "Pelayanan Rawat Jalan & Tindakan Medis Operasional"
       }
     ]
   }
@@ -60,7 +61,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="style.css?v=3.4.0">
+  <link rel="stylesheet" href="style.css?v=3.5.3">
 </head>
 <body>
 
@@ -85,13 +86,27 @@
     <symbol id="ic-radar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/><path d="M4 6h.01"/><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/><path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"/><path d="M12 18h.01"/><path d="m17.99 11.66A6 6 0 0 1 15.77 15.77"/><circle cx="12" cy="12" r="2"/><path d="m13.41 10.59 5.66-5.66"/></symbol>
   </svg>
 
+  <!-- Offline Network Status Bar (Muncul otomatis saat sambungan terputus) -->
+  <aside id="offline-notification-bar" class="offline-bar" role="status" aria-live="polite" style="display: none;">
+    <div class="container offline-bar-content">
+      <div class="offline-bar-left">
+        <span style="font-size: 1.1rem; line-height: 1;">⚡</span>
+        <span class="offline-text"><strong>Mode Offline Aktif</strong> — Anda tetap dapat membaca seluruh katalog layanan, informasi dokter, berita, dan menyusun draf aduan.</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span class="offline-pill">Data Tersimpan di Perangkat</span>
+        <button id="btn-reconnect-check" style="background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.6875rem; font-weight: 700; cursor: pointer;">Cek Koneksi</button>
+      </div>
+    </div>
+  </aside>
+
   <!-- 1. TOPBAR INFORMASI OPERASIONAL PEMERINTAHAN -->
   <div class="topbar">
     <div class="container">
       <div class="topbar-left">
         <span class="topbar-service-hours">
           <svg style="width: 14px; height: 14px; display: inline-block; vertical-align: -2px; margin-right: 5px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Pelayanan IGD & Persalinan Siaga 24 Jam • Rawat Jalan 08.00 - 14.00 WITA
+          Pelayanan Rawat Jalan & Tindakan Medis • Senin – Sabtu: 08.00 – 14.00 WITA
         </span>
       </div>
       <div class="topbar-right">
@@ -174,6 +189,10 @@
       </div>
 
       <div class="mobile-drawer-footer">
+        <button id="drawer-btn-pwa-install" class="btn-drawer-install" style="display: none;">
+          <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Pasang Aplikasi di HP</span>
+        </button>
         <a href="tel:0421921001" class="btn-drawer-contact">
           <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <span>Hubungi Kami</span>
@@ -329,7 +348,7 @@
               </div>
               <div class="quick-card-info">
                 <h3 class="quick-card-name">Jadwal Layanan</h3>
-                <p class="quick-card-desc">Jam operasional loket, dokter poli, dan IGD 24 Jam.</p>
+                <p class="quick-card-desc">Jam operasional loket, ruang tindakan, dan poli rawat jalan.</p>
               </div>
               <span class="quick-card-arrow">→</span>
             </a>
@@ -577,14 +596,14 @@
               <div class="lifestage-icon-wrap">
                 <svg style="width: 24px; height: 24px;" aria-hidden="true"><use href="#ic-doc"/></svg>
               </div>
-              <h3 class="lifestage-title">Penunjang & UGD 24 Jam</h3>
-              <p class="lifestage-desc">Layanan gawat darurat triase cepat, instalasi farmasi (apotek), dan pemeriksaan laboratorium diagnostik terstandar.</p>
+              <h3 class="lifestage-title">Penunjang & Ruang Tindakan Medis</h3>
+              <p class="lifestage-desc">Layanan tindakan medis terstandar, instalasi farmasi (apotek), dan pemeriksaan laboratorium diagnostik terstandar.</p>
               <ul class="lifestage-features">
-                <li>Penanganan IGD & Ruang Bersalin 24 Jam Siaga</li>
+                <li>Penanganan Tindakan Medis & Persalinan Operasional</li>
                 <li>Skrining Resep & Pemberian Informasi Obat</li>
                 <li>Pemeriksaan Hematologi & Kimia Darah</li>
               </ul>
-              <div class="lifestage-target-tag">Target: Siaga Medis 24 Jam Non-Stop</div>
+              <div class="lifestage-target-tag">Target: Pelayanan Prima Jam Operasional</div>
             </div>
           </div>
         </div>
@@ -613,7 +632,7 @@
             <div class="atlas-layer-switcher" role="tablist" aria-label="Pilihan Layer Peta Sehat">
               <button type="button" class="layer-tab active" data-map-layer="admin" role="tab" aria-selected="true" onclick="switchMapLayer('admin')">
                 <svg class="layer-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-                <span>Batas Wilayah (BIG)</span>
+                <span>Populasi & Batas Wilayah</span>
               </button>
               <button type="button" class="layer-tab" data-map-layer="faskes" role="tab" aria-selected="false" onclick="switchMapLayer('faskes')">
                 <svg class="layer-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
@@ -621,65 +640,85 @@
               </button>
               <button type="button" class="layer-tab" data-map-layer="health" role="tab" aria-selected="false" onclick="switchMapLayer('health')">
                 <svg class="layer-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                <span>Gambaran Kesehatan Warga</span>
+                <span>Cakupan Skrining CKG</span>
+              </button>
+              <button type="button" class="layer-tab" data-map-layer="ptm" role="tab" aria-selected="false" onclick="switchMapLayer('ptm')">
+                <svg class="layer-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span>Sebaran Kasus PTM</span>
               </button>
             </div>
             <div class="atlas-layer-indicator-label" id="layer-status-text">
-              Menampilkan: <strong>Batas Administrasi BIG 1:10.000</strong>
+              Menampilkan: <strong>Distribusi Penduduk Resmi (8.825 Jiwa)</strong>
             </div>
+          </div>
+
+          <!-- Sub-Filter Parameter PTM Beranda -->
+          <div id="home-ptm-filter-bar" class="ptm-filter-bar" style="display: none;">
+            <span class="ptm-filter-label">
+              <svg style="width:14px; height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+              Pilihan Indikator PTM:
+            </span>
+            <button type="button" class="ptm-filter-chip active" data-home-ptm="all" onclick="filterHomePtm('all')">Semua Kasus PTM</button>
+            <button type="button" class="ptm-filter-chip" data-home-ptm="hipertensi" onclick="filterHomePtm('hipertensi')">Hipertensi (321)</button>
+            <button type="button" class="ptm-filter-chip" data-home-ptm="diabetes" onclick="filterHomePtm('diabetes')">Gula Tinggi (62)</button>
+            <button type="button" class="ptm-filter-chip" data-home-ptm="obesitas" onclick="filterHomePtm('obesitas')">Obesitas (464)</button>
+            <button type="button" class="ptm-filter-chip" data-home-ptm="indera" onclick="filterHomePtm('indera')">Indera & Gigi (1.037)</button>
+            <button type="button" class="ptm-filter-chip" data-home-ptm="paru_jiwa" onclick="filterHomePtm('paru_jiwa')">Paru & Jiwa (136)</button>
           </div>
 
           <div class="atlas-home-wrapper">
             <!-- Kontainer Peta Leaflet Beranda -->
             <div class="atlas-home-map-container">
               <div id="health-atlas-home-map" style="height: 470px; width: 100%; border-radius: 16px; border: 1px solid var(--border-light); z-index: 1; background-color: #f8fafc;"></div>
-              <div class="atlas-map-legend-bar">
+              <div class="atlas-map-legend-bar" id="atlas-map-legend-bar">
                 <div class="atlas-legend-item">
                   <span class="legend-color-box box-malimpung"></span>
-                  <span><strong>Desa Malimpung</strong> (73.15.05.2006)</span>
+                  <span><strong>Desa Malimpung</strong>: 4.013 Jiwa (5,78 km²)</span>
                 </div>
                 <div class="atlas-legend-item">
                   <span class="legend-color-box box-padangloang"></span>
-                  <span><strong>Desa Padang Loang</strong> (73.15.05.2009)</span>
+                  <span><strong>Desa Padang Loang</strong>: 3.279 Jiwa (28,89 km²)</span>
                 </div>
                 <div class="atlas-legend-item">
                   <span class="legend-color-box box-maccirinna"></span>
-                  <span><strong>Kelurahan Maccirinna</strong> (73.15.05.1004)</span>
+                  <span><strong>Kelurahan Maccirinna</strong>: 1.533 Jiwa (5,01 km²)</span>
                 </div>
                 <div class="atlas-legend-item">
                   <span class="legend-dot-pkm"></span>
-                  <span><strong>Puskesmas Induk</strong> (-3.729869, 119.73413)</span>
+                  <span><strong>Puskesmas Induk</strong> (Rawat Jalan & Tindakan Medis)</span>
                 </div>
+              </div>
+              <div class="atlas-map-meta-footnote">
+                <span>Sumber Data Resmi: Registrasi Kependudukan Wilayah Kerja (Lampiran 2), Geometri BIG 1:10.000 & Aplikasi CKG TERSANJUNG</span>
               </div>
             </div>
 
-            <!-- Panel Samping: Wilayah Kerja & Analitik Data Realtime CKG TERSANJUNG -->
-            <div class="atlas-home-side-panel">
+            <!-- Panel Indikator Samping Peta Beranda -->
+            <div class="atlas-side-panel">
               <!-- Card 1: Data Realtime Skrining CKG -->
-              <div class="atlas-side-stat-card ckg-realtime-card">
-                <div class="ckg-card-topbar">
-                  <span class="atlas-stat-kicker">Data Realtime Skrining CKG</span>
+              <div class="atlas-side-indicators-card">
+                <div class="indicators-card-header">
+                  <span class="indicators-live-kicker">DATA REALTIME SKRINING CKG</span>
                   <span class="badge-live-pulse"><span class="pulse-dot"></span> LIVE CKG</span>
                 </div>
-                <div class="ckg-hero-metric">
+                <div class="ckg-total-metric">
                   <div class="ckg-total-num">1.371</div>
                   <div class="ckg-total-label">Total Warga Telah Diskrining</div>
+                  <div class="ckg-gender-pills">
+                    <span class="gender-pill pill-male">Laki-laki: <strong>419</strong></span>
+                    <span class="gender-pill pill-female">Perempuan: <strong>951</strong></span>
+                  </div>
                 </div>
-                <div class="ckg-gender-pills">
-                  <span class="gender-pill pill-male">Laki-laki: <strong>419</strong></span>
-                  <span class="gender-pill pill-female">Perempuan: <strong>951</strong></span>
-                </div>
-                <!-- Metrik PTM Kunci Terpantau -->
-                <div class="ckg-ptm-mini-grid">
-                  <div class="ckg-ptm-item item-hipertensi">
+                <div class="ckg-ptm-trio">
+                  <div class="ptm-trio-item item-red">
                     <span class="ptm-val">321</span>
                     <span class="ptm-lbl">Hipertensi</span>
                   </div>
-                  <div class="ckg-ptm-item item-diabetes">
+                  <div class="ptm-trio-item item-amber">
                     <span class="ptm-val">62</span>
                     <span class="ptm-lbl">Diabetes</span>
                   </div>
-                  <div class="ckg-ptm-item item-obesitas">
+                  <div class="ptm-trio-item item-blue">
                     <span class="ptm-val">464</span>
                     <span class="ptm-lbl">Obesitas</span>
                   </div>
@@ -690,36 +729,50 @@
               <div class="atlas-side-indicators-card">
                 <div class="indicators-card-header">
                   <h4 class="indicators-card-title">Capaian 8 Dusun Binaan</h4>
-                  <span class="indicators-verified-badge">Optimal 100%</span>
+                  <span class="indicators-verified-badge" style="background:#ecfdf5; color:#047857; border:1px solid #a7f3d0;">15.5% Cakupan Wilayah</span>
                 </div>
                 <div class="indicators-metric-list">
                   <div class="ind-metric-row">
                     <div class="ind-metric-info">
                       <span class="ind-metric-name">Dusun Malimpung (Desa Malimpung)</span>
-                      <span class="ind-metric-target">503 Kunjungan • 101 Hipertensi</span>
+                      <span class="ind-metric-target">503 Kunjungan • 101 Hipertensi • Aktif</span>
                     </div>
-                    <span class="ind-metric-score score-good">100%</span>
+                    <span class="ind-metric-score score-good" style="color:#047857;">12.5%</span>
                   </div>
                   <div class="ind-metric-row">
                     <div class="ind-metric-info">
                       <span class="ind-metric-name">Lingk. Dioang (Kel. Maccirinna)</span>
-                      <span class="ind-metric-target">367 Kunjungan • 75 Hipertensi</span>
+                      <span class="ind-metric-target">367 Kunjungan • 75 Hipertensi • Sangat Tinggi</span>
                     </div>
-                    <span class="ind-metric-score score-good">100%</span>
+                    <span class="ind-metric-score score-good" style="color:#047857;">23.9%</span>
                   </div>
                   <div class="ind-metric-row">
                     <div class="ind-metric-info">
                       <span class="ind-metric-name">Dusun Pajalele (Desa Malimpung)</span>
-                      <span class="ind-metric-target">159 Kunjungan • 38 Hipertensi</span>
+                      <span class="ind-metric-target">159 Kunjungan • 38 Hipertensi • Berjalan</span>
                     </div>
-                    <span class="ind-metric-score score-good">100%</span>
+                    <span class="ind-metric-score" style="color:#0284c7; font-weight:800;">4.0%</span>
                   </div>
                   <div class="ind-metric-row">
                     <div class="ind-metric-info">
-                      <span class="ind-metric-name">Dusun Palita & Padang</span>
-                      <span class="ind-metric-target">194 Kunjungan Terlayani</span>
+                      <span class="ind-metric-name">Dusun Palita (Desa Malimpung)</span>
+                      <span class="ind-metric-target">110 Kunjungan • 33 Hipertensi • Berjalan</span>
                     </div>
-                    <span class="ind-metric-score score-good">100%</span>
+                    <span class="ind-metric-score" style="color:#0284c7; font-weight:800;">2.7%</span>
+                  </div>
+                  <div class="ind-metric-row">
+                    <div class="ind-metric-info">
+                      <span class="ind-metric-name">Dusun Padang (Desa Padang Loang)</span>
+                      <span class="ind-metric-target">84 Kunjungan • 38 Hipertensi • Penjangkauan</span>
+                    </div>
+                    <span class="ind-metric-score" style="color:#d97706; font-weight:800;">2.6%</span>
+                  </div>
+                  <div class="ind-metric-row">
+                    <div class="ind-metric-info">
+                      <span class="ind-metric-name">Banga, Mattongang & Bulu Dua</span>
+                      <span class="ind-metric-target">148 Kunjungan Terlayani • Jemput Bola</span>
+                    </div>
+                    <span class="ind-metric-score" style="color:#64748b; font-weight:800;">1.7%</span>
                   </div>
                 </div>
                 <div class="indicators-footer-note">
@@ -802,10 +855,10 @@
                 <span class="eco-status-badge status-internal">Operasional Internal</span>
               </div>
               <h3 class="eco-app-title">Kepegawaian & Presensi Nakes</h3>
-              <p class="eco-app-desc">Manajemen shift jaga IGD 24 Jam, presensi digital bergeofencing fasyankes, Surat Tanda Registrasi (STR), dan Surat Izin Praktik (SIP) dokter/bidan.</p>
+              <p class="eco-app-desc">Manajemen jadwal dinas pelayanan medis, presensi digital bergeofencing fasyankes, Surat Tanda Registrasi (STR), dan Surat Izin Praktik (SIP) dokter/bidan.</p>
               <div class="eco-app-meta">
                 <span>Modul Aparatur:</span>
-                <code>Presensi • STR/SIP • Shift IGD</code>
+                <code>Presensi • STR/SIP • Jadwal Pelayanan</code>
               </div>
               <div class="eco-app-action">
                 <a href="#office" data-go="office" class="btn-eco-secondary">
@@ -1054,7 +1107,7 @@
               </div>
               <h3 class="facilities-card-title">Fasilitas Pelayanan Induk</h3>
               <ul class="facilities-checklist">
-                <li><span class="facility-dot"></span> Pelayanan Gawat Darurat (IGD) & Persalinan 24 Jam</li>
+                <li><span class="facility-dot"></span> Pelayanan Tindakan Medis & Ruang Bersalin</li>
                 <li><span class="facility-dot"></span> Poliklinik Rawat Jalan (Umum, Gigi, KIA/KB, Gizi, MTBS)</li>
                 <li><span class="facility-dot"></span> Laboratorium Pemeriksaan Darah & Kimia Darah Lengkap</li>
                 <li><span class="facility-dot"></span> Instalasi Farmasi & Gudang Obat Standar Kemenkes</li>
@@ -1138,7 +1191,7 @@
               <button class="chip" data-category="keluarga">Ibu & Anak (KIA)</button>
               <button class="chip" data-category="preventif">Deteksi Dini & CKG</button>
               <button class="chip" data-category="penunjang">Penunjang & Farmasi</button>
-              <button class="chip" data-category="darurat">Layanan 24 Jam</button>
+              <button class="chip" data-category="darurat">Tindakan Medis & Persalinan</button>
               <button id="service-reset" style="font-size: 0.75rem; color: var(--rose-600); font-weight: 700; margin-left: auto;">Reset Pencarian</button>
             </div>
           </div>
@@ -1157,6 +1210,370 @@
           <div id="service-empty" style="display: none; text-align: center; padding: 3rem; background-color: #ffffff; border-radius: var(--radius-lg); border: 1px solid var(--border); margin-top: 1.5rem;">
             <p style="font-size: 1.125rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.5rem;">Layanan tidak ditemukan</p>
             <p style="font-size: 0.875rem; color: var(--ink-secondary);">Coba kata kunci lain atau hubungi meja informasi kami.</p>
+          </div>
+
+          <!-- ====================================================================
+               PANDUAN ALUR PELAYANAN INTEGRASI LAYANAN PRIMER (ILP) KLASTER 2, 3, 4 & 5
+               Rujukan Dokumen: Alur pelayanan klaster 2, 3, 4 dan 5.pdf
+               ==================================================================== -->
+          <div class="ilp-flow-master-section" id="ilp-flow-section" style="margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border-light, #e2ece8);">
+            <div class="section-head-flex" style="margin-bottom: 1.75rem;">
+              <div>
+                <span class="tag-badge" style="background:#ecfdf5; color:#059669; margin-bottom:0.35rem;">Standar Integrasi Layanan Primer (ILP)</span>
+                <h2 class="section-title-master" style="font-size:1.625rem; margin-top:0.25rem;">Alur Pelayanan Pasien Berbasis Klaster</h2>
+                <p class="section-subtitle-master" style="max-width:760px;">Penyelenggaraan pelayanan kesehatan komprehensif yang mengintegrasikan penanganan klinis dalam gedung dengan pemantauan wilayah setempat (PWS) dan jejaring posyandu.</p>
+              </div>
+            </div>
+
+            <!-- Tab Switcher Klaster Pelayanan dengan Scroll Wrapper Aman -->
+            <div class="ilp-tabs-wrapper" style="max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; margin-bottom: 1.5rem;">
+              <div class="ilp-flow-tabs" role="tablist" aria-label="Pilihan Alur Klaster">
+                <button type="button" class="ilp-tab-btn active" data-flow="klaster2" role="tab" aria-selected="true" onclick="switchIlpFlow('klaster2')">
+                  <span class="ilp-tab-tag">Klaster 2</span>
+                  <strong>Kesehatan Ibu & Anak</strong>
+                </button>
+                <button type="button" class="ilp-tab-btn" data-flow="klaster3" role="tab" aria-selected="false" onclick="switchIlpFlow('klaster3')">
+                  <span class="ilp-tab-tag">Klaster 3</span>
+                  <strong>Usia Produktif & Lansia</strong>
+                </button>
+                <button type="button" class="ilp-tab-btn" data-flow="ugd" role="tab" aria-selected="false" onclick="switchIlpFlow('ugd')">
+                  <span class="ilp-tab-tag">Klaster 5</span>
+                  <strong>Tindakan Medis & Bersalin</strong>
+                </button>
+                <button type="button" class="ilp-tab-btn" data-flow="farmasi" role="tab" aria-selected="false" onclick="switchIlpFlow('farmasi')">
+                  <span class="ilp-tab-tag">Klaster 5</span>
+                  <strong>Pelayanan Farmasi (Apotek)</strong>
+                </button>
+                <button type="button" class="ilp-tab-btn" data-flow="lab" role="tab" aria-selected="false" onclick="switchIlpFlow('lab')">
+                  <span class="ilp-tab-tag">Klaster 5</span>
+                  <strong>Laboratorium Kesmas</strong>
+                </button>
+                <button type="button" class="ilp-tab-btn" data-flow="gigi" role="tab" aria-selected="false" onclick="switchIlpFlow('gigi')">
+                  <span class="ilp-tab-tag">Lintas Klaster</span>
+                  <strong>Kesehatan Gigi & Mulut</strong>
+                </button>
+              </div>
+            </div>
+
+            <!-- Kontainer Konten Alur Pelayanan Interaktif -->
+            <div class="ilp-flow-content-card" id="ilp-flow-display" style="background:#ffffff; border:1px solid var(--border-light, #e2ece8); border-radius:20px; padding:2rem; box-shadow:0 8px 30px rgba(12,41,35,0.06); margin-top:1.5rem;">
+              
+              <!-- 1. KONTEN ALUR KLASTER 2: KESEHATAN IBU DAN ANAK -->
+              <div class="ilp-flow-pane active" id="flow-klaster2">
+                <div class="ilp-pane-header" style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem; padding-bottom:1.25rem; border-bottom:1px solid var(--border-light);">
+                  <div>
+                    <span class="badge-live-pulse" style="margin-bottom:0.5rem;"><span class="pulse-dot"></span> SOP RESMI KLASTER 2</span>
+                    <h3 style="font-size:1.25rem; font-weight:800; color:var(--forest-950); margin:0;">Alur Pelayanan Klaster 2: Kesehatan Ibu dan Anak</h3>
+                    <p style="font-size:0.875rem; color:var(--ink-secondary); margin-top:0.25rem;">Sasaran: Ibu Hamil, Ibu Bersalin, Ibu Nifas, Balita & Pra-Sekolah, Anak Sekolah, dan Remaja.</p>
+                  </div>
+                  <div style="font-size:0.8125rem; background:var(--surface-alt); padding:0.4rem 0.875rem; border-radius:10px; font-weight:700; color:var(--forest-950);">
+                    Koordinator: <strong>Sartika, Amd. Keb</strong>
+                  </div>
+                </div>
+
+                <div class="ilp-steps-grid">
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">1</div>
+                    <h4 class="step-title">Kedatangan & Triase</h4>
+                    <p class="step-desc">Pasien datang mandiri atau rujukan posyandu/sekolah/faskes primer. Dilakukan triase cepat:</p>
+                    <ul class="step-sublist">
+                      <li><strong>Gawat Darurat:</strong> Langsung ke Ruang Tindakan Medis (UGD).</li>
+                      <li><strong>Ibu Bersalin:</strong> Langsung ke Ruang Bersalin Puskesmas.</li>
+                      <li><strong>Reguler:</strong> Melakukan registrasi di loket pendaftaran.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">2</div>
+                    <h4 class="step-title">Poli Klaster 2</h4>
+                    <p class="step-desc">Pemeriksaan komprehensif sesuai standar mutu:</p>
+                    <ul class="step-sublist">
+                      <li><strong>Ibu Hamil:</strong> Pelayanan ANC terstandar 10T.</li>
+                      <li><strong>Balita & Pra-Sekolah:</strong> Antropometri digital, kurva pertumbuhan, SDIDTK, dan imunisasi.</li>
+                      <li><strong>Remaja & Usia Sekolah:</strong> Skrining masalah usekrem (pendekatan HEADSSS) dan skrining PTM (>15 th).</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">3</div>
+                    <h4 class="step-title">Layanan Penunjang</h4>
+                    <p class="step-desc">Jika membutuhkan pemeriksaan penunjang, pasien diarahkan antar-klaster:</p>
+                    <ul class="step-sublist">
+                      <li>Pemeriksaan Laboratorium (Hb, Golongan Darah, Urin, GDS).</li>
+                      <li>Poli Gigi & Mulut (pemeriksaan kesehatan gigi bumil/anak).</li>
+                      <li>Konsultasi ulang ke dokter klaster penatalaksanaan.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">4</div>
+                    <h4 class="step-title">Penanganan & Farmasi</h4>
+                    <p class="step-desc">Penetapan tatalaksana terapi dan tindak lanjut:</p>
+                    <ul class="step-sublist">
+                      <li><strong>Dapat Ditangani:</strong> Pelayanan resep di Farmasi (Apotek) disertai edukasi, lalu pasien pulang.</li>
+                      <li><strong>Kasus Kompleks:</strong> Rujukan spesialistik ke FKRTL (RSUD Pinrang).</li>
+                      <li><strong>Kasus Khusus:</strong> Rujukan pendampingan sosial dan hukum bila terindikasi kekerasan anak/perempuan.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card step-highlight-pws">
+                    <div class="step-num-badge pws-badge">PWS</div>
+                    <h4 class="step-title">Tindak Lanjut Luar Gedung</h4>
+                    <p class="step-desc">Integrasi Pemantauan Wilayah Setempat (PWS) berkelanjutan:</p>
+                    <ul class="step-sublist">
+                      <li>Analisis beban penyakit morbiditas & cakupan layanan.</li>
+                      <li>Diteruskan ke Posyandu Prima di 2 Desa & 1 Kelurahan binaan.</li>
+                      <li>Kunjungan rumah oleh Bidan Desa & Kader Kesehatan untuk sweeping dan pemantauan gizi/kepatuhan terapi.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. KONTEN ALUR KLASTER 3: USIA PRODUKTIF DAN LANSIA -->
+              <div class="ilp-flow-pane" id="flow-klaster3" style="display: none;">
+                <div class="ilp-pane-header" style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem; padding-bottom:1.25rem; border-bottom:1px solid var(--border-light);">
+                  <div>
+                    <span class="badge-live-pulse" style="margin-bottom:0.5rem;"><span class="pulse-dot"></span> SOP RESMI KLASTER 3</span>
+                    <h3 style="font-size:1.25rem; font-weight:800; color:var(--forest-950); margin:0;">Alur Pelayanan Klaster 3: Usia Produktif dan Lanjut Usia</h3>
+                    <p style="font-size:0.875rem; color:var(--ink-secondary); margin-top:0.25rem;">Sasaran: Usia Produktif (15–59 Tahun) dan Lanjut Usia (Geriatri 60+ Tahun).</p>
+                  </div>
+                  <div style="font-size:0.8125rem; background:var(--surface-alt); padding:0.4rem 0.875rem; border-radius:10px; font-weight:700; color:var(--forest-950);">
+                    Koordinator: <strong>Dr. Andi Mutia</strong>
+                  </div>
+                </div>
+
+                <div class="ilp-steps-grid">
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">1</div>
+                    <h4 class="step-title">Kedatangan & Registrasi</h4>
+                    <p class="step-desc">Pasien datang sendiri atau rujukan posyandu / praktik mandiri:</p>
+                    <ul class="step-sublist">
+                      <li>Kasus Gawat Darurat -> Segera ditangani di IGD/RB.</li>
+                      <li>Pasien reguler melakukan registrasi di loket fasyankes.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">2</div>
+                    <h4 class="step-title">Poli Klaster 3</h4>
+                    <p class="step-desc">Pelayanan sesuai standar skrining terpadu:</p>
+                    <ul class="step-sublist">
+                      <li><strong>Pandu PTM:</strong> Skrining faktor risiko penyakit tidak menular (Hipertensi, Diabetes, Obesitas, Kolesterol).</li>
+                      <li><strong>Usia Produktif:</strong> Pemeriksaan penyakit menular & skrining pranikah / calon pengantin layak hamil.</li>
+                      <li><strong>Lanjut Usia (60+ th):</strong> Pengkajian Paripurna Pasien Geriatri (P3G) dan status kognitif/kemandirian.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">3</div>
+                    <h4 class="step-title">Layanan Penunjang</h4>
+                    <p class="step-desc">Pemeriksaan penunjang terintegrasi:</p>
+                    <ul class="step-sublist">
+                      <li>Laboratorium rutin (Kimia darah, urinalisis, profil lipid).</li>
+                      <li>Poli Gigi dan Mulut serta konseling gizi terpadu.</li>
+                      <li>Konsultasi ulang untuk penatalaksanaan komprehensif.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">4</div>
+                    <h4 class="step-title">Tatalaksana & Resep</h4>
+                    <p class="step-desc">Pengobatan dan rujukan terstandar:</p>
+                    <ul class="step-sublist">
+                      <li>Pengambilan obat di Farmasi disertai penjelasan penggunaan obat kronis.</li>
+                      <li>Rujukan FKRTL ke Rumah Sakit bila memerlukan penanganan spesialis.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card step-highlight-pws">
+                    <div class="step-num-badge pws-badge">PWS</div>
+                    <h4 class="step-title">Pemantauan PWS Wilayah</h4>
+                    <p class="step-desc">Evaluasi tindak lanjut komunitas:</p>
+                    <ul class="step-sublist">
+                      <li>Pemantauan kohort PTM melalui Posyandu Lansia & Posbindu.</li>
+                      <li>Kunjungan rumah kader kesehatan bagi penderita hipertensi/diabetes yang tidak patuh kontrol.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. KONTEN ALUR KLASTER 5: TINDAKAN MEDIS & BERSALIN -->
+              <div class="ilp-flow-pane" id="flow-ugd" style="display: none;">
+                <div class="ilp-pane-header" style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem; padding-bottom:1.25rem; border-bottom:1px solid var(--border-light);">
+                  <div>
+                    <span class="badge-live-pulse" style="margin-bottom:0.5rem;"><span class="pulse-dot"></span> RUANG TINDAKAN MEDIS</span>
+                    <h3 style="font-size:1.25rem; font-weight:800; color:var(--forest-950); margin:0;">Alur Pelayanan Tindakan Medis & Persalinan (Klaster 5)</h3>
+                    <p style="font-size:0.875rem; color:var(--ink-secondary); margin-top:0.25rem;">Layanan tindakan medis dan persalinan pada jam operasional Puskesmas.</p>
+                  </div>
+                  <div style="font-size:0.8125rem; background:var(--surface-alt); padding:0.4rem 0.875rem; border-radius:10px; font-weight:700; color:var(--forest-950);">
+                    Penanggung Jawab: <strong>Rasma, Amd. Kep</strong>
+                  </div>
+                </div>
+
+                <div class="ilp-steps-grid">
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">1</div>
+                    <h4 class="step-title">Triase Primer Cepat</h4>
+                    <p class="step-desc">Identifikasi kegawatdaruratan seketika saat pasien tiba di fasyankes:</p>
+                    <ul class="step-sublist">
+                      <li><strong>Kategori Gawat Darurat / Partus:</strong> Langsung diarahkan ke Ruang Tindakan UGD / Ruang Bersalin.</li>
+                      <li><strong>Kasus Non-Gawat:</strong> Dialihkan ke alur pendaftaran klaster reguler.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">2</div>
+                    <h4 class="step-title">Tatalaksana Definitif</h4>
+                    <p class="step-desc">Tindakan resusitasi, stabilisasi tanda vital, penjahitan luka, tatalaksana asma akut, atau pertolongan persalinan normal oleh tim medis siaga.</p>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">3</div>
+                    <h4 class="step-title">Keputusan Klinis</h4>
+                    <p class="step-desc">Penilaian respon tatalaksana medis:</p>
+                    <ul class="step-sublist">
+                      <li><strong>Dapat Ditangani:</strong> Observasi hingga stabil, pemberian obat, dan edukasi rawat jalan.</li>
+                      <li><strong>Perlu Penanganan Lanjutan:</strong> Prosedur rujukan cepat darurat ke FKRTL dengan ambulans siaga puskesmas.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">4</div>
+                    <h4 class="step-title">Pencatatan RME & PWS</h4>
+                    <p class="step-desc">Pencatatan rekam medis elektronik dalam Sistem Informasi Puskesmas & bridging SATUSEHAT. Notifikasi tindak lanjut ke klaster siklus hidup terkait.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4. KONTEN ALUR KLASTER 5: PELAYANAN FARMASI (APOTEK) -->
+              <div class="ilp-flow-pane" id="flow-farmasi" style="display: none;">
+                <div class="ilp-pane-header" style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem; padding-bottom:1.25rem; border-bottom:1px solid var(--border-light);">
+                  <div>
+                    <span class="badge-live-pulse" style="margin-bottom:0.5rem;"><span class="pulse-dot"></span> MUTU & KESELAMATAN PASIEN</span>
+                    <h3 style="font-size:1.25rem; font-weight:800; color:var(--forest-950); margin:0;">Alur Pelayanan Farmasi & Apotek (Klaster 5)</h3>
+                    <p style="font-size:0.875rem; color:var(--ink-secondary); margin-top:0.25rem;">Standar penjaminan obat rasional, tepat dosis, dan bebas efek interaksi merugikan.</p>
+                  </div>
+                  <div style="font-size:0.8125rem; background:var(--surface-alt); padding:0.4rem 0.875rem; border-radius:10px; font-weight:700; color:var(--forest-950);">
+                    Penanggung Jawab: <strong>Bd. Lia Andriani, S.Keb</strong>
+                  </div>
+                </div>
+
+                <div class="ilp-steps-grid">
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">1</div>
+                    <h4 class="step-title">Penerimaan Resep</h4>
+                    <p class="step-desc">Pasien menyerahkan lembar resep fisik/elektronik dari ruang pemeriksaan Klaster 2, 3, atau 4.</p>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">2</div>
+                    <h4 class="step-title">Skrining Resep</h4>
+                    <p class="step-desc">Pemeriksaan kelengkapan administrasi, kesesuaian farmasetis, dan klinis (dosis, interaksi, alergi):</p>
+                    <ul class="step-sublist">
+                      <li>Bila ada keraguan/tidak lengkap: Petugas segera mengonfirmasi ke dokter peresep.</li>
+                      <li>Bila resep absah: Melanjutkan ke penyiapan obat.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">3</div>
+                    <h4 class="step-title">Penyiapan & Pelabelan</h4>
+                    <p class="step-desc">Pengambilan obat dari rak penyimpanan berstandar FEFO/FIFO, peracikan (bila ada puyer/sirup), pengemasan higienis, dan penempelan etiket aturan pakai yang jelas.</p>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">4</div>
+                    <h4 class="step-title">Pemberian Informasi Obat (PIO)</h4>
+                    <p class="step-desc">Pengecekan ulang identitas pasien saat penyerahan, pemberian edukasi cara minum obat, penyimpanan obat di rumah, kemungkinan efek samping, lalu pasien pulang.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5. KONTEN ALUR KLASTER 5: LABORATORIUM KESMAS -->
+              <div class="ilp-flow-pane" id="flow-lab" style="display: none;">
+                <div class="ilp-pane-header" style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem; padding-bottom:1.25rem; border-bottom:1px solid var(--border-light);">
+                  <div>
+                    <span class="badge-live-pulse" style="margin-bottom:0.5rem;"><span class="pulse-dot"></span> DIAGNOSTIK AKURAT</span>
+                    <h3 style="font-size:1.25rem; font-weight:800; color:var(--forest-950); margin:0;">Alur Pelayanan Laboratorium Kesehatan Masyarakat</h3>
+                    <p style="font-size:0.875rem; color:var(--ink-secondary); margin-top:0.25rem;">Pemeriksaan spesimen darah, dahak, urin, dan rapid diagnostik standar Kemenkes.</p>
+                  </div>
+                  <div style="font-size:0.8125rem; background:var(--surface-alt); padding:0.4rem 0.875rem; border-radius:10px; font-weight:700; color:var(--forest-950);">
+                    Penanggung Jawab: <strong>Pebriansyah, Amd.AK</strong>
+                  </div>
+                </div>
+
+                <div class="ilp-steps-grid">
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">1</div>
+                    <h4 class="step-title">Penerimaan Pengantar Lab</h4>
+                    <p class="step-desc">Pasien datang dari Klaster 2, Klaster 3, atau UGD membawa formulir rujukan pemeriksaan lab.</p>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">2</div>
+                    <h4 class="step-title">Validasi Kelayakan Uji</h4>
+                    <p class="step-desc">Verifikasi apakah parameter tes tersedia di fasyankes:</p>
+                    <ul class="step-sublist">
+                      <li><strong>Tersedia:</strong> Dilakukan pengambilan spesimen (darah/urin/dahak) sesuai SOP biosafety.</li>
+                      <li><strong>Tidak Tersedia:</strong> Diberikan rekomendasi rujukan laboratorium rujukan/FKRTL.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">3</div>
+                    <h4 class="step-title">Analisis & Verifikasi Hasil</h4>
+                    <p class="step-desc">Pemeriksaan spesimen menggunakan alat uji terkalibrasi, pencatatan hasil, dan verifikasi oleh Pranata Laboratorium Kesehatan.</p>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">4</div>
+                    <h4 class="step-title">Kembali ke Dokter Klaster</h4>
+                    <p class="step-desc">Lembar hasil diserahkan kembali kepada dokter pemeriksa di klaster asal untuk penegakan diagnosis definitif dan tata laksana lanjutan.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6. KONTEN ALUR LINTAS KLASTER: POLI GIGI DAN MULUT -->
+              <div class="ilp-flow-pane" id="flow-gigi" style="display: none;">
+                <div class="ilp-pane-header" style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem; padding-bottom:1.25rem; border-bottom:1px solid var(--border-light);">
+                  <div>
+                    <span class="badge-live-pulse" style="margin-bottom:0.5rem;"><span class="pulse-dot"></span> KESEHATAN ORAL</span>
+                    <h3 style="font-size:1.25rem; font-weight:800; color:var(--forest-950); margin:0;">Alur Pelayanan Kesehatan Gigi dan Mulut</h3>
+                    <p style="font-size:0.875rem; color:var(--ink-secondary); margin-top:0.25rem;">Pelayanan tumpatan, pencabutan gigi, pembersihan karang gigi, dan edukasi kesehatan oral.</p>
+                  </div>
+                  <div style="font-size:0.8125rem; background:var(--surface-alt); padding:0.4rem 0.875rem; border-radius:10px; font-weight:700; color:var(--forest-950);">
+                    Penanggung Jawab: <strong>Dwi Ermayani, AMKG</strong>
+                  </div>
+                </div>
+
+                <div class="ilp-steps-grid">
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">1</div>
+                    <h4 class="step-title">Pendaftaran / Rujukan Klaster</h4>
+                    <p class="step-desc">Pasien datang melalui pendaftaran langsung atau rujukan internal dari Klaster 2 (Ibu Hamil/Anak) dan Klaster 3.</p>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">2</div>
+                    <h4 class="step-title">Pemeriksaan & Tindakan Oral</h4>
+                    <p class="step-desc">Pemeriksaan klinis gigi dan mulut. Bila memerlukan penunjang (misal pemeriksaan darah/gula darah) dirujuk sementara ke Laboratorium.</p>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">3</div>
+                    <h4 class="step-title">Keputusan & Konsultasi</h4>
+                    <p class="step-desc">Tindakan tuntas dikonsultasikan kembali ke klaster perujuk. Bila kasus impaksi/kista rumit, dirujuk ke spesialis bedah mulut di FKRTL.</p>
+                  </div>
+
+                  <div class="ilp-step-card">
+                    <div class="step-num-badge">4</div>
+                    <h4 class="step-title">Farmasi & Edukasi</h4>
+                    <p class="step-desc">Pengambilan analgesik/antibiotik di Apotek bila diperlukan, pemberian petunjuk kebersihan gigi, dan pencatatan data ke PWS.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </section>
@@ -1324,7 +1741,7 @@
               Indikator resmi diterbitkan setelah pembilang, penyebut kependudukan sah, dan periode pengamatan divalidasi oleh Dinas Kesehatan Kabupaten Pinrang.
             </p>
 
-            <div class="kpi-stat-grid">
+            <div class="kpi-stat-grid" id="topic-kpi-standard-grid">
               <div class="kpi-stat-item">
                 <span id="kpi-label-1">Jumlah Peserta Tervalidasi</span>
                 <strong id="kpi-val-1">—</strong>
@@ -1339,6 +1756,77 @@
                 <span id="kpi-label-3">Cakupan Wilayah</span>
                 <strong id="kpi-val-3">—%</strong>
                 <small id="kpi-sub-3">Cakupan tidak dihitung tanpa penyebut sah</small>
+              </div>
+            </div>
+
+            <!-- Grid Khusus 10 Indikator PTM Komprehensif (Aktif saat Tab PTM dipilih) -->
+            <div id="topic-ptm-10grid" style="display: none; margin-bottom: 1.5rem;">
+              <div class="ptm-grid-10" style="margin-bottom: 0.75rem;">
+                <!-- 1. Hipertensi -->
+                <div class="ptm-grid-item" style="border: 1px solid #fee2e2; background: #fffaf9;">
+                  <div class="ptm-metric-title" style="color:#991b1b;">Hipertensi</div>
+                  <div class="ptm-metric-num" style="color:#b91c1c;">321</div>
+                  <div class="ptm-metric-desc">≥140/90 mmHg</div>
+                </div>
+                <!-- 2. Gula Tinggi -->
+                <div class="ptm-grid-item" style="border: 1px solid #fef3c7; background: #fffdf5;">
+                  <div class="ptm-metric-title" style="color:#92400e;">Gula Tinggi</div>
+                  <div class="ptm-metric-num" style="color:#d97706;">62</div>
+                  <div class="ptm-metric-desc">GDS/GDP Tinggi</div>
+                </div>
+                <!-- 3. Obesitas -->
+                <div class="ptm-grid-item" style="border: 1px solid #dbeafe; background: #f8fbff;">
+                  <div class="ptm-metric-title" style="color:#1e40af;">Obesitas</div>
+                  <div class="ptm-metric-num" style="color:#2563eb;">464</div>
+                  <div class="ptm-metric-desc">IMT ≥25 & LP</div>
+                </div>
+                <!-- 4. Risiko Paru -->
+                <div class="ptm-grid-item" style="border: 1px solid #dcfce7; background: #f6fef9;">
+                  <div class="ptm-metric-title" style="color:#166534;">Risiko Paru</div>
+                  <div class="ptm-metric-num" style="color:#15803d;">119</div>
+                  <div class="ptm-metric-desc">Skrining PUMA</div>
+                </div>
+                <!-- 5. Mental Jiwa -->
+                <div class="ptm-grid-item" style="border: 1px solid #f3e8ff; background: #faf5ff;">
+                  <div class="ptm-metric-title" style="color:#6b21a8;">Mental Jiwa</div>
+                  <div class="ptm-metric-num" style="color:#7e22ce;">17</div>
+                  <div class="ptm-metric-desc">SRQ-20 Positif</div>
+                </div>
+                <!-- 6. Mata Kiri -->
+                <div class="ptm-grid-item" style="border: 1px solid #e0f2fe; background: #f0f9ff;">
+                  <div class="ptm-metric-title" style="color:#0369a1;">Mata Kiri</div>
+                  <div class="ptm-metric-num" style="color:#0284c7;">74</div>
+                  <div class="ptm-metric-desc">Visus & Katarak</div>
+                </div>
+                <!-- 7. Mata Kanan -->
+                <div class="ptm-grid-item" style="border: 1px solid #e0f2fe; background: #f0f9ff;">
+                  <div class="ptm-metric-title" style="color:#0369a1;">Mata Kanan</div>
+                  <div class="ptm-metric-num" style="color:#0284c7;">68</div>
+                  <div class="ptm-metric-desc">Visus & Katarak</div>
+                </div>
+                <!-- 8. Telinga Kiri -->
+                <div class="ptm-grid-item" style="border: 1px solid #ede9fe; background: #f5f3ff;">
+                  <div class="ptm-metric-title" style="color:#5b21b6;">Telinga Kiri</div>
+                  <div class="ptm-metric-num" style="color:#6d28d9;">46</div>
+                  <div class="ptm-metric-desc">Serumen/Dengar</div>
+                </div>
+                <!-- 9. Telinga Kanan -->
+                <div class="ptm-grid-item" style="border: 1px solid #ede9fe; background: #f5f3ff;">
+                  <div class="ptm-metric-title" style="color:#5b21b6;">Telinga Kanan</div>
+                  <div class="ptm-metric-num" style="color:#6d28d9;">43</div>
+                  <div class="ptm-metric-desc">Serumen/Dengar</div>
+                </div>
+                <!-- 10. Gigi & Mulut -->
+                <div class="ptm-grid-item" style="border: 1px solid #ccfbf1; background: #f0fdfa;">
+                  <div class="ptm-metric-title" style="color:#0f766e;">Gigi & Mulut</div>
+                  <div class="ptm-metric-num" style="color:#0d9488;">218</div>
+                  <div class="ptm-metric-desc">Karies & Gusi</div>
+                </div>
+              </div>
+              <div style="font-size:0.75rem; color:var(--ink-secondary); display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; padding:0.5rem 0.75rem; background:#f8fafc; border-radius:8px; border:1px solid var(--border-light);">
+                <span>👥 Total Terperiksa: <strong>1.371 Pengunjung Fasyankes</strong> (419 Laki-laki • 951 Perempuan)</span>
+                <span>👁️👂 Skrining Indera: <strong>1.037 Warga</strong></span>
+                <span>🩺 Standar: <strong>Kemenkes RI & ICD-10</strong></span>
               </div>
             </div>
 
@@ -1404,49 +1892,91 @@
                 </div>
               </div>
 
-              <!-- 2. Penyakit Tidak Menular (PTM) -->
+              <!-- 2. Penyakit Tidak Menular (PTM) & Indikator Skrining Lengkap -->
               <div style="background:#f8fafc; border:1px solid var(--border-light); border-radius:14px; padding:1.25rem;">
-                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
                   <div>
-                    <h4 style="font-size:1rem; font-weight:800; color:var(--forest-950); margin:0;">Penyakit Tidak Menular (PTM)</h4>
-                    <span style="font-size:0.75rem; color:var(--ink-secondary);">Pemantauan risiko kesehatan terkini dari 1.371 pengunjung</span>
+                    <h4 style="font-size:1rem; font-weight:800; color:var(--forest-950); margin:0;">Penyakit Tidak Menular (PTM) & Indikator Organ</h4>
+                    <span style="font-size:0.75rem; color:var(--ink-secondary);">Pemantauan 10 indikator risiko klinis dari 1.371 pengunjung fasyankes</span>
                   </div>
                   <div style="font-size:0.75rem; text-align:right;">
                     <span style="color:#0284c7; font-weight:700;">Laki-laki: 419</span> • <span style="color:#e11d48; font-weight:700;">Perempuan: 951</span>
                   </div>
                 </div>
-                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.625rem;">
-                  <div style="background:#fff; border:1px solid #fee2e2; border-radius:10px; padding:8px; text-align:center;">
-                    <div style="font-size:0.6875rem; color:#991b1b; font-weight:700;">Hipertensi</div>
-                    <div style="font-size:1.25rem; font-weight:900; color:#b91c1c;">321</div>
+
+                <!-- Grid 10 Indikator PTM Komprehensif -->
+                <div class="ptm-grid-10">
+                  <!-- 1. Hipertensi -->
+                  <div class="ptm-grid-item" style="border: 1px solid #fee2e2;">
+                    <div class="ptm-metric-title" style="color:#991b1b;">Hipertensi</div>
+                    <div class="ptm-metric-num" style="color:#b91c1c;">321</div>
+                    <div class="ptm-metric-desc">≥140/90 mmHg</div>
                   </div>
-                  <div style="background:#fff; border:1px solid #fef3c7; border-radius:10px; padding:8px; text-align:center;">
-                    <div style="font-size:0.6875rem; color:#92400e; font-weight:700;">Diabetes</div>
-                    <div style="font-size:1.25rem; font-weight:900; color:#d97706;">62</div>
+                  <!-- 2. Diabetes / Gula Tinggi -->
+                  <div class="ptm-grid-item" style="border: 1px solid #fef3c7;">
+                    <div class="ptm-metric-title" style="color:#92400e;">Gula Tinggi</div>
+                    <div class="ptm-metric-num" style="color:#d97706;">62</div>
+                    <div class="ptm-metric-desc">GDS/GDP Tinggi</div>
                   </div>
-                  <div style="background:#fff; border:1px solid #dbeafe; border-radius:10px; padding:8px; text-align:center;">
-                    <div style="font-size:0.6875rem; color:#1e40af; font-weight:700;">Obesitas</div>
-                    <div style="font-size:1.25rem; font-weight:900; color:#2563eb;">464</div>
+                  <!-- 3. Obesitas -->
+                  <div class="ptm-grid-item" style="border: 1px solid #dbeafe;">
+                    <div class="ptm-metric-title" style="color:#1e40af;">Obesitas</div>
+                    <div class="ptm-metric-num" style="color:#2563eb;">464</div>
+                    <div class="ptm-metric-desc">IMT ≥25 & LP</div>
                   </div>
-                  <div style="background:#fff; border:1px solid #dcfce7; border-radius:10px; padding:8px; text-align:center;">
-                    <div style="font-size:0.6875rem; color:#166534; font-weight:700;">Risiko Paru</div>
-                    <div style="font-size:1.25rem; font-weight:900; color:#15803d;">119</div>
+                  <!-- 4. Risiko Paru -->
+                  <div class="ptm-grid-item" style="border: 1px solid #dcfce7;">
+                    <div class="ptm-metric-title" style="color:#166534;">Risiko Paru</div>
+                    <div class="ptm-metric-num" style="color:#15803d;">119</div>
+                    <div class="ptm-metric-desc">Skrining PUMA</div>
                   </div>
-                  <div style="background:#fff; border:1px solid #e0e7ff; border-radius:10px; padding:8px; text-align:center;">
-                    <div style="font-size:0.6875rem; color:#3730a3; font-weight:700;">Gggn Mata</div>
-                    <div style="font-size:1.25rem; font-weight:900; color:#4f46e5;">1.037</div>
+                  <!-- 5. Mental Jiwa -->
+                  <div class="ptm-grid-item" style="border: 1px solid #f3e8ff;">
+                    <div class="ptm-metric-title" style="color:#6b21a8;">Mental Jiwa</div>
+                    <div class="ptm-metric-num" style="color:#7e22ce;">17</div>
+                    <div class="ptm-metric-desc">SRQ-20 Positif</div>
                   </div>
-                  <div style="background:#fff; border:1px solid #f3e8ff; border-radius:10px; padding:8px; text-align:center;">
-                    <div style="font-size:0.6875rem; color:#6b21a8; font-weight:700;">Telinga</div>
-                    <div style="font-size:1.25rem; font-weight:900; color:#7e22ce;">1.037</div>
+                  <!-- 6. Mata Kiri -->
+                  <div class="ptm-grid-item" style="border: 1px solid #e0f2fe;">
+                    <div class="ptm-metric-title" style="color:#0369a1;">Mata Kiri</div>
+                    <div class="ptm-metric-num" style="color:#0284c7;">74</div>
+                    <div class="ptm-metric-desc">Visus & Katarak</div>
                   </div>
+                  <!-- 7. Mata Kanan -->
+                  <div class="ptm-grid-item" style="border: 1px solid #e0f2fe;">
+                    <div class="ptm-metric-title" style="color:#0369a1;">Mata Kanan</div>
+                    <div class="ptm-metric-num" style="color:#0284c7;">68</div>
+                    <div class="ptm-metric-desc">Visus & Katarak</div>
+                  </div>
+                  <!-- 8. Telinga Kiri -->
+                  <div class="ptm-grid-item" style="border: 1px solid #ede9fe;">
+                    <div class="ptm-metric-title" style="color:#5b21b6;">Telinga Kiri</div>
+                    <div class="ptm-metric-num" style="color:#6d28d9;">46</div>
+                    <div class="ptm-metric-desc">Serumen/Dengar</div>
+                  </div>
+                  <!-- 9. Telinga Kanan -->
+                  <div class="ptm-grid-item" style="border: 1px solid #ede9fe;">
+                    <div class="ptm-metric-title" style="color:#5b21b6;">Telinga Kanan</div>
+                    <div class="ptm-metric-num" style="color:#6d28d9;">43</div>
+                    <div class="ptm-metric-desc">Serumen/Dengar</div>
+                  </div>
+                  <!-- 10. Gigi & Mulut -->
+                  <div class="ptm-grid-item" style="border: 1px solid #ccfbf1;">
+                    <div class="ptm-metric-title" style="color:#0f766e;">Gigi & Mulut</div>
+                    <div class="ptm-metric-num" style="color:#0d9488;">218</div>
+                    <div class="ptm-metric-desc">Karies & Gusi</div>
+                  </div>
+                </div>
+                <div style="font-size:0.6875rem; color:var(--ink-secondary); margin-top:0.75rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.25rem;">
+                  <span>* Total skrining organ indera (penglihatan & pendengaran): <strong>1.037 warga terperiksa</strong></span>
+                  <span>Standar Diagnosis: <strong>Kemenkes RI & ICD-10</strong></span>
                 </div>
               </div>
             </div>
 
             <!-- Tabel Capaian Layanan per Dusun/Lingkungan Binaan -->
             <div style="overflow-x:auto;">
-              <h4 style="font-size:1rem; font-weight:800; color:var(--forest-950); margin-bottom:0.75rem;">Capaian Layanan per Dusun/Lingkungan</h4>
+              <h4 style="font-size:1rem; font-weight:800; color:var(--forest-950); margin-bottom:0.75rem;">Capaian Layanan per Dusun/Lingkungan Binaan</h4>
               <table style="width:100%; border-collapse:collapse; font-size:0.8125rem;">
                 <thead>
                   <tr style="background:#f1f5f9; text-align:left; border-bottom:2px solid var(--border-light);">
@@ -1454,94 +1984,94 @@
                     <th style="padding:0.625rem 0.75rem; font-weight:800; color:var(--forest-950); text-align:center;">Kunjungan</th>
                     <th style="padding:0.625rem 0.75rem; font-weight:800; color:#b91c1c; text-align:center;">Hipertensi</th>
                     <th style="padding:0.625rem 0.75rem; font-weight:800; color:#d97706; text-align:center;">Diabetes</th>
-                    <th style="padding:0.625rem 0.75rem; font-weight:800; color:var(--ink-secondary); text-align:center;">Risiko Lainnya</th>
-                    <th style="padding:0.625rem 0.75rem; font-weight:800; color:var(--forest-950); text-align:center;">Capaian Target</th>
-                    <th style="padding:0.625rem 0.75rem; font-weight:800; color:var(--forest-950); text-align:center;">Status</th>
+                    <th style="padding:0.625rem 0.75rem; font-weight:800; color:var(--ink-secondary); text-align:center;">Risiko Lain / Normal</th>
+                    <th style="padding:0.625rem 0.75rem; font-weight:800; color:var(--forest-950); text-align:center;">Rasio Populasi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr style="border-bottom:1px solid var(--border-light);">
-                    <td style="padding:0.625rem 0.75rem;"><strong>Dusun Malimpung</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">MALIMPUNG</span></td>
+                    <td style="padding:0.625rem 0.75rem;"><strong>Dusun Malimpung</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">DESA MALIMPUNG (4.013 JIWA)</span></td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:800;">503</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#b91c1c; font-weight:700;">101</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#d97706; font-weight:700;">14</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;">631</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">100%</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;"><span style="background:#ecfdf5; color:#059669; padding:2px 8px; border-radius:4px; font-weight:800; font-size:0.6875rem;">✓ OPTIMAL</span></td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center;">388</td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">12.5%</td>
                   </tr>
                   <tr style="border-bottom:1px solid var(--border-light); background:#fcfdfd;">
-                    <td style="padding:0.625rem 0.75rem;"><strong>Lingkungan Dioang</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">MACCIRINNA</span></td>
+                    <td style="padding:0.625rem 0.75rem;"><strong>Lingkungan Otting (Dioang)</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">KEL. MACCIRINNA (1.533 JIWA)</span></td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:800;">367</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#b91c1c; font-weight:700;">75</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#d97706; font-weight:700;">15</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;">359</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">100%</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;"><span style="background:#ecfdf5; color:#059669; padding:2px 8px; border-radius:4px; font-weight:800; font-size:0.6875rem;">✓ OPTIMAL</span></td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center;">277</td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">23.9%</td>
                   </tr>
                   <tr style="border-bottom:1px solid var(--border-light);">
-                    <td style="padding:0.625rem 0.75rem;"><strong>Dusun Pajalele</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">MALIMPUNG</span></td>
+                    <td style="padding:0.625rem 0.75rem;"><strong>Dusun Pajalele</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">DESA MALIMPUNG (4.013 JIWA)</span></td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:800;">159</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#b91c1c; font-weight:700;">38</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#d97706; font-weight:700;">1</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;">214</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">100%</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;"><span style="background:#ecfdf5; color:#059669; padding:2px 8px; border-radius:4px; font-weight:800; font-size:0.6875rem;">✓ OPTIMAL</span></td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center;">120</td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">4.0%</td>
                   </tr>
                   <tr style="border-bottom:1px solid var(--border-light); background:#fcfdfd;">
-                    <td style="padding:0.625rem 0.75rem;"><strong>Dusun Palita</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">MALIMPUNG</span></td>
+                    <td style="padding:0.625rem 0.75rem;"><strong>Dusun Palita (Pallis)</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">DESA MALIMPUNG (4.013 JIWA)</span></td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:800;">110</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#b91c1c; font-weight:700;">33</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#d97706; font-weight:700;">3</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;">139</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">100%</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;"><span style="background:#ecfdf5; color:#059669; padding:2px 8px; border-radius:4px; font-weight:800; font-size:0.6875rem;">✓ OPTIMAL</span></td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center;">74</td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">2.7%</td>
                   </tr>
                   <tr style="border-bottom:1px solid var(--border-light);">
-                    <td style="padding:0.625rem 0.75rem;"><strong>Dusun Padang</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">PADANG LOANG</span></td>
+                    <td style="padding:0.625rem 0.75rem;"><strong>Dusun Padang</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">DESA PADANG LOANG (3.279 JIWA)</span></td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:800;">84</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#b91c1c; font-weight:700;">38</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#d97706; font-weight:700;">12</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;">108</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">100%</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;"><span style="background:#ecfdf5; color:#059669; padding:2px 8px; border-radius:4px; font-weight:800; font-size:0.6875rem;">✓ OPTIMAL</span></td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center;">34</td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#2563eb;">2.6%</td>
                   </tr>
                   <tr style="border-bottom:1px solid var(--border-light); background:#fcfdfd;">
-                    <td style="padding:0.625rem 0.75rem;"><strong>Lainnya</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">LUAR WILAYAH</span></td>
+                    <td style="padding:0.625rem 0.75rem;"><strong>Lainnya / Non-Domisili</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">PASIEN RUJUKAN LINTAS BATAS</span></td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:800;">52</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#b91c1c; font-weight:700;">8</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#d97706; font-weight:700;">7</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;">72</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">100%</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;"><span style="background:#ecfdf5; color:#059669; padding:2px 8px; border-radius:4px; font-weight:800; font-size:0.6875rem;">✓ OPTIMAL</span></td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center;">37</td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:var(--ink-tertiary);">-</td>
                   </tr>
                   <tr style="border-bottom:1px solid var(--border-light);">
-                    <td style="padding:0.625rem 0.75rem;"><strong>Dusun Banga</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">PADANG LOANG</span></td>
+                    <td style="padding:0.625rem 0.75rem;"><strong>Dusun Banga</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">DESA PADANG LOANG (3.279 JIWA)</span></td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:800;">42</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#b91c1c; font-weight:700;">15</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#d97706; font-weight:700;">6</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;">64</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">100%</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;"><span style="background:#ecfdf5; color:#059669; padding:2px 8px; border-radius:4px; font-weight:800; font-size:0.6875rem;">✓ OPTIMAL</span></td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center;">21</td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#d97706;">1.3%</td>
                   </tr>
                   <tr style="border-bottom:1px solid var(--border-light); background:#fcfdfd;">
-                    <td style="padding:0.625rem 0.75rem;"><strong>Lingkungan Paraungan</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">MACCIRINNA</span></td>
+                    <td style="padding:0.625rem 0.75rem;"><strong>Lingkungan Mattongang (Paraungan)</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">KEL. MACCIRINNA (1.533 JIWA)</span></td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:800;">38</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#b91c1c; font-weight:700;">9</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#d97706; font-weight:700;">3</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;">39</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">100%</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;"><span style="background:#ecfdf5; color:#059669; padding:2px 8px; border-radius:4px; font-weight:800; font-size:0.6875rem;">✓ OPTIMAL</span></td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center;">26</td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#059669;">2.5%</td>
                   </tr>
                   <tr>
-                    <td style="padding:0.625rem 0.75rem;"><strong>Lingkungan Bulu Dua</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">MACCIRINNA</span></td>
+                    <td style="padding:0.625rem 0.75rem;"><strong>Lingkungan Bulu Dua</strong><br><span style="font-size:0.6875rem; color:var(--ink-secondary);">KEL. MACCIRINNA (1.533 JIWA)</span></td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:800;">16</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#b91c1c; font-weight:700;">4</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center; color:#d97706; font-weight:700;">1</td>
                     <td style="padding:0.625rem 0.75rem; text-align:center;">11</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#d97706;">80%</td>
-                    <td style="padding:0.625rem 0.75rem; text-align:center;"><span style="background:#fffbeb; color:#b45309; padding:2px 8px; border-radius:4px; font-weight:800; font-size:0.6875rem;">MENENGAH</span></td>
+                    <td style="padding:0.625rem 0.75rem; text-align:center; font-weight:700; color:#d97706;">1.0%</td>
                   </tr>
                 </tbody>
+                <tfoot>
+                  <tr style="background:#f8fafc; border-top:2px solid var(--border-light); font-weight:800;">
+                    <td style="padding:0.75rem; color:var(--forest-950);">TOTAL TERDATA</td>
+                    <td style="padding:0.75rem; text-align:center; color:var(--forest-950);">1.371</td>
+                    <td style="padding:0.75rem; text-align:center; color:#b91c1c;">321</td>
+                    <td style="padding:0.75rem; text-align:center; color:#d97706;">62</td>
+                    <td style="padding:0.75rem; text-align:center; color:var(--ink-secondary);">988</td>
+                    <td style="padding:0.75rem; text-align:center; color:#087d79;">15.5% dari Total 8.825 Sasaran</td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
@@ -1552,7 +2082,7 @@
               <div>
                 <span class="tag-badge" style="background-color: #e6f7f5; color: #087d79; margin-bottom: 0.25rem;">Geospasial BIG · TASWIL10000 Edisi 2023</span>
                 <h3 style="font-size: 1.25rem; font-weight: 800; color: #18383A; margin-top: 0.25rem;">Peta Wilayah Binaan & Fasyankes Puskesmas Malimpung</h3>
-                <p style="font-size: 0.8125rem; color: var(--ink-secondary); margin-top: 0.25rem;">Batas administrasi resmi 2 Desa dan 1 Kelurahan (1.246 verteks poligon resmi BIG) serta titik koordinat fasyankes induk.</p>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); margin-top: 0.25rem;">Batas administrasi resmi 2 Desa dan 1 Kelurahan (1.246 verteks poligon resmi BIG), 2 Pustu, 8 Posyandu, dan Fasyankes Induk.</p>
               </div>
               <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
                 <span class="integrity-badge verified" style="font-size: 0.75rem;">EPSG:4326 WGS84</span>
@@ -1563,32 +2093,71 @@
               </div>
             </div>
 
-            <!-- Kontainer Peta Leaflet -->
-            <div id="health-atlas-leaflet-map" style="height: 480px; width: 100%; border-radius: 12px; z-index: 1; border: 1px solid var(--border-light); background-color: #f8fafc;"></div>
+            <!-- KONTROL MULTI-LAYER PETA SEHAT INSIGHTS -->
+            <div class="atlas-layer-switcher-bar" style="margin-bottom: 0.75rem;">
+              <div class="atlas-layer-switcher" role="tablist" aria-label="Pilihan Layer Peta Sehat Insights">
+                <button type="button" class="layer-tab active" data-map-layer="admin" role="tab" aria-selected="true" onclick="switchInsightsMapLayer('admin')">
+                  <svg class="layer-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                  <span>Populasi & Batas Wilayah</span>
+                </button>
+                <button type="button" class="layer-tab" data-map-layer="faskes" role="tab" aria-selected="false" onclick="switchInsightsMapLayer('faskes')">
+                  <svg class="layer-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+                  <span>Fasyankes & 8 Posyandu</span>
+                </button>
+                <button type="button" class="layer-tab" data-map-layer="health" role="tab" aria-selected="false" onclick="switchInsightsMapLayer('health')">
+                  <svg class="layer-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                  <span>Cakupan Skrining CKG</span>
+                </button>
+                <button type="button" class="layer-tab" data-map-layer="ptm" role="tab" aria-selected="false" onclick="switchInsightsMapLayer('ptm')">
+                  <svg class="layer-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <span>Sebaran Kasus PTM</span>
+                </button>
+              </div>
+              <div class="atlas-layer-indicator-label" id="insights-layer-status-text">
+                Menampilkan: <strong>Distribusi Penduduk Resmi (Total 8.825 Jiwa)</strong>
+              </div>
+            </div>
+
+            <!-- Sub-Filter Parameter PTM Insights -->
+            <div id="insights-ptm-filter-bar" class="ptm-filter-bar" style="display: none;">
+              <span class="ptm-filter-label">
+                <svg style="width:14px; height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                Pilihan Indikator PTM:
+              </span>
+              <button type="button" class="ptm-filter-chip active" data-insights-ptm="all" onclick="filterInsightsPtm('all')">Semua Kasus PTM</button>
+              <button type="button" class="ptm-filter-chip" data-insights-ptm="hipertensi" onclick="filterInsightsPtm('hipertensi')">Hipertensi (321)</button>
+              <button type="button" class="ptm-filter-chip" data-insights-ptm="diabetes" onclick="filterInsightsPtm('diabetes')">Gula Tinggi (62)</button>
+              <button type="button" class="ptm-filter-chip" data-insights-ptm="obesitas" onclick="filterInsightsPtm('obesitas')">Obesitas (464)</button>
+              <button type="button" class="ptm-filter-chip" data-insights-ptm="indera" onclick="filterInsightsPtm('indera')">Indera & Gigi (1.037)</button>
+              <button type="button" class="ptm-filter-chip" data-insights-ptm="paru_jiwa" onclick="filterInsightsPtm('paru_jiwa')">Paru & Jiwa (136)</button>
+            </div>
+
+            <!-- Kontainer Peta Leaflet Insights -->
+            <div id="health-atlas-leaflet-map" style="height: 490px; width: 100%; border-radius: 12px; z-index: 1; border: 1px solid var(--border-light); background-color: #f8fafc;"></div>
             
-            <!-- Panel Legenda & Metadata Spasial -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 1rem; font-size: 0.75rem; color: var(--ink-secondary); padding-top: 0.75rem; border-top: 1px solid var(--border-light);">
-              <div style="display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;">
-                <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
-                  <span style="display: inline-block; width: 14px; height: 14px; background-color: rgba(46, 168, 154, 0.4); border: 2px solid #087d79; border-radius: 3px;"></span>
-                  <strong>Desa Malimpung</strong> (73.15.05.2006)
-                </span>
-                <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
-                  <span style="display: inline-block; width: 14px; height: 14px; background-color: rgba(16, 185, 129, 0.4); border: 2px solid #059669; border-radius: 3px;"></span>
-                  <strong>Desa Padang Loang</strong> (73.15.05.2009)
-                </span>
-                <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
-                  <span style="display: inline-block; width: 14px; height: 14px; background-color: rgba(56, 189, 248, 0.4); border: 2px solid #0284c7; border-radius: 3px;"></span>
-                  <strong>Kelurahan Maccirinna</strong> (73.15.05.1004)
-                </span>
-                <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
-                  <span style="display: inline-block; width: 10px; height: 10px; background-color: #e11d48; border: 2px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 1px #e11d48;"></span>
-                  <strong>Puskesmas Induk</strong> (-3.729869, 119.73413)
-                </span>
+            <!-- Panel Legenda & Metadata Spasial Dinamis -->
+            <div class="atlas-map-legend-bar" id="insights-map-legend-bar" style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-light);">
+              <div class="atlas-legend-item">
+                <span class="legend-color-box box-malimpung"></span>
+                <span><strong>Desa Malimpung</strong>: 4.013 Jiwa (5,78 km²)</span>
               </div>
-              <div>
-                Rujukan Dokumen: <em>TASWIL1000020230928_DATA_BATAS_DESAKELURAHAN.xml (BIG)</em>
+              <div class="atlas-legend-item">
+                <span class="legend-color-box box-padangloang"></span>
+                <span><strong>Desa Padang Loang</strong>: 3.279 Jiwa (28,89 km²)</span>
               </div>
+              <div class="atlas-legend-item">
+                <span class="legend-color-box box-maccirinna"></span>
+                <span><strong>Kelurahan Maccirinna</strong>: 1.533 Jiwa (5,01 km²)</span>
+              </div>
+              <div class="atlas-legend-item">
+                <span class="legend-dot-pkm"></span>
+                <span><strong>Puskesmas Induk</strong> (Rawat Jalan & Tindakan Medis)</span>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; flex-wrap: wrap; gap: 0.5rem; font-size: 0.6875rem; color: var(--ink-tertiary);">
+              <span>Sumber Geometri: <em>Badan Informasi Geospasial (BIG TASWIL10000 2023)</em></span>
+              <span>Data Kependudukan: <em>Registrasi Resmi Wilayah Kerja Fasyankes (Lampiran 2)</em></span>
             </div>
           </div>
 
@@ -1596,7 +2165,7 @@
           <div class="section-header" style="margin-top: 2rem; margin-bottom: 1.5rem;">
             <span class="tag-badge">Wilayah Binaan</span>
             <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--forest-950);">Daftar Wilayah Kerja Puskesmas Malimpung</h3>
-            <p style="font-size: 0.875rem; color: var(--ink-secondary);">Data pemantauan fasilitas jejaring tingkat desa di Kecamatan Patampanua.</p>
+            <p style="font-size: 0.875rem; color: var(--ink-secondary);">Distribusi resmi jejaring pelayanan: 1 Puskesmas Induk, 2 Pustu, dan 8 Posyandu Dusun se-Kecamatan Patampanua.</p>
           </div>
 
           <div class="territory-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
@@ -1604,8 +2173,8 @@
             <div class="village-card" style="border-top: 4px solid var(--teal-primary);">
               <div>
                 <span class="village-name">Desa Malimpung</span>
-                <span class="village-facility">Lokasi Puskesmas Induk & Poskesdes</span>
-                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Pusat pelayanan rawat jalan, IGD 24 Jam, persalinan, dan rujukan primer fasyankes induk.</p>
+                <span class="village-facility">Puskesmas Induk & 3 Posyandu Dusun</span>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Pusat pelayanan rawat jalan, tindakan medis & persalinan operasional, didukung Posyandu Melati (Pajalele), Posyandu Mawar (Benteng), dan Posyandu Teratai (Alitta).</p>
                 <div style="margin-top: 0.5rem;">
                   <a href="https://maps.app.goo.gl/YYYWShsgAxZoG2vW8" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 700; color: var(--teal-primary); text-decoration: none;">
                     <svg style="width: 14px; height: 14px;" aria-hidden="true"><use href="#ic-map-pin"/></svg>
@@ -1613,27 +2182,27 @@
                   </a>
                 </div>
               </div>
-              <div class="village-meta">Wilayah Binaan Resmi · Koordinat: -3.729869, 119.73413</div>
+              <div class="village-meta">4.013 Jiwa · Luas 5,78 km² · Koordinat: -3.729869, 119.73413</div>
             </div>
 
             <!-- 2. Desa Padang Loang -->
             <div class="village-card" style="border-top: 4px solid #10b981;">
               <div>
                 <span class="village-name">Desa Padang Loang</span>
-                <span class="village-facility">Pustu Padang Loang & Jejaring Posyandu</span>
-                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Pelayanan kesehatan keluarga, imunisasi rutin balita, pemantauan stunting, dan skrining PTM.</p>
+                <span class="village-facility">Pustu Padang Loang & 2 Posyandu Dusun</span>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Pustu Padang Loang membawahi wilayah geografis terluas di Patampanua, didukung Posyandu Dahlia (Padang Loang I) dan Posyandu Cempaka (Padang Loang II).</p>
               </div>
-              <div class="village-meta">Wilayah Binaan Resmi · Pustu & Poskesdes Jejaring</div>
+              <div class="village-meta">3.279 Jiwa · Luas 28,89 km² · Pustu & Jejaring Fasyankes</div>
             </div>
 
             <!-- 3. Kelurahan Maccirinna -->
             <div class="village-card" style="border-top: 4px solid #0284c7;">
               <div>
                 <span class="village-name">Kelurahan Maccirinna</span>
-                <span class="village-facility">Pustu Maccirinna & Posyandu Terpadu</span>
-                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Integrasi Layanan Primer, Posyandu siklus hidup anak hingga lansia, dan surveilans wilayah.</p>
+                <span class="village-facility">Pustu Maccirinna & 3 Posyandu Terpadu</span>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">Pustu Maccirinna menerapkan Integrasi Layanan Primer (ILP), membina Posyandu Kenanga (Kariango), Posyandu Anggrek (Barat), dan Posyandu Flamboyan (Timur).</p>
               </div>
-              <div class="village-meta">Wilayah Binaan Resmi · Pustu & Poskesdes Jejaring</div>
+              <div class="village-meta">1.533 Jiwa · Luas 5,01 km² · Pustu & Jejaring Posyandu</div>
             </div>
           </div>
 
@@ -1725,9 +2294,120 @@
                     <tr><td><strong>Visi</strong></td><td>Terwujudnya Masyarakat Malimpung yang Mandiri untuk Hidup Sehat dan Berkualitas.</td></tr>
                     <tr><td><strong>Misi</strong></td><td>1. Meningkatkan pelayanan kesehatan yang bermutu, merata, dan terjangkau.<br>2. Mendorong kemandirian masyarakat hidup sehat melalui pemberdayaan.<br>3. Memantapkan manajemen puskesmas yang akuntabel dan transparan.</td></tr>
                     <tr><td><strong>Tata Nilai</strong></td><td><strong>MALIMPUNG:</strong> Mandiri, Amanah, Loyal, Inovatif, Melayani, Profesional, Unggul, Nyaman, Gotong-royong.</td></tr>
-                    <tr><td><strong>Kepala Puskesmas</strong></td><td>Pejabat Definitif Dinas Kesehatan Kabupaten Pinrang</td></tr>
+                    <tr><td><strong>Kepala Puskesmas</strong></td><td><strong>drg. IFAH NILAWATY RASYID, M.Kes</strong> (Pejabat Definitif Kepala Fasyankes)</td></tr>
                   </tbody>
                 </table>
+              </div>
+
+              <!-- ====================================================================
+                   BAGAN STRUKTUR ORGANISASI RESMI PUSKESMAS MALIMPUNG (ILP)
+                   Rujukan Dokumen: Struktur Organisasi.png
+                   ==================================================================== -->
+              <div class="org-structure-container" style="margin-top:2.5rem; padding-top:2rem; border-top:1px solid var(--border-light);">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+                  <div>
+                    <span class="tag-badge" style="background:#ecfdf5; color:#059669; margin-bottom:0.35rem;">Tata Kelola Fasyankes Kemenkes RI</span>
+                    <h4 style="font-size:1.375rem; font-weight:800; color:var(--forest-950); margin:0.25rem 0;">Struktur Organisasi Puskesmas Malimpung</h4>
+                    <p style="font-size:0.875rem; color:var(--ink-secondary); margin:0;">Penyelenggaraan tata kerja dan pembagian tanggung jawab berbasis Integrasi Layanan Primer (ILP).</p>
+                  </div>
+                  <button type="button" class="btn-secondary" style="padding:0.4rem 0.875rem; font-size:0.8125rem;" onclick="appToast('Membuka salinan dokumen SK Struktur Organisasi.')">Unduh Bagan PDF</button>
+                </div>
+
+                <!-- Kartu Top Executive: Kepala Puskesmas -->
+                <div class="org-leader-card" style="background:linear-gradient(135deg, #07221d 0%, #0c382f 100%); border-radius:18px; padding:1.5rem; color:#ffffff; margin-bottom:1.75rem; box-shadow:0 12px 28px rgba(7,34,29,0.15); border:1px solid rgba(16,185,129,0.25); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.25rem;">
+                  <div style="display:flex; align-items:center; gap:1.25rem;">
+                    <div style="width:64px; height:64px; border-radius:18px; background:linear-gradient(135deg, #10b981 0%, #059669 100%); display:flex; align-items:center; justify-content:center; color:#ffffff; font-size:1.75rem; font-weight:800; flex-shrink:0; box-shadow:0 6px 16px rgba(16,185,129,0.35);">
+                      KP
+                    </div>
+                    <div>
+                      <span style="font-size:0.75rem; font-weight:800; color:#34d399; letter-spacing:0.05em; text-transform:uppercase;">Pimpinan Tertinggi Fasyankes</span>
+                      <h3 style="font-size:1.375rem; font-weight:800; color:#ffffff; margin:0.2rem 0;">drg. IFAH NILAWATY RASYID, M.Kes</h3>
+                      <p style="font-size:0.8125rem; color:#a7f3d0; margin:0;">Kepala UPT Puskesmas Malimpung • Penanggung Jawab Tata Kelola & Mutu Pelayanan</p>
+                    </div>
+                  </div>
+                  <span style="background:rgba(255,255,255,0.12); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.2); padding:0.4rem 0.875rem; border-radius:999px; font-size:0.75rem; font-weight:700; color:#ffffff;">SK Kepala Dinas Kesehatan Pinrang</span>
+                </div>
+
+                <!-- Grid 5 Klaster Terpadu Puskesmas Malimpung -->
+                <div class="org-clusters-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(310px, 1fr)); gap:1.25rem;">
+                  
+                  <!-- Klaster 1: Manajemen -->
+                  <div class="org-cluster-card cluster-manajemen" style="background:#ffffff; border:1px solid var(--border-light); border-radius:16px; padding:1.25rem; box-shadow:0 4px 14px rgba(0,0,0,0.03); border-top:4px solid #10b981;">
+                    <div style="margin-bottom:0.875rem; padding-bottom:0.75rem; border-bottom:1px solid var(--border-light);">
+                      <span style="font-size:0.6875rem; font-weight:800; color:#059669; text-transform:uppercase;">Klaster 1</span>
+                      <h5 style="font-size:1.0625rem; font-weight:800; color:var(--forest-950); margin:2px 0;">Manajemen</h5>
+                      <span style="font-size:0.8125rem; font-weight:700; color:#059669;">Koordinator: Irmayani, SKM</span>
+                    </div>
+                    <ul style="list-style:none; padding:0; margin:0; font-size:0.8125rem; display:flex; flex-direction:column; gap:0.5rem;">
+                      <li><strong>Manajemen Inti:</strong> Irmayani, SKM</li>
+                      <li><strong>Ketatausahaan:</strong> Irmayani, SKM & Sessy Liyana, Amd.PJK</li>
+                      <li><strong>Sumber Daya Manusia:</strong> Sitti Rahma, Amd.RMIK</li>
+                      <li><strong>Sarpras & Perbekalan:</strong> Pebriansyah, Amd.AK</li>
+                      <li><strong>Mutu Pelayanan:</strong> Bd. Lia Andriani, S.Keb</li>
+                      <li><strong>Keuangan & Aset/BMD:</strong> Erna Edy, SKM</li>
+                      <li><strong>Sistem Digital Informasi:</strong> Satriani Zulkifli, Amd.Pk & Nur Hidayah, S.Kom</li>
+                      <li><strong>Manajemen Jejaring:</strong> Sartika, Amd. Keb</li>
+                    </ul>
+                  </div>
+
+                  <!-- Klaster 2: Ibu dan Anak -->
+                  <div class="org-cluster-card cluster-kia" style="background:#ffffff; border:1px solid var(--border-light); border-radius:16px; padding:1.25rem; box-shadow:0 4px 14px rgba(0,0,0,0.03); border-top:4px solid #ec4899;">
+                    <div style="margin-bottom:0.875rem; padding-bottom:0.75rem; border-bottom:1px solid var(--border-light);">
+                      <span style="font-size:0.6875rem; font-weight:800; color:#db2777; text-transform:uppercase;">Klaster 2</span>
+                      <h5 style="font-size:1.0625rem; font-weight:800; color:var(--forest-950); margin:2px 0;">Ibu dan Anak</h5>
+                      <span style="font-size:0.8125rem; font-weight:700; color:#db2777;">Koordinator: Sartika, Amd. Keb</span>
+                    </div>
+                    <ul style="list-style:none; padding:0; margin:0; font-size:0.8125rem; display:flex; flex-direction:column; gap:0.5rem;">
+                      <li><strong>Ibu Hamil, Bersalin, Nifas:</strong> Bd. Hardina, S.ST & Bd. Yulin Atan, S.ST</li>
+                      <li><strong>Balita & Pra-Sekolah:</strong> Bd. Nurhayati, S.ST</li>
+                      <li><strong>Usia Sekolah & Remaja:</strong> Dwi Ermayani, AMKG</li>
+                    </ul>
+                  </div>
+
+                  <!-- Klaster 3: Dewasa dan Lansia -->
+                  <div class="org-cluster-card cluster-dewasa" style="background:#ffffff; border:1px solid var(--border-light); border-radius:16px; padding:1.25rem; box-shadow:0 4px 14px rgba(0,0,0,0.03); border-top:4px solid #0ea5e9;">
+                    <div style="margin-bottom:0.875rem; padding-bottom:0.75rem; border-bottom:1px solid var(--border-light);">
+                      <span style="font-size:0.6875rem; font-weight:800; color:#0284c7; text-transform:uppercase;">Klaster 3</span>
+                      <h5 style="font-size:1.0625rem; font-weight:800; color:var(--forest-950); margin:2px 0;">Dewasa dan Lansia</h5>
+                      <span style="font-size:0.8125rem; font-weight:700; color:#0284c7;">Koordinator: Dr. Andi Mutia</span>
+                    </div>
+                    <ul style="list-style:none; padding:0; margin:0; font-size:0.8125rem; display:flex; flex-direction:column; gap:0.5rem;">
+                      <li><strong>Usia Dewasa:</strong> Rasma, Amd. Kep</li>
+                      <li><strong>Lanjut Usia (Geriatri):</strong> Rohani Gani, S.Kep, Ners</li>
+                    </ul>
+                  </div>
+
+                  <!-- Klaster 4: Penanggulangan Penyakit Menular -->
+                  <div class="org-cluster-card cluster-p2p" style="background:#ffffff; border:1px solid var(--border-light); border-radius:16px; padding:1.25rem; box-shadow:0 4px 14px rgba(0,0,0,0.03); border-top:4px solid #f59e0b;">
+                    <div style="margin-bottom:0.875rem; padding-bottom:0.75rem; border-bottom:1px solid var(--border-light);">
+                      <span style="font-size:0.6875rem; font-weight:800; color:#d97706; text-transform:uppercase;">Klaster 4</span>
+                      <h5 style="font-size:1.0625rem; font-weight:800; color:var(--forest-950); margin:2px 0;">P2P & Kesling</h5>
+                      <span style="font-size:0.8125rem; font-weight:700; color:#d97706;">Koordinator: Muh. Aras Tahir, SKM</span>
+                    </div>
+                    <ul style="list-style:none; padding:0; margin:0; font-size:0.8125rem; display:flex; flex-direction:column; gap:0.5rem;">
+                      <li><strong>Kesehatan Lingkungan:</strong> Muh. Aras Tahir, SKM</li>
+                      <li><strong>Surveilans Epidemiologi:</strong> Irmayani, SKM</li>
+                    </ul>
+                  </div>
+
+                  <!-- Lintas Klaster -->
+                  <div class="org-cluster-card cluster-lintas" style="background:#ffffff; border:1px solid var(--border-light); border-radius:16px; padding:1.25rem; box-shadow:0 4px 14px rgba(0,0,0,0.03); border-top:4px solid #8b5cf6;">
+                    <div style="margin-bottom:0.875rem; padding-bottom:0.75rem; border-bottom:1px solid var(--border-light);">
+                      <span style="font-size:0.6875rem; font-weight:800; color:#7c3aed; text-transform:uppercase;">Pelayanan Penunjang</span>
+                      <h5 style="font-size:1.0625rem; font-weight:800; color:var(--forest-950); margin:2px 0;">Lintas Klaster</h5>
+                      <span style="font-size:0.8125rem; font-weight:700; color:#7c3aed;">Koordinator: Rasma, Amd. Kep</span>
+                    </div>
+                    <ul style="list-style:none; padding:0; margin:0; font-size:0.8125rem; display:flex; flex-direction:column; gap:0.5rem;">
+                      <li><strong>Promosi Kesehatan:</strong> Erna Edy, SKM</li>
+                      <li><strong>Kesehatan Gigi & Mulut:</strong> Dwi Ermayani, AMKG</li>
+                      <li><strong>Gawat Darurat & Persalinan:</strong> Rasma, Amd. Kep</li>
+                      <li><strong>Kefarmasian (Apotek):</strong> Bd. Lia Andriani, S.Keb</li>
+                      <li><strong>Laboratorium Kesmas:</strong> Pebriansyah, Amd.AK</li>
+                      <li><strong>Respon Krisis Kesehatan:</strong> Irmayani, SKM</li>
+                    </ul>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
@@ -1778,7 +2458,7 @@
               <!-- Formulir Pengaduan & Aspirasi Pelayanan Online -->
               <div style="background-color: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.5rem; margin-top: 1.5rem;">
                 <h4 style="font-size: 1.125rem; font-weight: 800; color: var(--forest-950); margin-bottom: 0.5rem;">Formulir Aspirasi & Pengaduan Pelayanan Online</h4>
-                <p style="font-size: 0.8125rem; color: var(--ink-secondary); margin-bottom: 1.25rem;">Setiap aspirasi atau keluhan akan ditindaklanjuti dalam waktu maksimal 1×24 jam hari kerja oleh Tim Penanganan Pengaduan Puskesmas Malimpung.</p>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); margin-bottom: 1.25rem;">Setiap aspirasi atau keluhan akan ditindaklanjuti dalam waktu maksimal 1 hari kerja oleh Tim Penanganan Pengaduan Puskesmas Malimpung.</p>
                 <form id="public-complaint-form" style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
                   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
                     <div>
@@ -1799,7 +2479,7 @@
                       <option value="Poli Gigi">Pelayanan Gigi dan Mulut</option>
                       <option value="Laboratorium">Layanan Laboratorium</option>
                       <option value="Farmasi / Obat">Pelayanan Farmasi & Obat</option>
-                      <option value="UGD & Persalinan">UGD & Ruang Persalinan 24 Jam</option>
+                      <option value="UGD & Persalinan">Ruang Tindakan Medis & Persalinan</option>
                       <option value="Fasilitas & Kebersihan">Sarana, Kebersihan & Kenyamanan</option>
                     </select>
                   </div>
@@ -1817,14 +2497,44 @@
                 <div id="complaint-receipt" style="display: none; margin-top: 1rem; padding: 1.25rem; background-color: var(--mint-50); border: 1px solid var(--mint-200); border-radius: var(--radius-md);">
                   <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                     <svg style="width: 18px; height: 18px; color: var(--jade-600);" aria-hidden="true"><use href="#ic-check"/></svg>
-                    <strong style="color: var(--forest-950); font-size: 0.9375rem;">Pengaduan Berhasil Terkirim ke Tim Penanganan</strong>
+                    <strong id="receipt-status-title" style="color: var(--forest-950); font-size: 0.9375rem;">Pengaduan Berhasil Terkirim ke Tim Penanganan</strong>
                   </div>
                   <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5; margin-bottom: 0.5rem;">
                     Nomor Tiket Anda: <strong id="receipt-ticket-id" style="font-family: monospace; color: var(--forest-950); background: #ffffff; padding: 0.2rem 0.4rem; border-radius: 4px; border: 1px solid var(--border-light);"></strong>
                   </p>
-                  <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">
+                  <p id="receipt-status-note" style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">
                     Petugas kami akan segera memverifikasi dan menghubungi Anda melalui kontak yang dicantumkan.
                   </p>
+                </div>
+              </div>
+
+              <!-- Lacak Status Pengaduan Publik Mandiri -->
+              <div style="background-color: var(--surface-alt); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.5rem; margin-top: 1.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                  <svg style="width: 20px; height: 20px; color: var(--emerald-600);" aria-hidden="true"><use href="#ic-search"/></svg>
+                  <h4 style="font-size: 1.0625rem; font-weight: 800; color: var(--forest-950); margin: 0;">Lacak Progres Tiket Pengaduan</h4>
+                </div>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); margin-bottom: 1rem;">Masukkan nomor tiket yang Anda terima saat mengirimkan pengaduan untuk memantau tahapan tindak lanjut oleh tim puskesmas.</p>
+                <div style="display: flex; gap: 0.5rem; max-width: 520px; flex-wrap: wrap;">
+                  <input type="text" id="track-ticket-input" class="search-input" style="flex: 1; min-width: 200px; padding: 0.625rem 0.875rem; border-radius: var(--radius-md); font-family: monospace;" placeholder="Contoh: ADU-2026-12345">
+                  <button id="btn-track-ticket" class="btn-secondary" style="padding: 0.625rem 1rem; border-radius: var(--radius-md); font-weight: 700; white-space: nowrap;">
+                    <span>Cek Status Tiket</span>
+                  </button>
+                </div>
+                <div id="track-ticket-result" style="display: none; margin-top: 1rem; padding: 1rem 1.25rem; background-color: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md);">
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+                    <div>
+                      <span style="font-size: 0.75rem; color: var(--ink-tertiary); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Nomor Registrasi Tiket</span>
+                      <div id="track-res-ticket" style="font-family: monospace; font-size: 1.0625rem; font-weight: 800; color: var(--forest-950);"></div>
+                    </div>
+                    <div>
+                      <span id="track-res-badge" class="badge" style="font-size: 0.75rem; padding: 0.35rem 0.75rem; font-weight: 700; border-radius: 9999px;"></span>
+                    </div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; font-size: 0.8125rem; color: var(--ink-secondary); border-top: 1px solid var(--border-light); padding-top: 0.75rem; margin-top: 0.5rem;">
+                    <div><strong>Unit Terkait:</strong> <span id="track-res-unit">-</span></div>
+                    <div><strong>Waktu Pengajuan:</strong> <span id="track-res-time">-</span></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1907,26 +2617,72 @@
             </p>
           </div>
 
-          <!-- Shell Virtual Office Interaktif -->
-          <div class="office-shell">
-            <!-- Office Topbar dengan Simulator Peran Pengguna -->
-            <div class="office-topbar">
+          <!-- 1. GERBANG AUTENTIKASI RESMI (LOGIN GATE APARATUR & NAKES) -->
+          <div id="office-login-gate" class="office-login-container" style="max-width: 580px; margin: 0 auto; background: #ffffff; border: 1px solid var(--border-light); border-radius: 20px; box-shadow: 0 10px 30px rgba(7,34,29,0.08); overflow: hidden;">
+            <div style="background: linear-gradient(135deg, var(--forest-950), var(--forest-900)); color: white; padding: 2rem; text-align: center; border-bottom: 3px solid var(--emerald-500);">
+              <div style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <img src="assets/logo_pinrang.png" alt="Kabupaten Pinrang" style="height: 40px; width: auto;">
+                <img src="assets/logo_puskesmas_malimpung.png" alt="Puskesmas Malimpung" style="height: 40px; width: auto;">
+              </div>
+              <span class="tag-badge" style="background: rgba(255,255,255,0.15); color: #ffffff; border: 1px solid rgba(255,255,255,0.25); margin-bottom: 0.5rem;">Sistem Autentikasi Fasyankes</span>
+              <h3 style="font-size: 1.375rem; font-weight: 800; margin: 0 0 0.5rem 0; color: #ffffff;">Masuk Smart Virtual Office</h3>
+              <p style="font-size: 0.8125rem; color: #cde6de; margin: 0; line-height: 1.5;">Portal kerja terproteksi khusus pegawai, pimpinan, dan dokter Puskesmas Malimpung.</p>
+            </div>
+
+            <div style="padding: 2rem;">
+              <form id="office-login-form" style="display: grid; gap: 1.25rem;">
+                <div>
+                  <label for="login-username" style="display: block; font-size: 0.8125rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.375rem;">NIP / Email Dinas Pegawai</label>
+                  <input type="text" id="login-username" class="search-input" style="padding: 0.75rem 1rem; border-radius: 10px;" placeholder="Contoh: 197804152005022003 atau kapus@malimpung.pkm.id" required>
+                </div>
+                <div>
+                  <label for="login-password" style="display: block; font-size: 0.8125rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.375rem;">Kata Sandi / PIN Keamanan</label>
+                  <input type="password" id="login-password" class="search-input" style="padding: 0.75rem 1rem; border-radius: 10px;" placeholder="••••••••" required>
+                </div>
+                <div id="login-error-msg" style="display: none; padding: 0.625rem 0.875rem; background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; border-radius: 8px; font-size: 0.75rem;"></div>
+                <button type="submit" class="btn-primary" style="padding: 0.75rem 1.5rem; justify-content: center; font-weight: 700; border-radius: 10px;">
+                  <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-lock"/></svg>
+                  <span>Autentikasi & Masuk ke Ruang Kerja</span>
+                </button>
+              </form>
+
+              <!-- Panel Pintas Akun Simulasi Dinas untuk Evaluasi Cepat -->
+              <div style="margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-light);">
+                <span style="display: block; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--ink-tertiary); letter-spacing: 0.05em; margin-bottom: 0.75rem;">Pilih Akun Dinas untuk Pengujian Peran (RBAC):</span>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                  <button type="button" class="btn-quick-login" data-role="kapus" data-user="drg. IFAH NILAWATY RASYID, M.Kes" data-nip="19780415 200502 2 003" data-title="Kepala Puskesmas (Full Access)" style="text-align: left; padding: 0.625rem; background: var(--surface-alt); border: 1px solid var(--border-light); border-radius: 8px; font-size: 0.6875rem; cursor: pointer; transition: all 0.2s;">
+                    <strong>drg. IFAH NILAWATY R.</strong><br><span style="color: var(--emerald-600); font-weight: 700;">Kepala Puskesmas</span>
+                  </button>
+                  <button type="button" class="btn-quick-login" data-role="dokter" data-user="dr. ANDI MUTIA" data-nip="19890218 201403 2 001" data-title="Koordinator Klaster 3 (Dewasa & Lansia)" style="text-align: left; padding: 0.625rem; background: var(--surface-alt); border: 1px solid var(--border-light); border-radius: 8px; font-size: 0.6875rem; cursor: pointer; transition: all 0.2s;">
+                    <strong>dr. ANDI MUTIA</strong><br><span style="color: #0284c7; font-weight: 700;">Dokter / Klinis</span>
+                  </button>
+                  <button type="button" class="btn-quick-login" data-role="editor" data-user="IRMAYANI, SKM" data-nip="19850612 201001 2 015" data-title="Koordinator Klaster 1 (Tata Usaha & CMS)" style="text-align: left; padding: 0.625rem; background: var(--surface-alt); border: 1px solid var(--border-light); border-radius: 8px; font-size: 0.6875rem; cursor: pointer; transition: all 0.2s;">
+                    <strong>IRMAYANI, SKM</strong><br><span style="color: #7c3aed; font-weight: 700;">Editor Konten CMS</span>
+                  </button>
+                  <button type="button" class="btn-quick-login" data-role="admin" data-user="MUH. ARAS TAHIR, SKM" data-nip="19821104 200804 1 002" data-title="Koordinator Klaster 4 (Admin Sistem & P2P)" style="text-align: left; padding: 0.625rem; background: var(--surface-alt); border: 1px solid var(--border-light); border-radius: 8px; font-size: 0.6875rem; cursor: pointer; transition: all 0.2s;">
+                    <strong>MUH. ARAS TAHIR, SKM</strong><br><span style="color: #d97706; font-weight: 700;">Admin TI & Audit</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. SHELL VIRTUAL OFFICE & CMS TEROTORISASI (Hanya Ditampilkan Setelah Login Berhasil) -->
+          <div class="office-shell" id="office-shell-authenticated" style="display: none;">
+            <!-- Office Topbar dengan Identitas Akun Login Riil -->
+            <div class="office-topbar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
               <div class="office-user-badge">
                 <div class="user-avatar" id="office-avatar">KP</div>
                 <div>
-                  <div style="font-size: 0.9375rem; font-weight: 700;" id="office-username">dr. Hj. Pimpinan Puskesmas</div>
-                  <div style="font-size: 0.75rem; opacity: 0.8;">NIP: 19800512 200604 2 001 · Sesi Aktif</div>
+                  <div style="font-size: 0.9375rem; font-weight: 700;" id="office-username">drg. IFAH NILAWATY RASYID, M.Kes</div>
+                  <div style="font-size: 0.75rem; opacity: 0.8;" id="office-user-meta">NIP: 19780415 200502 2 003 · Sesi Terautentikasi</div>
                 </div>
               </div>
               <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <label for="role-switcher" style="font-size: 0.8125rem; font-weight: 600;">Simulasi Peran:</label>
-                <select id="role-switcher" class="user-role-select" aria-label="Ganti Peran Pengguna">
-                  <option value="kapus">Kepala Puskesmas (Pimpinan Eksekutif)</option>
-                  <option value="dokter">Dokter / Petugas Medis (Klinis)</option>
-                  <option value="editor">Petugas Administrasi / Editor CMS</option>
-                  <option value="program">Koordinator Program / Verifikator Data</option>
-                  <option value="admin">Administrator TI & Keamanan Sistem</option>
-                </select>
+                <span class="badge" id="office-role-badge" style="background: rgba(255,255,255,0.2); color: #ffffff; padding: 0.35rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700;">Kepala Puskesmas</span>
+                <button id="btn-office-logout" class="btn-secondary" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #ffffff; padding: 0.4rem 0.875rem; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">
+                  <span>Keluar (Logout)</span>
+                </button>
               </div>
             </div>
 
@@ -2038,10 +2794,10 @@
                           <td style="padding: 0.625rem 0.5rem;"><span style="color: var(--emerald-600); font-weight: 700;">● Hadir Bertugas</span></td>
                         </tr>
                         <tr>
-                          <td style="padding: 0.625rem 0.5rem; font-weight: 700;">UGD & Persalinan 24 Jam</td>
-                          <td style="padding: 0.625rem 0.5rem;">Tim Jaga Shift 1 (3 Perawat & 2 Bidan)</td>
-                          <td style="padding: 0.625rem 0.5rem;">Tim Siaga Darurat</td>
-                          <td style="padding: 0.625rem 0.5rem;"><span style="color: var(--emerald-600); font-weight: 700;">● Standby Penuh</span></td>
+                          <td style="padding: 0.625rem 0.5rem; font-weight: 700;">Ruang Tindakan Medis & Persalinan</td>
+                          <td style="padding: 0.625rem 0.5rem;">Tim Pelayanan Tindakan Medis (Perawat & Bidan)</td>
+                          <td style="padding: 0.625rem 0.5rem;">Tim Pelayanan Operasional</td>
+                          <td style="padding: 0.625rem 0.5rem;"><span style="color: var(--emerald-600); font-weight: 700;">● Bertugas</span></td>
                         </tr>
                       </tbody>
                     </table>
@@ -2405,7 +3161,7 @@
           
           <!-- Navigasi & Breadcrumb -->
           <div class="single-post-nav-bar">
-            <button type="button" class="btn-back-single-post" onclick="goBackFromNewsDetail()">
+            <button type="button" class="btn-back-single-post" id="btn-back-to-news" onclick="goBackFromNewsDetail()">
               <span class="back-arrow">←</span>
               <span id="btn-back-text">Kembali ke Berita</span>
             </button>
@@ -2539,9 +3295,9 @@
       <div class="footer-grid-master footer-grid-balanced">
         <!-- Kolom 1: Profil Fasyankes & Kontak Cepat -->
         <div class="footer-col-m footer-col-info">
-          <div class="footer-logos-group" style="margin-bottom: 0.75rem;">
-            <img src="assets/logo_pinrang.png" alt="Kabupaten Pinrang" class="footer-logo-img">
-            <img src="assets/logo_puskesmas_malimpung.png" alt="Puskesmas Malimpung" class="footer-logo-img">
+          <div class="footer-logos-group" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.875rem;">
+            <img src="assets/logo_pinrang.png" alt="Kabupaten Pinrang" class="footer-logo-img" width="38" height="38" style="height: 38px !important; width: auto !important; max-width: 120px !important; object-fit: contain !important; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));">
+            <img src="assets/logo_puskesmas_malimpung.png" alt="Puskesmas Malimpung" class="footer-logo-img" width="38" height="38" style="height: 38px !important; width: auto !important; max-width: 120px !important; object-fit: contain !important; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));">
           </div>
           <strong class="footer-brand-title">Puskesmas Malimpung</strong>
           <p class="footer-brand-desc">Fasilitas Pelayanan Kesehatan Tingkat Pertama (FKTP) terakreditasi Kementerian Kesehatan Republik Indonesia.</p>
@@ -2555,7 +3311,7 @@
             <div class="footer-contact-row">
               <svg style="width: 15px; height: 15px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               <a href="tel:0421921001" style="color: #d1ede4; text-decoration: none;">
-                <span>(0421) 921001 • Siaga 24 Jam</span>
+                <span>(0421) 921001 • Senin – Sabtu 08.00 – 14.00 WITA</span>
               </a>
             </div>
           </div>
@@ -2634,8 +3390,10 @@
 
   <!-- Inisialisasi Firebase Web SDK & Google Analytics Resmi -->
   <script type="module" src="firebase-config.js"></script>
+  <!-- Konektor Resmi Database CKG Malimpung (Single Source of Truth RBAC & Realtime) -->
+  <script type="module" src="ckg-connector.js"></script>
   <!-- Library Leaflet.js untuk Peta Geospasial Health Atlas BIG -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="app.js?v=3.4.0"></script>
+  <script src="app.js?v=3.5.3"></script>
 </body>
 </html>
