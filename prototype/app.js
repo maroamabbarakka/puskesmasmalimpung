@@ -397,7 +397,7 @@ function updateTopicView(topicKey) {
 // ---------------------------------------------------------------------------
 // 4. ROUTING & NAVIGATION (DENGAN DUKUNGAN DEEP-LINKING SLUG)
 // ---------------------------------------------------------------------------
-const VALID_ROUTES = ['home', 'services', 'programs', 'insights', 'public', 'office'];
+const VALID_ROUTES = ['home', 'services', 'programs', 'insights', 'public', 'office', 'news'];
 
 function navigate(fullRoute, scroll = true) {
   let [baseRoute, subSlug] = (fullRoute || 'home').split('/');
@@ -420,12 +420,13 @@ function navigate(fullRoute, scroll = true) {
 
   // Update Judul Halaman
   const titles = {
-    home: 'Beranda — Puskesmas Malimpung Health Hub V2',
+    home: 'Beranda — Puskesmas Malimpung Kabupaten Pinrang',
     services: 'Katalog Layanan Publik — Puskesmas Malimpung',
     programs: 'Program Kesehatan Siklus Hidup — Puskesmas Malimpung',
     insights: 'Health Intelligence Wilayah — Puskesmas Malimpung',
     public: 'Keterbukaan Informasi Publik — Puskesmas Malimpung',
-    office: 'Smart Virtual Office — Ruang Kerja Terotorisasi'
+    office: 'Smart Virtual Office — Puskesmas Malimpung',
+    news: 'Berita & Informasi Terkini — Puskesmas Malimpung'
   };
   document.title = titles[baseRoute] || 'Puskesmas Malimpung';
 
@@ -791,6 +792,51 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         executeHeroFinder();
       }
+    });
+  }
+
+  // Header Search Trigger
+  const headerSearchBtn = document.getElementById('header-search-btn');
+  if (headerSearchBtn) {
+    headerSearchBtn.addEventListener('click', () => {
+      navigate('services');
+      setTimeout(() => {
+        const svcSearch = document.getElementById('service-search');
+        if (svcSearch) svcSearch.focus();
+      }, 100);
+    });
+  }
+
+  // Filter Kategori Berita & Informasi
+  const newsPills = document.querySelectorAll('.news-pill[data-news-cat]');
+  const newsSearchInput = document.getElementById('news-search-input');
+  let activeNewsCat = 'all';
+
+  function filterNewsArticles() {
+    const q = (newsSearchInput ? newsSearchInput.value.toLowerCase().trim() : '');
+    const articles = document.querySelectorAll('#news-articles-container .news-item-card');
+    articles.forEach(card => {
+      const cat = card.dataset.category || '';
+      const text = card.textContent.toLowerCase();
+      const matchCat = (activeNewsCat === 'all' || cat === activeNewsCat);
+      const matchSearch = (!q || text.includes(q));
+      card.style.display = (matchCat && matchSearch) ? 'grid' : 'none';
+    });
+  }
+
+  if (newsPills.length > 0) {
+    newsPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        activeNewsCat = pill.dataset.newsCat;
+        newsPills.forEach(p => p.classList.toggle('active', p === pill));
+        filterNewsArticles();
+      });
+    });
+  }
+
+  if (newsSearchInput) {
+    newsSearchInput.addEventListener('input', () => {
+      filterNewsArticles();
     });
   }
 
