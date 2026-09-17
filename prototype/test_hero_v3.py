@@ -1,6 +1,5 @@
 import os
 import sys
-import time
 import socket
 import threading
 from http.server import SimpleHTTPRequestHandler, HTTPServer
@@ -29,7 +28,7 @@ def run():
 
     url = f"http://127.0.0.1:{port}/index.html"
     print("=" * 65)
-    print("VERIFIKASI HERO SECTION V3.1 (DIGITAL GATEWAY & INTERACTIVE MOSAIC)")
+    print("VERIFIKASI HERO SECTION V3.2 (HUMAN-CENTERED EDITORIAL)")
     print(f"Server Uji: {url}")
     print("=" * 65)
 
@@ -49,7 +48,7 @@ def run():
             ("Desktop_Standard_1440", 1440, 900)
         ]
 
-        print("\n[Phase 1] Audit Zero Horizontal Overflow pada Hero V3.1 across 7 Viewports...")
+        print("\n[Phase 1] Audit Zero Horizontal Overflow pada Hero V3.2 across 7 Viewports...")
         for name, w, h in viewports:
             context = browser.new_context(viewport={"width": w, "height": h})
             page = context.new_page()
@@ -57,7 +56,7 @@ def run():
 
             # Cek overflow
             overflow = page.evaluate("""() => {
-                const hero = document.querySelector('.hero-v3-gateway');
+                const hero = document.querySelector('.hero-v3-editorial');
                 const doc = document.documentElement;
                 return {
                     docScroll: doc.scrollWidth,
@@ -76,20 +75,20 @@ def run():
 
             # Ambil screenshot Hero khusus untuk Desktop 1440 dan Mobile 390
             if name == "Desktop_Standard_1440":
-                hero_el = page.locator(".hero-v3-gateway")
-                hero_shot = os.path.join(screenshots_dir, "Hero_V3_1_Desktop_1440.png")
+                hero_el = page.locator(".hero-v3-editorial")
+                hero_shot = os.path.join(screenshots_dir, "Hero_V3_2_Desktop_1440.png")
                 hero_el.screenshot(path=hero_shot)
                 print(f"  -> Screenshot hero desktop disimpan: {hero_shot}")
 
             if name == "Mobile_Standard_390":
-                hero_el = page.locator(".hero-v3-gateway")
-                hero_shot = os.path.join(screenshots_dir, "Hero_V3_1_Mobile_390.png")
+                hero_el = page.locator(".hero-v3-editorial")
+                hero_shot = os.path.join(screenshots_dir, "Hero_V3_2_Mobile_390.png")
                 hero_el.screenshot(path=hero_shot)
                 print(f"  -> Screenshot hero mobile disimpan: {hero_shot}")
 
             context.close()
 
-        print("\n[Phase 2] Uji Fungsionalitas Quick Service Finder & Tautan Eksternal CKG...")
+        print("\n[Phase 2] Uji Navigasi Layanan & Tautan Eksternal CKG...")
         context = browser.new_context(viewport={"width": 1440, "height": 900})
         page = context.new_page()
         page.goto(url, wait_until="networkidle")
@@ -99,26 +98,18 @@ def run():
         assert len(ckg_links) >= 1, "Tautan CKG https://ckg.puskesmasmalimpung.id/ harus tersedia"
         print(f"  [PASS] Tautan eksternal ke https://ckg.puskesmasmalimpung.id/ terverifikasi ({len(ckg_links)} tautan ditemukan).")
 
-        # 2. Uji Quick Finder input -> Services
-        page.fill("#hero-service-finder", "Gigi")
-        page.click("#btn-hero-finder")
-        page.wait_for_timeout(400)
-
+        # 2. Klik tombol Jelajahi Layanan Warga
+        page.click(".btn-editorial-primary")
+        page.wait_for_timeout(300)
         current_hash = page.evaluate("() => window.location.hash")
         assert current_hash == "#services", f"Expected #services but got {current_hash}"
-        
-        filtered_val = page.input_value("#service-search")
-        assert filtered_val == "Gigi", f"Expected 'Gigi' in search box but got {filtered_val}"
-
-        visible_cards = page.locator(".service-card:visible").count()
-        assert visible_cards == 1, f"Expected 1 filtered dental card but got {visible_cards}"
-        print("  [PASS] Quick Finder berhasil mengalihkan ke #services dan memfilter poli Gigi secara instan!")
+        print("  [PASS] Tombol 'Jelajahi Layanan Warga' berhasil mengarahkan ke halaman #services!")
 
         browser.close()
 
     server.shutdown()
     print("\n" + "=" * 65)
-    print("ALL CHECKS PASSED FOR HERO V3.1!")
+    print("ALL CHECKS PASSED FOR HERO V3.2!")
     print("=" * 65)
 
 if __name__ == "__main__":

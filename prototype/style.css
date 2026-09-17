@@ -507,33 +507,20 @@ ul, ol {
 }
 
 /* --------------------------------------------------------------------------
-   5. HERO SECTION V3.1: DIGITAL GATEWAY & INTERACTIVE MOSAIC
-   Arah Visual: SATUSEHAT Tone × Mekari-Style Storytelling
+   5. HERO SECTION V3.2: HUMAN-CENTERED EDITORIAL & SATUSEHAT ATMOSPHERE
+   Prinsip: Terang, Bersih, Lapang, Bernapas Lega (White & Soft Aqua)
    -------------------------------------------------------------------------- */
-.hero-v3-gateway {
+.hero-v3-editorial {
   position: relative;
-  background: linear-gradient(145deg, #074e4a 0%, #087D79 50%, #064543 100%);
+  background: radial-gradient(120% 120% at 85% 15%, rgba(230, 248, 246, 0.7) 0%, rgba(255, 255, 255, 0) 70%),
+              linear-gradient(180deg, #ffffff 0%, #f4faf8 100%);
   padding-top: 3.5rem;
   padding-bottom: 4.5rem;
-  color: #ffffff;
+  border-bottom: 1px solid var(--border-light);
   overflow: hidden;
-  border-bottom: 1px solid rgba(230, 248, 246, 0.15);
 }
 
-.hero-bg-grid {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(rgba(230, 248, 246, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(230, 248, 246, 0.04) 1px, transparent 1px);
-  background-size: 36px 36px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.hero-grid-v3 {
-  position: relative;
-  z-index: 2;
+.hero-grid-editorial {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2.5rem;
@@ -541,242 +528,222 @@ ul, ol {
 }
 
 @media (min-width: 992px) {
-  .hero-grid-v3 {
-    grid-template-columns: 1fr 1.05fr;
+  .hero-grid-editorial {
+    grid-template-columns: 1.1fr 0.9fr;
     gap: 3.5rem;
   }
 }
 
 /* Kolom Kiri: Narasi Manfaat */
-.hero-content-v3 {
+.hero-content-editorial {
   display: flex;
   flex-direction: column;
 }
 
-.hero-pill-v3 {
+.hero-pill-editorial {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.875rem;
+  padding: 0.375rem 0.875rem;
   border-radius: var(--radius-full);
-  background-color: rgba(230, 248, 246, 0.12);
-  border: 1px solid rgba(190, 214, 47, 0.4);
+  background-color: var(--aqua-soft);
+  border: 1px solid rgba(22, 165, 161, 0.3);
   font-size: 0.8125rem;
   font-weight: 700;
-  color: #E6F8F6;
+  color: var(--teal-deep);
   margin-bottom: 1.25rem;
   width: fit-content;
 }
 
-.pill-dot-lime {
+.hero-pill-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--lime-fresh);
-  box-shadow: 0 0 8px var(--lime-fresh);
+  background-color: var(--teal-primary);
+  box-shadow: 0 0 8px rgba(22, 165, 161, 0.6);
 }
 
-.hero-title-v3 {
-  font-size: clamp(2rem, 4.2vw, 3.25rem);
+.hero-title-editorial {
+  font-size: clamp(2.125rem, 4.4vw, 3.375rem);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.03em;
-  color: #ffffff;
+  color: var(--forest-950);
   margin-bottom: 1.25rem;
 }
 
-.hero-title-accent {
-  color: var(--lime-fresh);
-  font-weight: 800;
+.hero-title-editorial em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--teal-deep);
 }
 
-.hero-lead-v3 {
+.hero-lead-editorial {
   font-size: 1.0625rem;
-  line-height: 1.65;
-  color: var(--aqua-soft);
-  opacity: 0.95;
-  margin-bottom: 1.75rem;
+  line-height: 1.7;
+  color: var(--ink-secondary);
+  margin-bottom: 2rem;
   max-width: 540px;
 }
 
-/* Quick Finder Bar Interaktif */
-.hero-quick-finder {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(230, 248, 246, 0.3);
-  border-radius: var(--radius-full);
-  padding: 0.35rem 0.35rem 0.35rem 1rem;
-  margin-bottom: 1.5rem;
-  max-width: 520px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.finder-input-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  flex: 1;
-  min-width: 0;
-}
-
-.finder-input-wrap svg {
-  color: var(--aqua-soft);
-  flex-shrink: 0;
-}
-
-#hero-service-finder {
-  border: none;
-  background: transparent;
-  color: #ffffff;
-  font-size: 0.875rem;
-  width: 100%;
-  outline: none;
-  font-family: inherit;
-}
-
-#hero-service-finder::placeholder {
-  color: rgba(230, 248, 246, 0.65);
-}
-
-.btn-finder-action {
-  background-color: var(--lime-fresh);
-  color: var(--ink-v3);
-  font-weight: 800;
-  border: none;
-  border-radius: var(--radius-full);
-  padding: 0.5rem 1.125rem;
-  font-size: 0.8125rem;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all var(--duration-fast);
-  box-shadow: 0 2px 8px rgba(190, 214, 47, 0.35);
-}
-
-.btn-finder-action:hover {
-  filter: brightness(1.08);
-  transform: translateY(-1px);
-}
-
-/* Tombol Aksi Ganda */
-.hero-actions-v3 {
+.hero-actions-editorial {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.875rem;
-  margin-bottom: 2rem;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
 }
 
-.btn-hero-primary {
+.btn-editorial-primary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.625rem;
-  padding: 0.8125rem 1.5rem;
-  border-radius: var(--radius-full);
-  font-weight: 800;
-  font-size: 0.9375rem;
-  background-color: var(--lime-fresh);
-  color: var(--ink-v3);
-  text-decoration: none;
-  box-shadow: 0 4px 16px rgba(190, 214, 47, 0.3);
-  transition: all var(--duration-fast);
-}
-
-.btn-hero-primary:hover {
-  filter: brightness(1.08);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(190, 214, 47, 0.4);
-}
-
-.btn-hero-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.8125rem 1.375rem;
+  padding: 0.875rem 1.625rem;
   border-radius: var(--radius-full);
   font-weight: 700;
-  font-size: 0.875rem;
-  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.9375rem;
+  background-color: var(--teal-deep);
   color: #ffffff;
-  border: 1px solid rgba(230, 248, 246, 0.35);
   text-decoration: none;
-  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(8, 125, 121, 0.25);
   transition: all var(--duration-fast);
 }
 
-.btn-hero-secondary:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: #ffffff;
+.btn-editorial-primary:hover {
+  background-color: #066562;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(8, 125, 121, 0.35);
+}
+
+.btn-editorial-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.625rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  background-color: #ffffff;
+  color: var(--teal-deep);
+  border: 1.5px solid var(--border);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-fast);
+}
+
+.btn-editorial-secondary:hover {
+  background-color: var(--aqua-soft);
+  border-color: var(--teal-primary);
   transform: translateY(-2px);
 }
 
-/* Micro Trust Badges */
-.hero-trust-row-v3 {
+.hero-trust-editorial {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
-  padding-top: 1.25rem;
-  border-top: 1px solid rgba(230, 248, 246, 0.15);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-light);
 }
 
-.trust-pill-v3 {
-  display: inline-flex;
+.trust-item-editorial {
+  display: flex;
   align-items: center;
-  gap: 0.375rem;
-  font-size: 0.75rem;
-  color: var(--aqua-soft);
-  opacity: 0.92;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-secondary);
 }
 
-.trust-pill-v3 svg {
-  color: var(--lime-fresh);
-  flex-shrink: 0;
+.trust-item-editorial svg {
+  color: var(--teal-primary);
 }
 
-/* --------------------------------------------------------------------------
-   Mosaik Mockup Antarmuka (Laptop CKG + Phone Layanan)
-   -------------------------------------------------------------------------- */
-.hero-mosaic-v3 {
+/* Kolom Kanan: Visual Fotografi Asli & Floating Live Cards */
+.hero-visual-editorial {
   position: relative;
   width: 100%;
-  padding: 1.5rem 0 1rem 0;
+  padding: 1rem 0;
 }
 
-/* Floating Status System Badge */
-.floating-sys-badge {
+.hero-photo-frame {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 48px -12px rgba(8, 125, 121, 0.18);
+  border: 4px solid #ffffff;
+  background-color: var(--surface-alt);
+}
+
+.hero-main-photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-overlay-tint {
   position: absolute;
-  top: 0;
-  left: 1rem;
-  z-index: 30;
-  background: #ffffff;
-  border-radius: var(--radius-full);
-  padding: 0.5rem 1rem;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 65%, rgba(7, 34, 29, 0.3) 100%);
+  pointer-events: none;
+}
+
+/* Floating Live Cards */
+.hero-float-card {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(8, 125, 121, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 0.625rem 1rem;
+  box-shadow: 0 12px 32px rgba(8, 125, 121, 0.12);
   display: flex;
   align-items: center;
-  gap: 0.625rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--border);
+  gap: 0.75rem;
+  z-index: 10;
   animation: floatSubtle 4s ease-in-out infinite;
 }
 
-@keyframes floatSubtle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+.hero-float-card.card-status {
+  bottom: -14px;
+  left: -14px;
 }
 
-.pulse-lime {
+.hero-float-card.card-ckg {
+  top: -14px;
+  right: -14px;
+  animation-delay: 2s;
+}
+
+.float-pulse {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #059669;
-  box-shadow: 0 0 10px #059669;
+  background-color: var(--emerald-600);
+  box-shadow: 0 0 10px var(--emerald-600);
   flex-shrink: 0;
 }
 
-.sys-badge-text strong {
+.float-icon-ckg {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background-color: var(--teal-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.625rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.float-title {
   display: block;
   font-size: 0.75rem;
   font-weight: 800;
@@ -784,341 +751,37 @@ ul, ol {
   line-height: 1.2;
 }
 
-.sys-badge-text small {
+.float-subtitle {
   display: block;
   font-size: 0.6875rem;
   font-weight: 600;
   color: var(--teal-deep);
 }
 
-/* Device Mockup: Laptop CKG */
-.device-laptop {
-  position: relative;
-  width: 92%;
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
-  background: #1e293b;
-  border-radius: 14px 14px 0 0;
-  padding: 8px 8px 0 8px;
-  box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.laptop-screen {
-  background: #ffffff;
-  border-radius: 8px 8px 0 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.screen-browser-bar {
-  background: #f1f5f9;
-  border-bottom: 1px solid #e2e8f0;
-  padding: 6px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.browser-dots {
-  display: flex;
-  gap: 4px;
-}
-
-.browser-dots i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.browser-dots i:nth-child(1) { background-color: #f87171; }
-.browser-dots i:nth-child(2) { background-color: #fbbf24; }
-.browser-dots i:nth-child(3) { background-color: #34d399; }
-
-.browser-url-bar {
-  font-family: monospace;
-  font-size: 0.6875rem;
-  color: #475569;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  padding: 2px 10px;
-  border-radius: 4px;
-}
-
-.browser-tag {
-  font-size: 0.625rem;
-  font-weight: 700;
-  color: var(--teal-deep);
-  background: var(--aqua-soft);
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.screen-body.ckg-preview {
-  padding: 1rem;
-  background: #f8fafc;
-  color: var(--ink-v3);
-}
-
-.ckg-top-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.ckg-brand-mini {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--teal-deep);
-}
-
-.ckg-icon-sq {
-  width: 22px;
-  height: 22px;
-  background-color: var(--teal-primary);
-  color: #ffffff;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.5625rem;
-  font-weight: 900;
-}
-
-.ckg-badge-ok {
-  font-size: 0.625rem;
-  font-weight: 700;
-  color: #166534;
-  background: #dcfce7;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.ckg-grid-mini {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.ckg-box {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 0.5rem;
-}
-
-.ckg-lbl {
-  font-size: 0.625rem;
-  color: #64748b;
-  display: block;
-}
-
-.ckg-box strong {
-  font-size: 0.75rem;
-  display: block;
-  color: var(--forest-950);
-  line-height: 1.2;
-}
-
-.ckg-box small {
-  font-size: 0.5625rem;
-  color: #94a3b8;
-  display: block;
-}
-
-.ckg-action-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #ffffff;
-  padding: 0.4rem 0.625rem;
-  border-radius: 4px;
-  font-size: 0.6875rem;
-  border: 1px solid #e2e8f0;
-}
-
-.ckg-action-bar span {
-  color: #64748b;
-}
-
-.ckg-link-mini {
-  font-weight: 700;
-  color: var(--teal-primary);
-  text-decoration: none;
-}
-
-.laptop-base {
-  height: 14px;
-  background: #334155;
-  border-radius: 0 0 16px 16px;
-  position: relative;
-}
-
-.laptop-base::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 4px;
-  background: #1e293b;
-  border-radius: 0 0 4px 4px;
-}
-
-/* Device Mockup: Smartphone (Bertumpuk di Kanan Bawah) */
-.device-phone {
-  position: absolute;
-  right: -8px;
-  bottom: -24px;
-  width: 210px;
-  background: #0f172a;
-  border-radius: 24px;
-  padding: 8px;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  z-index: 25;
-}
-
-.phone-speaker {
-  width: 36px;
-  height: 4px;
-  background: #334155;
-  border-radius: 4px;
-  margin: 2px auto 6px auto;
-}
-
-.phone-screen {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 0.625rem;
-  color: var(--ink-v3);
-}
-
-.phone-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-  font-size: 0.625rem;
-  font-weight: 700;
-  color: var(--teal-deep);
-}
-
-.phone-card {
-  background: var(--surface-alt);
-  border-radius: 8px;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.phone-card-title {
-  font-size: 0.625rem;
-  font-weight: 700;
-  color: var(--ink-secondary);
-  display: block;
-  margin-bottom: 0.35rem;
-}
-
-.phone-doc-item {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  background: #ffffff;
-  border-radius: 6px;
-  padding: 0.35rem 0.5rem;
-  margin-bottom: 0.35rem;
-  border: 1px solid var(--border-light);
-}
-
-.phone-doc-avatar {
-  font-size: 0.875rem;
-}
-
-.phone-doc-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.phone-doc-info strong {
-  display: block;
-  font-size: 0.625rem;
-  color: var(--forest-950);
-  line-height: 1.2;
-}
-
-.phone-doc-info small {
-  display: block;
-  font-size: 0.5625rem;
-  color: var(--ink-tertiary);
-}
-
-.phone-badge-open {
-  font-size: 0.5625rem;
-  font-weight: 800;
-  color: #166534;
-  background: #dcfce7;
-  padding: 1px 4px;
-  border-radius: 3px;
-}
-
-.phone-banner {
-  background: linear-gradient(135deg, var(--teal-deep), #064543);
-  color: #ffffff;
-  border-radius: 6px;
-  padding: 0.35rem 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.625rem;
-  font-weight: 700;
-}
-
-.phone-banner svg {
-  color: var(--lime-fresh);
-}
-
 /* Responsivitas Layar Mobile (< 768px) */
 @media (max-width: 767px) {
-  .hero-v3-gateway {
-    padding-top: 4.5rem;
+  .hero-v3-editorial {
+    padding-top: 4.25rem;
     padding-bottom: 3.5rem;
   }
 
-  .hero-mosaic-v3 {
-    padding-top: 2rem;
+  .hero-visual-editorial {
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 0.875rem;
   }
 
-  .floating-sys-badge {
-    position: static;
-    margin-bottom: 1rem;
-    width: fit-content;
+  .hero-photo-frame {
+    border-radius: 20px;
+    border-width: 3px;
   }
 
-  .device-laptop {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1.25rem;
-  }
-
-  .device-phone {
+  .hero-float-card {
     position: static;
     width: 100%;
-    max-width: 280px;
-    margin-top: 0.5rem;
+    box-sizing: border-box;
+    animation: none;
   }
 }
 
