@@ -446,6 +446,16 @@ function navigate(fullRoute, scroll = true) {
     }
   }
 
+  // Inisialisasi & refresh Leaflet Map pada rute insights
+  if (baseRoute === 'insights') {
+    setTimeout(() => {
+      initHealthAtlasLeafletMap();
+      if (healthAtlasMap) {
+        healthAtlasMap.invalidateSize();
+      }
+    }, 150);
+  }
+
   if (scroll) {
     window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
   }
@@ -529,7 +539,109 @@ function handleCmsSubmit(e) {
 }
 
 // ---------------------------------------------------------------------------
-// 6. TOAST HELPER
+// 6. HEALTH ATLAS LEAFLET MAP ENGINE (BIG TASWIL10000 2023)
+// ---------------------------------------------------------------------------
+let healthAtlasMap = null;
+let healthAtlasGeoJsonLayer = null;
+
+function initHealthAtlasLeafletMap() {
+  const mapContainer = document.getElementById('health-atlas-leaflet-map');
+  if (!mapContainer || healthAtlasMap || typeof L === 'undefined') return;
+
+  // Inisialisasi peta berpusat pada koordinat wilayah kerja Malimpung
+  healthAtlasMap = L.map('health-atlas-leaflet-map', {
+    center: [-3.729869, 119.73413],
+    zoom: 12,
+    scrollWheelZoom: false
+  });
+
+  // Base Layer OpenStreetMap Standar Kemenkes RI
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | Batas Wilayah &copy; Badan Informasi Geospasial (BIG)'
+  }).addTo(healthAtlasMap);
+
+  // Palet Warna Poligon Wilayah Kerja Resmi
+  const villageStyles = {
+    'malimpung': { color: '#087d79', fillColor: '#2ea89a', fillOpacity: 0.35, weight: 2.5 },
+    'padang loang': { color: '#059669', fillColor: '#10b981', fillOpacity: 0.35, weight: 2.5 },
+    'maccirinna': { color: '#0284c7', fillColor: '#38bdf8', fillOpacity: 0.35, weight: 2.5 }
+  };
+
+  // Marker Puskesmas Induk Malimpung
+  const pkmIcon = L.divIcon({
+    className: 'pkm-custom-marker',
+    html: `<div style="background-color: #e11d48; width: 26px; height: 26px; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px; line-height: 1;">+</div>`,
+    iconSize: [26, 26],
+    iconAnchor: [13, 13]
+  });
+
+  const pkmMarker = L.marker([-3.729869, 119.73413], { icon: pkmIcon, title: 'Puskesmas Malimpung Induk' }).addTo(healthAtlasMap);
+  pkmMarker.bindPopup(`
+    <div style="font-family: 'Plus Jakarta Sans', sans-serif; min-width: 220px; padding: 4px;">
+      <span style="font-size: 10px; font-weight: 800; color: #087d79; text-transform: uppercase; letter-spacing: 0.05em;">Fasyankes Induk Terakreditasi Paripurna</span>
+      <h4 style="font-size: 14px; font-weight: 800; color: #18383A; margin: 4px 0 2px;">Puskesmas Malimpung</h4>
+      <p style="font-size: 11px; color: #4b5563; margin: 0 0 8px; line-height: 1.4;">Benteng Malimpung, Kec. Patampanua, Kab. Pinrang</p>
+      <div style="font-size: 11px; color: #15803d; font-weight: 700; margin-bottom: 8px;">✓ Layanan UGD & Persalinan 24 Jam</div>
+      <a href="https://maps.app.goo.gl/YYYWShsgAxZoG2vW8" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; background-color: #087d79; color: white; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; text-decoration: none;">
+        <span>Petunjuk Arah Google Maps ↗</span>
+      </a>
+    </div>
+  `);
+
+  // Muat berkas GeoJSON resmi hasil ekstraksi BIG
+  fetch('assets/batas_wilayah_malimpung.geojson')
+    .then(res => res.json())
+    .then(geoData => {
+      healthAtlasGeoJsonLayer = L.geoJSON(geoData, {
+        style: function(feature) {
+          const name = (feature.properties.NAMOBJ || '').toLowerCase();
+          for (const key in villageStyles) {
+            if (name.includes(key)) return villageStyles[key];
+          }
+          return { color: '#64748b', fillColor: '#94a3b8', fillOpacity: 0.3, weight: 2 };
+        },
+        onEachFeature: function(feature, layer) {
+          const p = feature.properties;
+          layer.bindTooltip(`<strong>${p.TIPE} ${p.NAMOBJ}</strong><br><span style="font-size:10px;">Kode: ${p.KODE_KEMENDAGRI}</span>`, {
+            sticky: true,
+            direction: 'top'
+          });
+          layer.bindPopup(`
+            <div style="font-family: 'Plus Jakarta Sans', sans-serif; min-width: 230px; padding: 4px;">
+              <span style="font-size: 10px; font-weight: 800; color: #087d79; text-transform: uppercase;">${p.TIPE} BINAAN RESMI</span>
+              <h4 style="font-size: 15px; font-weight: 800; color: #18383A; margin: 4px 0 4px;">${p.TIPE} ${p.NAMOBJ}</h4>
+              <table style="width: 100%; font-size: 11px; border-collapse: collapse; margin-top: 6px; border-top: 1px solid #e5e7eb;">
+                <tr><td style="color:#6b7280; padding: 3px 0;">Kode Kemendagri</td><td style="font-weight:700; text-align:right;">${p.KODE_KEMENDAGRI}</td></tr>
+                <tr><td style="color:#6b7280; padding: 3px 0;">Kecamatan</td><td style="font-weight:700; text-align:right;">${p.KECAMATAN}</td></tr>
+                <tr><td style="color:#6b7280; padding: 3px 0;">Kabupaten</td><td style="font-weight:700; text-align:right;">${p.KABUPATEN}</td></tr>
+                <tr><td style="color:#6b7280; padding: 3px 0;">Sumber Geometri</td><td style="font-weight:700; color:#15803d; text-align:right;">BIG TASWIL10000</td></tr>
+              </table>
+            </div>
+          `);
+          layer.on({
+            mouseover: function(e) {
+              const l = e.target;
+              l.setStyle({ fillOpacity: 0.6, weight: 3.5 });
+            },
+            mouseout: function(e) {
+              healthAtlasGeoJsonLayer.resetStyle(e.target);
+            }
+          });
+        }
+      }).addTo(healthAtlasMap);
+
+      // Fit bounds agar mencakup keseluruhan batas poligon
+      healthAtlasMap.fitBounds(healthAtlasGeoJsonLayer.getBounds(), { padding: [30, 30] });
+    })
+    .catch(err => {
+      console.warn('Gagal memuat GeoJSON batas wilayah BIG:', err);
+    });
+}
+window.initHealthAtlasLeafletMap = initHealthAtlasLeafletMap;
+
+// ---------------------------------------------------------------------------
+// 7. TOAST HELPER
 // ---------------------------------------------------------------------------
 function appToast(msg) {
   const toast = document.getElementById('toast');

@@ -6,7 +6,9 @@
   <title>Puskesmas Malimpung — Health Hub V2</title>
   <meta name="description" content="Portal Layanan Kesehatan Publik, Health Intelligence Wilayah, dan Smart Virtual Office Puskesmas Malimpung, Kabupaten Pinrang.">
   <meta name="theme-color" content="#07221d">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%2307221d%22/><path d=%22M50 20v60M20 50h60%22 stroke=%22%231fa288%22 stroke-width=%2214%22 stroke-linecap=%22round%22/></svg>">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Puskesmas Malimpung — Health Hub V2">
   <meta property="og:description" content="Portal Layanan Kesehatan Publik, Health Intelligence Wilayah, dan Smart Virtual Office Puskesmas Malimpung, Kabupaten Pinrang.">
@@ -16,6 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -1134,60 +1137,49 @@
             </div>
           </div>
 
-          <!-- Diagram Skematis Topologi Jejaring Fasyankes Malimpung -->
-          <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <!-- PETA GEOSPASIAL INTERAKTIF LEAFLET (SUMBER RESMI BIG TASWIL10000 2023) -->
+          <div class="health-atlas-map-container" style="background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
               <div>
-                <h4 style="font-size: 1.0625rem; font-weight: 800; color: var(--forest-950); margin-bottom: 0.25rem;">Skema Jejaring Fasyankes Wilayah Kerja Patampanua</h4>
-                <p style="font-size: 0.8125rem; color: var(--ink-secondary);">Topologi koordinasi dan alur rujukan pelayanan kesehatan primer dari tingkat dusun/desa ke puskesmas induk.</p>
+                <span class="tag-badge" style="background-color: #e6f7f5; color: #087d79; margin-bottom: 0.25rem;">Geospasial BIG · TASWIL10000 Edisi 2023</span>
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: #18383A; margin-top: 0.25rem;">Peta Wilayah Binaan & Fasyankes Puskesmas Malimpung</h3>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); margin-top: 0.25rem;">Batas administrasi resmi 2 Desa dan 1 Kelurahan (1.246 verteks poligon resmi BIG) serta titik koordinat fasyankes induk.</p>
               </div>
-              <span class="integrity-badge verified">6 Desa Terkoneksi</span>
+              <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <span class="integrity-badge verified" style="font-size: 0.75rem;">EPSG:4326 WGS84</span>
+                <a href="https://maps.app.goo.gl/YYYWShsgAxZoG2vW8" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 0.4rem 0.875rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+                  <svg style="width: 14px; height: 14px;" aria-hidden="true"><use href="#ic-map-pin"/></svg>
+                  <span>Google Maps ↗</span>
+                </a>
+              </div>
             </div>
-            <div style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 0.5rem 0;">
-              <svg viewBox="0 0 760 180" style="min-width: 620px; width: 100%; height: auto; display: block; font-family: 'Plus Jakarta Sans', sans-serif;" aria-label="Diagram Topologi Jejaring Puskesmas Malimpung">
-                <!-- Lines connecting Hub to nodes -->
-                <line x1="380" y1="90" x2="100" y2="40" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4,4"/>
-                <line x1="380" y1="90" x2="280" y2="140" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4,4"/>
-                <line x1="380" y1="90" x2="100" y2="140" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4,4"/>
-                <line x1="380" y1="90" x2="530" y2="40" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4,4"/>
-                <line x1="380" y1="90" x2="660" y2="90" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4,4"/>
-                <line x1="380" y1="90" x2="530" y2="140" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4,4"/>
 
-                <!-- Central Hub: Puskesmas Induk Malimpung -->
-                <rect x="290" y="65" width="180" height="50" rx="12" fill="#07221d" stroke="#1fa288" stroke-width="2"/>
-                <text x="380" y="86" fill="#ffffff" font-size="12" font-weight="800" text-anchor="middle">PUSKESMAS INDUK</text>
-                <text x="380" y="102" fill="#99f6e4" font-size="10" font-weight="600" text-anchor="middle">Pusat Rujukan & UGD 24 Jam</text>
-
-                <!-- Jejaring Barat: Pustu Masolo -->
-                <rect x="20" y="15" width="160" height="46" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
-                <text x="100" y="34" fill="#065f46" font-size="11" font-weight="700" text-anchor="middle">Pustu Masolo</text>
-                <text x="100" y="49" fill="#047857" font-size="9" text-anchor="middle">Rawat Jalan & Stunting</text>
-
-                <!-- Jejaring Barat: Poskesdes Malimpung -->
-                <rect x="20" y="115" width="160" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-                <text x="100" y="134" fill="#1e293b" font-size="11" font-weight="700" text-anchor="middle">Poskesdes Malimpung</text>
-                <text x="100" y="149" fill="#64748b" font-size="9" text-anchor="middle">Posyandu Siklus Hidup M1-M2</text>
-
-                <!-- Jejaring Tengah: Pustu Sipatuo -->
-                <rect x="450" y="15" width="160" height="46" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
-                <text x="530" y="34" fill="#065f46" font-size="11" font-weight="700" text-anchor="middle">Pustu Sipatuo</text>
-                <text x="530" y="49" fill="#047857" font-size="9" text-anchor="middle">KIA, Imunisasi & Lansia</text>
-
-                <!-- Jejaring Timur: Pustu Mattiro Ade -->
-                <rect x="580" y="67" width="160" height="46" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
-                <text x="660" y="86" fill="#065f46" font-size="11" font-weight="700" text-anchor="middle">Pustu Mattiro Ade</text>
-                <text x="660" y="101" fill="#047857" font-size="9" text-anchor="middle">ILP & Lansia Mobile</text>
-
-                <!-- Jejaring Selatan: Poskesdes Padangloang -->
-                <rect x="200" y="125" width="160" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-                <text x="280" y="144" fill="#1e293b" font-size="11" font-weight="700" text-anchor="middle">Poskesdes Padangloang</text>
-                <text x="280" y="159" fill="#64748b" font-size="9" text-anchor="middle">Skrining PTM & Kesling</text>
-
-                <!-- Jejaring Timur: Poskesdes Benteng -->
-                <rect x="450" y="125" width="160" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-                <text x="530" y="144" fill="#1e293b" font-size="11" font-weight="700" text-anchor="middle">Poskesdes Benteng</text>
-                <text x="530" y="159" fill="#64748b" font-size="9" text-anchor="middle">PWS KIA & Pengendalian P2P</text>
-              </svg>
+            <!-- Kontainer Peta Leaflet -->
+            <div id="health-atlas-leaflet-map" style="height: 480px; width: 100%; border-radius: 12px; z-index: 1; border: 1px solid var(--border-light); background-color: #f8fafc;"></div>
+            
+            <!-- Panel Legenda & Metadata Spasial -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 1rem; font-size: 0.75rem; color: var(--ink-secondary); padding-top: 0.75rem; border-top: 1px solid var(--border-light);">
+              <div style="display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;">
+                <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                  <span style="display: inline-block; width: 14px; height: 14px; background-color: rgba(46, 168, 154, 0.4); border: 2px solid #087d79; border-radius: 3px;"></span>
+                  <strong>Desa Malimpung</strong> (73.15.05.2006)
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                  <span style="display: inline-block; width: 14px; height: 14px; background-color: rgba(16, 185, 129, 0.4); border: 2px solid #059669; border-radius: 3px;"></span>
+                  <strong>Desa Padang Loang</strong> (73.15.05.2009)
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                  <span style="display: inline-block; width: 14px; height: 14px; background-color: rgba(56, 189, 248, 0.4); border: 2px solid #0284c7; border-radius: 3px;"></span>
+                  <strong>Kelurahan Maccirinna</strong> (73.15.05.1004)
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                  <span style="display: inline-block; width: 10px; height: 10px; background-color: #e11d48; border: 2px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 1px #e11d48;"></span>
+                  <strong>Puskesmas Induk</strong> (-3.729869, 119.73413)
+                </span>
+              </div>
+              <div>
+                Rujukan Dokumen: <em>TASWIL1000020230928_DATA_BATAS_DESAKELURAHAN.xml (BIG)</em>
+              </div>
             </div>
           </div>
 
@@ -2098,9 +2090,11 @@
         </div>
 
         <div class="footer-col-m footer-col-berakhlak">
-          <div class="berakhlak-badge">
-            <span class="berakhlak-title">BerAKHLAK</span>
-            <span class="berakhlak-sub">Bangga Melayani Bangsa</span>
+          <div class="berakhlak-logo-card">
+            <picture>
+              <source srcset="assets/logo_berakhlak.webp" type="image/webp">
+              <img src="assets/logo_berakhlak.png" alt="BerAKHLAK — Bangga Melayani Bangsa" class="footer-berakhlak-img" width="240" height="120">
+            </picture>
           </div>
         </div>
       </div>
@@ -2128,6 +2122,8 @@
 
   <!-- Inisialisasi Firebase Web SDK & Google Analytics Resmi -->
   <script type="module" src="firebase-config.js"></script>
+  <!-- Library Leaflet.js untuk Peta Geospasial Health Atlas BIG -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="app.js"></script>
 </body>
 </html>

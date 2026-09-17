@@ -3544,6 +3544,35 @@ table {
   background-color: var(--teal-primary);
 }
 
+.berakhlak-logo-card {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 0.625rem;
+  max-width: 260px;
+  transition: transform var(--duration-fast), border-color var(--duration-fast);
+}
+
+.berakhlak-logo-card picture {
+  display: block;
+  width: 100%;
+}
+
+.berakhlak-logo-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.footer-berakhlak-img {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
 .berakhlak-badge {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);

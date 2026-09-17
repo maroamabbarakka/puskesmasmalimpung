@@ -104,8 +104,8 @@ def run():
         for name, w, h in [("Desktop_Master_1440", 1440, 900), ("Tablet_Portrait_768", 768, 1024), ("Mobile_390", 390, 844)]:
             context = browser.new_context(viewport={"width": w, "height": h})
             page = context.new_page()
-            page.goto(f"{url}#news", wait_until="networkidle")
-            page.wait_for_timeout(400)
+            page.goto(f"{url}#news", wait_until="domcontentloaded")
+            page.wait_for_timeout(500)
 
             shot_name = f"05_Halaman_Berita_{name}.png"
             shot_path = os.path.join(screenshots_dir, shot_name)
@@ -115,7 +115,7 @@ def run():
             # Uji filter kategori berita di desktop
             if name == "Desktop_Master_1440":
                 page.click('button[data-news-cat="edukasi"]')
-                page.wait_for_timeout(200)
+                page.wait_for_timeout(300)
                 visible_cards = page.locator('#news-articles-container .news-item-card:visible').count()
                 print(f"  [LULUS] Filter Kategori 'Edukasi': {visible_cards} artikel tampil.")
 
@@ -124,7 +124,8 @@ def run():
         print("\n[Tahap 3] Verifikasi Integritas 12 Section Beranda Master V3.2 & Isolasi CKG...")
         context = browser.new_context(viewport={"width": 1440, "height": 900})
         page = context.new_page()
-        page.goto(url, wait_until="networkidle")
+        page.goto(url, wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
 
         # 1. Header & Topbar
         assert page.locator(".topbar").is_visible(), "Topbar resmi harus ada"
@@ -181,14 +182,31 @@ def run():
         assert page.locator(".section-public-transparency").is_visible(), "Section Informasi Publik harus ada"
         print("  [LULUS] 11. Keterbukaan Informasi Publik Terverifikasi (Maklumat Pelayanan & IKM 89.24).")
 
-        # 12. Kontak & Footer Institusional
+        # 12. Kontak & Footer Institusional (Gambar BerAKHLAK & Favicon Resmi)
         assert page.locator(".site-footer").is_visible(), "Footer institusional harus ada"
-        print("  [LULUS] 12. Kontak & Footer Institusional BerAKHLAK Terverifikasi.")
+        page.locator(".site-footer").scroll_into_view_if_needed()
+        page.wait_for_timeout(400)
+        assert page.locator(".footer-berakhlak-img").is_visible(), "Logo resmi BerAKHLAK wajib tampil di footer"
+        assert page.locator('link[rel="icon"][type="image/x-icon"]').get_attribute("href") == "favicon.ico"
+        assert page.locator('link[rel="icon"][sizes="32x32"]').get_attribute("href") == "assets/favicon-32x32.png"
+        print("  [LULUS] 12. Kontak & Footer Institusional dengan Logo BerAKHLAK Resmi & Favicon Terverifikasi.")
+
+        # 13. Verifikasi Interaktif Halaman Health Atlas Leaflet (Poligon BIG 2 Desa 1 Kelurahan)
+        page.locator('a[data-go="insights"]').first.click()
+        page.wait_for_timeout(600)
+        page.wait_for_selector("#health-atlas-leaflet-map", state="visible", timeout=10000)
+        page.wait_for_selector(".pkm-custom-marker", timeout=10000)
+        page.wait_for_timeout(1500)  # Beri jeda render GeoJSON
+        svg_paths = page.locator("#health-atlas-leaflet-map path.leaflet-interactive").count()
+        assert svg_paths >= 3, f"Harus ada minimal 3 poligon batas desa/kelurahan BIG, terdeteksi {svg_paths}"
+        atlas_shot = os.path.join(screenshots_dir, "06_Health_Atlas_Leaflet_BIG.png")
+        page.screenshot(path=atlas_shot, full_page=True)
+        print(f"  [LULUS] 13. Health Atlas Leaflet BIG Terverifikasi ({svg_paths} poligon interaktif + 1 fasyankes marker) -> {atlas_shot}.")
 
         context.close()
 
     print("\n" + "=" * 70)
-    print("SELURUH GERBANG VERIFIKASI 12 SECTION MASTER V3.2 BERHASIL (PASSED) 100%!")
+    print("SELURUH GERBANG VERIFIKASI 12 SECTION & HEALTH ATLAS V3.2 BERHASIL (PASSED) 100%!")
     print("=" * 70)
 
 if __name__ == "__main__":
