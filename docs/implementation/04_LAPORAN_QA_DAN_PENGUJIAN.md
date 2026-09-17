@@ -51,3 +51,23 @@
 4. **Health Intelligence Topics:** Pergantian topik ke `"ptm"` berhasil memperbarui judul dan deskripsi, serta pengembalian ke `"ckg"` memvalidasi bahwa metrik tetap menyajikan `'—'` (kejujuran data tanpa pemalsuan nol).
 5. **Keterbukaan Informasi Publik:** Tab maklumat dan standar pelayanan berhasil berganti konten dengan mulus.
 6. **Navigasi Mobile Drawer:** Tombol hamburger berhasil membuka drawer overlay pada viewport mobile (390px), dan navigasi ke rute layanan berhasil berpindah rute dengan benar.
+
+---
+
+## 4. Pengujian Ekstrem 7 Viewport & Deep-Linking URL (`test_extended_viewports.py`)
+
+Pengujian otomatis tambahan telah dijalankan menggunakan Playwright Edge Chromium untuk menjamin tidak adanya horizontal overflow pada resolusi ekstrem serta fungsionalitas deep-linking URL slug:
+
+| Skenario / Resolusi | Dimensi Viewport | Target Uji | Hasil Verifikasi | Status |
+|---|---|---|---|---|
+| **Mobile Small 320** | 320 × 568 px | 6 Rute Primer | Max scrollWidth = clientWidth (0px overflow) | **PASS** |
+| **Mobile Android 360** | 360 × 640 px | 6 Rute Primer | Max scrollWidth = clientWidth (0px overflow) | **PASS** |
+| **Mobile Standard 390** | 390 × 844 px | 6 Rute Primer | Max scrollWidth = clientWidth (0px overflow) | **PASS** |
+| **Tablet Small 768** | 768 × 1024 px | 6 Rute Primer | Max scrollWidth = clientWidth (0px overflow) | **PASS** |
+| **Tablet Standard 820** | 820 × 1180 px | 6 Rute Primer | Max scrollWidth = clientWidth (0px overflow) | **PASS** |
+| **Desktop Small 1024** | 1024 × 768 px | 6 Rute Primer | Max scrollWidth = clientWidth (0px overflow) | **PASS** |
+| **Desktop Standard 1440** | 1440 × 900 px | 6 Rute Primer | Max scrollWidth = clientWidth (0px overflow) | **PASS** |
+| **Deep-Linking Direct URL** | URL `#services/ckg` | Buka browser langsung ke modal | Modal CKG terbuka otomatis & judul sesuai | **PASS** |
+| **Deep-Linking Close Sync** | Tutup modal CKG | Sinkronisasi History Hash | Hash URL kembali ke `#services` | **PASS** |
+| **Deep-Linking Hashchange** | Evaluasi `#services/gigi` | Navigasi dinamis antar-layanan | Modal berganti ke layanan Gigi dan Mulut | **PASS** |
+
