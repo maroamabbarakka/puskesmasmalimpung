@@ -60,7 +60,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="style.css?v=3.3.1">
+  <link rel="stylesheet" href="style.css?v=3.3.2">
 </head>
 <body>
 
@@ -89,8 +89,10 @@
   <div class="topbar">
     <div class="container">
       <div class="topbar-left">
-        <img src="assets/logo_pinrang.png" alt="Lambang Kabupaten Pinrang" class="topbar-badge-icon">
-        <span>Pemerintah Kabupaten Pinrang</span>
+        <span class="topbar-service-hours">
+          <svg style="width: 14px; height: 14px; display: inline-block; vertical-align: -2px; margin-right: 5px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Pelayanan IGD & Persalinan Siaga 24 Jam • Rawat Jalan 08.00 - 14.00 WITA
+        </span>
       </div>
       <div class="topbar-right">
         <a href="#public" data-go="public" class="topbar-link">PPID</a>
@@ -102,7 +104,7 @@
     </div>
   </div>
 
-  <!-- 2. SITE HEADER RESMI V3.2 -->
+  <!-- 2. SITE HEADER RESMI V3.3 -->
   <header class="site-header" id="site-header">
     <div class="container">
       <!-- Identitas Resmi Pemerintah -->
@@ -118,25 +120,25 @@
         </div>
       </a>
 
-      <!-- Navigasi Desktop Lengkap Sesuai Mockup Master -->
+      <!-- Navigasi Desktop 1 Baris Rapi (Peta Sehat, Tanpa Wrapping) -->
       <nav class="nav-menu" id="nav-desktop" aria-label="Navigasi Utama">
         <a href="#home" class="nav-link active" data-go="home">Beranda</a>
         <a href="#public" class="nav-link" data-go="public">Profil</a>
         <a href="#services" class="nav-link" data-go="services">Layanan</a>
         <a href="#programs" class="nav-link" data-go="programs">Program</a>
-        <a href="#insights" class="nav-link" data-go="insights">Health Atlas</a>
-        <a href="#office" class="nav-link" data-go="office">Kantor Virtual</a>
+        <a href="#insights" class="nav-link" data-go="insights">Peta Sehat</a>
         <a href="#news" class="nav-link" data-go="news">Berita</a>
         <a href="#public" class="nav-link" data-go="public">Kontak</a>
       </nav>
 
-      <!-- Action: Search, CTA Hubungi Kami, & Hamburger -->
+      <!-- Action: Search, CTA Kantor Virtual dengan Icon Center, & Hamburger -->
       <div class="header-actions">
         <button class="btn-search-trigger" id="header-search-btn" aria-label="Buka Pencarian Layanan & Berita" title="Cari informasi">
           <svg style="width: 18px; height: 18px;" aria-hidden="true"><use href="#ic-search"/></svg>
         </button>
-        <a href="tel:0421921001" class="btn-contact-pill" aria-label="Hubungi Layanan Puskesmas Malimpung">
-          <span>Hubungi Kami</span>
+        <a href="#office" data-go="office" class="btn-nav-office-cta" aria-label="Akses Kantor Virtual Aparatur & Nakes">
+          <svg style="width: 17px; height: 17px;" aria-hidden="true"><use href="#ic-building"/></svg>
+          <span>Kantor Virtual</span>
         </a>
         <button class="btn-hamburger" id="menu-toggle" aria-label="Buka Menu Navigasi" aria-expanded="false" aria-controls="mobile-nav">
           <svg style="width: 24px; height: 24px;" aria-hidden="true"><use href="#ic-menu"/></svg>
@@ -165,7 +167,7 @@
         <a href="#public" class="mobile-nav-link" data-go="public"><span>Profil</span> <span class="nav-arrow">›</span></a>
         <a href="#services" class="mobile-nav-link" data-go="services"><span>Layanan</span> <span class="nav-arrow">›</span></a>
         <a href="#programs" class="mobile-nav-link" data-go="programs"><span>Program</span> <span class="nav-arrow">›</span></a>
-        <a href="#insights" class="mobile-nav-link" data-go="insights"><span>Health Atlas</span> <span class="nav-arrow">›</span></a>
+        <a href="#insights" class="mobile-nav-link" data-go="insights"><span>Peta Sehat</span> <span class="nav-arrow">›</span></a>
         <a href="#office" class="mobile-nav-link" data-go="office"><span>Kantor Virtual</span> <span class="nav-arrow">›</span></a>
         <a href="#news" class="mobile-nav-link" data-go="news"><span>Berita</span> <span class="nav-arrow">›</span></a>
         <a href="#public" class="mobile-nav-link" data-go="public"><span>Kontak</span> <span class="nav-arrow">›</span></a>
@@ -202,11 +204,17 @@
          ==================================================================== -->
     <div class="page active" id="page-home">
 
-      <!-- HERO SECTION V3.2: SATUSEHAT TONE X MEKARI STORYTELLING (SESUAI MOCKUP HUMANIS) -->
-      <section class="hero hero-v3-master">
-        <div class="container">
+      <!-- HERO SECTION V3.3: FULL-WIDTH SEAMLESS HERO DENGAN GRADASI HALUS & VISUAL FASYANKES -->
+      <section class="hero hero-v3-master hero-fullwidth-seamless">
+        <!-- Background Layer Gambar Fasyankes & Gradasi Halus -->
+        <div class="hero-full-bg-layer" aria-hidden="true">
+          <div class="hero-full-bg-image"></div>
+          <div class="hero-full-bg-gradient"></div>
+        </div>
+
+        <div class="container hero-container-rel">
           <div class="hero-master-grid">
-            <!-- Kolom Kiri: Teks & Aksi Sesuai Mockup -->
+            <!-- Kolom Kiri: Teks Judul & Aksi dengan Latar Gradasi Halus -->
             <div class="hero-master-text">
               <span class="hero-master-kicker">Bersama untuk Masyarakat Sehat</span>
               <h1 class="hero-master-title">
@@ -244,10 +252,33 @@
               </div>
             </div>
 
-            <!-- Kolom Kanan: Visual Fotografi Asli & Kaligrafi Sehat Bersama Malimpung -->
-            <div class="hero-master-visual">
-              <div class="hero-master-card">
-                <img src="assets/hero_mockup_clean.webp" alt="Tenaga Kesehatan Puskesmas Malimpung Kabupaten Pinrang" class="hero-master-img" loading="eager" decoding="async" width="646" height="370">
+            <!-- Kolom Kanan: Aksen Badge Wilayah & Kaligrafi Sehat Bersama Malimpung (Menyatu Luas) -->
+            <div class="hero-master-visual-seamless">
+              <div class="hero-floating-badges-wrap">
+                <div class="hero-calligraphy-badge">
+                  <span class="calligraphy-main">Sehat</span>
+                  <span class="calligraphy-sub">Bersama Malimpung.</span>
+                </div>
+                <div class="hero-badge-item">
+                  <div class="badge-icon-box">
+                    <svg style="width: 18px; height: 18px;" aria-hidden="true"><use href="#ic-users"/></svg>
+                  </div>
+                  <div>
+                    <strong>2 Desa, 1 Kelurahan</strong>
+                    <span>Wilayah Kerja Binaan</span>
+                  </div>
+                  <span class="badge-arrow">›</span>
+                </div>
+                <div class="hero-badge-item">
+                  <div class="badge-icon-box">
+                    <svg style="width: 18px; height: 18px;" aria-hidden="true"><use href="#ic-map-pin"/></svg>
+                  </div>
+                  <div>
+                    <strong>8 Dusun/Lingkungan</strong>
+                    <span>Siap Melayani Warga</span>
+                  </div>
+                  <span class="badge-arrow">›</span>
+                </div>
               </div>
             </div>
           </div>
@@ -584,7 +615,7 @@
       </section>
 
       <!-- ====================================================================
-           SECTION 6: HEALTH ATLAS GEOSPASIAL PUSKESMAS MALIMPUNG (MANDIRI)
+           SECTION 6: PETA SEHAT GEOSPASIAL PUSKESMAS MALIMPUNG (MULTI-LAYER)
            Rujukan: Geometri BIG TASWIL10000 2023 Skala 1:10.000 (EPSG:4326)
            ==================================================================== -->
       <section class="section-health-atlas-home" id="section-atlas">
@@ -592,19 +623,40 @@
           <div class="section-head-flex">
             <div>
               <span class="section-kicker-tag">Health Intelligence Wilayah</span>
-              <h2 class="section-title-master">Health Atlas Geospasial Puskesmas Malimpung</h2>
-              <p class="section-subtitle-master">Pemetaan batas wilayah kerja resmi Badan Informasi Geospasial (BIG) skala 1:10.000 untuk 2 Desa dan 1 Kelurahan wilayah kerja binaan.</p>
+              <h2 class="section-title-master">Peta Sehat Puskesmas Malimpung</h2>
+              <p class="section-subtitle-master">Pemetaan batas wilayah kerja resmi Badan Informasi Geospasial (BIG), persebaran 8 posyandu, dan indikator gambaran kesehatan warga.</p>
             </div>
             <a href="#insights" data-go="insights" class="link-master-see-all">
-              <span>Buka Health Atlas Lengkap</span>
+              <span>Buka Peta Sehat Lengkap</span>
               <span class="see-all-arrow">→</span>
             </a>
+          </div>
+
+          <!-- KONTROL MULTI-LAYER PETA SEHAT -->
+          <div class="atlas-layer-switcher-bar">
+            <div class="atlas-layer-switcher" role="tablist" aria-label="Pilihan Layer Peta Sehat">
+              <button type="button" class="layer-tab active" data-map-layer="admin" role="tab" aria-selected="true" onclick="switchMapLayer('admin')">
+                <svg class="layer-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                <span>Batas Wilayah (BIG)</span>
+              </button>
+              <button type="button" class="layer-tab" data-map-layer="faskes" role="tab" aria-selected="false" onclick="switchMapLayer('faskes')">
+                <svg class="layer-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+                <span>Fasyankes & 8 Posyandu</span>
+              </button>
+              <button type="button" class="layer-tab" data-map-layer="health" role="tab" aria-selected="false" onclick="switchMapLayer('health')">
+                <svg class="layer-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                <span>Gambaran Kesehatan Warga</span>
+              </button>
+            </div>
+            <div class="atlas-layer-indicator-label" id="layer-status-text">
+              Menampilkan: <strong>Batas Administrasi BIG 1:10.000</strong>
+            </div>
           </div>
 
           <div class="atlas-home-wrapper">
             <!-- Kontainer Peta Leaflet Beranda -->
             <div class="atlas-home-map-container">
-              <div id="health-atlas-home-map" style="height: 460px; width: 100%; border-radius: 16px; border: 1px solid var(--border-light); z-index: 1; background-color: #f8fafc;"></div>
+              <div id="health-atlas-home-map" style="height: 470px; width: 100%; border-radius: 16px; border: 1px solid var(--border-light); z-index: 1; background-color: #f8fafc;"></div>
               <div class="atlas-map-legend-bar">
                 <div class="atlas-legend-item">
                   <span class="legend-color-box box-malimpung"></span>
@@ -715,8 +767,8 @@
             <!-- App 1: CKG Puskesmas Malimpung (Operasional / LIVE) -->
             <div class="eco-app-card eco-card-featured">
               <div class="eco-card-top">
-                <div class="eco-app-icon icon-ckg">
-                  <svg style="width: 24px; height: 24px;" aria-hidden="true"><use href="#ic-activity"/></svg>
+                <div class="eco-app-icon icon-ckg eco-icon-pulse">
+                  <svg style="width: 32px; height: 32px;" aria-hidden="true"><use href="#ic-activity"/></svg>
                 </div>
                 <span class="eco-status-badge status-live">Operasional (Live)</span>
               </div>
@@ -737,8 +789,8 @@
             <!-- App 2: Rekam Medis Elektronik (RME) & SATUSEHAT -->
             <div class="eco-app-card">
               <div class="eco-card-top">
-                <div class="eco-app-icon icon-rme">
-                  <svg style="width: 24px; height: 24px;" aria-hidden="true"><use href="#ic-doc"/></svg>
+                <div class="eco-app-icon icon-rme eco-icon-pulse">
+                  <svg style="width: 32px; height: 32px;" aria-hidden="true"><use href="#ic-doc"/></svg>
                 </div>
                 <span class="eco-status-badge status-integrated">Terintegrasi Kemenkes</span>
               </div>
@@ -759,8 +811,8 @@
             <!-- App 3: Sistem Informasi Kepegawaian & Presensi (SIMPEG) -->
             <div class="eco-app-card">
               <div class="eco-card-top">
-                <div class="eco-app-icon icon-simpeg">
-                  <svg style="width: 24px; height: 24px;" aria-hidden="true"><use href="#ic-users"/></svg>
+                <div class="eco-app-icon icon-simpeg eco-icon-pulse">
+                  <svg style="width: 32px; height: 32px;" aria-hidden="true"><use href="#ic-users"/></svg>
                 </div>
                 <span class="eco-status-badge status-internal">Operasional Internal</span>
               </div>
@@ -781,8 +833,8 @@
             <!-- App 4: Dashboard SPM & Akuntabilitas Kinerja -->
             <div class="eco-app-card">
               <div class="eco-card-top">
-                <div class="eco-app-icon icon-spm">
-                  <svg style="width: 24px; height: 24px;" aria-hidden="true"><use href="#ic-chart"/></svg>
+                <div class="eco-app-icon icon-spm eco-icon-pulse">
+                  <svg style="width: 32px; height: 32px;" aria-hidden="true"><use href="#ic-chart"/></svg>
                 </div>
                 <span class="eco-status-badge status-monitoring">Monitoring Terpadu</span>
               </div>
@@ -806,7 +858,7 @@
       <!-- ====================================================================
            SECTION 8: BERITA & KEGIATAN TERKINI PUSKESMAS
            ==================================================================== -->
-      <section class="section-news-feed">
+      <section class="section-news-feed" id="section-news">
         <div class="container">
           <div class="section-head-flex">
             <div>
@@ -821,7 +873,7 @@
           </div>
 
           <div class="news-cards-grid">
-            <article class="news-feed-card" onclick="openNewsDetail('posyandu-terpadu-pajalele')">
+            <article class="news-feed-card clickable-news-card" data-news-slug="posyandu-terpadu-pajalele" onclick="openNewsDetail('posyandu-terpadu-pajalele')" role="button" tabindex="0" aria-label="Buka berita Posyandu Terpadu di Dusun Pajalele">
               <div class="news-feed-thumb">
                 <img src="assets/berita_posyandu.webp" alt="Posyandu Terpadu di Dusun Pajalele" class="news-feed-img" loading="eager" decoding="async" width="400" height="240">
               </div>
@@ -829,10 +881,14 @@
                 <span class="news-feed-badge">Kegiatan Fasyankes</span>
                 <span class="news-feed-date">02 Sep 2026</span>
                 <h3 class="news-feed-title">Puskesmas Malimpung Gelar Posyandu Terpadu di Dusun Pajalele</h3>
+                <div class="news-feed-cta-row">
+                  <span class="btn-read-single-link">Baca Selengkapnya</span>
+                  <span class="read-arrow">→</span>
+                </div>
               </div>
             </article>
 
-            <article class="news-feed-card" onclick="openNewsDetail('edukasi-phbs-sekolah-dasar')">
+            <article class="news-feed-card clickable-news-card" data-news-slug="edukasi-phbs-sekolah-dasar" onclick="openNewsDetail('edukasi-phbs-sekolah-dasar')" role="button" tabindex="0" aria-label="Buka berita Edukasi PHBS di Sekolah Dasar">
               <div class="news-feed-thumb">
                 <img src="assets/berita_phbs.webp" alt="Edukasi PHBS di Sekolah Dasar" class="news-feed-img" loading="eager" decoding="async" width="400" height="240">
               </div>
@@ -840,10 +896,14 @@
                 <span class="news-feed-badge">Promosi Kesehatan</span>
                 <span class="news-feed-date">28 Agu 2026</span>
                 <h3 class="news-feed-title">Edukasi PHBS dan Cuci Tangan Pakai Sabun di SD Binaan</h3>
+                <div class="news-feed-cta-row">
+                  <span class="btn-read-single-link">Baca Selengkapnya</span>
+                  <span class="read-arrow">→</span>
+                </div>
               </div>
             </article>
 
-            <article class="news-feed-card" onclick="openNewsDetail('kunjungan-rumah-perkesmas')">
+            <article class="news-feed-card clickable-news-card" data-news-slug="kunjungan-rumah-perkesmas" onclick="openNewsDetail('kunjungan-rumah-perkesmas')" role="button" tabindex="0" aria-label="Buka berita Kunjungan Rumah Program Perawatan Kesehatan Masyarakat">
               <div class="news-feed-thumb">
                 <img src="assets/berita_bumil.webp" alt="Kunjungan Rumah Perkesmas di Desa Padang Loang" class="news-feed-img" loading="eager" decoding="async" width="400" height="240">
               </div>
@@ -851,10 +911,14 @@
                 <span class="news-feed-badge">Layanan Lapangan</span>
                 <span class="news-feed-date">20 Agu 2026</span>
                 <h3 class="news-feed-title">Kunjungan Rumah Program Perawatan Kesehatan Masyarakat</h3>
+                <div class="news-feed-cta-row">
+                  <span class="btn-read-single-link">Baca Selengkapnya</span>
+                  <span class="read-arrow">→</span>
+                </div>
               </div>
             </article>
 
-            <article class="news-feed-card" onclick="openNewsDetail('lokakarya-lintas-sektor-stunting')">
+            <article class="news-feed-card clickable-news-card" data-news-slug="lokakarya-lintas-sektor-stunting" onclick="openNewsDetail('lokakarya-lintas-sektor-stunting')" role="button" tabindex="0" aria-label="Buka berita Lokakarya Mini Lintas Sektor Patampanua">
               <div class="news-feed-thumb">
                 <img src="assets/berita_stunting.webp" alt="Lokakarya Mini Lintas Sektor Patampanua" class="news-feed-img" loading="eager" decoding="async" width="400" height="240">
               </div>
@@ -862,6 +926,10 @@
                 <span class="news-feed-badge">Manajemen Mutu</span>
                 <span class="news-feed-date">15 Agu 2026</span>
                 <h3 class="news-feed-title">Lokakarya Mini Lintas Sektor untuk Pencegahan Stunting Terpadu</h3>
+                <div class="news-feed-cta-row">
+                  <span class="btn-read-single-link">Baca Selengkapnya</span>
+                  <span class="read-arrow">→</span>
+                </div>
               </div>
             </article>
           </div>
@@ -1999,7 +2067,7 @@
               <!-- List Feed Artikel Berita -->
               <div class="news-feed-list" id="news-articles-container">
                 <!-- Artikel 1 -->
-                <article class="news-item-card" data-category="kegiatan" onclick="openNewsDetail('posyandu-terpadu-pajalele')">
+                <article class="news-item-card clickable-news-card" data-category="kegiatan" data-news-slug="posyandu-terpadu-pajalele" onclick="openNewsDetail('posyandu-terpadu-pajalele')" role="button" tabindex="0" aria-label="Buka berita Puskesmas Malimpung Gelar Posyandu Terpadu di Dusun Pajalele">
                   <div class="news-item-thumb">
                     <img src="assets/berita_posyandu.webp" alt="Puskesmas Malimpung Gelar Posyandu Terpadu di Dusun Pajalele" class="news-item-img" loading="eager" decoding="async" width="400" height="240">
                   </div>
@@ -2017,7 +2085,7 @@
                 </article>
 
                 <!-- Artikel 2 -->
-                <article class="news-item-card" data-category="edukasi" onclick="openNewsDetail('edukasi-phbs-sekolah-dasar')">
+                <article class="news-item-card clickable-news-card" data-category="edukasi" data-news-slug="edukasi-phbs-sekolah-dasar" onclick="openNewsDetail('edukasi-phbs-sekolah-dasar')" role="button" tabindex="0" aria-label="Buka berita Edukasi PHBS di Sekolah Dasar">
                   <div class="news-item-thumb">
                     <img src="assets/berita_phbs.webp" alt="Edukasi PHBS di Sekolah Dasar" class="news-item-img" loading="eager" decoding="async" width="400" height="240">
                   </div>
@@ -2035,7 +2103,7 @@
                 </article>
 
                 <!-- Artikel 3 -->
-                <article class="news-item-card" data-category="program" onclick="openNewsDetail('kunjungan-rumah-perkesmas')">
+                <article class="news-item-card clickable-news-card" data-category="program" data-news-slug="kunjungan-rumah-perkesmas" onclick="openNewsDetail('kunjungan-rumah-perkesmas')" role="button" tabindex="0" aria-label="Buka berita Kunjungan Ibu Hamil di Wilayah Kerja">
                   <div class="news-item-thumb">
                     <img src="assets/berita_bumil.webp" alt="Kunjungan Ibu Hamil di Wilayah Kerja" class="news-item-img" loading="eager" decoding="async" width="400" height="240">
                   </div>
@@ -2053,7 +2121,7 @@
                 </article>
 
                 <!-- Artikel 4 -->
-                <article class="news-item-card" data-category="kegiatan" onclick="openNewsDetail('lokakarya-lintas-sektor-stunting')">
+                <article class="news-item-card clickable-news-card" data-category="kegiatan" data-news-slug="lokakarya-lintas-sektor-stunting" onclick="openNewsDetail('lokakarya-lintas-sektor-stunting')" role="button" tabindex="0" aria-label="Buka berita Kolaborasi Lintas Sektor untuk Cegah Stunting">
                   <div class="news-item-thumb">
                     <img src="assets/berita_stunting.webp" alt="Kolaborasi Lintas Sektor untuk Cegah Stunting" class="news-item-img" loading="eager" decoding="async" width="400" height="240">
                   </div>
@@ -2099,21 +2167,21 @@
               <div class="sidebar-widget">
                 <h3 class="widget-title">Berita Populer</h3>
                 <div class="widget-popular-list">
-                  <div class="popular-item" onclick="openNewsDetail('posyandu-terpadu-pajalele')" style="cursor: pointer;">
+                  <div class="popular-item" data-news-slug="posyandu-terpadu-pajalele" onclick="openNewsDetail('posyandu-terpadu-pajalele')" role="button" tabindex="0" style="cursor: pointer;">
                     <img src="assets/berita_posyandu.webp" alt="Posyandu Terpadu di Dusun Pajalele" class="popular-thumb" loading="lazy">
                     <div>
                       <span class="popular-date">02 September 2026</span>
                       <h4 class="popular-title">Posyandu Terpadu di Dusun Pajalele</h4>
                     </div>
                   </div>
-                  <div class="popular-item" onclick="openNewsDetail('edukasi-phbs-sekolah-dasar')" style="cursor: pointer;">
+                  <div class="popular-item" data-news-slug="edukasi-phbs-sekolah-dasar" onclick="openNewsDetail('edukasi-phbs-sekolah-dasar')" role="button" tabindex="0" style="cursor: pointer;">
                     <img src="assets/berita_phbs.webp" alt="Edukasi PHBS di Sekolah Dasar" class="popular-thumb" loading="lazy">
                     <div>
                       <span class="popular-date">28 Agustus 2026</span>
                       <h4 class="popular-title">Edukasi PHBS di Sekolah Dasar</h4>
                     </div>
                   </div>
-                  <div class="popular-item" onclick="openNewsDetail('kunjungan-rumah-perkesmas')" style="cursor: pointer;">
+                  <div class="popular-item" data-news-slug="kunjungan-rumah-perkesmas" onclick="openNewsDetail('kunjungan-rumah-perkesmas')" role="button" tabindex="0" style="cursor: pointer;">
                     <img src="assets/berita_bumil.webp" alt="Kunjungan Ibu Hamil di Wilayah Kerja" class="popular-thumb" loading="lazy">
                     <div>
                       <span class="popular-date">20 Agustus 2026</span>
@@ -2301,47 +2369,73 @@
         </div>
       </div>
 
-      <div class="footer-grid-master">
-        <div class="footer-col-m">
-          <h4 class="footer-heading-m">Menu</h4>
-          <ul class="footer-links-m">
-            <li><a href="#home" data-go="home">Beranda</a></li>
-            <li><a href="#public" data-go="public">Profil</a></li>
-            <li><a href="#services" data-go="services">Layanan</a></li>
-            <li><a href="#programs" data-go="programs">Program</a></li>
-            <li><a href="#insights" data-go="insights">Health Atlas</a></li>
-            <li><a href="#news" data-go="news">Berita</a></li>
-            <li><a href="#public" data-go="public">Kontak</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col-m">
-          <h4 class="footer-heading-m">Layanan Tautan</h4>
-          <ul class="footer-links-m">
-            <li><a href="#office" data-go="office">Kantor Virtual</a></li>
-            <li><a href="#public" data-go="public">PPID</a></li>
-            <li><a href="#public" data-go="public">Pengaduan</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col-m">
-          <h4 class="footer-heading-m">Ikuti Kami</h4>
-          <div class="footer-social-icons">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-soc-link" aria-label="Facebook">
-              <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-soc-link" aria-label="Instagram">
-              <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-soc-link" aria-label="YouTube">
-              <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
+      <div class="footer-grid-master footer-grid-balanced">
+        <!-- Kolom 1: Profil Fasyankes & Kontak Cepat -->
+        <div class="footer-col-m footer-col-info">
+          <div class="footer-logos-group" style="margin-bottom: 0.75rem;">
+            <img src="assets/logo_pinrang.png" alt="Kabupaten Pinrang" class="footer-logo-img">
+            <img src="assets/logo_puskesmas_malimpung.png" alt="Puskesmas Malimpung" class="footer-logo-img">
+          </div>
+          <strong class="footer-brand-title">Puskesmas Malimpung</strong>
+          <p class="footer-brand-desc">Fasilitas Pelayanan Kesehatan Tingkat Pertama (FKTP) terakreditasi Kementerian Kesehatan Republik Indonesia.</p>
+          <div class="footer-contact-details">
+            <div class="footer-contact-row">
+              <svg style="width: 15px; height: 15px; flex-shrink: 0;" aria-hidden="true"><use href="#ic-map-pin"/></svg>
+              <span>Benteng Malimpung, Kec. Patampanua, Pinrang 91252</span>
+            </div>
+            <div class="footer-contact-row">
+              <svg style="width: 15px; height: 15px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>(0421) 921001 • Siaga 24 Jam</span>
+            </div>
           </div>
         </div>
 
-        <div class="footer-col-m footer-col-berakhlak">
+        <!-- Kolom 2: Navigasi Portal -->
+        <div class="footer-col-m">
+          <h4 class="footer-heading-m">Navigasi Portal</h4>
+          <ul class="footer-links-m">
+            <li><a href="#home" data-go="home">Beranda</a></li>
+            <li><a href="#public" data-go="public">Profil Fasyankes</a></li>
+            <li><a href="#services" data-go="services">Layanan Unggulan</a></li>
+            <li><a href="#programs" data-go="programs">Program Prioritas</a></li>
+            <li><a href="#insights" data-go="insights">Peta Sehat Wilayah</a></li>
+            <li><a href="#news" data-go="news">Berita & Kegiatan</a></li>
+            <li><a href="#public" data-go="public">Kontak & Lokasi</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom 3: Layanan Digital & Informasi Publik -->
+        <div class="footer-col-m">
+          <h4 class="footer-heading-m">Layanan Digital</h4>
+          <ul class="footer-links-m">
+            <li><a href="#office" data-go="office">Kantor Virtual Pegawai</a></li>
+            <li><a href="https://ckg.puskesmasmalimpung.id/" target="_blank" rel="noopener noreferrer">Aplikasi CKG Malimpung ↗</a></li>
+            <li><a href="#office" data-go="office">Rekam Medis SATUSEHAT</a></li>
+            <li><a href="#office" data-go="office">Dashboard Mutu SPM</a></li>
+            <li><a href="#public" data-go="public">PPID & Dokumen Publik</a></li>
+            <li><a href="#public" data-go="public">Layanan Aspirasi & Pengaduan</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom 4: Nilai Utama & Media Sosial -->
+        <div class="footer-col-m footer-col-berakhlak-wrap">
+          <h4 class="footer-heading-m">Tata Nilai Fasyankes</h4>
           <div class="berakhlak-logo-card">
             <img src="assets/BerAKHLAK_Putih_Vektor.svg" alt="BerAKHLAK — Bangga Melayani Bangsa" class="footer-berakhlak-img" width="220" height="87">
+          </div>
+          <div class="footer-social-wrapper">
+            <span class="footer-soc-label">Saluran Media Sosial Resmi:</span>
+            <div class="footer-social-icons">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-soc-link" aria-label="Facebook Puskesmas Malimpung">
+                <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-soc-link" aria-label="Instagram Puskesmas Malimpung">
+                <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-soc-link" aria-label="YouTube Puskesmas Malimpung">
+                <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -2371,6 +2465,6 @@
   <script type="module" src="firebase-config.js"></script>
   <!-- Library Leaflet.js untuk Peta Geospasial Health Atlas BIG -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="app.js?v=3.3.1"></script>
+  <script src="app.js?v=3.3.2"></script>
 </body>
 </html>

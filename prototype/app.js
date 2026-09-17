@@ -948,10 +948,28 @@ function initHealthAtlasLeafletMap() {
 window.initHealthAtlasLeafletMap = initHealthAtlasLeafletMap;
 
 // ---------------------------------------------------------------------------
-// 6B. HEALTH ATLAS MAP ENGINE UNTUK BERANDA (#health-atlas-home-map)
+// 6B. PETA SEHAT GEOSPASIAL ENGINE (MULTI-LAYER SWITCHER)
 // ---------------------------------------------------------------------------
 let healthAtlasHomeMap = null;
-let healthAtlasHomeGeoJsonLayer = null;
+let homeAdminLayer = null;
+let homeFaskesLayer = null;
+let homeHealthLayer = null;
+let currentHomeMapLayer = 'admin';
+
+// Data Lokasi Fasyankes & 8 Posyandu Binaan
+const POSYANDU_DATA = [
+  { name: 'Puskesmas Malimpung (Induk)', type: 'pkm', coords: [-3.729869, 119.73413], info: 'IGD & Persalinan Siaga 24 Jam • Rawat Jalan 08.00-14.00 WITA' },
+  { name: 'Pustu Padang Loang', type: 'pustu', coords: [-3.7385, 119.7435], info: 'Pelayanan Dasar & Rujukan Desa Padang Loang' },
+  { name: 'Pustu Maccirinna', type: 'pustu', coords: [-3.7210, 119.7170], info: 'Pelayanan Bidan & Perawat Kelurahan Maccirinna' },
+  { name: 'Posyandu Melati (Dusun Pajalele)', type: 'posyandu', coords: [-3.7320, 119.7390], info: 'Penimbangan Balita, CKG, Imunisasi Rutin Hari Selasa I' },
+  { name: 'Posyandu Mawar (Dusun Benteng)', type: 'posyandu', coords: [-3.7270, 119.7310], info: 'Pelayanan Ibu Hamil & Balita Hari Rabu I' },
+  { name: 'Posyandu Kenanga (Dusun Kariango)', type: 'posyandu', coords: [-3.7225, 119.7385], info: 'Skrining CKG, Lansia, Balita Hari Kamis I' },
+  { name: 'Posyandu Dahlia (Padang Loang I)', type: 'posyandu', coords: [-3.7395, 119.7460], info: 'Layanan Posyandu Integrasi Hari Senin II' },
+  { name: 'Posyandu Cempaka (Padang Loang II)', type: 'posyandu', coords: [-3.7440, 119.7415], info: 'Pemantauan Tumbuh Kembang Hari Rabu II' },
+  { name: 'Posyandu Anggrek (Maccirinna Barat)', type: 'posyandu', coords: [-3.7195, 119.7145], info: 'Penyuluhan PHBS, Imunisasi Hari Kamis II' },
+  { name: 'Posyandu Flamboyan (Maccirinna Timur)', type: 'posyandu', coords: [-3.7245, 119.7215], info: 'Skrining PTM Hipertensi & Balita Hari Jumat II' },
+  { name: 'Posyandu Teratai (Dusun Alitta)', type: 'posyandu', coords: [-3.7345, 119.7275], info: 'Pelayanan Antenatal & Lansia Hari Sabtu II' }
+];
 
 function initHealthAtlasHomeMap() {
   const mapContainer = document.getElementById('health-atlas-home-map');
@@ -959,7 +977,7 @@ function initHealthAtlasHomeMap() {
 
   healthAtlasHomeMap = L.map('health-atlas-home-map', {
     center: [-3.729869, 119.73413],
-    zoom: 12,
+    zoom: 13,
     scrollWheelZoom: false
   });
 
@@ -968,69 +986,192 @@ function initHealthAtlasHomeMap() {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | BIG Batas Wilayah'
   }).addTo(healthAtlasHomeMap);
 
+  homeAdminLayer = L.featureGroup().addTo(healthAtlasHomeMap);
+  homeFaskesLayer = L.featureGroup();
+  homeHealthLayer = L.featureGroup();
+
   const villageStyles = {
-    'malimpung': { color: '#059669', fillColor: '#10b981', fillOpacity: 0.35, weight: 2.5 },
-    'padang loang': { color: '#2563eb', fillColor: '#3b82f6', fillOpacity: 0.35, weight: 2.5 },
-    'maccirinna': { color: '#d97706', fillColor: '#f59e0b', fillOpacity: 0.35, weight: 2.5 }
+    'malimpung': { color: '#059669', fillColor: '#10b981', fillOpacity: 0.32, weight: 2.5 },
+    'padang loang': { color: '#2563eb', fillColor: '#3b82f6', fillOpacity: 0.32, weight: 2.5 },
+    'maccirinna': { color: '#d97706', fillColor: '#f59e0b', fillOpacity: 0.32, weight: 2.5 }
   };
 
-  const pkmIcon = L.divIcon({
-    className: 'pkm-custom-marker',
-    html: `<div style="background-color: #e11d48; width: 26px; height: 26px; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px; line-height: 1;">+</div>`,
-    iconSize: [26, 26],
-    iconAnchor: [13, 13]
-  });
+  const healthStyles = {
+    'malimpung': { color: '#047857', fillColor: '#10b981', fillOpacity: 0.52, weight: 3 },
+    'padang loang': { color: '#0284c7', fillColor: '#38bdf8', fillOpacity: 0.48, weight: 3 },
+    'maccirinna': { color: '#7c3aed', fillColor: '#a855f7', fillOpacity: 0.45, weight: 3 }
+  };
 
-  const pkmMarker = L.marker([-3.729869, 119.73413], { icon: pkmIcon, title: 'Puskesmas Malimpung Induk' }).addTo(healthAtlasHomeMap);
-  pkmMarker.bindPopup(`
-    <div style="font-family: 'Plus Jakarta Sans', sans-serif; min-width: 210px; padding: 4px;">
-      <span style="font-size: 10px; font-weight: 800; color: #087d79; text-transform: uppercase;">Puskesmas Induk</span>
-      <h4 style="font-size: 14px; font-weight: 800; color: #18383A; margin: 3px 0;">Puskesmas Malimpung</h4>
-      <p style="font-size: 11px; color: #4b5563; margin-bottom: 6px;">Benteng Malimpung, Patampanua, Pinrang</p>
-      <a href="https://maps.app.goo.gl/YYYWShsgAxZoG2vW8" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 700; color: #087d79; text-decoration: none;">Buka Google Maps ↗</a>
-    </div>
-  `);
-
+  // Muat GeoJSON Resmi BIG untuk Layer Admin & Health
   fetch('assets/batas_wilayah_malimpung.geojson')
     .then(res => res.json())
     .then(geoData => {
-      healthAtlasHomeGeoJsonLayer = L.geoJSON(geoData, {
-        style: function(feature) {
-          const name = (feature.properties.NAMOBJ || '').toLowerCase();
+      // 1. Layer Batas Administrasi BIG
+      const adminGeo = L.geoJSON(geoData, {
+        style: function(f) {
+          const name = (f.properties.NAMOBJ || '').toLowerCase();
           for (const key in villageStyles) {
             if (name.includes(key)) return villageStyles[key];
           }
           return { color: '#64748b', fillColor: '#94a3b8', fillOpacity: 0.3, weight: 2 };
         },
-        onEachFeature: function(feature, layer) {
-          const p = feature.properties;
+        onEachFeature: function(f, layer) {
+          const p = f.properties;
           layer.bindTooltip(`<strong>${p.TIPE} ${p.NAMOBJ}</strong>`, { sticky: true, direction: 'top' });
           layer.bindPopup(`
-            <div style="font-family: 'Plus Jakarta Sans', sans-serif; min-width: 200px; padding: 4px;">
-              <span style="font-size: 10px; font-weight: 800; color: #087d79; text-transform: uppercase;">${p.TIPE} BINAAN</span>
-              <h4 style="font-size: 14px; font-weight: 800; color: #18383A; margin: 3px 0;">${p.TIPE} ${p.NAMOBJ}</h4>
-              <p style="font-size: 11px; color: #6b7280; margin: 0;">Kode Kemendagri: <strong>${p.KODE_KEMENDAGRI}</strong></p>
-              <p style="font-size: 11px; color: #15803d; font-weight: 600; margin-top: 4px;">Batas Resmi BIG 2023</p>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:210px; padding:4px;">
+              <span style="font-size:10px; font-weight:800; color:#008775; text-transform:uppercase;">Wilayah Kerja Binaan</span>
+              <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:3px 0;">${p.TIPE} ${p.NAMOBJ}</h4>
+              <p style="font-size:11px; color:#526b64; margin:0;">Kode Kemendagri: <strong>${p.KODE_KEMENDAGRI}</strong></p>
+              <p style="font-size:11px; color:#059669; font-weight:700; margin-top:4px;">Skala Peta 1:10.000 BIG 2023</p>
             </div>
           `);
-          layer.on({
-            mouseover: function(e) {
-              e.target.setStyle({ fillOpacity: 0.6, weight: 3.5 });
-            },
-            mouseout: function(e) {
-              healthAtlasHomeGeoJsonLayer.resetStyle(e.target);
-            }
-          });
         }
-      }).addTo(healthAtlasHomeMap);
+      });
+      homeAdminLayer.addLayer(adminGeo);
 
-      healthAtlasHomeMap.fitBounds(healthAtlasHomeGeoJsonLayer.getBounds(), { padding: [20, 20] });
+      // 2. Layer Gambaran Kesehatan Warga (Choropleth Tematik)
+      const healthGeo = L.geoJSON(geoData, {
+        style: function(f) {
+          const name = (f.properties.NAMOBJ || '').toLowerCase();
+          for (const key in healthStyles) {
+            if (name.includes(key)) return healthStyles[key];
+          }
+          return { color: '#059669', fillColor: '#10b981', fillOpacity: 0.45, weight: 2.5 };
+        },
+        onEachFeature: function(f, layer) {
+          const p = f.properties;
+          const name = (p.NAMOBJ || '').toLowerCase();
+          let statsHtml = '';
+          if (name.includes('malimpung')) {
+            statsHtml = `
+              <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
+                <div>🟢 Skrining CKG: <strong>87.4%</strong> (Zona Unggul)</div>
+                <div>👶 Bebas Stunting: <strong>93.2%</strong> (Intervensi Rutin)</div>
+                <div>🚰 Status Sanitasi: <strong>100% ODF (Bebas BABS)</strong></div>
+              </div>`;
+          } else if (name.includes('padang')) {
+            statsHtml = `
+              <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
+                <div>🟢 Skrining CKG: <strong>84.6%</strong> (Aktif)</div>
+                <div>🤰 Kunjungan Bumil K4: <strong>94.1%</strong></div>
+                <div>🩺 Skrining Hipertensi: <strong>79.2%</strong></div>
+              </div>`;
+          } else {
+            statsHtml = `
+              <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
+                <div>🟢 Skrining CKG: <strong>81.9%</strong> (Aktif)</div>
+                <div>👵 Posyandu Lansia: <strong>92.0% Kehadiran</strong></div>
+                <div>💊 Remaja Bebas Anemia: <strong>89.5%</strong></div>
+              </div>`;
+          }
+          layer.bindTooltip(`<strong>Status Kesehatan: ${p.NAMOBJ}</strong>`, { sticky: true, direction: 'top' });
+          layer.bindPopup(`
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:230px; padding:4px;">
+              <span style="font-size:10px; font-weight:800; color:#059669; text-transform:uppercase;">Gambaran Kesehatan Warga</span>
+              <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:3px 0;">${p.TIPE} ${p.NAMOBJ}</h4>
+              ${statsHtml}
+            </div>
+          `);
+        }
+      });
+      homeHealthLayer.addLayer(healthGeo);
+
+      // Pasang Marker Fasyankes & Posyandu ke Layer Faskes
+      POSYANDU_DATA.forEach(pos => {
+        let markerColor = '#8b5cf6';
+        let markerSymbol = '●';
+        let iconRadius = '50%';
+        if (pos.type === 'pkm') {
+          markerColor = '#e11d48';
+          markerSymbol = '+';
+        } else if (pos.type === 'pustu') {
+          markerColor = '#2563eb';
+          markerSymbol = 'H';
+          iconRadius = '8px';
+        }
+
+        const customIcon = L.divIcon({
+          className: 'posyandu-map-marker',
+          html: `<div style="background-color: ${markerColor}; width: 26px; height: 26px; border-radius: ${iconRadius}; border: 3px solid #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 13px; line-height: 1;">${markerSymbol}</div>`,
+          iconSize: [26, 26],
+          iconAnchor: [13, 13]
+        });
+
+        const m = L.marker(pos.coords, { icon: customIcon, title: pos.name });
+        m.bindPopup(`
+          <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:210px; padding:4px;">
+            <span style="font-size:10px; font-weight:800; color:${markerColor}; text-transform:uppercase;">${pos.type === 'pkm' ? 'Fasyankes Induk' : (pos.type === 'pustu' ? 'Puskesmas Pembantu' : 'Pos Pelayanan Terpadu')}</span>
+            <h4 style="font-size:13px; font-weight:800; color:#0c2923; margin:3px 0;">${pos.name}</h4>
+            <p style="font-size:11px; color:#526b64; margin:0 0 6px; line-height:1.4;">${pos.info}</p>
+            <span style="font-size:10px; color:#059669; font-weight:700;">✓ Wilayah Binaan Puskesmas Malimpung</span>
+          </div>
+        `);
+        homeFaskesLayer.addLayer(m);
+      });
+
+      // Tambahkan juga marker PKM ke layer admin
+      const pkmMain = POSYANDU_DATA[0];
+      const pkmIcon = L.divIcon({
+        className: 'pkm-custom-marker',
+        html: `<div style="background-color: #e11d48; width: 28px; height: 28px; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 15px; line-height: 1;">+</div>`,
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
+      });
+      const pkmMarker = L.marker(pkmMain.coords, { icon: pkmIcon, title: pkmMain.name });
+      pkmMarker.bindPopup(`
+        <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:210px; padding:4px;">
+          <span style="font-size:10px; font-weight:800; color:#008775; text-transform:uppercase;">Puskesmas Induk</span>
+          <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:3px 0;">Puskesmas Malimpung</h4>
+          <p style="font-size:11px; color:#526b64; margin-bottom:6px;">Benteng Malimpung, Kec. Patampanua</p>
+          <a href="https://maps.app.goo.gl/YYYWShsgAxZoG2vW8" target="_blank" rel="noopener noreferrer" style="font-size:11px; font-weight:700; color:#008775; text-decoration:none;">Buka Petunjuk Arah ↗</a>
+        </div>
+      `);
+      homeAdminLayer.addLayer(pkmMarker);
+
+      // Initial Fit Bounds
+      healthAtlasHomeMap.fitBounds(adminGeo.getBounds(), { padding: [20, 20] });
     })
     .catch(err => {
-      console.warn('Gagal memuat GeoJSON batas wilayah BIG untuk Beranda:', err);
+      console.warn('Gagal memuat GeoJSON Peta Sehat Beranda:', err);
     });
 }
+
+function switchMapLayer(layerName) {
+  if (!healthAtlasHomeMap) return;
+  currentHomeMapLayer = layerName;
+
+  // Hapus semua layer feature group
+  if (healthAtlasHomeMap.hasLayer(homeAdminLayer)) healthAtlasHomeMap.removeLayer(homeAdminLayer);
+  if (healthAtlasHomeMap.hasLayer(homeFaskesLayer)) healthAtlasHomeMap.removeLayer(homeFaskesLayer);
+  if (healthAtlasHomeMap.hasLayer(homeHealthLayer)) healthAtlasHomeMap.removeLayer(homeHealthLayer);
+
+  // Update indikator UI tab
+  document.querySelectorAll('.layer-tab').forEach(tab => {
+    const isTarget = (tab.getAttribute('data-map-layer') === layerName);
+    tab.classList.toggle('active', isTarget);
+    tab.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+  });
+
+  const labelEl = document.getElementById('layer-status-text');
+
+  if (layerName === 'admin') {
+    homeAdminLayer.addTo(healthAtlasHomeMap);
+    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Batas Administrasi BIG 1:10.000</strong>';
+    appToast('Peta beralih: Batas Administrasi BIG');
+  } else if (layerName === 'faskes') {
+    homeAdminLayer.addTo(healthAtlasHomeMap);
+    homeFaskesLayer.addTo(healthAtlasHomeMap);
+    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Fasyankes Induk, 2 Pustu & 8 Posyandu Dusun</strong>';
+    appToast('Peta beralih: Fasyankes & 8 Posyandu Dusun');
+  } else if (layerName === 'health') {
+    homeHealthLayer.addTo(healthAtlasHomeMap);
+    if (labelEl) labelEl.innerHTML = 'Menampilkan: <strong>Gambaran Kesehatan Warga & Capaian Skrining CKG</strong>';
+    appToast('Peta beralih: Gambaran Kesehatan Warga');
+  }
+}
 window.initHealthAtlasHomeMap = initHealthAtlasHomeMap;
+window.switchMapLayer = switchMapLayer;
 
 // Auto Re-fit Peta Leaflet Saat Window Resize / Rotasi Layar Ponsel
 let mapResizeTimer = null;
@@ -1039,17 +1180,38 @@ window.addEventListener('resize', () => {
   mapResizeTimer = setTimeout(() => {
     if (healthAtlasHomeMap) {
       healthAtlasHomeMap.invalidateSize();
-      if (healthAtlasHomeGeoJsonLayer) {
-        healthAtlasHomeMap.fitBounds(healthAtlasHomeGeoJsonLayer.getBounds(), { padding: [20, 20] });
-      }
     }
     if (healthAtlasMap) {
       healthAtlasMap.invalidateSize();
-      if (healthAtlasGeoJsonLayer) {
-        healthAtlasMap.fitBounds(healthAtlasGeoJsonLayer.getBounds(), { padding: [30, 30] });
-      }
     }
   }, 250);
+});
+
+// ---------------------------------------------------------------------------
+// 7. EVENT DELEGATION GLOBAL: SINGLE POST BERITA BERFUNGSI UNIVERSAL
+// ---------------------------------------------------------------------------
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('[data-news-slug]');
+  if (card) {
+    const slug = card.getAttribute('data-news-slug');
+    if (slug && typeof window.openNewsDetail === 'function') {
+      e.preventDefault();
+      window.openNewsDetail(slug);
+    }
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' || e.key === ' ') {
+    const card = e.target.closest('[data-news-slug]');
+    if (card) {
+      const slug = card.getAttribute('data-news-slug');
+      if (slug && typeof window.openNewsDetail === 'function') {
+        e.preventDefault();
+        window.openNewsDetail(slug);
+      }
+    }
+  }
 });
 
 // ---------------------------------------------------------------------------
