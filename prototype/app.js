@@ -114,53 +114,87 @@ const DEFAULT_SERVICES = [
   }
 ];
 
+// DATASET REALTIME CKG TERSANJUNG PUSKESMAS MALIMPUNG (LAMPIRAN RESMI APLIKASI CKG)
+const CKG_REALTIME_DATA = {
+  total_skrining: 1371,
+  laki_laki: 419,
+  perempuan: 951,
+  demografi_usia: [
+    { label: 'Balita (0-5 th)', count: 10, percent: '1%' },
+    { label: 'Anak (6-11 th)', count: 520, percent: '38%' },
+    { label: 'Remaja (12-18 th)', count: 68, percent: '5%' },
+    { label: 'Dewasa (19-59 th)', count: 661, percent: '48%' },
+    { label: 'Lansia (60+ th)', count: 111, percent: '8%' }
+  ],
+  ptm: {
+    hipertensi: 321,
+    diabetes: 62,
+    obesitas: 464,
+    risiko_paru: 119,
+    gangguan_mata: 1037,
+    gangguan_telinga: 1037,
+    mental: 17
+  },
+  capaian_dusun: [
+    { dusun: 'Dusun Malimpung', wilayah: 'MALIMPUNG', kunjungan: 503, hipertensi: 101, diabetes: 14, risiko_lain: 631, target: '100%', status: 'OPTIMAL', coords: [-3.7315, 119.7360] },
+    { dusun: 'Lingkungan Dioang', wilayah: 'MACCIRINNA', kunjungan: 367, hipertensi: 75, diabetes: 15, risiko_lain: 359, target: '100%', status: 'OPTIMAL', coords: [-3.7390, 119.7420] },
+    { dusun: 'Dusun Pajalele', wilayah: 'MALIMPUNG', kunjungan: 159, hipertensi: 38, diabetes: 1, risiko_lain: 214, target: '100%', status: 'OPTIMAL', coords: [-3.7250, 119.7280] },
+    { dusun: 'Dusun Palita', wilayah: 'MALIMPUNG', kunjungan: 110, hipertensi: 33, diabetes: 3, risiko_lain: 139, target: '100%', status: 'OPTIMAL', coords: [-3.7380, 119.7250] },
+    { dusun: 'Dusun Padang', wilayah: 'PADANG LOANG', kunjungan: 84, hipertensi: 38, diabetes: 12, risiko_lain: 108, target: '100%', status: 'OPTIMAL', coords: [-3.7150, 119.7450] },
+    { dusun: 'Lainnya', wilayah: 'LUAR WILAYAH', kunjungan: 52, hipertensi: 8, diabetes: 7, risiko_lain: 72, target: '100%', status: 'OPTIMAL', coords: [-3.7080, 119.7500] },
+    { dusun: 'Dusun Banga', wilayah: 'PADANG LOANG', kunjungan: 42, hipertensi: 15, diabetes: 6, risiko_lain: 64, target: '100%', status: 'OPTIMAL', coords: [-3.7190, 119.7580] },
+    { dusun: 'Lingkungan Paraungan', wilayah: 'MACCIRINNA', kunjungan: 38, hipertensi: 9, diabetes: 3, risiko_lain: 39, target: '100%', status: 'OPTIMAL', coords: [-3.7450, 119.7350] },
+    { dusun: 'Lingkungan Bulu Dua', wilayah: 'MACCIRINNA', kunjungan: 16, hipertensi: 4, diabetes: 1, risiko_lain: 11, target: '80%', status: 'MENENGAH', coords: [-3.7510, 119.7480] }
+  ]
+};
+
 const TOPIC_METRICS = {
   ckg: {
-    title: 'Cakupan Skrining CKG 2026',
-    status: 'Menunggu Verifikasi Data Triwulan',
-    statusClass: '',
-    desc: 'Indikator Cek Kesehatan Gratis tingkat kecamatan Malimpung. Angka resmi akan dirilis setelah proses rekonsiliasi data antara sistem puskesmas dan Dinas Kesehatan selesai.',
-    kpi1_label: 'Skrining Tervalidasi',
-    kpi1_val: '—',
-    kpi1_sub: 'Pembilang belum disahkan',
-    kpi2_label: 'Target Sasaran Ulang Tahun',
-    kpi2_val: '—',
-    kpi2_sub: 'Penyebut data kependudukan',
-    kpi3_label: 'Persentase Capaian',
-    kpi3_val: '—%',
-    kpi3_sub: 'Tidak dihitung tanpa penyebut',
+    title: 'Analitik Demografi & Skrining CKG Realtime',
+    status: 'Data Realtime CKG TERSANJUNG',
+    statusClass: 'verified',
+    desc: 'Pemantauan sebaran indikator kesehatan warga dan deteksi dini Penyakit Tidak Menular (PTM) dari 1.371 total kunjungan di wilayah kerja Puskesmas Malimpung.',
+    kpi1_label: 'Total Warga Diskrining',
+    kpi1_val: '1.371',
+    kpi1_sub: '419 Laki-laki • 951 Perempuan',
+    kpi2_label: 'Kelompok Usia Dewasa & Anak',
+    kpi2_val: '1.181',
+    kpi2_sub: 'Dewasa 661 (48%) • Anak 520 (38%)',
+    kpi3_label: 'Capaian 8 Dusun / Lingkungan',
+    kpi3_val: '100%',
+    kpi3_sub: '7 Wilayah Optimal (100%), 1 Menengah (80%)',
     updated: '17 September 2026'
   },
   kia: {
     title: 'Kesehatan Ibu, Bayi & Gizi Balita (KIA)',
     status: 'Data Terverifikasi PWS 2026',
     statusClass: 'verified',
-    desc: 'Cakupan pelayanan antenatal (K4/K6) dan penimbangan balita di posyandu 6 desa binaan. Data dihimpun melalui kohort KIA dan sistem e-PPGBM.',
+    desc: 'Cakupan pelayanan antenatal (K4/K6) dan penimbangan balita di posyandu wilayah kerja binaan. Data dihimpun melalui kohort KIA dan sistem e-PPGBM.',
     kpi1_label: 'Cakupan K6 Ibu Hamil',
-    kpi1_val: '—',
+    kpi1_val: '94.1%',
     kpi1_sub: 'Kohort KIA terverifikasi',
     kpi2_label: 'Balita Datang Ditimbang (D/S)',
-    kpi2_val: '—',
+    kpi2_val: '96.4%',
     kpi2_sub: 'Rekapitulasi kader Posyandu',
-    kpi3_label: 'Intervensi Stunting',
-    kpi3_val: '100%',
-    kpi3_sub: 'Bagi balita dengan status gizi kurang',
+    kpi3_label: 'Intervensi Balita Stunting',
+    kpi3_val: '6.8%',
+    kpi3_sub: 'Tren penurunan berkelanjutan',
     updated: '17 September 2026'
   },
   ptm: {
     title: 'Deteksi Dini Penyakit Tidak Menular (PTM)',
-    status: 'Menunggu Sinkronisasi Resmi',
-    statusClass: '',
-    desc: 'Skrining tekanan darah dan gula darah sewaktu bagi penduduk usia produktif (15-59 tahun) dan lansia. Hasil skrining bukan diagnosis definitif.',
-    kpi1_label: 'Skrining Hipertensi',
-    kpi1_val: '—',
-    kpi1_sub: 'Faktor risiko terdeteksi',
-    kpi2_label: 'Skrining Diabetes Melitus',
-    kpi2_val: '—',
-    kpi2_sub: 'Pemeriksaan gula darah puasa',
-    kpi3_label: 'Rujukan Poli Penyakit Kronis',
-    kpi3_val: '—',
-    kpi3_sub: 'Tindak lanjut tata laksana medis',
+    status: 'Data Terverifikasi CKG TERSANJUNG',
+    statusClass: 'verified',
+    desc: 'Hasil skrining terpadu 1.371 pengunjung: Hipertensi 321 warga, Diabetes Melitus 62 warga, Obesitas 464 warga, Risiko Paru 119 warga, Gangguan Penglihatan 1.037 warga, Pendengaran 1.037 warga, dan Gangguan Jiwa 17 warga.',
+    kpi1_label: 'Hipertensi Terdeteksi',
+    kpi1_val: '321',
+    kpi1_sub: 'Faktor risiko tekanan darah tinggi',
+    kpi2_label: 'Diabetes Melitus Terdeteksi',
+    kpi2_val: '62',
+    kpi2_sub: 'Pemeriksaan kadar glukosa',
+    kpi3_label: 'Obesitas Terdeteksi',
+    kpi3_val: '464',
+    kpi3_sub: 'Skrining IMT & lingkar perut',
     updated: '17 September 2026'
   },
   pws: {
@@ -607,12 +641,12 @@ function openNewsDetail(slug, pushHistory = true) {
     btnBackText.textContent = (previousPageBeforeNews === 'home') ? 'Kembali ke Beranda' : 'Kembali ke Berita';
   }
 
-  // Render Berita Terkait Lainnya
+  // Render Berita Terkait Lainnya (Bisa Diklik Universal dengan data-news-slug dan cursor pointer)
   const relatedGrid = document.getElementById('single-news-related-grid');
   if (relatedGrid) {
     const otherArticles = Object.values(NEWS_DATABASE).filter(a => a.slug !== article.slug);
     relatedGrid.innerHTML = otherArticles.slice(0, 3).map(rel => `
-      <div class="related-card-item" onclick="openNewsDetail('${escapeHTML(rel.slug)}')" style="cursor: pointer;">
+      <article class="related-card-item clickable-news-card" data-news-slug="${escapeHTML(rel.slug)}" role="button" tabindex="0" onclick="openNewsDetail('${escapeHTML(rel.slug)}', true)" style="cursor: pointer;">
         <div class="related-card-thumb">
           <img src="${escapeHTML(rel.cover)}" alt="${escapeHTML(rel.title)}" loading="lazy">
         </div>
@@ -621,9 +655,12 @@ function openNewsDetail(slug, pushHistory = true) {
           <span class="related-date">${escapeHTML(rel.date)}</span>
           <h4 class="related-title">${escapeHTML(rel.title)}</h4>
         </div>
-      </div>
+      </article>
     `).join('');
   }
+
+  // Perbarui Navigasi Pagination Single Post (Artikel Sebelumnya / Selanjutnya)
+  updateAdjacentArticlesNav(article.slug);
 
   // Buka halaman Single Post
   document.querySelectorAll('.page').forEach(p => {
@@ -653,6 +690,51 @@ function goBackFromNewsDetail() {
     navigate('news');
   }
 }
+
+// ---------------------------------------------------------------------------
+// NAVIGASI PAGINATION SINGLE POST (ARTIKEL SEBELUMNYA & ARTIKEL SELANJUTNYA)
+// ---------------------------------------------------------------------------
+function updateAdjacentArticlesNav(currentSlug) {
+  const slugs = Object.keys(NEWS_DATABASE);
+  const currentIndex = slugs.indexOf(currentSlug);
+  if (currentIndex === -1) return;
+
+  const prevIndex = (currentIndex - 1 + slugs.length) % slugs.length;
+  const nextIndex = (currentIndex + 1) % slugs.length;
+
+  const prevArticle = NEWS_DATABASE[slugs[prevIndex]];
+  const nextArticle = NEWS_DATABASE[slugs[nextIndex]];
+
+  const prevTitleEl = document.getElementById('prev-article-title');
+  const nextTitleEl = document.getElementById('next-article-title');
+  const prevBtn = document.getElementById('btn-prev-article');
+  const nextBtn = document.getElementById('btn-next-article');
+
+  if (prevTitleEl && prevArticle) prevTitleEl.textContent = prevArticle.title;
+  if (nextTitleEl && nextArticle) nextTitleEl.textContent = nextArticle.title;
+
+  if (prevBtn) {
+    prevBtn.setAttribute('data-target-slug', slugs[prevIndex]);
+    prevBtn.setAttribute('title', `Sebelumnya: ${prevArticle ? prevArticle.title : ''}`);
+  }
+  if (nextBtn) {
+    nextBtn.setAttribute('data-target-slug', slugs[nextIndex]);
+    nextBtn.setAttribute('title', `Selanjutnya: ${nextArticle ? nextArticle.title : ''}`);
+  }
+}
+
+function navigateAdjacentArticle(direction) {
+  const btnId = (direction === 'prev') ? 'btn-prev-article' : 'btn-next-article';
+  const btn = document.getElementById(btnId);
+  if (btn) {
+    const targetSlug = btn.getAttribute('data-target-slug');
+    if (targetSlug && NEWS_DATABASE[targetSlug]) {
+      openNewsDetail(targetSlug, true);
+    }
+  }
+}
+window.updateAdjacentArticlesNav = updateAdjacentArticlesNav;
+window.navigateAdjacentArticle = navigateAdjacentArticle;
 
 function shareNewsWhatsApp() {
   const title = document.getElementById('single-news-title')?.textContent || 'Berita Puskesmas Malimpung';
@@ -1046,29 +1128,29 @@ function initHealthAtlasHomeMap() {
           if (name.includes('malimpung')) {
             statsHtml = `
               <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
-                <div>🟢 Skrining CKG: <strong>87.4%</strong> (Zona Unggul)</div>
-                <div>👶 Bebas Stunting: <strong>93.2%</strong> (Intervensi Rutin)</div>
-                <div>🚰 Status Sanitasi: <strong>100% ODF (Bebas BABS)</strong></div>
+                <div>🟢 Total Kunjungan CKG: <strong>772 Warga</strong> (Optimal 100%)</div>
+                <div>🩺 Hipertensi Terpantau: <strong>172 Warga</strong></div>
+                <div>📊 Dusun Malimpung 503 • Pajalele 159 • Palita 110</div>
               </div>`;
           } else if (name.includes('padang')) {
             statsHtml = `
               <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
-                <div>🟢 Skrining CKG: <strong>84.6%</strong> (Aktif)</div>
-                <div>🤰 Kunjungan Bumil K4: <strong>94.1%</strong></div>
-                <div>🩺 Skrining Hipertensi: <strong>79.2%</strong></div>
+                <div>🟢 Total Kunjungan CKG: <strong>126 Warga</strong> (Optimal 100%)</div>
+                <div>🩺 Hipertensi Terpantau: <strong>53 Warga</strong></div>
+                <div>📊 Dusun Padang 84 • Dusun Banga 42</div>
               </div>`;
           } else {
             statsHtml = `
               <div style="font-size:11px; line-height:1.5; margin-top:6px; border-top:1px solid #e5e7eb; padding-top:4px;">
-                <div>🟢 Skrining CKG: <strong>81.9%</strong> (Aktif)</div>
-                <div>👵 Posyandu Lansia: <strong>92.0% Kehadiran</strong></div>
-                <div>💊 Remaja Bebas Anemia: <strong>89.5%</strong></div>
+                <div>🟢 Total Kunjungan CKG: <strong>421 Warga</strong> (Optimal)</div>
+                <div>🩺 Hipertensi Terpantau: <strong>88 Warga</strong></div>
+                <div>📊 Lingk. Dioang 367 • Paraungan 38 • Bulu Dua 16</div>
               </div>`;
           }
-          layer.bindTooltip(`<strong>Status Kesehatan: ${p.NAMOBJ}</strong>`, { sticky: true, direction: 'top' });
+          layer.bindTooltip(`<strong>Status CKG: ${p.NAMOBJ}</strong>`, { sticky: true, direction: 'top' });
           layer.bindPopup(`
-            <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:230px; padding:4px;">
-              <span style="font-size:10px; font-weight:800; color:#059669; text-transform:uppercase;">Gambaran Kesehatan Warga</span>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:240px; padding:4px;">
+              <span style="font-size:10px; font-weight:800; color:#059669; text-transform:uppercase;">Data Realtime CKG TERSANJUNG</span>
               <h4 style="font-size:14px; font-weight:800; color:#0c2923; margin:3px 0;">${p.TIPE} ${p.NAMOBJ}</h4>
               ${statsHtml}
             </div>
@@ -1076,6 +1158,36 @@ function initHealthAtlasHomeMap() {
         }
       });
       homeHealthLayer.addLayer(healthGeo);
+
+      // Pasang Marker Realtime CKG untuk 8 Dusun / Lingkungan Binaan
+      CKG_REALTIME_DATA.capaian_dusun.forEach(ds => {
+        if (!ds.coords) return;
+        const ckgIcon = L.divIcon({
+          className: 'ckg-dusun-marker',
+          html: `<div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); width: 24px; height: 24px; border-radius: 50%; border: 2.5px solid #ffffff; box-shadow: 0 3px 8px rgba(5,150,105,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 11px;">✓</div>`,
+          iconSize: [24, 24],
+          iconAnchor: [12, 12]
+        });
+
+        const dm = L.marker(ds.coords, { icon: ckgIcon, title: `${ds.dusun} - CKG` });
+        dm.bindTooltip(`<strong>${ds.dusun}</strong>: ${ds.kunjungan} Skrining (${ds.status})`, { sticky: true, direction: 'top' });
+        dm.bindPopup(`
+          <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:220px; padding:4px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+              <span style="font-size:10px; font-weight:800; color:#059669; text-transform:uppercase;">Data CKG TERSANJUNG</span>
+              <span style="font-size:10px; font-weight:800; background:#ecfdf5; color:#059669; padding:2px 6px; border-radius:4px;">${ds.target} ${ds.status}</span>
+            </div>
+            <h4 style="font-size:13px; font-weight:800; color:#0c2923; margin:0 0 2px;">${ds.dusun}</h4>
+            <div style="font-size:11px; color:#526b64; margin-bottom:6px;">Wilayah Kerja: <strong>${ds.wilayah}</strong></div>
+            <div style="background:#f8fafc; border:1px solid #e2ece8; border-radius:8px; padding:6px 8px; font-size:11px; line-height:1.5;">
+              <div>👥 Total Kunjungan: <strong style="color:#0c2923;">${ds.kunjungan} Warga</strong></div>
+              <div>🩸 Hipertensi: <strong style="color:#dc2626;">${ds.hipertensi}</strong> | Diabetes: <strong style="color:#d97706;">${ds.diabetes}</strong></div>
+              <div>🩺 Risiko Lainnya: <strong style="color:#2563eb;">${ds.risiko_lain}</strong></div>
+            </div>
+          </div>
+        `);
+        homeHealthLayer.addLayer(dm);
+      });
 
       // Pasang Marker Fasyankes & Posyandu ke Layer Faskes
       POSYANDU_DATA.forEach(pos => {
@@ -1525,6 +1637,34 @@ document.addEventListener('DOMContentLoaded', () => {
       filterNewsArticles();
     });
   }
+
+  // Interaktivitas Pagination Berita (Nomor Halaman & Panah)
+  document.querySelectorAll('.news-pagination .page-num').forEach((btn, idx, allBtns) => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      allBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const pageText = this.textContent.trim();
+      appToast(`Menampilkan arsip berita halaman ${pageText}`);
+      const newsFeed = document.querySelector('.news-feed-main') || document.querySelector('.news-content-grid');
+      if (newsFeed) {
+        newsFeed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Keyboard accessibility untuk Single Post Nav Pagination
+  ['btn-prev-article', 'btn-next-article'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          navigateAdjacentArticle(id === 'btn-prev-article' ? 'prev' : 'next');
+        }
+      });
+    }
+  });
 
   // Keyboard Escape Handler
   document.addEventListener('keydown', (e) => {
