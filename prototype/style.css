@@ -3595,4 +3595,620 @@ table {
   text-decoration: underline;
 }
 
+/* ==========================================================================
+   21. MASTER TECHNICAL DIRECTION V3.2 — HOMEPAGE 12 SECTIONS STYLING
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   21.1 SECTION 3: AKSES CEPAT WARGA
+   -------------------------------------------------------------------------- */
+.section-quick-access {
+  padding: 3.5rem 0 2.5rem;
+  background-color: var(--surface);
+}
+
+.quick-access-header {
+  margin-bottom: 2rem;
+}
+
+.quick-access-kicker {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--teal-primary);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.quick-access-title {
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: #18383A;
+  line-height: 1.2;
+}
+
+.quick-access-subtitle {
+  font-size: 0.9375rem;
+  color: var(--ink-secondary);
+  margin-top: 0.35rem;
+  max-width: 680px;
+}
+
+.quick-access-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 1200px) {
+  .quick-access-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
+.quick-card-item {
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.125rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--ink-primary);
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast), border-color var(--duration-fast);
+}
+
+.quick-card-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(14, 59, 51, 0.06);
+  border-color: var(--teal-primary);
+}
+
+.quick-card-highlight {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+}
+
+.quick-card-highlight:hover {
+  border-color: #059669;
+}
+
+.quick-card-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ic-teal { background-color: #e6f7f5; color: #087d79; }
+.ic-blue { background-color: #eff6ff; color: #2563eb; }
+.ic-lime { background-color: #f7fee7; color: #65a30d; }
+.ic-emerald { background-color: #ecfdf5; color: #059669; }
+.ic-amber { background-color: #fffbeb; color: #d97706; }
+.ic-rose { background-color: #fff1f2; color: #e11d48; }
+.ic-indigo { background-color: #eef2ff; color: #4f46e5; }
+
+.quick-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.quick-badge-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quick-ext-badge {
+  font-size: 0.625rem;
+  font-weight: 800;
+  background-color: #d1fae5;
+  color: #065f46;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.quick-card-name {
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: #18383A;
+  margin-bottom: 0.15rem;
+  line-height: 1.25;
+}
+
+.quick-card-desc {
+  font-size: 0.75rem;
+  color: var(--ink-secondary);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.quick-card-arrow {
+  font-size: 1rem;
+  color: var(--ink-tertiary);
+  font-weight: 700;
+  transition: transform var(--duration-fast), color var(--duration-fast);
+  flex-shrink: 0;
+}
+
+.quick-card-item:hover .quick-card-arrow {
+  transform: translateX(3px);
+  color: var(--teal-primary);
+}
+
+/* --------------------------------------------------------------------------
+   21.2 SECTION 5: PROGRAM SIKLUS HIDUP ILP
+   -------------------------------------------------------------------------- */
+.section-life-stage-programs {
+  padding: 3.5rem 0;
+  background-color: var(--surface-alt);
+  border-top: 1px solid var(--border-light);
+}
+
+.section-kicker-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--teal-primary);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.tag-edu {
+  color: #2563eb;
+}
+
+.lifestage-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+@media (min-width: 1200px) {
+  .lifestage-cards-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.lifestage-item-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.lifestage-item-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(14, 59, 51, 0.08);
+  border-color: var(--teal-primary);
+}
+
+.lifestage-badge {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  width: fit-content;
+}
+
+.klaster-ibu { background-color: #ffe4e6; color: #be123c; }
+.klaster-anak { background-color: #fef3c7; color: #b45309; }
+.klaster-remaja { background-color: #ede9fe; color: #6d28d9; }
+.klaster-dewasa { background-color: #dbeafe; color: #1d4ed8; }
+.klaster-lansia { background-color: #e0e7ff; color: #3730a3; }
+
+.lifestage-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: #f0fdf4;
+  color: var(--teal-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.875rem;
+}
+
+.lifestage-title {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: #18383A;
+  margin-bottom: 0.35rem;
+}
+
+.lifestage-desc {
+  font-size: 0.8125rem;
+  color: var(--ink-secondary);
+  line-height: 1.45;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.lifestage-features {
+  list-style: none;
+  font-size: 0.75rem;
+  color: var(--ink-primary);
+  border-top: 1px solid var(--border-light);
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.lifestage-features li::before {
+  content: "•";
+  color: var(--teal-primary);
+  font-weight: bold;
+  display: inline-block;
+  width: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   21.3 SECTION 9: ARTIKEL & EDUKASI KESEHATAN (TERPISAH DARI BERITA)
+   -------------------------------------------------------------------------- */
+.section-articles-feed {
+  padding: 3.5rem 0;
+  background-color: #ffffff;
+  border-top: 1px solid var(--border-light);
+}
+
+.articles-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .articles-cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.article-edu-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast), border-color var(--duration-fast);
+}
+
+.article-edu-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(14, 59, 51, 0.08);
+  border-color: #2563eb;
+  background-color: #ffffff;
+}
+
+.article-edu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.article-category-badge {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.cat-gizi { background-color: #fef3c7; color: #92400e; }
+.cat-ptm { background-color: #fee2e2; color: #991b1b; }
+.cat-imun { background-color: #e0f2fe; color: #075985; }
+.cat-gigi { background-color: #ecfdf5; color: #065f46; }
+
+.article-read-time {
+  font-size: 0.6875rem;
+  color: var(--ink-tertiary);
+  font-weight: 600;
+}
+
+.article-edu-title {
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: #18383A;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+.article-edu-excerpt {
+  font-size: 0.8125rem;
+  color: var(--ink-secondary);
+  line-height: 1.45;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.article-reviewer-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border);
+}
+
+.reviewer-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.reviewer-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewer-name {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: #18383A;
+  line-height: 1.2;
+}
+
+.review-date {
+  font-size: 0.625rem;
+  color: var(--ink-tertiary);
+}
+
+/* --------------------------------------------------------------------------
+   21.4 SECTION 10: PROFIL & AKTIVITAS PUSKESMAS
+   -------------------------------------------------------------------------- */
+.section-profile-highlight {
+  padding: 3.5rem 0;
+  background-color: var(--surface-alt);
+  border-top: 1px solid var(--border-light);
+}
+
+.profile-highlight-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .profile-highlight-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+.profile-highlight-lead {
+  font-size: 0.9375rem;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+  margin-top: 0.75rem;
+}
+
+.profile-values-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.profile-val-box {
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.profile-val-box strong {
+  font-size: 0.9375rem;
+  color: var(--teal-deep);
+  font-weight: 800;
+}
+
+.profile-val-box span {
+  font-size: 0.75rem;
+  color: var(--ink-secondary);
+  line-height: 1.35;
+}
+
+.btn-profile-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background-color: var(--teal-deep);
+  color: #ffffff;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--duration-fast);
+}
+
+.btn-profile-primary:hover {
+  background-color: #066562;
+  transform: translateY(-1px);
+}
+
+.profile-facilities-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.facilities-card-title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #18383A;
+  margin-bottom: 1rem;
+}
+
+.facilities-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  font-size: 0.8125rem;
+  color: var(--ink-primary);
+  margin-bottom: 1.25rem;
+}
+
+.facility-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  margin-right: 0.5rem;
+}
+
+.facility-address-note {
+  font-size: 0.75rem;
+  color: var(--ink-tertiary);
+  line-height: 1.4;
+  border-top: 1px dashed var(--border);
+  padding-top: 0.875rem;
+}
+
+/* --------------------------------------------------------------------------
+   21.5 SECTION 11: INFORMASI PUBLIK & AKUNTABILITAS
+   -------------------------------------------------------------------------- */
+.section-public-transparency {
+  padding: 3.5rem 0;
+  background-color: #ffffff;
+  border-top: 1px solid var(--border-light);
+}
+
+.transparency-banner {
+  background: linear-gradient(135deg, #093f35 0%, #062b24 100%);
+  border-radius: 20px;
+  padding: clamp(1.25rem, 3vw, 2.5rem) clamp(1rem, 2.5vw, 2rem);
+  color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 12px 32px rgba(5, 38, 32, 0.15);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.transparency-left {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.transparency-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--lime-fresh);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.transparency-title {
+  font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+.transparency-desc {
+  font-size: 0.875rem;
+  color: #cde6de;
+  line-height: 1.5;
+  max-width: 600px;
+  margin-bottom: 1.25rem;
+}
+
+.transparency-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.trans-badge-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.trans-val {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: var(--lime-fresh);
+}
+
+.trans-lbl {
+  font-size: 0.75rem;
+  color: #a5cec3;
+  max-width: 180px;
+  line-height: 1.25;
+}
+
+.transparency-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  width: 100%;
+  max-width: 320px;
+}
+
+.btn-transparency-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--teal-primary);
+  color: #ffffff;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--duration-fast);
+}
+
+.btn-transparency-action:hover {
+  background-color: #2ea89a;
+  transform: translateY(-1px);
+}
+
+.btn-trans-secondary {
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-trans-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+
 
