@@ -28,6 +28,7 @@
   --jade-400: #2fc3a6;
   
   /* Tint & Surface Palette */
+  --mint-200: #bbf0d8;
   --mint-100: #d9f4e9;
   --mint-50: #effaf4;
   --warm-100: #fff0d8;
@@ -40,6 +41,7 @@
   --surface-alt: #f3f7f5;
   --surface-card: #ffffff;
   --ink: #112d27;
+  --ink-primary: #112d27;
   --ink-secondary: #4a665f;
   --ink-tertiary: #75928a;
   --border: #dbe7e1;

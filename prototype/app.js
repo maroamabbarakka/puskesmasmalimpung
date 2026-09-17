@@ -491,6 +491,12 @@ function closeMobileNav() {
   }
 }
 
+window.navigate = navigate;
+window.openMobileNav = openMobileNav;
+window.closeMobileNav = closeMobileNav;
+window.openServiceDetail = openServiceDetail;
+window.closeServiceDetail = closeServiceDetail;
+
 // ---------------------------------------------------------------------------
 // 5. CMS STUDIO LOGIC
 // ---------------------------------------------------------------------------
@@ -734,6 +740,26 @@ function initHealthAtlasHomeMap() {
     });
 }
 window.initHealthAtlasHomeMap = initHealthAtlasHomeMap;
+
+// Auto Re-fit Peta Leaflet Saat Window Resize / Rotasi Layar Ponsel
+let mapResizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(mapResizeTimer);
+  mapResizeTimer = setTimeout(() => {
+    if (healthAtlasHomeMap) {
+      healthAtlasHomeMap.invalidateSize();
+      if (healthAtlasHomeGeoJsonLayer) {
+        healthAtlasHomeMap.fitBounds(healthAtlasHomeGeoJsonLayer.getBounds(), { padding: [20, 20] });
+      }
+    }
+    if (healthAtlasMap) {
+      healthAtlasMap.invalidateSize();
+      if (healthAtlasGeoJsonLayer) {
+        healthAtlasMap.fitBounds(healthAtlasGeoJsonLayer.getBounds(), { padding: [30, 30] });
+      }
+    }
+  }, 250);
+});
 
 // ---------------------------------------------------------------------------
 // 7. TOAST HELPER
