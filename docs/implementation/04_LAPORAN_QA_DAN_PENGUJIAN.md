@@ -80,3 +80,7 @@ Pengujian otomatis tambahan telah dijalankan menggunakan Playwright Edge Chromiu
 | **Kepatuhan Supresi Sel Kecil** | Regulasi UU 27/2022 & Permenkes 24/2022 | Proteksi batas < 5 kasus per desa | Perlindungan identitas warga dari re-identifikasi | **PASS** |
 | **Pemuatan Modul Firebase SDK** | Modul ES `prototype/firebase-config.js` | Inisialisasi Firebase App & Analytics | Status HTTP 200, zero console error, defensive `isSupported()` | **PASS** |
 | **Kepatuhan CSP Firebase** | Content Security Policy `_headers` & `firebase.json` | Konektivitas Analytics & Firestore | Whitelist resmi Google Analytics & Firebase aktif | **PASS** |
+| **Hero V3.1 Digital Gateway (7 Viewport)** | Resolusi 320px s.d. 1440px (`test_hero_v3.py`) | Evaluasi layout mosaik mockup & teks | 0px horizontal overflow, zero visual crash | **PASS** |
+| **Hero V3.1 Quick Service Finder** | Input kata kunci di Hero (contoh: "Gigi") | Otomatis navigasi `#services` & filter poli | Beralih rute mulus dan kartu poli gigi terfilter instan | **PASS** |
+| **Hero V3.1 CKG Subdomain Link** | Tautan tombol & mosaik laptop CKG | Mengarah ke `https://ckg.puskesmasmalimpung.id/` | Valid URL absolut, target="_blank", rel="noopener" | **PASS** |
+

@@ -11,3 +11,11 @@ node_modules/
 .idea/
 .DS_Store
 Thumbs.db
+.firebase/
+
+# Large Raw Media Files
+*.zip
+*.mp4
+*.MP4
+Dokumentasi Acara Malimpung/
+Peresmian Puskesmas malinpung/

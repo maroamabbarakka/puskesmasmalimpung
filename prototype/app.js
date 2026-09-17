@@ -767,6 +767,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Quick Service Finder di Hero Beranda V3.1
+  const heroFinderInput = document.getElementById('hero-service-finder');
+  const heroFinderBtn = document.getElementById('btn-hero-finder');
+
+  function executeHeroFinder() {
+    if (!heroFinderInput) return;
+    const query = heroFinderInput.value.trim();
+    navigate('services');
+    const serviceSearchInput = document.getElementById('service-search');
+    if (serviceSearchInput) {
+      serviceSearchInput.value = query;
+      serviceSearchInput.dispatchEvent(new Event('input'));
+    }
+  }
+
+  if (heroFinderBtn) {
+    heroFinderBtn.addEventListener('click', executeHeroFinder);
+  }
+  if (heroFinderInput) {
+    heroFinderInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        executeHeroFinder();
+      }
+    });
+  }
+
   // Keyboard Escape Handler
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {

@@ -125,85 +125,147 @@
          PAGE 1: BERANDA (#home)
          ==================================================================== -->
     <div class="page active" id="page-home">
-      <!-- Hero Section Editorial & Premium -->
-      <section class="hero">
+      <!-- Hero Section V3.1: Digital Gateway & Interactive Mosaic (SATUSEHAT Tone × Mekari Storytelling) -->
+      <section class="hero hero-v3-gateway">
+        <div class="hero-bg-grid" aria-hidden="true"></div>
         <div class="container">
-          <div class="hero-grid">
-            <div class="hero-content">
-              <div class="hero-pill">
-                <svg style="width: 14px; height: 14px;" aria-hidden="true"><use href="#ic-shield"/></svg>
-                <span>Pelayanan Kesehatan Primer Terpadu & Terpercaya</span>
+          <div class="hero-grid-v3">
+            <!-- Kolom Kiri: Narasi Manfaat & Quick Finder -->
+            <div class="hero-content-v3">
+              <div class="hero-pill-v3">
+                <span class="pill-dot-lime"></span>
+                <span>Ekosistem Digital Kesehatan Puskesmas Malimpung</span>
               </div>
-              <h1 class="hero-title">
-                Kesehatan masyarakat Malimpung, <em>dalam satu ekosistem terpadu.</em>
+              <h1 class="hero-title-v3">
+                Pelayanan publik yang transparan. <br>
+                <span class="hero-title-accent">Operasional fasyankes yang terintegrasi.</span>
               </h1>
-              <p class="hero-lead">
-                Puskesmas Malimpung menyediakan akses pelayanan kesehatan yang manusiawi, informasi jadwal & prosedur yang transparan, serta pemantauan kesehatan wilayah berbasis data yang dapat dipertanggungjawabkan.
+              <p class="hero-lead-v3">
+                Portal resmi masyarakat Kecamatan Patampanua untuk akses layanan kesehatan primer, jadwal dokter, dan pemantauan wilayah — terhubung langsung dengan gerbang operasional fasyankes.
               </p>
-              <div class="hero-actions">
-                <a href="#services" class="btn-primary" data-go="services">
+
+              <!-- Quick Finder Bar Interaktif -->
+              <div class="hero-quick-finder">
+                <div class="finder-input-wrap">
+                  <svg style="width: 18px; height: 18px;" aria-hidden="true"><use href="#ic-search"/></svg>
+                  <input type="text" id="hero-service-finder" placeholder="Cari layanan (Gigi, KIA, CKG, Laboratorium)..." autocomplete="off" aria-label="Cari Layanan Kesehatan Cepat">
+                </div>
+                <button class="btn-finder-action" id="btn-hero-finder" aria-label="Temukan Layanan">Cari Layanan</button>
+              </div>
+
+              <!-- Tombol Aksi Ganda (Layanan Publik & Subdomain CKG) -->
+              <div class="hero-actions-v3">
+                <a href="#services" class="btn-hero-primary" data-go="services">
                   <span>Jelajahi Layanan Warga</span>
                   <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-arrow"/></svg>
                 </a>
-                <a href="#insights" class="btn-secondary" data-go="insights">
-                  <span>Pantau Kesehatan Wilayah</span>
-                  <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-chart"/></svg>
+                <a href="https://ckg.puskesmasmalimpung.id/" target="_blank" rel="noopener noreferrer" class="btn-hero-secondary" aria-label="Buka Aplikasi CKG Malimpung di tab baru">
+                  <span>Buka Aplikasi CKG</span>
+                  <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 </a>
               </div>
-              <div class="hero-trust-bar">
-                <div class="trust-item">
-                  <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-check"/></svg>
-                  <span>Integrasi Pelayanan Primer (ILP)</span>
+
+              <!-- Micro Trust Badges -->
+              <div class="hero-trust-row-v3">
+                <div class="trust-pill-v3">
+                  <svg style="width: 14px; height: 14px;" aria-hidden="true"><use href="#ic-shield"/></svg>
+                  <span>Akreditasi Paripurna Kemenkes</span>
                 </div>
-                <div class="trust-item">
-                  <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-check"/></svg>
-                  <span>Cek Kesehatan Gratis (CKG) 2026</span>
+                <div class="trust-pill-v3">
+                  <svg style="width: 14px; height: 14px;" aria-hidden="true"><use href="#ic-clock"/></svg>
+                  <span>UGD & Bersalin 24 Jam</span>
                 </div>
-                <div class="trust-item">
-                  <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-check"/></svg>
-                  <span>Standar SPM Permenkes 6/2024</span>
+                <div class="trust-pill-v3">
+                  <svg style="width: 14px; height: 14px;" aria-hidden="true"><use href="#ic-map-pin"/></svg>
+                  <span>Jejaring 6 Desa Patampanua</span>
                 </div>
               </div>
             </div>
 
-            <!-- Hero Visual Overview Card -->
-            <div class="hero-visual-card">
-              <div class="hero-visual-header">
-                <div>
-                  <span class="visual-badge">Status Fasyankes Hari Ini</span>
-                  <h3 style="font-size: 1.125rem; font-weight: 800; color: var(--forest-950); margin-top: 0.25rem;">Puskesmas Induk Malimpung</h3>
-                </div>
-                <span style="font-size: 0.75rem; color: var(--emerald-600); font-weight: 700;">● Beroperasi Normal</span>
-              </div>
-              <div class="hero-metrics-grid">
-                <div class="metric-box">
-                  <span class="metric-label">Pelayanan Rawat Jalan</span>
-                  <span class="metric-value" id="home-stat-services">6 Unit</span>
-                  <span class="metric-note">Poli Umum, KIA, Gigi, Lab, Farmasi, CKG</span>
-                </div>
-                <div class="metric-box">
-                  <span class="metric-label">Wilayah Kerja Binaan</span>
-                  <span class="metric-value">6 Desa</span>
-                  <span class="metric-note">Patampanua, Kab. Pinrang</span>
-                </div>
-                <div class="metric-box">
-                  <span class="metric-label">Layanan Darurat</span>
-                  <span class="metric-value" style="color: var(--emerald-600);">24 Jam</span>
-                  <span class="metric-note">UGD & Persalinan Siaga</span>
-                </div>
-                <div class="metric-box">
-                  <span class="metric-label">Keterbukaan Publik</span>
-                  <span class="metric-value" style="color: var(--forest-900);">100%</span>
-                  <span class="metric-note">UU 25/2009 & Maklumat Resmi</span>
+            <!-- Kolom Kanan: Mosaik Mockup Antarmuka Terpadu (Laptop CKG + Phone Layanan) -->
+            <div class="hero-mosaic-v3">
+              <!-- Floating Live Status Badge -->
+              <div class="floating-sys-badge" id="hero-sys-status">
+                <span class="pulse-lime"></span>
+                <div class="sys-badge-text">
+                  <strong>Status Ekosistem Digital</strong>
+                  <small>Portal Aktif • Subdomain CKG Siaga</small>
                 </div>
               </div>
-              <div class="hero-card-banner">
-                <div class="banner-icon">
-                  <svg style="width: 22px; height: 22px;" aria-hidden="true"><use href="#ic-activity"/></svg>
+
+              <!-- Laptop Mockup: Subdomain CKG Malimpung -->
+              <div class="device-laptop">
+                <div class="laptop-screen">
+                  <div class="screen-browser-bar">
+                    <span class="browser-dots"><i></i><i></i><i></i></span>
+                    <span class="browser-url-bar">🔒 https://ckg.puskesmasmalimpung.id</span>
+                    <span class="browser-tag">CKG V2</span>
+                  </div>
+                  <div class="screen-body ckg-preview">
+                    <div class="ckg-top-nav">
+                      <div class="ckg-brand-mini">
+                        <div class="ckg-icon-sq">CKG</div>
+                        <span>Sistem Skrining Malimpung</span>
+                      </div>
+                      <span class="ckg-badge-ok">Klinis Aktif</span>
+                    </div>
+                    <div class="ckg-grid-mini">
+                      <div class="ckg-box">
+                        <span class="ckg-lbl">Alur Siklus Hidup</span>
+                        <strong>5 Klaster ILP</strong>
+                        <small>Bayi s.d. Lansia</small>
+                      </div>
+                      <div class="ckg-box">
+                        <span class="ckg-lbl">Metode Operasional</span>
+                        <strong>Pemeriksaan Fisik</strong>
+                        <small>Antropometri, Gula, EKG</small>
+                      </div>
+                      <div class="ckg-box">
+                        <span class="ckg-lbl">Keamanan Pasien</span>
+                        <strong style="color: #087D79;">Zero PHI Leak</strong>
+                        <small>Database Terisolasi</small>
+                      </div>
+                    </div>
+                    <div class="ckg-action-bar">
+                      <span>Operasional Internal Tenaga Medis</span>
+                      <a href="https://ckg.puskesmasmalimpung.id/" target="_blank" rel="noopener noreferrer" class="ckg-link-mini">Akses Subdomain ↗</a>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h4 style="font-size: 0.9375rem; font-weight: 700; margin-bottom: 0.15rem;">Program Nasional CKG 2026</h4>
-                  <p style="font-size: 0.8125rem; opacity: 0.9;">Pemeriksaan kesehatan gratis bagi seluruh siklus hidup di wilayah Malimpung.</p>
+                <div class="laptop-base"></div>
+              </div>
+
+              <!-- Smartphone Mockup: Portal Layanan Publik Warga (Bertumpuk di Kanan Bawah) -->
+              <div class="device-phone">
+                <div class="phone-speaker"></div>
+                <div class="phone-screen">
+                  <div class="phone-header">
+                    <span class="phone-logo">Puskesmas Malimpung</span>
+                    <span class="phone-time">08:00 WITA</span>
+                  </div>
+                  <div class="phone-card">
+                    <span class="phone-card-title">Jadwal Pelayanan Hari Ini</span>
+                    <div class="phone-doc-item">
+                      <div class="phone-doc-avatar">🩺</div>
+                      <div class="phone-doc-info">
+                        <strong>Poli Umum & CKG</strong>
+                        <small>08.00 - 14.00 WITA</small>
+                      </div>
+                      <span class="phone-badge-open">Buka</span>
+                    </div>
+                    <div class="phone-doc-item">
+                      <div class="phone-doc-avatar">🦷</div>
+                      <div class="phone-doc-info">
+                        <strong>Poli Gigi & Mulut</strong>
+                        <small>08.00 - 12.00 WITA</small>
+                      </div>
+                      <span class="phone-badge-open">Buka</span>
+                    </div>
+                  </div>
+                  <div class="phone-banner">
+                    <svg style="width: 14px; height: 14px;" aria-hidden="true"><use href="#ic-heart"/></svg>
+                    <span>UGD Siaga 24 Jam</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1276,52 +1338,60 @@
                 </div>
               </div>
 
-              <!-- Tab 4: Konektor Sistem Eksternal -->
+              <!-- Tab 4: Ekosistem Aplikasi Internal & Eksternal -->
               <div class="otab-pane" id="otab-integrasi" style="display: none;">
                 <div class="transparency-card" style="margin-bottom: 0;">
-                  <h4>Status Arsitektur Integrasi Sistem (Pemisahan Tegas)</h4>
+                  <h4>Katalog & Gerbang Aplikasi Ekosistem Puskesmas</h4>
                   <p style="font-size: 0.875rem; color: var(--ink-secondary); margin-bottom: 1.25rem;">
-                    Sesuai Blueprint 07 & 08, konektor eksternal tidak diaktifkan sebelum izin, akun resmi, dan audit keamanan disahkan.
+                    Kantor Virtual berfungsi sebagai gerbang terpusat menuju aplikasi operasional Puskesmas Malimpung. Setiap aplikasi beroperasi secara independen pada domain/subdomain masing-masing tanpa duplikasi antarmuka ataupun asumsi SSO otomatis.
                   </p>
                   <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                    <div class="doc-download-item">
+                    <!-- Aplikasi CKG Malimpung (Resmi & Tersedia) -->
+                    <div class="doc-download-item" style="border-left: 4px solid var(--emerald-600); background-color: #f0fdf9;">
                       <div class="doc-meta">
-                        <h5>Aplikasi CKG Malimpung (Internal Database)</h5>
-                        <span>Status: Read-Only Service Account Siap · Penyimpanan Terisolasi Aman</span>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                          <h5 style="margin: 0; font-size: 1rem; color: var(--forest-950);">Aplikasi CKG Malimpung</h5>
+                          <span class="integrity-badge verified" style="font-size: 0.7rem; padding: 0.15rem 0.5rem;">Tersedia</span>
+                        </div>
+                        <p style="margin: 0; font-size: 0.8125rem; color: var(--ink-secondary);">
+                          Buka aplikasi pemeriksaan kesehatan pada subdomain CKG resmi. Berjalan secara mandiri pada domain operasional klinis.
+                        </p>
+                        <span style="font-size: 0.75rem; color: var(--teal-800); font-family: monospace; display: block; margin-top: 0.25rem;">
+                          https://ckg.puskesmasmalimpung.id/
+                        </span>
                       </div>
-                      <span class="integrity-badge verified">Konektor Aman (Staged)</span>
+                      <a href="https://ckg.puskesmasmalimpung.id/" target="_blank" rel="noopener noreferrer" class="btn-primary" style="text-decoration: none; font-size: 0.8125rem; padding: 0.5rem 1rem; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.375rem;">
+                        <span>Buka Aplikasi CKG</span>
+                        <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </a>
                     </div>
 
-                    <div class="doc-download-item">
+                    <!-- Sistem RME, Absensi, KPI: Dalam Antrean Konfirmasi Resmi -->
+                    <div class="doc-download-item" style="opacity: 0.85;">
                       <div class="doc-meta">
-                        <h5>Rekam Medis Elektronik (RME) Puskesmas</h5>
-                        <span>Status: Menunggu Keputusan Pemilihan Vendor RME Resmi dari Dinas Kesehatan</span>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                          <h5 style="margin: 0; font-size: 0.9375rem; color: var(--ink);">RME · Absensi · KPI Pegawai</h5>
+                          <span class="integrity-badge" style="background-color: #f3f4f6; color: #6b7280; font-size: 0.7rem; padding: 0.15rem 0.5rem;">Menunggu Konfirmasi Sistem</span>
+                        </div>
+                        <span style="font-size: 0.8125rem; color: var(--ink-secondary);">
+                          Aplikasi ini akan ditampilkan dalam katalog interaktif segera setelah penetapan alamat domain dan sistem resmi disahkan oleh Dinas Kesehatan dan Pemkab Pinrang.
+                        </span>
                       </div>
-                      <span class="integrity-badge" style="background-color: #f3f4f6; color: #6b7280;">Dinonaktifkan Sementara</span>
+                      <span style="font-size: 0.75rem; color: var(--ink-secondary); font-style: italic; white-space: nowrap;">Belum Aktif</span>
                     </div>
 
-                    <div class="doc-download-item">
+                    <!-- SATUSEHAT Kemenkes RI -->
+                    <div class="doc-download-item" style="opacity: 0.85;">
                       <div class="doc-meta">
-                        <h5>Aplikasi Sehat IndonesiaKu (ASIK Kemenkes RI)</h5>
-                        <span>Status: Pengajuan Akun Institusi Dalam Proses · Tidak Ada Bot Ilegal</span>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                          <h5 style="margin: 0; font-size: 0.9375rem; color: var(--ink);">SATUSEHAT Platform (Kemenkes RI)</h5>
+                          <span class="integrity-badge" style="background-color: #f0fdf4; color: #166534; font-size: 0.7rem; padding: 0.15rem 0.5rem;">Fasyankes Terdaftar</span>
+                        </div>
+                        <span style="font-size: 0.8125rem; color: var(--ink-secondary);">
+                          Interoperabilitas data fasyankes nasional berbasis HL7 FHIR. Menunggu penerbitan kredensial lingkungan produksi resmi.
+                        </span>
                       </div>
-                      <span class="integrity-badge" style="background-color: #f3f4f6; color: #6b7280;">Dinonaktifkan Sementara</span>
-                    </div>
-
-                    <div class="doc-download-item">
-                      <div class="doc-meta">
-                        <h5>SATUSEHAT Platform Interoperability (HL7 FHIR)</h5>
-                        <span>Status: Registrasi Fasyankes Aktif · Menunggu Kredensial Produksi Kemenkes</span>
-                      </div>
-                      <span class="integrity-badge" style="background-color: #f3f4f6; color: #6b7280;">Staging Mode</span>
-                    </div>
-
-                    <div class="doc-download-item">
-                      <div class="doc-meta">
-                        <h5>Sistem Absensi & KPI Pegawai Pemkab Pinrang</h5>
-                        <span>Status: Menunggu Integrasi API Resmi Badan Kepegawaian Daerah (BKPSDM)</span>
-                      </div>
-                      <span class="integrity-badge" style="background-color: #f3f4f6; color: #6b7280;">Menunggu Dokumen API</span>
+                      <span style="font-size: 0.75rem; color: var(--ink-secondary); font-style: italic; white-space: nowrap;">Staging Mode</span>
                     </div>
                   </div>
                 </div>

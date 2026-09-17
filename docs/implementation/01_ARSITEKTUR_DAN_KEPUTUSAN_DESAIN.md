@@ -39,11 +39,38 @@ Puskesmas Malimpung Health Hub V2 bukan sekadar situs profil instansi pemerintah
 - **Rasional:** Kepatuhan terhadap UU No. 27/2022 tentang Pelindungan Data Pribadi (UU PDP) dan Permenkes No. 24/2022 tentang Rekam Medis.
 - **BFF (Backend-For-Frontend):** Snapshot publik hanya menyediakan data agregat yang telah disetujui (*Approved Aggregate Snapshot*) dengan penekanan sel kecil (*low-cell suppression*) untuk mencegah re-identifikasi warga di tingkat desa.
 
+### ADR-04: Penetapan Domain & Separasi Subdomain Operasional CKG
+- **Keputusan:**
+  - **Website Utama (Publik & Virtual Office):** `https://puskesmasmalimpung.id/`
+  - **Aplikasi Operasional Klinis (CKG):** `https://ckg.puskesmasmalimpung.id/`
+- **Rasional & Batasan:**
+  - Aplikasi CKG tidak diduplikasi di dalam website utama.
+  - Kantor Virtual berfungsi sebagai portal gerbang (*gateway*) terpadu menuju aplikasi operasional internal.
+  - Tautan CKG pada Kantor Virtual berupa URL absolut `https://ckg.puskesmasmalimpung.id/` (`target="_blank"`).
+  - Tidak membuat mekanisme login tiruan atau asumsi SSO sepihak antar-subdomain, menjaga isolasi sesi klinis secara mandiri.
+  - Aplikasi RME, Absensi, dan KPI hanya dicantumkan dalam katalog setelah sistem dan alamat domain resminya disahkan.
+
+### ADR-05: Arah Kreatif V3.1 — Human-Centered Digital Health (SATUSEHAT Tone × Mekari Storytelling)
+- **Tone SATUSEHAT:** Menghadirkan atmosfer kesehatan modern yang terang, bersih, segar, dan hangat.
+  - `Primary Teal`: `#16A5A1`
+  - `Deep Teal`: `#087D79`
+  - `Fresh Lime`: `#BED62F`
+  - `Soft Aqua`: `#E6F8F6`
+  - `Sky Blue`: `#65C6E8`
+  - `Clean White`: `#FFFFFF`
+  - `Ink`: `#18383A`
+- **Pengalaman Scroll & Ritme Ala Mekari:**
+  - Menghilangkan kesan deretan kartu seragam yang berulang secara datar.
+  - Mengadopsi komposisi editorial bertingkat, penekanan modul utama secara asimetris, dan staggered entrance.
+  - Pemanfaatan CSS transform/opacity native dan Intersection Observer (durasi 400–600 ms) dengan kepatuhan penuh terhadap `@media (prefers-reduced-motion: reduce)`.
+- **Integritas Aset Daerah:** Tetap mempertahankan lambang resmi Kabupaten Pinrang dan logo resmi Puskesmas Malimpung tanpa menyalin logo Kemenkes ataupun aset referensi secara harfiah.
+
 ---
 
 ## 3. Matriks Hierarki Responsivitas
 | Viewport | Lebar | Adaptasi Tata Letak |
 |---|---|---|
-| **Desktop** | 1440px | Header 76px sticky, Hero 2-kolom asimetris (55% teks narasi, 45% visual card), Bento grid 4-kolom, Service catalog 3-kolom, Footer 4-kolom. |
-| **Tablet** | 820px | Header compact dengan menu navigasi, Hero 2-kolom kompak, Bento grid 2-kolom, Service catalog 2-kolom, Footer 2-kolom. |
-| **Mobile** | 390px / 320px | Hamburger drawer navigasi fullscreen, Hero 1-kolom bertumpuk (teks lalu kartu metrik), Bento grid 1-kolom, Touch targets ≥ 44px, Zero horizontal scroll (`overflow-x: hidden`). |
+| **Desktop** | 1440px | Header 76px sticky, Hero komposisi mendalam berlapis, Modular editorial grid, Dynamic narrative flow, Footer multi-kolom. |
+| **Tablet** | 820px | Header compact dengan menu navigasi, Penyesuaian staggered card vertikal-horizontal seimbang, Touch targets optimal. |
+| **Mobile** | 390px / 320px | Hamburger drawer navigasi fullscreen, Single column flow bertumpuk teratur, Touch targets ≥ 44px, Zero horizontal scroll (`overflow-x: hidden`). |
+
