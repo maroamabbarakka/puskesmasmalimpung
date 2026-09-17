@@ -74,5 +74,8 @@ Pengujian otomatis tambahan telah dijalankan menggunakan Playwright Edge Chromiu
 | **Deep-Linking Close Sync** | Tutup modal CKG | Sinkronisasi History Hash | Hash URL kembali ke `#services` | **PASS** |
 | **Deep-Linking Hashchange** | Evaluasi `#services/gigi` | Navigasi dinamis antar-layanan | Modal berganti ke layanan Gigi dan Mulut | **PASS** |
 | **Sanitasi XSS Input CMS** | String input uji karakter khusus | `escapeHTML` aktif | Karakter `<`, `>`, `"`, `'`, `&` di-escape sempurna | **PASS** |
+| **Aspirasi & Pengaduan Warga** | Input form publik di `#ptab-pengaduan` | Submit aduan dengan kontak & poli | Nomor tiket `ADU-2026-XXXXX` diterbitkan | **PASS** |
+| **Sinkronisasi Audit Trail** | Evaluasi riwayat di `#office` | Cek integrasi log sistem | Aduan warga otomatis tercatat di log internal | **PASS** |
+
 
 

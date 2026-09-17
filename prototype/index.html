@@ -883,6 +883,59 @@
                   <p style="font-size: 0.8125rem; color: var(--ink-secondary);">Kanal pengaduan terintegrasi nasional: <strong>lapor.go.id</strong></p>
                 </div>
               </div>
+
+              <!-- Formulir Pengaduan & Aspirasi Pelayanan Online -->
+              <div style="background-color: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.5rem; margin-top: 1.5rem;">
+                <h4 style="font-size: 1.125rem; font-weight: 800; color: var(--forest-950); margin-bottom: 0.5rem;">Formulir Aspirasi & Pengaduan Pelayanan Online</h4>
+                <p style="font-size: 0.8125rem; color: var(--ink-secondary); margin-bottom: 1.25rem;">Setiap aspirasi atau keluhan akan ditindaklanjuti dalam waktu maksimal 1×24 jam hari kerja oleh Tim Penanganan Pengaduan Puskesmas Malimpung.</p>
+                <form id="public-complaint-form" style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+                    <div>
+                      <label for="complaint-name" style="display: block; font-size: 0.8125rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.375rem;">Nama Pelapor / Inisial</label>
+                      <input type="text" id="complaint-name" class="search-input" style="padding: 0.625rem 0.875rem; border-radius: var(--radius-md);" placeholder="Contoh: Andi Pratama (atau Anonim)" required>
+                    </div>
+                    <div>
+                      <label for="complaint-contact" style="display: block; font-size: 0.8125rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.375rem;">Nomor Kontak / WhatsApp</label>
+                      <input type="tel" id="complaint-contact" class="search-input" style="padding: 0.625rem 0.875rem; border-radius: var(--radius-md);" placeholder="Contoh: 0812XXXXXXXX" required>
+                    </div>
+                  </div>
+                  <div>
+                    <label for="complaint-service" style="display: block; font-size: 0.8125rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.375rem;">Unit / Layanan yang Diadukan</label>
+                    <select id="complaint-service" class="search-input" style="padding: 0.625rem 0.875rem; border-radius: var(--radius-md); background-color: #ffffff;">
+                      <option value="Loket Pendaftaran">Loket Pendaftaran / Rekam Medis</option>
+                      <option value="Poli Umum">Pemeriksaan Poli Umum</option>
+                      <option value="Poli KIA & KB">Pemeriksaan KIA, KB & Ibu Hamil</option>
+                      <option value="Poli Gigi">Pelayanan Gigi dan Mulut</option>
+                      <option value="Laboratorium">Layanan Laboratorium</option>
+                      <option value="Farmasi / Obat">Pelayanan Farmasi & Obat</option>
+                      <option value="UGD & Persalinan">UGD & Ruang Persalinan 24 Jam</option>
+                      <option value="Fasilitas & Kebersihan">Sarana, Kebersihan & Kenyamanan</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="complaint-message" style="display: block; font-size: 0.8125rem; font-weight: 700; color: var(--forest-950); margin-bottom: 0.375rem;">Uraian Pengaduan / Masukan</label>
+                    <textarea id="complaint-message" class="search-input" style="padding: 0.625rem 0.875rem; border-radius: var(--radius-md); min-height: 90px; resize: vertical;" placeholder="Jelaskan kronologi, tanggal kejadian, atau saran perbaikan secara jelas..." required></textarea>
+                  </div>
+                  <div>
+                    <button type="submit" class="btn-primary" style="padding: 0.625rem 1.25rem;">
+                      <span>Kirim Pengaduan Resmi</span>
+                      <svg style="width: 16px; height: 16px;" aria-hidden="true"><use href="#ic-arrow"/></svg>
+                    </button>
+                  </div>
+                </form>
+                <div id="complaint-receipt" style="display: none; margin-top: 1rem; padding: 1.25rem; background-color: var(--mint-50); border: 1px solid var(--mint-200); border-radius: var(--radius-md);">
+                  <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <svg style="width: 18px; height: 18px; color: var(--jade-600);" aria-hidden="true"><use href="#ic-check"/></svg>
+                    <strong style="color: var(--forest-950); font-size: 0.9375rem;">Pengaduan Berhasil Terkirim ke Tim Penanganan</strong>
+                  </div>
+                  <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5; margin-bottom: 0.5rem;">
+                    Nomor Tiket Anda: <strong id="receipt-ticket-id" style="font-family: monospace; color: var(--forest-950); background: #ffffff; padding: 0.2rem 0.4rem; border-radius: 4px; border: 1px solid var(--border-light);"></strong>
+                  </p>
+                  <p style="font-size: 0.8125rem; color: var(--ink-secondary); line-height: 1.5;">
+                    Petugas kami akan segera memverifikasi dan menghubungi Anda melalui kontak yang dicantumkan.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 

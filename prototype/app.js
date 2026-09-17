@@ -681,6 +681,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Public Complaint Form Submit
+  const complaintForm = document.getElementById('public-complaint-form');
+  if (complaintForm) {
+    complaintForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('complaint-name').value.trim();
+      const unit = document.getElementById('complaint-service').value;
+      const message = document.getElementById('complaint-message').value.trim();
+
+      if (!message) return;
+
+      const randomNum = Math.floor(10000 + Math.random() * 90000);
+      const ticketId = `ADU-2026-${randomNum}`;
+
+      // Catat ke audit log Smart Virtual Office secara persisten
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2, '0')}.${String(now.getMinutes()).padStart(2, '0')}`;
+      auditLogsState.unshift({
+        time: timeStr,
+        user: `Warga (${escapeHTML(name)})`,
+        action: `Aduan Online [${ticketId}]: ${escapeHTML(unit)}`,
+        result: 'Tercatat (Perlu Tindak Lanjut)'
+      });
+      saveLogsToStorage();
+      renderOfficeTables();
+
+      const receipt = document.getElementById('complaint-receipt');
+      const ticketEl = document.getElementById('receipt-ticket-id');
+      if (receipt && ticketEl) {
+        ticketEl.textContent = ticketId;
+        receipt.style.display = 'block';
+      }
+
+      complaintForm.reset();
+      appToast(`Pengaduan berhasil terkirim. Nomor Tiket: ${ticketId}`);
+    });
+  }
+
   // CMS Form Submit
   const cmsForm = document.getElementById('cms-form-service');
   if (cmsForm) {

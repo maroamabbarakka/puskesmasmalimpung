@@ -97,11 +97,37 @@ with sync_playwright() as pw:
     assert "Gigi dan Mulut" in page.locator('#modal-svc-title').inner_text(), "Deep link opened wrong title for gigi"
     print("  [PASS]: Hashchange to '#services/gigi' dynamically opened Dental service modal!")
 
+    # Phase 3: Auditing Citizen Online Complaint Form & Office Audit Trail Sync
+    print("\n[Phase 3] Auditing Citizen Online Complaint Form & Office Audit Trail...")
+    page.evaluate("location.hash = '#public'")
+    page.wait_for_timeout(300)
+    page.locator('button[data-ptab="pengaduan"]').click()
+    page.wait_for_timeout(200)
+
+    page.locator('#complaint-name').fill('Baharuddin')
+    page.locator('#complaint-contact').fill('081299887766')
+    page.locator('#complaint-service').select_option('Poli Gigi')
+    page.locator('#complaint-message').fill('Apresiasi untuk pelayanan dokter gigi yang sangat ramah dan informatif.')
+    page.locator('#public-complaint-form button[type="submit"]').click()
+    page.wait_for_timeout(300)
+
+    assert page.locator('#complaint-receipt').is_visible(), "Complaint receipt not visible after submission"
+    ticket_id = page.locator('#receipt-ticket-id').inner_text()
+    assert ticket_id.startswith('ADU-2026-'), f"Invalid ticket format: {ticket_id}"
+    print(f"  [PASS]: Complaint form successfully submitted! Ticket generated: {ticket_id}")
+
+    # Verifikasi sinkronisasi ke tabel audit log Smart Virtual Office
+    page.evaluate("location.hash = '#office'")
+    page.wait_for_timeout(300)
+    office_audit_text = page.locator('#office-audit-table').inner_text()
+    assert ticket_id in office_audit_text, f"Ticket {ticket_id} not recorded in Smart Virtual Office audit log!"
+    print(f"  [PASS]: Ticket {ticket_id} successfully synchronized into Smart Virtual Office audit logs!")
+
     context.close()
     browser.close()
 
 print("\n=================================================================")
-print("ALL EXTENDED CHECKS PASSED: 7 VIEWPORTS & DEEP-LINKING VERIFIED!")
+print("ALL EXTENDED CHECKS PASSED: 7 VIEWPORTS, SLUGS & AUDIT LOG SYNC!")
 print("=================================================================")
 os._exit(0)
 
