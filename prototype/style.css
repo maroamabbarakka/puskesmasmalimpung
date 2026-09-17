@@ -1836,3 +1836,157 @@ ul, ol {
   transform: translateY(0);
   opacity: 1;
 }
+
+/* --------------------------------------------------------------------------
+   16. ACTIVITY GALLERY & COMMUNITY HEALTH
+   -------------------------------------------------------------------------- */
+.activity-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .activity-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.activity-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--duration-fast);
+}
+
+.activity-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--jade-600);
+  box-shadow: var(--shadow-md);
+}
+
+.activity-badge-bar {
+  padding: 1.25rem 1.25rem 0.5rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.activity-body {
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.activity-title {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--forest-950);
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+.activity-desc {
+  font-size: 0.8125rem;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.activity-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--ink-tertiary);
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-light);
+}
+
+/* --------------------------------------------------------------------------
+   17. STRONG CLOSING CTA
+   -------------------------------------------------------------------------- */
+.closing-cta {
+  background: radial-gradient(circle at 100% 0%, rgba(24, 133, 111, 0.15) 0%, transparent 50%),
+              linear-gradient(135deg, var(--forest-900) 0%, var(--forest-950) 100%);
+  border-radius: var(--radius-xl);
+  padding: 3.5rem 2rem;
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.closing-cta h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.closing-cta h2 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--mint-200);
+}
+
+.closing-cta p {
+  font-size: 1.0625rem;
+  color: #b3cdc4;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.closing-cta-btns {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   18. SURVEI KEPUASAN MASYARAKAT (SKM)
+   -------------------------------------------------------------------------- */
+.skm-score-card {
+  background: linear-gradient(135deg, var(--mint-50), #ffffff);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.skm-score-val {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--forest-950);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.skm-badge-predikat {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  background-color: var(--emerald-50);
+  color: var(--emerald-600);
+  border: 1px solid rgba(5, 150, 105, 0.2);
+  margin-bottom: 0.5rem;
+}
+
